@@ -1,0 +1,143 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+	series: string;
+	currentId: string;
+	currentOrder?: number;
+}
+
+const { series, currentId, currentOrder } = Astro.props;
+
+const allPosts = await getCollection('blog', ({ data }) => data.series === series);
+
+const seriesPosts = allPosts.sort((a, b) => {
+	const aO = a.data.seriesOrder ?? Infinity;
+	const bO = b.data.seriesOrder ?? Infinity;
+	if (aO !== bO) return aO - bO;
+	return a.data.pubDate.getTime() - b.data.pubDate.getTime();
+});
+---
+
+<aside class="series-card" aria-label={`Part of the series: ${series}`}>
+	<p class="series-label">Part of a series</p>
+	<h2 class="series-title">{series}</h2>
+	<ol class="series-list">
+		{seriesPosts.map((post, index) => {
+			const isCurrent = post.id === currentId;
+			const displayNumber = post.data.seriesOrder ?? index + 1;
+			return (
+				<li class:list={['series-item', { 'series-item--current': isCurrent }]}>
+					{isCurrent ? (
+						<span class="series-item__current">
+							<span class="series-item__number" aria-hidden="true">{displayNumber}.</span>
+							<span class="series-item__title">{post.data.title}</span>
+							<span class="series-item__badge" aria-label="You are here">You are here</span>
+						</span>
+					) : (
+						<a href={`/blog/${post.id}`} class="series-item__link">
+							<span class="series-item__number" aria-hidden="true">{displayNumber}.</span>
+							<span class="series-item__title">{post.data.title}</span>
+						</a>
+					)}
+				</li>
+			);
+		})}
+	</ol>
+</aside>
+
+<style>
+	.series-card {
+		border: 1px solid var(--color-gray-200, #e5e7eb);
+		border-left: 4px solid var(--color-primary, #2563EB);
+		border-radius: 10px;
+		background: var(--color-gray-50, #f9fafb);
+		padding: 1.25rem 1.5rem;
+		margin-bottom: 2.5rem;
+	}
+
+	.series-label {
+		font-size: 0.72rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--color-primary, #2563EB);
+		margin: 0 0 0.2rem;
+	}
+
+	.series-title {
+		font-size: 1rem;
+		font-weight: 700;
+		color: var(--color-text-primary, #111827);
+		margin: 0 0 1rem;
+		line-height: 1.35;
+	}
+
+	.series-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.series-item {
+		display: flex;
+		align-items: baseline;
+	}
+
+	.series-item__link,
+	.series-item__current {
+		display: flex;
+		align-items: baseline;
+		gap: 0.5rem;
+		font-size: 0.875rem;
+		line-height: 1.5;
+		width: 100%;
+	}
+
+	.series-item__link {
+		color: var(--color-primary, #2563EB);
+		text-decoration: none;
+		transition: color 150ms ease;
+	}
+
+	.series-item__link:hover {
+		text-decoration: underline;
+	}
+
+	.series-item__current {
+		font-weight: 600;
+		color: var(--color-text-primary, #111827);
+		cursor: default;
+	}
+
+	.series-item__number {
+		color: var(--color-text-tertiary, #9ca3af);
+		min-width: 1.5ch;
+		flex-shrink: 0;
+		font-variant-numeric: tabular-nums;
+	}
+
+	.series-item--current .series-item__number {
+		color: var(--color-primary, #2563EB);
+	}
+
+	.series-item__title {
+		flex: 1;
+	}
+
+	.series-item__badge {
+		flex-shrink: 0;
+		font-size: 0.7rem;
+		font-weight: 600;
+		color: var(--color-primary, #2563EB);
+		background: color-mix(in srgb, var(--color-primary, #2563EB) 10%, transparent);
+		border: 1px solid color-mix(in srgb, var(--color-primary, #2563EB) 25%, transparent);
+		border-radius: 999px;
+		padding: 1px 0.5rem;
+		white-space: nowrap;
+		margin-left: 0.25rem;
+	}
+</style>

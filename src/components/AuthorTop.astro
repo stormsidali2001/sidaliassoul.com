@@ -1,0 +1,55 @@
+---
+import { AUTHOR } from '../consts';
+import FormattedDate from './FormattedDate.astro';
+
+interface Props {
+	pubDate: Date;
+	readingTime: string;
+}
+
+const { pubDate, readingTime } = Astro.props;
+---
+
+<div class="author-top">
+	<img
+		src={AUTHOR.avatar}
+		alt={AUTHOR.name}
+		class="author-top__avatar"
+		width="28"
+		height="28"
+	/>
+	<span class="author-top__name">{AUTHOR.name}</span>
+	<span class="author-top__sep" aria-hidden="true">·</span>
+	<span class="author-top__date"><FormattedDate date={pubDate} /></span>
+	<span class="author-top__sep" aria-hidden="true">·</span>
+	<span class="author-top__reading-time">{readingTime}</span>
+</div>
+
+<style>
+	.author-top {
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+		font-size: 0.875rem;
+		color: var(--color-text-secondary, #6b7280);
+		flex-wrap: wrap;
+	}
+
+	.author-top__avatar {
+		border-radius: 50%;
+		object-fit: cover;
+		object-position: center top;
+		flex-shrink: 0;
+		width: 28px;
+		height: 28px;
+	}
+
+	.author-top__name {
+		color: var(--color-text-primary, #111827);
+		font-weight: 600;
+	}
+
+	.author-top__sep {
+		color: var(--color-gray-300, #d1d5db);
+	}
+</style>

@@ -1,0 +1,183 @@
+---
+import { getCollection } from 'astro:content';
+import FormattedDate from './FormattedDate.astro';
+
+interface Props {
+	currentId: string;
+	tags: string[];
+}
+
+const { currentId, tags } = Astro.props;
+
+const all = await getCollection('blog', ({ id }) => id !== currentId);
+
+// Score by overlapping tags
+const scored = all
+	.map(post => ({
+		post,
+		score: (post.data.tags ?? []).filter(t => tags.includes(t)).length,
+	}))
+	.filter(({ score }) => score > 0)
+	.sort((a, b) =>
+		b.score - a.score ||
+		b.post.data.pubDate.getTime() - a.post.data.pubDate.getTime()
+	);
+
+const related = scored.slice(0, 3).map(s => s.post);
+
+// Fallback: fill remaining slots with most recent posts
+if (related.length < 3) {
+	const fallback = all
+		.filter(p => !related.find(r => r.id === p.id))
+		.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+	related.push(...fallback.slice(0, 3 - related.length));
+}
+---
+
+{related.length > 0 && (
+	<section class="related-articles">
+		<div class="related-header">
+			<h2 class="related-title">Continue Reading</h2>
+			<a href="/blog" class="related-all-link">All articles →</a>
+		</div>
+		<div class="related-grid">
+			{related.map(post => (
+				<a href={`/blog/${post.id}`} class="related-card">
+					<div class="related-card__top">
+						{post.data.tags?.[0] && (
+							<span class="related-card__tag">{post.data.tags[0]}</span>
+						)}
+						<span class="related-card__arrow" aria-hidden="true">→</span>
+					</div>
+					<h3 class="related-card__title">{post.data.title}</h3>
+					<p class="related-card__desc">{post.data.description}</p>
+					<span class="related-card__date">
+						<FormattedDate date={post.data.pubDate} />
+					</span>
+				</a>
+			))}
+		</div>
+	</section>
+)}
+
+<style>
+	.related-articles {
+		margin-top: 3rem;
+		padding-top: 2rem;
+		border-top: 1px solid var(--color-gray-200, #e5e7eb);
+	}
+
+	.related-header {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		margin-bottom: 1.25rem;
+	}
+
+	.related-title {
+		font-size: 0.72rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--color-text-tertiary, #9ca3af);
+		margin: 0;
+	}
+
+	.related-all-link {
+		font-size: 0.8rem;
+		font-weight: 500;
+		color: var(--color-primary, #2563EB);
+		text-decoration: none;
+		transition: gap 150ms ease;
+	}
+
+	.related-all-link:hover {
+		text-decoration: underline;
+	}
+
+	.related-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+		gap: 0.875rem;
+	}
+
+	.related-card {
+		display: flex;
+		flex-direction: column;
+		gap: 0.45rem;
+		padding: 1rem 1rem 1rem 1.1rem;
+		border: 1px solid var(--color-gray-200, #e5e7eb);
+		border-left: 3px solid transparent;
+		border-radius: 10px;
+		text-decoration: none;
+		transition: border-left-color 150ms ease, background 150ms ease, transform 150ms ease;
+		background: var(--color-white, #fff);
+	}
+
+	.related-card:hover {
+		border-left-color: var(--color-primary, #2563EB);
+		background: color-mix(in srgb, var(--color-primary, #2563EB) 3%, white);
+		transform: translateY(-2px);
+	}
+
+	.related-card__top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		min-height: 1.4rem;
+	}
+
+	.related-card__tag {
+		font-size: 0.68rem;
+		font-weight: 600;
+		color: var(--color-primary, #2563EB);
+		background: color-mix(in srgb, var(--color-primary, #2563EB) 9%, transparent);
+		border: 1px solid color-mix(in srgb, var(--color-primary, #2563EB) 22%, transparent);
+		border-radius: 4px;
+		padding: 0.1rem 0.45rem;
+	}
+
+	.related-card__arrow {
+		font-size: 0.875rem;
+		color: var(--color-gray-300, #d1d5db);
+		transition: color 150ms ease, transform 150ms ease;
+		flex-shrink: 0;
+	}
+
+	.related-card:hover .related-card__arrow {
+		color: var(--color-primary, #2563EB);
+		transform: translateX(3px);
+	}
+
+	.related-card__title {
+		font-size: 0.9rem;
+		font-weight: 700;
+		color: var(--color-text-primary, #111827);
+		line-height: 1.35;
+		margin: 0;
+	}
+
+	.related-card__desc {
+		font-size: 0.78rem;
+		color: var(--color-text-secondary, #6b7280);
+		line-height: 1.55;
+		margin: 0;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+		flex: 1;
+	}
+
+	.related-card__date {
+		font-size: 0.72rem;
+		color: var(--color-text-tertiary, #9ca3af);
+		margin-top: auto;
+	}
+
+	@media (max-width: 520px) {
+		.related-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

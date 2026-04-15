@@ -1,0 +1,210 @@
+/*
+ * Resume Page Styles — web-page layout (not A4 card)
+ */
+
+.resume-main {
+	max-width: 760px;
+	margin: 0 auto;
+	padding: 0 1.5rem 4rem;
+}
+
+/* ── Page header ── */
+.resume-page-header {
+	padding: 3rem 0 2rem;
+	border-bottom: 2px solid var(--color-gray-200, #e5e7eb);
+	margin-bottom: 0;
+}
+
+.resume-title-row {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 1rem;
+	flex-wrap: wrap;
+	margin-bottom: 1rem;
+}
+
+.resume-page-name {
+	font-size: 1.875rem;
+	font-weight: 800;
+	color: var(--color-text-primary, #111827);
+	letter-spacing: -0.03em;
+	margin: 0 0 0.25rem;
+	line-height: 1.1;
+}
+
+.resume-page-headline {
+	font-size: 0.975rem;
+	color: var(--color-text-secondary, #6b7280);
+	margin: 0;
+	line-height: 1.4;
+}
+
+.resume-download-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	padding: 0.5rem 1rem;
+	background: var(--color-primary, #4472C4);
+	color: #fff;
+	border-radius: 6px;
+	text-decoration: none;
+	font-size: 0.825rem;
+	font-weight: 600;
+	transition: background 150ms ease;
+	white-space: nowrap;
+	flex-shrink: 0;
+}
+.resume-download-btn:hover {
+	background: var(--color-primary-dark, #2563eb);
+	color: #fff;
+}
+
+/* ── Contact bar ── */
+.resume-contact-bar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.3rem;
+	font-size: 0.825rem;
+}
+
+.resume-contact-item {
+	color: var(--color-text-secondary, #6b7280);
+	text-decoration: none;
+	transition: color 150ms ease;
+}
+
+a.resume-contact-item:hover {
+	color: var(--color-primary, #4472C4);
+}
+
+.resume-contact-sep {
+	color: var(--color-gray-300, #d1d5db);
+}
+
+/* ── CV body content (rendered markdown) ── */
+.resume-body {
+	padding-top: 1rem;
+}
+
+/* Section headings (## in markdown → h2) */
+.resume-body h2 {
+	font-size: 0.7rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.09em;
+	color: var(--color-primary, #4472C4);
+	margin: 2.25rem 0 0.875rem;
+	padding-bottom: 0.4rem;
+	border-bottom: 1px solid var(--color-primary, #4472C4);
+}
+
+.resume-body h2:first-child {
+	margin-top: 1.25rem;
+}
+
+/* Entry title (### in markdown → h3) */
+.resume-body h3 {
+	font-size: 0.925rem;
+	font-weight: 700;
+	color: var(--color-text-primary, #111827);
+	margin: 1.25rem 0 0.2rem;
+}
+
+.resume-body h3 a {
+	color: var(--color-text-primary, #111827);
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+
+.resume-body h3 a:hover {
+	color: var(--color-primary, #4472C4);
+}
+
+/* Company / subtitle line (h4 from #### or bold/italic) */
+.resume-body h4 {
+	font-size: 0.875rem;
+	font-weight: 500;
+	color: var(--color-text-secondary, #6b7280);
+	font-style: italic;
+	margin: 0 0 0.4rem;
+}
+
+/* Paragraphs */
+.resume-body p {
+	font-size: 0.9rem;
+	color: var(--color-text-primary, #374151);
+	line-height: 1.65;
+	margin: 0 0 0.6rem;
+	text-align: left;
+}
+
+/* Lists */
+.resume-body ul {
+	margin: 0.3rem 0 0.75rem 1rem;
+	padding: 0;
+}
+
+.resume-body li {
+	font-size: 0.875rem;
+	color: var(--color-text-secondary, #4b5563);
+	line-height: 1.6;
+	margin-bottom: 0.3rem;
+	padding-left: 0.1rem;
+}
+
+/* Strong / bold */
+.resume-body strong {
+	color: var(--color-text-primary, #111827);
+	font-weight: 600;
+}
+
+/* Links inside body */
+.resume-body a {
+	color: var(--color-primary, #4472C4);
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+
+.resume-body a:hover {
+	color: var(--color-primary-dark, #2563eb);
+}
+
+/* Horizontal rule between major sections */
+.resume-body hr {
+	display: none;
+}
+
+/* ── Print styles ── */
+@media print {
+	.resume-download-btn,
+	header,
+	footer {
+		display: none !important;
+	}
+	.resume-main {
+		padding: 0;
+		max-width: 100%;
+	}
+	.resume-page-header {
+		padding: 0 0 1rem;
+	}
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+	.resume-main {
+		padding: 0 1rem 3rem;
+	}
+	.resume-title-row {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.resume-page-name {
+		font-size: 1.5rem;
+	}
+	.resume-contact-bar {
+		font-size: 0.775rem;
+	}
+}

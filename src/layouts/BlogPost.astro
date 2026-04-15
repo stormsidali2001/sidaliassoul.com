@@ -1,0 +1,341 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import ArticleCTA from '../components/ArticleCTA.astro';
+import AuthorBio from '../components/AuthorBio.astro';
+import AuthorTop from '../components/AuthorTop.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import JsonLd from '../components/JsonLd.astro';
+import RelatedArticles from '../components/RelatedArticles.astro';
+import SeriesCard from '../components/SeriesCard.astro';
+import { AUTHOR } from '../consts';
+
+type Props = { entry: CollectionEntry<'blog'> };
+
+const { entry } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, series, seriesOrder } = entry.data;
+const tags = entry.data.tags ?? [];
+
+const words = (entry.body ?? '').trim().split(/\s+/).length;
+const readingTime = `${Math.max(1, Math.round(words / 200))} min read`;
+---
+
+<html lang="en">
+	<head>
+		<BaseHead
+			title={title}
+			description={description}
+			image={heroImage}
+			type="article"
+			pubDate={pubDate}
+			author={AUTHOR.name}
+		/>
+		<JsonLd schema={{
+			'@context': 'https://schema.org',
+			'@type': 'BlogPosting',
+			headline: title,
+			description: description,
+			datePublished: pubDate.toISOString(),
+			dateModified: (updatedDate ?? pubDate).toISOString(),
+			author: {
+				'@type': 'Person',
+				name: AUTHOR.name,
+				url: Astro.site?.href,
+			},
+			publisher: {
+				'@type': 'Person',
+				name: AUTHOR.name,
+				url: Astro.site?.href,
+			},
+			url: new URL(Astro.url.pathname, Astro.site).href,
+			mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).href,
+		}} />
+		<style>
+			main {
+				width: calc(100% - 2em);
+				max-width: 100%;
+				margin: 0;
+			}
+
+			/* ── Hero image ── */
+			.hero-image {
+				margin-bottom: 2.25rem;
+				border-radius: 14px;
+				overflow: hidden;
+				aspect-ratio: 16 / 9;
+				background: var(--color-gray-100, #f3f4f6);
+				box-shadow:
+					0 4px 24px rgba(0, 0, 0, 0.08),
+					0 0 0 1px var(--color-gray-200, #e5e7eb);
+			}
+			.hero-image img {
+				display: block;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+
+			/* ── Prose container ── */
+			.prose {
+				width: 720px;
+				max-width: calc(100% - 2em);
+				margin: 0 auto;
+				padding: 2.5rem 1em 5rem;
+				color: var(--color-text-primary, #111827);
+			}
+
+			/* ── Article header ── */
+			.article-header {
+				margin-bottom: 1.75rem;
+			}
+
+			.article-header h1 {
+				font-size: clamp(1.75rem, 4vw, 2.5rem);
+				font-weight: 800;
+				color: var(--color-text-primary, #111827);
+				line-height: 1.15;
+				letter-spacing: -0.03em;
+				margin: 0 0 0.9rem;
+			}
+
+			.article-tags {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.4rem;
+				margin-top: 0.9rem;
+			}
+
+			.article-tag {
+				display: inline-block;
+				padding: 0.2rem 0.75rem;
+				background: transparent;
+				color: var(--color-text-secondary, #6b7280);
+				border: 1px solid var(--color-gray-300, #d1d5db);
+				border-radius: 999px;
+				font-size: 0.8rem;
+				font-weight: 500;
+			}
+
+			.last-updated-on {
+				font-size: 0.8rem;
+				color: var(--color-text-tertiary, #9ca3af);
+				font-style: italic;
+				margin: 0.5rem 0 0;
+			}
+
+			/* ── Article body typography ── */
+			.prose-body {
+				font-size: 1.0625rem;
+				line-height: 1.8;
+				color: var(--color-text-primary, #111827);
+			}
+
+			.prose-body :global(h2) {
+				font-size: 1.375rem;
+				font-weight: 700;
+				color: var(--color-text-primary, #111827);
+				margin: 2.5rem 0 0.75rem;
+				letter-spacing: -0.02em;
+				line-height: 1.3;
+			}
+
+			.prose-body :global(h3) {
+				font-size: 1.125rem;
+				font-weight: 700;
+				color: var(--color-text-primary, #111827);
+				margin: 2rem 0 0.5rem;
+				letter-spacing: -0.01em;
+				line-height: 1.35;
+			}
+
+			.prose-body :global(h4) {
+				font-size: 1rem;
+				font-weight: 700;
+				margin: 1.5rem 0 0.4rem;
+			}
+
+			.prose-body :global(p) {
+				margin: 0 0 1.35rem;
+			}
+
+			.prose-body :global(a) {
+				color: var(--color-primary, #2563EB);
+				text-decoration: underline;
+				text-underline-offset: 3px;
+				text-decoration-color: color-mix(in srgb, var(--color-primary, #2563EB) 40%, transparent);
+				transition: text-decoration-color 150ms ease;
+			}
+			.prose-body :global(a:hover) {
+				text-decoration-color: var(--color-primary, #2563EB);
+			}
+
+			.prose-body :global(strong) {
+				font-weight: 700;
+				color: var(--color-text-primary, #111827);
+			}
+
+			.prose-body :global(code:not(pre code)) {
+				font-family: 'Fira Code', 'Cascadia Code', 'Monaco', monospace;
+				font-size: 0.875em;
+				background: var(--color-gray-100, #f3f4f6);
+				color: var(--color-text-primary, #111827);
+				padding: 0.15em 0.45em;
+				border-radius: 4px;
+				border: 1px solid var(--color-gray-200, #e5e7eb);
+			}
+
+			.prose-body :global(pre) {
+				background: #1e1e2e;
+				color: #cdd6f4;
+				padding: 1.25rem 1.5rem;
+				border-radius: 10px;
+				overflow-x: auto;
+				margin: 1.75rem 0;
+				font-size: 0.875rem;
+				line-height: 1.65;
+				border: 1px solid rgba(255,255,255,0.06);
+			}
+
+			.prose-body :global(pre code) {
+				background: none;
+				border: none;
+				padding: 0;
+				color: inherit;
+				font-size: inherit;
+				border-radius: 0;
+			}
+
+			.prose-body :global(blockquote) {
+				border-left: 4px solid var(--color-primary, #2563EB);
+				margin: 2rem 0;
+				padding: 0.875rem 1.25rem;
+				background: color-mix(in srgb, var(--color-primary, #2563EB) 4%, transparent);
+				border-radius: 0 8px 8px 0;
+				font-style: italic;
+				color: var(--color-text-secondary, #4b5563);
+			}
+			.prose-body :global(blockquote p) {
+				margin: 0;
+			}
+
+			.prose-body :global(ul),
+			.prose-body :global(ol) {
+				padding-left: 1.5rem;
+				margin: 0 0 1.35rem;
+			}
+
+			.prose-body :global(li) {
+				margin-bottom: 0.4rem;
+				line-height: 1.7;
+			}
+
+			.prose-body :global(li > ul),
+			.prose-body :global(li > ol) {
+				margin-top: 0.4rem;
+				margin-bottom: 0;
+			}
+
+			.prose-body :global(img) {
+				max-width: 100%;
+				border-radius: 10px;
+				margin: 2rem auto;
+				display: block;
+				box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+			}
+
+			.prose-body :global(hr) {
+				border: none;
+				border-top: 1px solid var(--color-gray-200, #e5e7eb);
+				margin: 3rem 0;
+			}
+
+			.prose-body :global(table) {
+				width: 100%;
+				border-collapse: collapse;
+				font-size: 0.875rem;
+				margin: 1.75rem 0;
+				border-radius: 8px;
+				overflow: hidden;
+				border: 1px solid var(--color-gray-200, #e5e7eb);
+			}
+
+			.prose-body :global(th) {
+				text-align: left;
+				padding: 0.6rem 0.875rem;
+				font-weight: 600;
+				font-size: 0.8rem;
+				letter-spacing: 0.03em;
+				text-transform: uppercase;
+				background: var(--color-gray-50, #f9fafb);
+				border-bottom: 1px solid var(--color-gray-200, #e5e7eb);
+				color: var(--color-text-secondary, #6b7280);
+			}
+
+			.prose-body :global(td) {
+				padding: 0.6rem 0.875rem;
+				border-bottom: 1px solid var(--color-gray-100, #f3f4f6);
+				vertical-align: top;
+			}
+
+			.prose-body :global(tr:last-child td) {
+				border-bottom: none;
+			}
+
+			@media (max-width: 640px) {
+				.prose {
+					padding: 1.5rem 1em 3rem;
+				}
+				.article-header h1 {
+					font-size: 1.625rem;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<Header />
+		<main>
+			<article>
+				<div class="prose">
+					<header class="article-header">
+						<h1>{title}</h1>
+						<AuthorTop pubDate={pubDate} readingTime={readingTime} />
+						{updatedDate && (
+							<p class="last-updated-on">
+								Last updated on <FormattedDate date={updatedDate} />
+							</p>
+						)}
+						{tags.length > 0 && (
+							<div class="article-tags">
+								{tags.map(tag => (
+									<span class="article-tag">{tag}</span>
+								))}
+							</div>
+						)}
+					</header>
+					{heroImage && (
+						<div class="hero-image">
+							<Image width={1020} height={510} src={heroImage} alt="" />
+						</div>
+					)}
+
+					{series && (
+						<SeriesCard series={series} currentId={entry.id} currentOrder={seriesOrder} />
+					)}
+
+					<div class="prose-body">
+						<slot />
+					</div>
+
+					<ArticleCTA />
+					<AuthorBio />
+					<RelatedArticles currentId={entry.id} tags={tags} />
+				</div>
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>

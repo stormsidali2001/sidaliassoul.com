@@ -1,0 +1,69 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { getEntry, render } from 'astro:content';
+import '../styles/pages/resume.css';
+
+const cvEntry = await getEntry('cv', 'main');
+const { data: cv } = cvEntry;
+const { Content } = await render(cvEntry);
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title={`Resume — ${cv.name}`} description={cv.headline} />
+	</head>
+
+	<body>
+		<Header />
+		<main class="resume-main">
+
+			<!-- Page header -->
+			<div class="resume-page-header">
+				<div class="resume-title-row">
+					<div>
+						<h1 class="resume-page-name">{cv.name}</h1>
+						<p class="resume-page-headline">{cv.headline}</p>
+					</div>
+					<a href="/resume.pdf" class="resume-download-btn" download="Sidali_Assoul_Resume.pdf">
+						<svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+							<path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+						</svg>
+						Download PDF
+					</a>
+				</div>
+
+				<div class="resume-contact-bar">
+					<a href={`mailto:${cv.email}`} class="resume-contact-item">{cv.email}</a>
+					<span class="resume-contact-sep">·</span>
+					<span class="resume-contact-item">{cv.phone}</span>
+					<span class="resume-contact-sep">·</span>
+					<span class="resume-contact-item">{cv.location}</span>
+					{cv.social_networks.map(social => (
+						<>
+							<span class="resume-contact-sep">·</span>
+							<a
+								href={social.network === 'LinkedIn'
+									? `https://linkedin.com/in/${social.username}`
+									: `https://github.com/${social.username}`}
+								target="_blank"
+								rel="noopener"
+								class="resume-contact-item"
+							>
+								{social.network === 'LinkedIn' ? 'LinkedIn' : 'GitHub'}
+							</a>
+						</>
+					))}
+				</div>
+			</div>
+
+			<!-- CV content rendered from markdown -->
+			<div class="resume-body">
+				<Content />
+			</div>
+
+		</main>
+		<Footer />
+	</body>
+</html>

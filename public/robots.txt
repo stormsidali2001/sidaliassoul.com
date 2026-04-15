@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# No need to crawl redirect pages
+Disallow: /about
+
+Sitemap: https://your-domain.com/sitemap-index.xml

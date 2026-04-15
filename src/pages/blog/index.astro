@@ -1,0 +1,120 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import Header from '../../components/Header.astro';
+import { SITE_TITLE } from '../../consts';
+import '../../styles/pages/blog.css';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+function readingTime(body: string): string {
+	const words = body.trim().split(/\s+/).length;
+	const mins = Math.max(1, Math.round(words / 200));
+	return `${mins} min read`;
+}
+
+// Group posts by year (descending)
+const postsByYear = new Map<number, typeof posts>();
+for (const post of posts) {
+	const year = post.data.pubDate.getFullYear();
+	if (!postsByYear.has(year)) postsByYear.set(year, []);
+	postsByYear.get(year)!.push(post);
+}
+const years = [...postsByYear.keys()].sort((a, b) => b - a);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Blog — ${SITE_TITLE}`} description="Thoughts on software engineering, architecture, and building scalable systems." />
+	</head>
+	<body>
+		<Header />
+		<main class="blog-main">
+
+			<!-- Page header -->
+			<div class="blog-page-header">
+				<div class="blog-title-row">
+					<h1 class="blog-page-title">Blog</h1>
+					<span class="blog-count">{posts.length} article{posts.length !== 1 ? 's' : ''}</span>
+				</div>
+				<p class="blog-page-subtitle">Thoughts on software engineering, architecture, and the craft of building things.</p>
+				<a href="/topics" class="blog-topics-link">Browse by topic →</a>
+			</div>
+
+			<!-- Active filter chip (shown via JS when ?tag= is present) -->
+			<div class="active-filter" id="activeFilter" style="display:none">
+				<span class="active-filter__label">Filtered by:</span>
+				<span class="active-filter__tag" id="activeFilterTag"></span>
+				<a href="/blog" class="active-filter__clear">✕ Clear</a>
+			</div>
+
+			<!-- Posts grouped by year -->
+			<div id="postList">
+				{years.map(year => (
+					<div class="year-group" data-year={year}>
+						<h2 class="year-label">{year}</h2>
+						<div class="blog-post-list">
+							{postsByYear.get(year)!.map(post => (
+								<article
+									class="blog-post-card"
+									data-tags={(post.data.tags ?? []).join(',')}
+								>
+									<a href={`/blog/${post.id}/`} class="blog-card-link">
+										<div class="blog-card-body">
+											<div class="blog-card-meta">
+												<span class="blog-post-date">
+													<FormattedDate date={post.data.pubDate} />
+												</span>
+												<span class="meta-sep">·</span>
+												<span class="blog-reading-time">{readingTime(post.body ?? '')}</span>
+											</div>
+											<h3 class="blog-post-title">{post.data.title}</h3>
+											<p class="blog-post-excerpt">{post.data.description}</p>
+											{(post.data.tags ?? []).length > 0 && (
+												<div class="blog-post-topics">
+													{post.data.tags!.map(topic => (
+														<span class="blog-topic">{topic}</span>
+													))}
+												</div>
+											)}
+										</div>
+									</a>
+								</article>
+							))}
+						</div>
+					</div>
+				))}
+			</div>
+
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<script>
+	const params = new URLSearchParams(window.location.search);
+	const tag = params.get('tag');
+	if (tag) {
+		const filterEl = document.getElementById('activeFilter') as HTMLElement;
+		const tagEl = document.getElementById('activeFilterTag') as HTMLElement;
+		if (filterEl) filterEl.style.display = 'flex';
+		if (tagEl) tagEl.textContent = tag;
+
+		document.querySelectorAll<HTMLElement>('.year-group').forEach(group => {
+			const cards = group.querySelectorAll<HTMLElement>('.blog-post-card');
+			let visible = 0;
+			cards.forEach(card => {
+				const tags = card.dataset.tags?.split(',').filter(Boolean) ?? [];
+				const show = tags.includes(tag);
+				card.style.display = show ? '' : 'none';
+				if (show) visible++;
+			});
+			group.style.display = visible === 0 ? 'none' : '';
+		});
+	}
+</script>
