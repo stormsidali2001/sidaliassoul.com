@@ -7,17 +7,12 @@ import { defineConfig, fontProviders } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
 	// TODO: replace 'https://your-domain.com' with your real production domain before deploying
-	site: 'https://your-domain.com',
+	site: 'http://localhost:4321',
 	integrations: [
 		mdx(),
-		sitemap({
-			// Exclude redirect pages — they shouldn't appear in search results
-			filter: (page) => !page.includes('/about'),
-		}),
+		sitemap(),
 	],
-	redirects: {
-		'/about': '/contact',
-	},
+
 	fonts: [
 		{
 			provider: fontProviders.local(),

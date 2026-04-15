@@ -9,7 +9,7 @@ interface Props {
 
 const { series, currentId, currentOrder } = Astro.props;
 
-const allPosts = await getCollection('blog', ({ data }) => data.series === series);
+const allPosts = await getCollection('blog', ({ data }) => data.series === series && data.published !== false);
 
 const seriesPosts = allPosts.sort((a, b) => {
 	const aO = a.data.seriesOrder ?? Infinity;

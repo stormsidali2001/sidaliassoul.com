@@ -4,6 +4,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 export async function GET(context) {
 	const posts = (await getCollection('blog'))
+		.filter((p) => p.data.published !== false)
 		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 	return rss({

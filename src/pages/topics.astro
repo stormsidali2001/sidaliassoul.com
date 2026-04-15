@@ -6,7 +6,7 @@ import Header from '../components/Header.astro';
 import { SITE_TITLE } from '../consts';
 import '../styles/pages/topics.css';
 
-const posts = await getCollection('blog');
+const posts = (await getCollection('blog')).filter((p) => p.data.published !== false);
 
 // Build topic → count map, sorted by count descending
 const topicMap = new Map<string, number>();

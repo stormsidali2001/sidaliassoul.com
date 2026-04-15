@@ -7,7 +7,9 @@ import Header from '../../components/Header.astro';
 import { SITE_TITLE } from '../../consts';
 import '../../styles/pages/blog.css';
 
-const posts = (await getCollection('blog')).sort(
+const posts = (await getCollection('blog'))
+	.filter((p) => p.data.published !== false)
+	.sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
