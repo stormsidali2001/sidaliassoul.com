@@ -8,6 +8,12 @@
 /* Import design system first */
 @import './design-system.css';
 
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
 /* Legacy support - mapped to design system tokens */
 :root {
 	--accent: var(--color-secondary);
@@ -29,15 +35,17 @@ body {
 	background-size: 100% 600px;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
+	overflow-x: hidden;
 	color: var(--color-text-primary);
 	font-size: var(--font-size-base);
 	line-height: var(--line-height-relaxed);
 }
 main {
-	width: 720px;
-	max-width: calc(100% - 2em);
+	width: calc(100% - 2em);
+	max-width: 720px;
 	margin: auto;
 	padding: 3em 1em;
+	box-sizing: border-box;
 }
 h1,
 h2,
@@ -125,6 +133,12 @@ hr {
 	}
 	main {
 		padding: 1em;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	body {
+		background: var(--color-surface-page);
 	}
 }
 
