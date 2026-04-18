@@ -239,12 +239,11 @@
  * =============================== */
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --color-bg-primary: var(--color-gray-900);
     --color-bg-secondary: var(--color-gray-800);
     --color-bg-tertiary: var(--color-gray-700);
 
-    /* Surface tokens — dark mode */
     --color-surface-page:   var(--color-gray-900);
     --color-surface-card:   var(--color-gray-800);
     --color-surface-raised: var(--color-gray-800);
@@ -252,23 +251,51 @@
     --color-border:         var(--color-gray-700);
     --color-border-subtle:  var(--color-gray-800);
 
-    /* Success — dark mode */
     --color-success-bg:     rgba(16, 185, 129, 0.12);
     --color-success-border: rgba(16, 185, 129, 0.30);
     --color-success-text:   #6ee7b7;
     --color-success-dot:    #10b981;
 
-    --color-text-primary: var(--color-gray-100);
+    --color-text-primary:   var(--color-gray-100);
     --color-text-secondary: var(--color-gray-300);
-    --color-text-tertiary: var(--color-gray-400);
+    --color-text-tertiary:  var(--color-gray-400);
 
-    --nav-bg: var(--color-gray-900);
+    --nav-bg:     var(--color-gray-900);
     --nav-border: var(--color-gray-700);
 
-    --input-bg: var(--color-gray-800);
+    --input-bg:     var(--color-gray-800);
     --input-border: var(--color-gray-600);
-    --input-text: var(--color-gray-100);
+    --input-text:   var(--color-gray-100);
   }
+}
+
+:root[data-theme="dark"] {
+  --color-bg-primary: var(--color-gray-900);
+  --color-bg-secondary: var(--color-gray-800);
+  --color-bg-tertiary: var(--color-gray-700);
+
+  --color-surface-page:   var(--color-gray-900);
+  --color-surface-card:   var(--color-gray-800);
+  --color-surface-raised: var(--color-gray-800);
+  --color-surface-sunken: var(--color-gray-900);
+  --color-border:         var(--color-gray-700);
+  --color-border-subtle:  var(--color-gray-800);
+
+  --color-success-bg:     rgba(16, 185, 129, 0.12);
+  --color-success-border: rgba(16, 185, 129, 0.30);
+  --color-success-text:   #6ee7b7;
+  --color-success-dot:    #10b981;
+
+  --color-text-primary:   var(--color-gray-100);
+  --color-text-secondary: var(--color-gray-300);
+  --color-text-tertiary:  var(--color-gray-400);
+
+  --nav-bg:     var(--color-gray-900);
+  --nav-border: var(--color-gray-700);
+
+  --input-bg:     var(--color-gray-800);
+  --input-border: var(--color-gray-600);
+  --input-text:   var(--color-gray-100);
 }
 
 /* ================================

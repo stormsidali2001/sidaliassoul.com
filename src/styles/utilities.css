@@ -221,9 +221,11 @@
 
 /* Dark mode utilities */
 @media (prefers-color-scheme: dark) {
-  .dark-hidden { display: none !important; }
-  .dark-visible { display: block !important; }
+  :root:not([data-theme="light"]) .dark-hidden { display: none !important; }
+  :root:not([data-theme="light"]) .dark-visible { display: block !important; }
 }
+[data-theme="dark"] .dark-hidden { display: none !important; }
+[data-theme="dark"] .dark-visible { display: block !important; }
 
 /* Responsive utilities - Mobile first */
 @media (min-width: 640px) {

@@ -137,9 +137,12 @@ hr {
 }
 
 @media (prefers-color-scheme: dark) {
-	body {
+	:root:not([data-theme="light"]) body {
 		background: var(--color-surface-page);
 	}
+}
+[data-theme="dark"] body {
+	background: var(--color-surface-page);
 }
 
 .sr-only {
