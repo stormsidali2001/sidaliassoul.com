@@ -5,9 +5,9 @@ description: Understand how React state snapshots work and why state values
   explanations.
 pubDate: 2025-04-09
 tags:
-  - frameworks
   - javascript
   - frontend
+  - state
 series: react-fundamentals
 seriesOrder: 12
 ---

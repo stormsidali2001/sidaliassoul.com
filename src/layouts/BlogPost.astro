@@ -55,7 +55,7 @@ const readingTime = `${Math.max(1, Math.round(words / 200))} min read`;
 		}} />
 		<style>
 			main {
-				width: calc(100% - 2em);
+				width: 100%;
 				max-width: 100%;
 				margin: 0;
 			}
@@ -66,10 +66,10 @@ const readingTime = `${Math.max(1, Math.round(words / 200))} min read`;
 				border-radius: 14px;
 				overflow: hidden;
 				aspect-ratio: 16 / 9;
-				background: var(--color-gray-100, #f3f4f6);
+				background: var(--color-surface-sunken, #f3f4f6);
 				box-shadow:
 					0 4px 24px rgba(0, 0, 0, 0.08),
-					0 0 0 1px var(--color-gray-200, #e5e7eb);
+					0 0 0 1px var(--color-border, #e5e7eb);
 			}
 			.hero-image img {
 				display: block;
@@ -80,10 +80,11 @@ const readingTime = `${Math.max(1, Math.round(words / 200))} min read`;
 
 			/* ── Prose container ── */
 			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
+				width: 100%;
+				max-width: 720px;
 				margin: 0 auto;
-				padding: 2.5rem 1em 5rem;
+				padding: 2.5rem 1.5rem 5rem;
+				box-sizing: border-box;
 				color: var(--color-text-primary, #111827);
 			}
 
@@ -113,10 +114,16 @@ const readingTime = `${Math.max(1, Math.round(words / 200))} min read`;
 				padding: 0.2rem 0.75rem;
 				background: transparent;
 				color: var(--color-text-secondary, #6b7280);
-				border: 1px solid var(--color-gray-300, #d1d5db);
+				border: 1px solid var(--color-border, #d1d5db);
 				border-radius: 999px;
 				font-size: 0.8rem;
 				font-weight: 500;
+				text-decoration: none;
+				transition: color 150ms ease, border-color 150ms ease;
+			}
+			.article-tag:hover {
+				color: var(--color-primary, #2563EB);
+				border-color: var(--color-primary, #2563EB);
 			}
 
 			.last-updated-on {
@@ -180,23 +187,23 @@ const readingTime = `${Math.max(1, Math.round(words / 200))} min read`;
 			.prose-body :global(code:not(pre code)) {
 				font-family: 'Fira Code', 'Cascadia Code', 'Monaco', monospace;
 				font-size: 0.875em;
-				background: var(--color-gray-100, #f3f4f6);
+				background: var(--color-surface-sunken, #f3f4f6);
 				color: var(--color-text-primary, #111827);
 				padding: 0.15em 0.45em;
 				border-radius: 4px;
-				border: 1px solid var(--color-gray-200, #e5e7eb);
+				border: 1px solid var(--color-border, #e5e7eb);
 			}
 
 			.prose-body :global(pre) {
-				background: #1e1e2e;
-				color: #cdd6f4;
+				background: var(--color-code-bg, #1e1e2e);
+				color: var(--color-code-text, #cdd6f4);
 				padding: 1.25rem 1.5rem;
 				border-radius: 10px;
 				overflow-x: auto;
 				margin: 1.75rem 0;
 				font-size: 0.875rem;
 				line-height: 1.65;
-				border: 1px solid rgba(255,255,255,0.06);
+				border: 1px solid var(--color-code-border, rgba(255,255,255,0.06));
 			}
 
 			.prose-body :global(pre code) {
@@ -248,7 +255,7 @@ const readingTime = `${Math.max(1, Math.round(words / 200))} min read`;
 
 			.prose-body :global(hr) {
 				border: none;
-				border-top: 1px solid var(--color-gray-200, #e5e7eb);
+				border-top: 1px solid var(--color-border, #e5e7eb);
 				margin: 3rem 0;
 			}
 
@@ -259,7 +266,7 @@ const readingTime = `${Math.max(1, Math.round(words / 200))} min read`;
 				margin: 1.75rem 0;
 				border-radius: 8px;
 				overflow: hidden;
-				border: 1px solid var(--color-gray-200, #e5e7eb);
+				border: 1px solid var(--color-border, #e5e7eb);
 			}
 
 			.prose-body :global(th) {
@@ -269,14 +276,14 @@ const readingTime = `${Math.max(1, Math.round(words / 200))} min read`;
 				font-size: 0.8rem;
 				letter-spacing: 0.03em;
 				text-transform: uppercase;
-				background: var(--color-gray-50, #f9fafb);
-				border-bottom: 1px solid var(--color-gray-200, #e5e7eb);
+				background: var(--color-surface-raised, #f9fafb);
+				border-bottom: 1px solid var(--color-border, #e5e7eb);
 				color: var(--color-text-secondary, #6b7280);
 			}
 
 			.prose-body :global(td) {
 				padding: 0.6rem 0.875rem;
-				border-bottom: 1px solid var(--color-gray-100, #f3f4f6);
+				border-bottom: 1px solid var(--color-border-subtle, #f3f4f6);
 				vertical-align: top;
 			}
 
@@ -286,7 +293,7 @@ const readingTime = `${Math.max(1, Math.round(words / 200))} min read`;
 
 			@media (max-width: 640px) {
 				.prose {
-					padding: 1.5rem 1em 3rem;
+					padding: 1.5rem 1.25rem 3rem;
 				}
 				.article-header h1 {
 					font-size: 1.625rem;
@@ -311,7 +318,7 @@ const readingTime = `${Math.max(1, Math.round(words / 200))} min read`;
 						{tags.length > 0 && (
 							<div class="article-tags">
 								{tags.map(tag => (
-									<span class="article-tag">{tag}</span>
+									<a href={`/blog/topics/${tag}`} class="article-tag">{tag}</a>
 								))}
 							</div>
 						)}

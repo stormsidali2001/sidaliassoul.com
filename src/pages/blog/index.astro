@@ -77,15 +77,15 @@ const years = [...postsByYear.keys()].sort((a, b) => b - a);
 											</div>
 											<h3 class="blog-post-title">{post.data.title}</h3>
 											<p class="blog-post-excerpt">{post.data.description}</p>
-											{(post.data.tags ?? []).length > 0 && (
-												<div class="blog-post-topics">
-													{post.data.tags!.map(topic => (
-														<span class="blog-topic">{topic}</span>
-													))}
-												</div>
-											)}
 										</div>
 									</a>
+									{(post.data.tags ?? []).length > 0 && (
+										<div class="blog-post-topics">
+											{post.data.tags!.map(topic => (
+												<a href={`/blog/topics/${topic}`} class="blog-topic">{topic}</a>
+											))}
+										</div>
+									)}
 								</article>
 							))}
 						</div>

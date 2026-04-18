@@ -315,6 +315,7 @@
 		grid-template-columns: 1fr;
 		padding: var(--space-10) 0 var(--space-8);
 		gap: var(--space-6);
+		text-align: center;
 	}
 	.hero-image-wrap {
 		order: -1;
@@ -328,6 +329,17 @@
 	}
 	.home-description {
 		max-width: 100%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.hero-eyebrow {
+		text-align: center;
+	}
+	.home-cta {
+		justify-content: center;
+	}
+	.hero-social {
+		justify-content: center;
 	}
 }
 
@@ -353,7 +365,7 @@
 	}
 	.home-cta {
 		flex-direction: column;
-		align-items: flex-start;
+		align-items: center;
 	}
 	.home-cta-primary,
 	.home-cta-secondary {

@@ -4,9 +4,9 @@ description: Learn how to handle user interactions in React by implementing
   event handlers for clicks, form submissions, and more.
 pubDate: 2025-03-19
 tags:
-  - frameworks
   - javascript
   - frontend
+  - events
 series: react-fundamentals
 seriesOrder: 9
 ---

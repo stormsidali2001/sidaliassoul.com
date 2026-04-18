@@ -5,9 +5,9 @@ description: Learn how to set up your development environment and create your
 pubDate: 2025-01-15
 # heroImage: /assets/Creating a React app easy using vite.jpg
 tags:
-  - frameworks
   - javascript
   - frontend
+  - tooling
 series: react-fundamentals
 seriesOrder: 2
 ---

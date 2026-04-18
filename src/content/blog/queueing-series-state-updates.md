@@ -3,9 +3,10 @@ title: "Title Here"
 description: "Description Here"
 pubDate: 2025-04-16
 # heroImage: "/assets/courses/react-fundamentals/your-first-component.jpg"
-tags: []
-# videoUrl: "https://www.youtube.com/embed/chapter4-example"
-# videoTitle: "Creating Your First React Component"
+tags:
+  - javascript
+  - frontend
+  - state
 series: "react-fundamentals-course"
 seriesOrder: 13
 resources: []

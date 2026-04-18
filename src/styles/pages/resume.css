@@ -178,6 +178,34 @@ a.resume-contact-item:hover {
 	display: none;
 }
 
+/* Period line under company name */
+.resume-period {
+	font-size: var(--font-size-xs);
+	color: var(--color-text-tertiary);
+	margin: 0 0 0.5rem;
+	font-weight: var(--font-weight-medium);
+}
+
+/* Tech stack badges inside resume */
+.resume-stack {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.35rem;
+	margin: 0.5rem 0 0.75rem;
+}
+
+.resume-badge {
+	display: inline-block;
+	padding: 0.15rem 0.5rem;
+	background: var(--color-surface-sunken);
+	color: var(--color-text-secondary);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-base);
+	font-size: var(--font-size-xs);
+	font-weight: var(--font-weight-medium);
+	line-height: 1.4;
+}
+
 /* ── Print styles ── */
 @media print {
 	.resume-download-btn,

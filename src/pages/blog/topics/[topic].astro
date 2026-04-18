@@ -1,0 +1,95 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import BaseHead from '../../../components/BaseHead.astro';
+import Footer from '../../../components/Footer.astro';
+import FormattedDate from '../../../components/FormattedDate.astro';
+import Header from '../../../components/Header.astro';
+import { SITE_TITLE } from '../../../consts';
+import '../../../styles/pages/blog.css';
+import '../../../styles/pages/topics.css';
+
+export async function getStaticPaths() {
+	const posts = (await getCollection('blog')).filter((p) => p.data.published !== false);
+	const tagMap = new Map<string, CollectionEntry<'blog'>[]>();
+	for (const post of posts) {
+		for (const tag of post.data.tags) {
+			if (!tagMap.has(tag)) tagMap.set(tag, []);
+			tagMap.get(tag)!.push(post);
+		}
+	}
+	return [...tagMap.entries()].map(([tag, tagPosts]) => ({
+		params: { topic: tag },
+		props: {
+			tag,
+			posts: tagPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+		},
+	}));
+}
+
+interface Props {
+	tag: string;
+	posts: CollectionEntry<'blog'>[];
+}
+
+const { tag, posts } = Astro.props;
+
+function readingTime(body: string): string {
+	const words = body.trim().split(/\s+/).length;
+	return `${Math.max(1, Math.round(words / 200))} min read`;
+}
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title={`#${tag} — ${SITE_TITLE}`}
+			description={`All articles tagged with "${tag}".`}
+		/>
+	</head>
+	<body>
+		<Header />
+		<main class="blog-main">
+
+			<a href="/topics" class="topics-back-link">← All Topics</a>
+
+			<div class="blog-page-header">
+				<div class="blog-title-row">
+					<h1 class="blog-page-title">#{tag}</h1>
+					<span class="blog-count">{posts.length} article{posts.length !== 1 ? 's' : ''}</span>
+				</div>
+				<p class="blog-page-subtitle">All posts tagged with <strong>#{tag}</strong>.</p>
+			</div>
+
+			<div class="blog-post-list">
+				{posts.map(post => (
+					<article class="blog-post-card">
+						<a href={`/blog/${post.id}/`} class="blog-card-link">
+							<div class="blog-card-body">
+								<div class="blog-card-meta">
+									<span class="blog-post-date">
+										<FormattedDate date={post.data.pubDate} />
+									</span>
+									<span class="meta-sep">·</span>
+									<span class="blog-reading-time">{readingTime(post.body ?? '')}</span>
+								</div>
+								<h3 class="blog-post-title">{post.data.title}</h3>
+								<p class="blog-post-excerpt">{post.data.description}</p>
+							</div>
+						</a>
+						{post.data.tags.length > 0 && (
+							<div class="blog-post-topics">
+								{post.data.tags.map(t => (
+									<a href={`/blog/topics/${t}`} class={`blog-topic${t === tag ? ' blog-topic--active' : ''}`}>{t}</a>
+								))}
+							</div>
+						)}
+					</article>
+				))}
+			</div>
+
+		</main>
+		<Footer />
+	</body>
+</html>

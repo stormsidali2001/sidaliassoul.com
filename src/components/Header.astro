@@ -36,7 +36,7 @@ import HeaderLink from './HeaderLink.astro';
 			</svg>
 		</button>
 	</nav>
-	<div class="mobile-menu" id="mobile-menu" hidden>
+	<div class="mobile-menu" id="mobile-menu">
 		<HeaderLink href="/">Home</HeaderLink>
 		<HeaderLink href="/blog">Blog</HeaderLink>
 		<HeaderLink href="/resume">Resume</HeaderLink>
@@ -62,17 +62,30 @@ import HeaderLink from './HeaderLink.astro';
 	const btn = document.querySelector<HTMLButtonElement>('.mobile-menu-btn');
 	const menu = document.getElementById('mobile-menu');
 
-	btn?.addEventListener('click', () => {
-		const isOpen = menu && !menu.hidden;
-		if (menu) menu.hidden = !!isOpen;
-		btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+	function closeMenu() {
+		menu?.classList.remove('is-open');
+		btn?.setAttribute('aria-expanded', 'false');
+	}
+
+	function openMenu() {
+		menu?.classList.add('is-open');
+		btn?.setAttribute('aria-expanded', 'true');
+	}
+
+	btn?.addEventListener('click', (e) => {
+		e.stopPropagation();
+		menu?.classList.contains('is-open') ? closeMenu() : openMenu();
 	});
 
-	// Close menu on outside click
+	// Close when any link inside the menu is clicked
+	menu?.querySelectorAll('a').forEach((link) => {
+		link.addEventListener('click', closeMenu);
+	});
+
+	// Close on outside click
 	document.addEventListener('click', (e) => {
-		if (menu && !menu.hidden && !menu.contains(e.target as Node) && !btn?.contains(e.target as Node)) {
-			menu.hidden = true;
-			btn?.setAttribute('aria-expanded', 'false');
+		if (menu?.classList.contains('is-open') && !menu.contains(e.target as Node)) {
+			closeMenu();
 		}
 	});
 </script>
@@ -156,14 +169,17 @@ import HeaderLink from './HeaderLink.astro';
 		display: block;
 	}
 
-	/* Mobile dropdown */
+	/* Mobile dropdown — hidden by default, shown via .is-open class */
 	.mobile-menu {
+		display: none;
 		border-top: 1px solid var(--nav-border, #e5e7eb);
 		background: var(--nav-bg, white);
 		padding: 0.75rem 1rem 1rem;
-		display: flex;
 		flex-direction: column;
 		gap: 0.15rem;
+	}
+	.mobile-menu.is-open {
+		display: flex;
 	}
 	.mobile-menu :global(a) {
 		display: block;
@@ -221,7 +237,7 @@ import HeaderLink from './HeaderLink.astro';
 	}
 
 	@media (min-width: 641px) {
-		.mobile-menu {
+		.mobile-menu.is-open {
 			display: none !important;
 		}
 	}

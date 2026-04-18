@@ -2,12 +2,20 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { getEntry, render } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
 import '../styles/pages/resume.css';
 
 const cvEntry = await getEntry('cv', 'main');
 const { data: cv } = cvEntry;
 const { Content } = await render(cvEntry);
+
+const experiences = (await getCollection('experience')).sort((a, b) => a.data.order - b.data.order);
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+
+function formatPeriod(start: Date, end?: Date) {
+	const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+	return `${fmt(start)} – ${end ? fmt(end) : 'Present'}`;
+}
 ---
 
 <!doctype html>
@@ -52,16 +60,55 @@ const { Content } = await render(cvEntry);
 								rel="noopener"
 								class="resume-contact-item"
 							>
-								{social.network === 'LinkedIn' ? 'LinkedIn' : 'GitHub'}
+								{social.network}
 							</a>
 						</>
 					))}
 				</div>
 			</div>
 
-			<!-- CV content rendered from markdown -->
 			<div class="resume-body">
+
+				<!-- Summary + Education from cv/main.md -->
 				<Content />
+
+				<!-- Experience from collection -->
+				<h2>Experience</h2>
+				{await Promise.all(experiences.map(async (exp) => {
+					const { Content: ExpContent } = await render(exp);
+					return (
+						<div>
+							<h3>{exp.data.role}</h3>
+							<h4>{exp.data.company} · {exp.data.location}</h4>
+							<p class="resume-period">{formatPeriod(exp.data.startDate, exp.data.endDate)}</p>
+							<ExpContent />
+							<div class="resume-stack">
+								{exp.data.stack.map(t => <span class="resume-badge">{t}</span>)}
+							</div>
+						</div>
+					);
+				}))}
+
+				<!-- Projects from collection -->
+				<h2>Projects</h2>
+				{await Promise.all(projects.map(async (proj) => {
+					const { Content: ProjContent } = await render(proj);
+					return (
+						<div>
+							<h3>
+								{proj.data.github
+									? <a href={proj.data.github} target="_blank" rel="noopener">{proj.data.title}</a>
+									: proj.data.title
+								}
+							</h3>
+							<ProjContent />
+							<div class="resume-stack">
+								{proj.data.stack.map(t => <span class="resume-badge">{t}</span>)}
+							</div>
+						</div>
+					);
+				}))}
+
 			</div>
 
 		</main>

@@ -5,9 +5,9 @@ description: Understand the structure of a React project, how components
 pubDate: 2025-01-29
 # heroImage: /assets/courses/react-fundamentals/basic-project-structure.jpg
 tags:
-  - frameworks
   - javascript
   - frontend
+  - patterns
 series: react-fundamentals
 seriesOrder: 3
 ---

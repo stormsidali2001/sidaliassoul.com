@@ -5,9 +5,9 @@ description: Learn how to efficiently render lists of data in React using array
 pubDate: 2025-03-12
 # heroImage: /assets/courses/react-fundamentals/rendering-lists.jpg
 tags:
-  - frameworks
   - javascript
   - frontend
+  - rendering
 series: react-fundamentals
 seriesOrder: 8
 ---

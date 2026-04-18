@@ -1,13 +1,16 @@
 ---
 import { getCollection } from 'astro:content';
 
+// How many posts to show before and after the current post
+const SERIES_WINDOW = 2;
+
 interface Props {
 	series: string;
 	currentId: string;
 	currentOrder?: number;
 }
 
-const { series, currentId, currentOrder } = Astro.props;
+const { series, currentId } = Astro.props;
 
 const allPosts = await getCollection('blog', ({ data }) => data.series === series && data.published !== false);
 
@@ -17,15 +20,26 @@ const seriesPosts = allPosts.sort((a, b) => {
 	if (aO !== bO) return aO - bO;
 	return a.data.pubDate.getTime() - b.data.pubDate.getTime();
 });
+
+const currentIndex = seriesPosts.findIndex((p) => p.id === currentId);
+const windowStart = Math.max(0, currentIndex - SERIES_WINDOW);
+const windowEnd = Math.min(seriesPosts.length - 1, currentIndex + SERIES_WINDOW);
+const visiblePosts = seriesPosts.slice(windowStart, windowEnd + 1);
+const hasHiddenBefore = windowStart > 0;
+const hasHiddenAfter = windowEnd < seriesPosts.length - 1;
 ---
 
 <aside class="series-card" aria-label={`Part of the series: ${series}`}>
 	<p class="series-label">Part of a series</p>
 	<h2 class="series-title">{series}</h2>
 	<ol class="series-list">
-		{seriesPosts.map((post, index) => {
+		{hasHiddenBefore && (
+			<li class="series-ellipsis" aria-hidden="true">…</li>
+		)}
+		{visiblePosts.map((post, i) => {
 			const isCurrent = post.id === currentId;
-			const displayNumber = post.data.seriesOrder ?? index + 1;
+			const globalIndex = seriesPosts.indexOf(post);
+			const displayNumber = post.data.seriesOrder ?? globalIndex + 1;
 			return (
 				<li class:list={['series-item', { 'series-item--current': isCurrent }]}>
 					{isCurrent ? (
@@ -43,6 +57,9 @@ const seriesPosts = allPosts.sort((a, b) => {
 				</li>
 			);
 		})}
+		{hasHiddenAfter && (
+			<li class="series-ellipsis" aria-hidden="true">…</li>
+		)}
 	</ol>
 </aside>
 
@@ -126,6 +143,13 @@ const seriesPosts = allPosts.sort((a, b) => {
 
 	.series-item__title {
 		flex: 1;
+	}
+
+	.series-ellipsis {
+		font-size: 0.875rem;
+		color: var(--color-text-tertiary, #9ca3af);
+		padding-left: 1.5ch;
+		line-height: 1.5;
 	}
 
 	.series-item__badge {

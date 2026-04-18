@@ -5,9 +5,9 @@ description: Learn how to render different UI elements based on conditions, a
 pubDate: 2025-03-05
 # heroImage: /assets/courses/react-fundamentals/conditional-rendering.jpg
 tags:
-  - frameworks
   - javascript
   - frontend
+  - rendering
 series: react-fundamentals
 seriesOrder: 7
 ---

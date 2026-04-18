@@ -6,9 +6,9 @@ description: Master JSX, the syntax extension for JavaScript that makes writing
 pubDate: 2025-02-19
 # heroImage: /assets/courses/react-fundamentals/jsx.jpg
 tags:
-  - frameworks
   - javascript
   - frontend
+  - components
 series: react-fundamentals
 seriesOrder: 5
 ---
