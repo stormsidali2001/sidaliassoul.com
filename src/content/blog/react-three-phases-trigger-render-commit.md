@@ -8,6 +8,7 @@ tags:
   - frontend
   - rendering
 series: react-fundamentals
+
 seriesOrder: 11
 ---
 ## Introduction

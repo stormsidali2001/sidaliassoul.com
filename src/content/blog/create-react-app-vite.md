@@ -3,7 +3,6 @@ title: Creating A React App in 2026 is EASY with Vite
 description: Learn how to set up your development environment and create your
   first React application using modern tools and best practices.
 pubDate: 2025-01-15
-# heroImage: /assets/Creating a React app easy using vite.jpg
 tags:
   - javascript
   - frontend

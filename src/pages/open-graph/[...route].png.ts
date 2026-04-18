@@ -46,7 +46,7 @@ async function generateOgImage(page: PageData): Promise<Buffer> {
 					backgroundColor: '#0f172a',
 					padding:         '60px 70px 50px 80px',
 					borderLeft:      '22px solid #2563eb',
-					fontFamily:      'Inter',
+					fontFamily:      'Atkinson',
 					boxSizing:       'border-box',
 				},
 				children: [
@@ -112,8 +112,8 @@ async function generateOgImage(page: PageData): Promise<Buffer> {
 			width:  1200,
 			height: 630,
 			fonts: [
-				{ name: 'Inter', data: fontData, weight: 400, style: 'normal' },
-				{ name: 'Inter', data: fontData, weight: 700, style: 'normal' },
+				{ name: 'Atkinson', data: fontRegular, weight: 400, style: 'normal' },
+				{ name: 'Atkinson', data: fontBold,    weight: 700, style: 'normal' },
 			],
 		},
 	);
