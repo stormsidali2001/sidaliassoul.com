@@ -49,26 +49,6 @@ const education = defineCollection({
   }),
 });
 
-const contact = defineCollection({
-  loader: glob({ base: "./src/content/contact", pattern: "**/*.{md,mdx}" }),
-  schema: z.object({
-    email: z.string().email(),
-    linkedin: z.string().url(),
-    github: z.string().url(),
-    subtitle: z.string(),
-    availabilityText: z.string(),
-    platforms: z.array(
-      z.object({
-        name: z.string(),
-        handle: z.string(),
-        url: z.string().url(),
-        icon: z.string(),
-        group: z.enum(["direct", "code", "social", "freelancing"]),
-      }),
-    ),
-  }),
-});
-
 const experience = defineCollection({
   loader: glob({ base: "./src/content/experience", pattern: "**/*.md" }),
   schema: z.object({
@@ -95,4 +75,4 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { blog, education, contact, experience, projects };
+export const collections = { blog, education, experience, projects };

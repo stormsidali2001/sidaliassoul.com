@@ -1,13 +1,13 @@
 ---
-import { getEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import { AUTHOR, CONTACT } from '../consts';
 import '../styles/pages/contact.css';
 
-const entry = await getEntry('contact', 'main');
-const { email, linkedin, github, subtitle, availabilityText, platforms } = entry!.data;
-const socialPlatforms = platforms.filter(p => p.group === 'social');
+const { subtitle, availabilityText, platforms } = CONTACT;
+const { email, linkedin, github } = AUTHOR;
+const socialPlatforms      = platforms.filter(p => p.group === 'social');
 const freelancingPlatforms = platforms.filter(p => p.group === 'freelancing');
 ---
 
@@ -15,8 +15,8 @@ const freelancingPlatforms = platforms.filter(p => p.group === 'freelancing');
 <html lang="en">
 	<head>
 		<BaseHead
-			title="Contact — Sidali Assoul"
-			description="Get in touch with Sidali Assoul — Full Stack Engineer open to remote opportunities."
+			title={`Contact — ${AUTHOR.name}`}
+			description={`Get in touch with ${AUTHOR.name} — ${AUTHOR.jobTitle} open to remote opportunities.`}
 		/>
 	</head>
 	<body>
