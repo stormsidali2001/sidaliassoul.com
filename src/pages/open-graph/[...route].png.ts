@@ -2,10 +2,21 @@ import { Resvg } from '@resvg/resvg-js';
 import { getCollection } from 'astro:content';
 import { readFileSync } from 'fs';
 import satori from 'satori';
-import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from '../../consts';
+import sharp from 'sharp';
+import { AUTHOR, SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from '../../consts';
 
 const fontRegular = readFileSync('./src/assets/fonts/atkinson-regular.woff');
 const fontBold    = readFileSync('./src/assets/fonts/atkinson-bold.woff');
+
+// Crop a face-centered square from the top of the portrait (matches hero object-position: center top)
+const rawProfile  = readFileSync('./public/profile.jpg');
+const { width: pw = 4000 } = await sharp(rawProfile).metadata();
+const cropSize    = pw; // square crop using full width, taken from the top
+const croppedProfile = await sharp(rawProfile)
+	.extract({ left: 0, top: 0, width: cropSize, height: cropSize })
+	.jpeg({ quality: 85 })
+	.toBuffer();
+const profileBase64 = `data:image/jpeg;base64,${croppedProfile.toString('base64')}`;
 
 interface PageData {
 	title: string;
@@ -73,31 +84,70 @@ async function generateOgImage(page: PageData): Promise<Buffer> {
 							],
 						},
 					},
-					// Footer row — domain
+					// Footer row — author credit
 					{
 						type: 'div',
 						props: {
 							style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between' },
 							children: [
+								// Left: avatar + stacked name/domain
 								{
-									type: 'span',
+									type: 'div',
 									props: {
-										style: { fontSize: 20, color: '#475569', fontWeight: 400 },
-										children: SITE_URL.replace('https://', ''),
+										style: { display: 'flex', alignItems: 'center', gap: '14px' },
+										children: [
+											{
+												type: 'img',
+												props: {
+													src:    profileBase64,
+													width:  56,
+													height: 56,
+													style: {
+														borderRadius: '50%',
+														objectFit:    'cover',
+														border:       '2px solid rgba(255,255,255,0.12)',
+														flexShrink:   0,
+													},
+												},
+											},
+											{
+												type: 'div',
+												props: {
+													style: { display: 'flex', flexDirection: 'column', gap: '2px' },
+													children: [
+														{
+															type: 'span',
+															props: {
+																style: { fontSize: 18, fontWeight: 600, color: '#f8fafc' },
+																children: AUTHOR.name,
+															},
+														},
+														{
+															type: 'span',
+															props: {
+																style: { fontSize: 15, color: '#475569' },
+																children: SITE_URL.replace('https://', ''),
+															},
+														},
+													],
+												},
+											},
+										],
 									},
 								},
+								// Right: role badge
 								{
 									type: 'span',
 									props: {
 										style: {
-											fontSize:        14,
-											color:           '#2563eb',
-											border:          '1px solid #2563eb',
-											padding:         '4px 14px',
-											borderRadius:    '999px',
-											fontWeight:      600,
-											letterSpacing:   '0.05em',
-											textTransform:   'uppercase',
+											fontSize:      14,
+											color:         '#2563eb',
+											border:        '1px solid #2563eb',
+											padding:       '4px 14px',
+											borderRadius:  '999px',
+											fontWeight:    600,
+											letterSpacing: '0.05em',
+											textTransform: 'uppercase',
 										},
 										children: 'Full Stack Engineer',
 									},
