@@ -149,7 +149,7 @@ async function generateOgImage(page: PageData): Promise<Buffer> {
 											letterSpacing: '0.05em',
 											textTransform: 'uppercase',
 										},
-										children: 'Full Stack Engineer',
+										children: AUTHOR.jobTitle,
 									},
 								},
 							],

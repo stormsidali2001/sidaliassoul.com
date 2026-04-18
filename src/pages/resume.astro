@@ -2,15 +2,13 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { getCollection, getEntry, render } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+import { AUTHOR } from '../consts';
 import '../styles/pages/resume.css';
 
-const cvEntry = await getEntry('cv', 'main');
-const { data: cv } = cvEntry;
-const { Content } = await render(cvEntry);
-
+const education   = (await getCollection('education')).sort((a, b) => a.data.order - b.data.order);
 const experiences = (await getCollection('experience')).sort((a, b) => a.data.order - b.data.order);
-const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const projects    = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 
 function formatPeriod(start: Date, end?: Date) {
 	const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
@@ -21,7 +19,7 @@ function formatPeriod(start: Date, end?: Date) {
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={`Resume — ${cv.name}`} description={cv.headline} />
+		<BaseHead title={`Resume — ${AUTHOR.name}`} description={AUTHOR.headline} />
 	</head>
 
 	<body>
@@ -32,10 +30,10 @@ function formatPeriod(start: Date, end?: Date) {
 			<div class="resume-page-header">
 				<div class="resume-title-row">
 					<div>
-						<h1 class="resume-page-name">{cv.name}</h1>
-						<p class="resume-page-headline">{cv.headline}</p>
+						<h1 class="resume-page-name">{AUTHOR.name}</h1>
+						<p class="resume-page-headline">{AUTHOR.headline}</p>
 					</div>
-					<a href="/resume.pdf" class="resume-download-btn" download="Sidali_Assoul_Resume.pdf">
+					<a href="/resume.pdf" class="resume-download-btn" download={`${AUTHOR.name.replace(' ', '_')}_Resume.pdf`}>
 						<svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 							<path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
 						</svg>
@@ -44,35 +42,39 @@ function formatPeriod(start: Date, end?: Date) {
 				</div>
 
 				<div class="resume-contact-bar">
-					<a href={`mailto:${cv.email}`} class="resume-contact-item">{cv.email}</a>
+					<a href={`mailto:${AUTHOR.email}`} class="resume-contact-item">{AUTHOR.email}</a>
 					<span class="resume-contact-sep">·</span>
-					<span class="resume-contact-item">{cv.phone}</span>
+					<span class="resume-contact-item">{AUTHOR.phone}</span>
 					<span class="resume-contact-sep">·</span>
-					<span class="resume-contact-item">{cv.location}</span>
-					{cv.social_networks.map(social => (
-						<>
-							<span class="resume-contact-sep">·</span>
-							<a
-								href={social.network === 'LinkedIn'
-									? `https://linkedin.com/in/${social.username}`
-									: `https://github.com/${social.username}`}
-								target="_blank"
-								rel="noopener"
-								class="resume-contact-item"
-							>
-								{social.network}
-							</a>
-						</>
-					))}
+					<span class="resume-contact-item">{AUTHOR.location}</span>
+					<span class="resume-contact-sep">·</span>
+					<a href={AUTHOR.linkedin} target="_blank" rel="noopener" class="resume-contact-item">LinkedIn</a>
+					<span class="resume-contact-sep">·</span>
+					<a href={AUTHOR.github} target="_blank" rel="noopener" class="resume-contact-item">GitHub</a>
 				</div>
 			</div>
 
 			<div class="resume-body">
 
-				<!-- Summary + Education from cv/main.md -->
-				<Content />
+				<!-- Summary -->
+				<h2>Summary</h2>
+				<p>{AUTHOR.bio}</p>
 
-				<!-- Experience from collection -->
+				<!-- Education -->
+				<h2>Education</h2>
+				{await Promise.all(education.map(async (edu) => {
+					const { Content: EduContent } = await render(edu);
+					return (
+						<div>
+							<h3>{edu.data.degree}</h3>
+							<h4>{edu.data.institution} · {edu.data.location}</h4>
+							<p class="resume-period">{formatPeriod(edu.data.startDate, edu.data.endDate)}</p>
+							<EduContent />
+						</div>
+					);
+				}))}
+
+				<!-- Experience -->
 				<h2>Experience</h2>
 				{await Promise.all(experiences.map(async (exp) => {
 					const { Content: ExpContent } = await render(exp);
@@ -89,7 +91,7 @@ function formatPeriod(start: Date, end?: Date) {
 					);
 				}))}
 
-				<!-- Projects from collection -->
+				<!-- Projects -->
 				<h2>Projects</h2>
 				{await Promise.all(projects.map(async (proj) => {
 					const { Content: ProjContent } = await render(proj);

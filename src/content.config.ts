@@ -37,21 +37,15 @@ const blog = defineCollection({
     }),
 });
 
-const cv = defineCollection({
-  loader: glob({ base: "./src/content/cv", pattern: "**/*.{md,mdx}" }),
+const education = defineCollection({
+  loader: glob({ base: "./src/content/education", pattern: "**/*.md" }),
   schema: z.object({
-    name: z.string(),
-    headline: z.string(),
+    degree: z.string(),
+    institution: z.string(),
     location: z.string(),
-    email: z.string(),
-    phone: z.string(),
-    website: z.string(),
-    social_networks: z.array(
-      z.object({
-        network: z.string(),
-        username: z.string(),
-      }),
-    ),
+    startDate: z.coerce.date(),
+    endDate: z.coerce.date().optional(),
+    order: z.number(),
   }),
 });
 
@@ -101,4 +95,4 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { blog, cv, contact, experience, projects };
+export const collections = { blog, education, contact, experience, projects };

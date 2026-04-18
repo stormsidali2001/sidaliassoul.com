@@ -23,7 +23,7 @@ const featuredProjects = (await getCollection('projects', ({ data }) => data.fea
 			'@type': 'Person',
 			name: AUTHOR.name,
 			url: Astro.site?.href,
-			jobTitle: 'Full Stack Engineer',
+			jobTitle: AUTHOR.jobTitle,
 			description: SITE_DESCRIPTION,
 			email: AUTHOR.email,
 			sameAs: [AUTHOR.linkedin, AUTHOR.github],
@@ -42,31 +42,28 @@ const featuredProjects = (await getCollection('projects', ({ data }) => data.fea
 			<!-- Hero -->
 			<section class="home-hero">
 				<div class="hero-text">
-					<p class="hero-eyebrow">Full Stack Engineer</p>
-					<h1 class="home-title">Sidali Assoul</h1>
-					<p class="home-description">
-						I build scalable SaaS platforms and AI microservices that stay stable in production —
-						leveraging Clean Architecture, DDD, and high-performance engineering.
-					</p>
+					<p class="hero-eyebrow">{AUTHOR.jobTitle}</p>
+					<h1 class="home-title">{AUTHOR.name}</h1>
+					<p class="home-description">{AUTHOR.tagline}</p>
 					<div class="home-cta">
 						<a href="/resume" class="home-cta-primary">View Resume</a>
 						<a href="/blog" class="home-cta-secondary">Read Blog</a>
 					</div>
 					<div class="hero-social">
-						<a href="mailto:assoulsidali@gmail.com" class="hero-social-link">
-							assoulsidali@gmail.com
+						<a href={`mailto:${AUTHOR.email}`} class="hero-social-link">
+							{AUTHOR.email}
 						</a>
 						<span class="hero-social-sep">·</span>
-						<a href="https://linkedin.com/in/sidali-assoul" target="_blank" rel="noopener" class="hero-social-link">LinkedIn</a>
+						<a href={AUTHOR.linkedin} target="_blank" rel="noopener" class="hero-social-link">LinkedIn</a>
 						<span class="hero-social-sep">·</span>
-						<a href="https://github.com/stormsidali2001" target="_blank" rel="noopener" class="hero-social-link">GitHub</a>
+						<a href={AUTHOR.github} target="_blank" rel="noopener" class="hero-social-link">GitHub</a>
 					</div>
 				</div>
 				<div class="hero-image-wrap">
 					<div class="hero-image-ring">
 						<img
-							src="/profile.jpg"
-							alt="Sidali Assoul"
+							src={AUTHOR.avatar}
+							alt={AUTHOR.name}
 							class="hero-image"
 							width="280"
 							height="280"
@@ -153,8 +150,8 @@ const featuredProjects = (await getCollection('projects', ({ data }) => data.fea
 					building something ambitious, I'd love to hear about it.
 				</p>
 				<div class="contact-actions">
-					<a href="mailto:assoulsidali@gmail.com" class="home-cta-primary">Send an Email</a>
-					<a href="https://linkedin.com/in/sidali-assoul" target="_blank" rel="noopener" class="home-cta-secondary">Connect on LinkedIn</a>
+					<a href={`mailto:${AUTHOR.email}`} class="home-cta-primary">Send an Email</a>
+					<a href={AUTHOR.linkedin} target="_blank" rel="noopener" class="home-cta-secondary">Connect on LinkedIn</a>
 				</div>
 			</section>
 
