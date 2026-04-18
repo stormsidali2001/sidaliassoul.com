@@ -4,9 +4,9 @@ description: Learn how React components maintain and update their state,
   allowing you to create dynamic and interactive user interfaces.
 pubDate: 2025-03-26
 tags:
+  - react
   - javascript
-  - frontend
-  - state
+  - tutorial
 series: react-fundamentals
 seriesOrder: 10
 ---

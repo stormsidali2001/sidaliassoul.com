@@ -4,9 +4,9 @@ description: Learn how to efficiently render lists of data in React using array
   methods and keys for optimal performance.
 pubDate: 2025-03-12
 tags:
+  - react
   - javascript
-  - frontend
-  - rendering
+  - tutorial
 series: react-fundamentals
 seriesOrder: 8
 ---

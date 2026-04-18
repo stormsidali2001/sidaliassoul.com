@@ -4,9 +4,9 @@ description: Learn how to render different UI elements based on conditions, a
   key technique for creating dynamic React applications.
 pubDate: 2025-03-05
 tags:
+  - react
   - javascript
-  - frontend
-  - rendering
+  - tutorial
 series: react-fundamentals
 seriesOrder: 7
 ---

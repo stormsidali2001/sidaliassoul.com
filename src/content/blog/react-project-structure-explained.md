@@ -4,9 +4,9 @@ description: Understand the structure of a React project, how components
   interact, and the flow of data through a React application.
 pubDate: 2025-01-29
 tags:
+  - react
   - javascript
-  - frontend
-  - patterns
+  - webdev
 series: react-fundamentals
 seriesOrder: 3
 ---

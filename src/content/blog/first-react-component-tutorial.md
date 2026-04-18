@@ -4,9 +4,9 @@ description: Learn how to create and use React components, the building blocks
   of any React application.
 pubDate: 2025-02-12
 tags:
+  - react
   - javascript
-  - frontend
-  - components
+  - tutorial
 series: react-fundamentals
 seriesOrder: 4
 ---

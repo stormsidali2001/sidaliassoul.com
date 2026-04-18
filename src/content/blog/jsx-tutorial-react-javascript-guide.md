@@ -5,9 +5,9 @@ description: Master JSX, the syntax extension for JavaScript that makes writing
   React components more intuitive and efficient.
 pubDate: 2025-02-19
 tags:
+  - react
   - javascript
-  - frontend
-  - components
+  - tutorial
 series: react-fundamentals
 seriesOrder: 5
 ---

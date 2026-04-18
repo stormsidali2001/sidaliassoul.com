@@ -4,8 +4,8 @@ description: Learn how to set up your development environment and create your
   first React application using modern tools and best practices.
 pubDate: 2025-01-15
 tags:
-  - javascript
-  - frontend
+  - react
+  - tutorial
   - tooling
 series: react-fundamentals
 seriesOrder: 2

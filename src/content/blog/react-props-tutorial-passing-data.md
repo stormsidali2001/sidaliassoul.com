@@ -4,9 +4,9 @@ description: Learn how to pass data between React components using props, a
   fundamental concept for building dynamic and reusable components.
 pubDate: 2025-02-26
 tags:
+  - react
   - javascript
-  - frontend
-  - components
+  - tutorial
 series: react-fundamentals
 seriesOrder: 6
 ---

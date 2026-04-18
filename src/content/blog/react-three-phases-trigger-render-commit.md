@@ -4,9 +4,9 @@ description: Understand the React rendering process and how components are
   updated in the DOM, providing insights into optimizing performance.
 pubDate: 2025-04-02
 tags:
+  - react
   - javascript
-  - frontend
-  - rendering
+  - webdev
 series: react-fundamentals
 
 seriesOrder: 11
