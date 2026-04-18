@@ -13,26 +13,32 @@ export async function GET(context) {
   const posts = allPosts
     .filter((p) => p.data.published !== false)
     .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-    .slice(0, 15); // Only fetch the last 15 articles
+    .slice(0, 15);
 
   return rss({
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     site: context.site,
+    xmlns: { media: "http://search.yahoo.com/mrss/" },
     customData: `<language>en-us</language>`,
-    items: posts.map((post) => ({
-      title: post.data.title,
-      description: post.data.description,
-      pubDate: post.data.pubDate,
-      link: `/blog/${post.id}/`,
-      categories: post.data.tags ?? [],
-      content: sanitizeHtml(parser.render(post.body), {
-        allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
-        allowedAttributes: {
-          ...sanitizeHtml.defaults.allowedAttributes,
-          img: ["src", "alt", "title"],
-        },
-      }),
-    })),
+    items: posts.map((post) => {
+      const ogImage = new URL(`open-graph/blog/${post.id}.png`, context.site).href;
+      return {
+        title: post.data.title,
+        description: post.data.description,
+        pubDate: post.data.pubDate,
+        link: `/blog/${post.id}/`,
+        categories: post.data.tags ?? [],
+        enclosure: { url: ogImage, length: 0, type: "image/png" },
+        customData: `<media:content url="${ogImage}" medium="image" type="image/png" />`,
+        content: sanitizeHtml(parser.render(post.body), {
+          allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
+          allowedAttributes: {
+            ...sanitizeHtml.defaults.allowedAttributes,
+            img: ["src", "alt", "title"],
+          },
+        }),
+      };
+    }),
   });
 }
