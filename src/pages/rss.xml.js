@@ -2,17 +2,18 @@ import { getCollection } from "astro:content";
 import rss from "@astrojs/rss";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 
-// ←←← NEW IMPORTS
 import sanitizeHtml from "sanitize-html";
 import MarkdownIt from "markdown-it";
 
-// ←←← Create the parser once (outside the function)
 const parser = new MarkdownIt();
 
 export async function GET(context) {
-  const posts = (await getCollection("blog"))
+  const allPosts = await getCollection("blog");
+
+  const posts = allPosts
     .filter((p) => p.data.published !== false)
-    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .slice(0, 15); // Only fetch the last 15 articles
 
   return rss({
     title: SITE_TITLE,
@@ -25,8 +26,6 @@ export async function GET(context) {
       pubDate: post.data.pubDate,
       link: `/blog/${post.id}/`,
       categories: post.data.tags ?? [],
-
-      // ←←← CHANGED: Convert Markdown → safe HTML (exactly what dev.to expects)
       content: sanitizeHtml(parser.render(post.body), {
         allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
         allowedAttributes: {
