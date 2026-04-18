@@ -1,55 +1,103 @@
-export const TAG1_VALUES = [
-	'javascript',
-	'typescript',
-	'python',
-	'php',
-	'go',
-	'rust',
-	'css',
-	'reflections',
-	'career',
-	'architecture',
-	'ai',
-	'open-source',
-	'tech-advice',
+// Dev.to Compatible Tags, important if you want to cross post to dev.to
+export const ALLOWED_TAGS = [
+  "ai", // 192,193 posts
+  "webdev", // 337,933 posts
+  "programming", // 234,884 posts
+  "productivity", // 108,844 posts
+  "javascript", // 233,568 posts
+  "tutorial", // 116,123 posts
+  "beginners", // 170,051 posts
+  "python", // 93,226 posts
+  "devops", // 83,336 posts
+  "opensource", // 67,536 posts
+  "security", // 49,855 posts
+  "blockchain", // 53,678 posts
+  "career", // 66,832 posts
+  "machinelearning", // 37,357 posts
+  "react", // 93,058 posts
+  "automation", // 25,278 posts
+  "web3", // 41,117 posts
+  "architecture", // 40,838 posts
+  "api", // 31,651 posts
+  "discuss", // 59,515 posts
+  "typescript", // 44,405 posts
+  "aws", // 54,430 posts
+  "showdev", // 20,228 posts
+  "startup", // 17,693 posts
+  "node", // 52,014 posts
+  "database", // 34,918 posts
+  "java", // 55,463 posts
+  "cybersecurity", // 18,305 posts
+  "cloud", // 39,611 posts
+  "news", // 54,917 posts
+  "rust", // 36,649 posts
+  "learning", // 33,383 posts
+  "php", // 29,035 posts
+  "performance", // 22,507 posts
+  "testing", // 26,123 posts
+  "agents", // 8,756 posts
+  "llm", // 11,403 posts
+  "nextjs", // 24,761 posts
+  "kubernetes", // 30,379 posts
+  "linux", // 27,779 posts
+  "datascience", // 21,837 posts
+  "marketing", // 10,510 posts
+  "saas", // 8,491 posts
+  "github", // 24,944 posts
+  "android", // 34,306 posts
+  "css", // 45,481 posts
+  "go", // 26,155 posts
+  "docker", // 22,987 posts
+  "development", // 22,145 posts
+  "mobile", // 21,801 posts
+  "frontend", // 23,178 posts
+  "backend", // 12,517 posts
+  "computerscience", // 13,810 posts
+  "softwaredevelopment", // 21,758 posts
+  "softwareengineering", // 13,146 posts
+  "dotnet", // 22,868 posts
+  "tooling", // 9,957 posts
+  "mcp", // 5,529 posts
+  "wordpress", // 9,292 posts
+  "devchallenge", // 11,110 posts
+  "coding", // 17,694 posts
+  "design", // 19,461 posts
+  "claude", // 2,591 posts
+  "flutter", // 13,388 posts
+  "gamedev", // 15,202 posts
+  "data", // 8,464 posts
+  "software", // 9,938 posts
+  "postgres", // 13,550 posts
+  "sql", // 12,296 posts
+  "deeplearning", // 5,980 posts
+  "azure", // 19,069 posts
+  "algorithms", // 12,455 posts
+  "cli", // 6,326 posts
+  "cryptocurrency", // 13,076 posts
+  "html", // 26,886 posts
+  "laravel", // 14,442 posts
+  "codepen", // 13,369 posts
+  "csharp", // 16,232 posts
+  "git", // 16,370 posts
+  "bitcoin", // 20,027 posts
+  "privacy", // 6,379 posts
+  "web", // 8,704 posts
+  "networking", // 6,093 posts
+  "chatgpt", // 9,021 posts
+  "systemdesign", // 4,021 posts
+  "codenewbie", // 26,458 posts
+  "ios", // 10,947 posts
+  "angular", // 22,265 posts
+  "terraform", // 6,557 posts
+  "vscode", // 12,480 posts
+  "buildinpublic", // 2,757 posts
+  "monitoring", // 5,219 posts
+  "community", // 12,309 posts
+  "resources", // 5,721 posts
+  "developer", // 8,420 posts
+  "ux", // 6,600 posts
+  "watercooler", // 16,385 posts
+  "django", // 8,151 posts
+  "iot", // 5,958 posts
+  "analytics", // 5,055 posts
 ] as const;
-
-export const TAG2_VALUES = [
-	'frontend',
-	'backend',
-	'tooling',
-	'testing',
-	'patterns',
-	'performance',
-	'security',
-	'devops',
-	'fundamentals',
-	'advanced',
-	'data',
-] as const;
-
-export const TAG3_VALUES = [
-	'components',
-	'state',
-	'rendering',
-	'hooks',
-	'routing',
-	'api',
-	'database',
-	'deployment',
-	'authentication',
-	'styling',
-	'accessibility',
-	'animation',
-	'architecture',
-	'events',
-	'forms',
-	'tooling',
-	'fundamentals',
-	'jsx',
-	'patterns',
-] as const;
-
-export type Tag1 = typeof TAG1_VALUES[number];
-export type Tag2 = typeof TAG2_VALUES[number];
-export type Tag3 = typeof TAG3_VALUES[number];
