@@ -11,7 +11,6 @@ tags:
 series: react-fundamentals
 seriesOrder: 12
 ---
-{/_Hook_/}
 
 ```javascript
 
@@ -39,11 +38,9 @@ Despite **incrementing the counter by 1**, and then **deferring the execution of
 
 **But** reality shows nothing but that, in fact a 1 gets printed 🤯.
 
-{/\* ### Introduction \*/}
 
 In this article, we will be clarifying what's exactly happening here under the scene while explaining the concept of a **state snapshot in `React`**. So without any further ado let's get started.
 
-{/\* ### Body \*/}
 
 As you might know, `State` doesn't live inside the function component but it's stored within the `React` package itself!.
 
@@ -80,11 +77,10 @@ In more specific words, **renders are totaly isolated**.
 
 ## Conclusion
 
-{/\* ### Outro + CTA _/} {/_\* HOOK\*/}
 
 To sum up, you can think of a **re-render** as a component starting a brand **new life** with a brand **new state snapshot**, **`JSX` code** and **event handlers**.
 
-{/\*\* Curiosity\*/} Now, imagine if we try to update the `counter` state using `setCounter` setter function two times sequentially. What would be the value of the `counter` state after the second render?
+Now, imagine if we try to update the `counter` state using `setCounter` setter function two times sequentially. What would be the value of the `counter` state after the second render?
 
 ```tsx
 // counter = 1
@@ -93,6 +89,6 @@ setCounter(counter +1)
 // counter = ?? 
 ```
 
-{/\*\* Action \*/} Well, thats what we are going to discover in the next article, where we introduce `React State Batching`.
+Well, thats what we are going to discover in the next article, where we introduce `React State Batching`.
 
 Thank you for your attentive reading and happy coding 🧑‍💻.

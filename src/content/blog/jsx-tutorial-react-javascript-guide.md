@@ -4,7 +4,6 @@ title: Master JSX in 8 Minutes (Before You Write Your Next React Component) --
 description: Master JSX, the syntax extension for JavaScript that makes writing
   React components more intuitive and efficient.
 pubDate: 2025-02-19
-# heroImage: /assets/courses/react-fundamentals/jsx.jpg
 tags:
   - javascript
   - frontend

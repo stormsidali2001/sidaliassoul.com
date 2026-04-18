@@ -3,7 +3,6 @@ title: Just Created Your React Project? Don't PANIC—here's every file explaine
 description: Understand the structure of a React project, how components
   interact, and the flow of data through a React application.
 pubDate: 2025-01-29
-# heroImage: /assets/courses/react-fundamentals/basic-project-structure.jpg
 tags:
   - javascript
   - frontend

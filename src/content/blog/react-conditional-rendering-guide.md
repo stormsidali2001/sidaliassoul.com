@@ -3,7 +3,6 @@ title: "React Conditional Rendering: Complete Guide with If Statements and JSX"
 description: Learn how to render different UI elements based on conditions, a
   key technique for creating dynamic React applications.
 pubDate: 2025-03-05
-# heroImage: /assets/courses/react-fundamentals/conditional-rendering.jpg
 tags:
   - javascript
   - frontend

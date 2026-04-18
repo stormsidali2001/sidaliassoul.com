@@ -3,7 +3,6 @@ title: "React Rendering Lists Tutorial: Complete Guide to Map Method and Keys"
 description: Learn how to efficiently render lists of data in React using array
   methods and keys for optimal performance.
 pubDate: 2025-03-12
-# heroImage: /assets/courses/react-fundamentals/rendering-lists.jpg
 tags:
   - javascript
   - frontend
