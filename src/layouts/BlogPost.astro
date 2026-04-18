@@ -11,7 +11,7 @@ import Header from '../components/Header.astro';
 import JsonLd from '../components/JsonLd.astro';
 import RelatedArticles from '../components/RelatedArticles.astro';
 import SeriesCard from '../components/SeriesCard.astro';
-import { AUTHOR } from '../consts';
+import { AUTHOR, SITE_URL } from '../consts';
 
 type Props = { entry: CollectionEntry<'blog'> };
 
@@ -291,6 +291,26 @@ const readingTime = `${Math.max(1, Math.round(words / 200))} min read`;
 				border-bottom: none;
 			}
 
+			.canonical-note {
+				margin-top: 3rem;
+				padding-top: 1.5rem;
+				border-top: 1px solid var(--color-border, #e5e7eb);
+				font-size: 0.8rem;
+				color: var(--color-text-tertiary, #9ca3af);
+				line-height: 1.6;
+			}
+
+			.canonical-note a {
+				color: var(--color-text-tertiary, #9ca3af);
+				text-decoration: underline;
+				text-underline-offset: 2px;
+				word-break: break-all;
+			}
+
+			.canonical-note a:hover {
+				color: var(--color-primary, #2563EB);
+			}
+
 			@media (max-width: 640px) {
 				.prose {
 					padding: 1.5rem 1.25rem 3rem;
@@ -340,6 +360,11 @@ const readingTime = `${Math.max(1, Math.round(words / 200))} min read`;
 					<ArticleCTA />
 					<AuthorBio />
 					<RelatedArticles currentId={entry.id} tags={tags} />
+					<p class="canonical-note">
+						This article was originally published on{' '}
+						<a href={`${SITE_URL}/blog/${entry.id}`}>{`${SITE_URL}/blog/${entry.id}`}</a>.
+						{' '}It was written by a human and polished using grammar tools for clarity.
+					</p>
 				</div>
 			</article>
 		</main>
