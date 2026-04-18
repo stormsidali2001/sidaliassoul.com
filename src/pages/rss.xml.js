@@ -2,6 +2,13 @@ import { getCollection } from "astro:content";
 import rss from "@astrojs/rss";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 
+// ←←← NEW IMPORTS
+import sanitizeHtml from "sanitize-html";
+import MarkdownIt from "markdown-it";
+
+// ←←← Create the parser once (outside the function)
+const parser = new MarkdownIt();
+
 export async function GET(context) {
   const posts = (await getCollection("blog"))
     .filter((p) => p.data.published !== false)
@@ -19,7 +26,14 @@ export async function GET(context) {
       link: `/blog/${post.id}/`,
       categories: post.data.tags ?? [],
 
-      content: post.body,
+      // ←←← CHANGED: Convert Markdown → safe HTML (exactly what dev.to expects)
+      content: sanitizeHtml(parser.render(post.body), {
+        allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
+        allowedAttributes: {
+          ...sanitizeHtml.defaults.allowedAttributes,
+          img: ["src", "alt", "title"],
+        },
+      }),
     })),
   });
 }
