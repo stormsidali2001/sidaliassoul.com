@@ -10,6 +10,7 @@ tags:
   - tutorial
 series: react-fundamentals
 seriesOrder: 5
+youtubeUrl: "https://youtu.be/BnnaFuTl7XA?si=M7e1FoihQC2wYtV3"
 ---
 ## Introduction
 

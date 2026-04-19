@@ -31,6 +31,7 @@ const blog = defineCollection({
             }
           });
         }),
+      youtubeUrl: z.string().url().optional(),
       series: z.string().min(1).optional(),
       seriesOrder: z.number().int().positive().optional(),
       published: z.boolean().default(true),

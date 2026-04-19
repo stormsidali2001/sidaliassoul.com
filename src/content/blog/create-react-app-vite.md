@@ -9,6 +9,8 @@ tags:
   - tooling
 series: react-fundamentals
 seriesOrder: 2
+
+youtubeUrl: "https://youtu.be/5RPUUmjkmq4?si=bUTx9lgrmzEokF_D"
 ---
 ## Introduction
 

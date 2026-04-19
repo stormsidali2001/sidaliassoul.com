@@ -16,11 +16,20 @@ import { AUTHOR, SITE_URL } from '../consts';
 type Props = { entry: CollectionEntry<'blog'> };
 
 const { entry } = Astro.props;
-const { title, description, pubDate, updatedDate, heroImage, series, seriesOrder } = entry.data;
+const { title, description, pubDate, updatedDate, heroImage, series, seriesOrder, youtubeUrl } = entry.data;
 const tags = entry.data.tags ?? [];
 
 const words = (entry.body ?? '').trim().split(/\s+/).length;
 const readingTime = `${Math.max(1, Math.round(words / 200))} min read`;
+
+function getYouTubeId(url: string): string | null {
+	try {
+		const u = new URL(url);
+		if (u.hostname === 'youtu.be') return u.pathname.slice(1);
+		return u.searchParams.get('v');
+	} catch { return null; }
+}
+const youtubeId = youtubeUrl ? getYouTubeId(youtubeUrl) : null;
 ---
 
 <html lang="en">
@@ -291,6 +300,22 @@ const readingTime = `${Math.max(1, Math.round(words / 200))} min read`;
 				border-bottom: none;
 			}
 
+			.yt-embed {
+				position: relative;
+				margin: 2.5rem 0;
+				padding-bottom: 56.25%; /* 16:9 */
+				height: 0;
+				overflow: hidden;
+				border-radius: 10px;
+			}
+			.yt-embed iframe {
+				position: absolute;
+				inset: 0;
+				width: 100%;
+				height: 100%;
+				border: none;
+			}
+
 			.canonical-note {
 				margin-top: 3rem;
 				padding-top: 1.5rem;
@@ -351,6 +376,18 @@ const readingTime = `${Math.max(1, Math.round(words / 200))} min read`;
 
 					{series && (
 						<SeriesCard series={series} currentId={entry.id} currentOrder={seriesOrder} />
+					)}
+
+					{youtubeId && (
+						<div class="yt-embed">
+							<iframe
+								src={`https://www.youtube-nocookie.com/embed/${youtubeId}`}
+								title="Related video"
+								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+								allowfullscreen
+								loading="lazy"
+							></iframe>
+						</div>
 					)}
 
 					<div class="prose-body">

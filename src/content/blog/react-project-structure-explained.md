@@ -9,6 +9,7 @@ tags:
   - webdev
 series: react-fundamentals
 seriesOrder: 3
+youtubeUrl: "https://youtu.be/B7m1jAs5FCk?si=EtU3TB-snIvrfFlv"
 ---
 You just created your first React project. Hopefully using `Vite`
 
