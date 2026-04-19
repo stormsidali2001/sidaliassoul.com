@@ -15,8 +15,6 @@ published: false
 
 &nbsp;
 
-&nbsp;
-
 By the end of this tutorial, you'll understand:
 
 - What Does "Asynchronous" Even Mean? And how it's the key for handling waiting IO tasks.
@@ -57,6 +55,90 @@ The same analogy can be applied to our program. If a part of the program is wait
 
 As you can see, async is not about executing tasks in parallel. It is all about avoiding doing nothing while our program stays idle waiting for an external I/O-bound operation to be completed. It’s about leveraging that waiting time to execute other operations.
 
+## Your First Async Code
+
+Now that we understand the importance of asynchronous operations, let's write our first async code:
+
+```
+async def main():
+    print("Start of main coroutine")
+
+main()
+
+```
+
+To declare an async function, we use the built-in async keyword; adding async in front of a function transforms it into an async function or what's called a **coroutine.**
+
+Trying to run the code above will result in printing the following runtime warning:
+
+```python
+RuntimeWarning: coroutine 'main' was never awaited
+```
+
+You can notice as well that the main function's code never executes as well. Nothing gets printed except the warning.
+
+Hmm, interesting. Let's try to print what's returned by the async main function
+
+```
+
+async def main():
+    print("Start of main coroutine")
+
+print(main()) # --> <coroutine object main at 0x10711bf40>
+
+```
+
+We can extrapolate from this that when a function is wrapped with the async keyword, it returns what's known as the coroutine object!
+
+But wait, what's a coroutine object? And how can we "await for it" to avoid the previous warning?
+
+A coroutine object is one of the three awaitable objects in Python: coroutines, tasks, and futures. To await it, we need to import asyncio and wrap the main coroutine call with its `run` method.
+
+> "asyncio" is a built-in python libraray so there is no need to install anything."
+
+```z
+import asyncio
+async def main():
+  print("Start of main coroutine")
+
+asyncio.run(main())
+
+```
+
+We usually only use the run method at the top level of our code because it does two things: start the async event loop and await the passed coroutine "main." 
+
+Let's declare another coroutine called "fetch," which simulates an I/O-bound task by stopping its execution for 2 seconds, using the sleep asyncio method.
+
+As we can't call the fetch coroutine without awaiting it, we need to use the await built-in keyword, which can only be used inside async functions.
+
+```
+
+import asyncio
+async def fetch():
+   asyncio.sleep(2)
+   print("Fetch: Nested coroutine")
+
+async def main():
+
+  print("Start of main coroutine")
+  await fetch()
+  
+asyncio.run(main())
+
+
+```
+
+Output:
+
+```
+
+Start of main coroutine
+Fetch: Nested coroutine
+
+```
+
+The main coroutine prints first, the program pauses for 2 seconds, and then the fetch function executes.
+
 
 
 ## How to Choose between Asyncio, Threads and Subprocesses
@@ -68,8 +150,6 @@ As you can see, async is not about executing tasks in parallel. It is all about 
 ## Conclusion
 
 
-
-&nbsp;
 
 &nbsp;
 
