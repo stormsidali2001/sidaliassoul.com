@@ -55,6 +55,10 @@ The same analogy can be applied to our program. If a part of the program is wait
 
 As you can see, async is not about executing tasks in parallel. It is all about avoiding doing nothing while our program stays idle waiting for an external I/O-bound operation to be completed. It’s about leveraging that waiting time to execute other operations.
 
+
+
+
+
 ## Your First Async Code
 
 Now that we understand the importance of asynchronous operations, let's write our first async code:
@@ -139,7 +143,25 @@ Fetch: Nested coroutine
 
 The main coroutine prints first, the program pauses for 2 seconds, and then the fetch function executes.
 
+## What is the event loop?
 
+Asynchronous execution of our program allows us to leverage the wasted waiting time of I/O-bound operations by switching from one blocked task to another until all tasks are executed. But how is that achieved in practice by asyncio? 
+
+That's where the Event Loop comes in.
+
+The `asyncio.run` method creates what's called an event loop. 
+
+```python
+
+asyncio.run(main())
+
+```
+
+You can think of the event loop as the orchestrator that tracks all the async coroutines. Here's how it works in practice.
+
+1. **Execution Start**: When you call "**asyncio.run(main()),"** the event loop starts and maintains a list of all the tasks that need to be executed. At any given moment, the loop is running exactly one task.
+2. **The Yield Point:** The loop executes a task until it hits an **"await,"** which is a signal that means that the coroutine/task is waiting for an external I/O operation. 
+3. **The Switch & Resume:** Instead of waiting, the loop immediately switches to another ready task. It keeps track of the "waiting" tasks in the background and resumes them exactly where they left off the moment their I/O operation is finished.
 
 ## How to Choose between Asyncio, Threads and Subprocesses
 
