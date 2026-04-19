@@ -19,7 +19,7 @@ By the end of this tutorial, you'll understand:
 
 - What Does "Asynchronous" Even Mean? And how it's the key for handling waiting IO tasks.
 - How asyncio's event loop manages and schedules async operations.
-- How to choose between asyncio, threads, and processes.
+- How to choose between asyncio, threads, and subprocesses.
 - How to Implement Your First Async Code.
 - Tasks
 - Types of Awaitables in python
@@ -55,9 +55,23 @@ The same analogy can be applied to our program. If a part of the program is wait
 
 As you can see, async is not about executing tasks in parallel. It is all about avoiding doing nothing while our program stays idle waiting for an external I/O-bound operation to be completed. It’s about leveraging that waiting time to execute other operations.
 
+## How to Choose between Asyncio, Threads and Subprocesses
+
+In software engineering, there is no silver bullet that works for everything and in all cases. That's why we need to make sure that we are employing the right solution for the right use case. 
+
+1. Asyncio: As we previously stated, whenever you hear the word "async," think about I/O-bound tasks. If you think that your program will deal with a lot of external systems such as databases, file system operations, or network requests, then asyncio is your best choice.
 
 
 
+2. Threads: Use them for parallel (concurrent if GIL enabled) tasks that share data with minimal CPU use. 
+
+- Threads are not really parallel in Python because of the Global Interpreter Lock (GIL). Which is a mutex ensuring that only one thread is executing python bytecode at a time
+- In the latest version of Python, they introduced a free-threaded build, but it's not enabled by default for compatibility reasons.
+
+3. Multiprocessing: Unlike threads, each process has its own instance of the Python interpreter. This means you can truly utilize 100% of your multi-core processor. 
+
+- Subprocesses cost more memory as each one has its own memory and instance of the Python interpreter.
+- But isolation pays for that cost; a crash in one subprocess won't affect the others
 
 ## Your First Async Code
 
@@ -111,21 +125,24 @@ asyncio.run(main())
 
 We usually only use the run method at the top level of our code because it does two things: start the async event loop and await the passed coroutine "main." 
 
-Let's declare another coroutine called "fetch," which simulates an I/O-bound task by stopping its execution for 2 seconds, using the sleep asyncio method.
+Let's declare another coroutine called "fetch," which simulates an I/O-bound task by stopping its execution for 2 seconds, using the asyncio.sleep method and a 200 success code.
 
 As we can't call the fetch coroutine without awaiting it, we need to use the await built-in keyword, which can only be used inside async functions.
+
+So in the main coroutine, await the fetch call and get its result then print it.
 
 ```
 
 import asyncio
 async def fetch():
-   asyncio.sleep(2)
-   print("Fetch: Nested coroutine")
+   asyncio.sleep(2) # 2 seconds delay, simulates I/O operation.
+   return 200
 
 async def main():
 
   print("Start of main coroutine")
-  await fetch()
+  result = await fetch()
+  print("result: {result}")
   
 asyncio.run(main())
 
@@ -137,11 +154,33 @@ Output:
 ```
 
 Start of main coroutine
-Fetch: Nested coroutine
+result: 200
 
 ```
 
 The main coroutine prints first, the program pauses for 2 seconds, and then the fetch function executes.
+
+Let's now try to call the fetch coroutine three times in main, retrieve the result of each call, and then print them all.
+
+```
+
+import asyncio
+async def fetch():
+   asyncio.sleep(2)
+   return "Fetch: Nested coroutine"
+
+
+async def main():
+  
+  print("Start of main coroutine")
+  result1 = await fetch()
+  result2 = await fetch()
+  result3 = await fetch()
+  print("results: {[result1,result2,result3]})
+  
+asyncio.run(main())
+
+```
 
 ## What is the event loop?
 
@@ -163,11 +202,7 @@ You can think of the event loop as the orchestrator that tracks all the async co
 2. **The Yield Point:** The loop executes a task until it hits an **"await,"** which is a signal that means that the coroutine/task is waiting for an external I/O operation. 
 3. **The Switch & Resume:** Instead of waiting, the loop immediately switches to another ready task. It keeps track of the "waiting" tasks in the background and resumes them exactly where they left off the moment their I/O operation is finished.
 
-## How to Choose between Asyncio, Threads and Subprocesses
 
-
-
-&nbsp;
 
 ## Conclusion
 
