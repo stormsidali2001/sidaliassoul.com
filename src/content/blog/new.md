@@ -13,8 +13,6 @@ published: false
 
 
 
-&nbsp;
-
 By the end of this tutorial, you'll understand:
 
 - What Does "Asynchronous" Even Mean? And how it's the key for handling waiting IO tasks.
@@ -60,20 +58,17 @@ As you can see, async is not about executing tasks in parallel. It is all about 
 In software engineering, there is no silver bullet that works for everything and in all cases. That's why we need to make sure that we are employing the right solution for the right use case. 
 
 1. Asyncio: As we previously stated, whenever you hear the word "async," think about I/O-bound tasks. If you think that your program will deal with a lot of external systems such as databases, file system operations, or network requests, then asyncio is your best choice.
-
-
-
-2. Threads: Use them for parallel (concurrent if GIL enabled) tasks that share data with minimal CPU use. 
+2. Threads: Use them for parallel (concurrent if GIL enabled) tasks that share data with minimal CPU use.
 
 - Threads are not really parallel in Python because of the Global Interpreter Lock (GIL). Which is a mutex ensuring that only one thread is executing python bytecode at a time
 - In the latest version of Python, they introduced a free-threaded build, but it's not enabled by default for compatibility reasons.
 
-3. Multiprocessing: Unlike threads, each process has its own instance of the Python interpreter. This means you can truly utilize 100% of your multi-core processor. 
+3. Multiprocessing: Unlike threads, each process has its own instance of the Python interpreter. This means you can truly utilize 100% of your multi-core processor.
 
 - Subprocesses cost more memory as each one has its own memory and instance of the Python interpreter.
 - But isolation pays for that cost; a crash in one subprocess won't affect the others
 
-## Your First Async Code 
+## Your First Async Code
 
 ### Getting Started
 
@@ -129,7 +124,7 @@ We usually only use the run method at the top level of our code because it does 
 
 
 
-### Concurrent IO with tasks
+### Awaiting Sequentially: When Async Acts Like Sync
 
 Let's declare another coroutine called "fetch," which simulates an I/O-bound task by stopping its execution for 2 seconds, using the asyncio.sleep method and a 200 success code.
 
@@ -230,10 +225,10 @@ asyncio.run(main())
 You can think of the event loop as the orchestrator that tracks all the async coroutines. Here's how it works in practice.
 
 1. **Execution Start**: When you call "**asyncio.run(main()),"** the event loop starts and maintains a list of all the tasks that need to be executed. At any given moment, the loop is running exactly one task.
-2. **The Yield Point:** The loop executes a task until it hits an **"await,"** which is a signal that means that the coroutine/task is waiting for an external I/O operation. 
+2. **The Yield Point:** The loop executes a task until it hits an **"await,"** which is a signal that means that the coroutine/task is waiting for an external I/O operation.
 3. **The Switch & Resume:** Instead of waiting, the loop immediately switches to another ready task. It keeps track of the "waiting" tasks in the background and resumes them exactly where they left off the moment their I/O operation is finished.
 
-## Introducing Tasks
+## Scheduling Coroutines: An Introduction to Tasks
 
 By default, asyncio does not schedule coroutines in the event loop; we need to wrap each coroutine object in a **Task**. Once wrapped, the event loop manages its execution immediately, allowing the program to switch between tasks while waiting for I/O operations.
 
@@ -276,15 +271,13 @@ Since all three tasks are waiting for a sleep I/O operation to complete, the eve
 
 
 
+&nbsp;
 
-
-
+&nbsp;
 
 ## Conclusion
 
 
-
-&nbsp;
 
 &nbsp;
 
