@@ -129,13 +129,13 @@ Let's declare another coroutine called "fetch," which simulates an I/O-bound tas
 
 As we can't call the fetch coroutine without awaiting it, we need to use the await built-in keyword, which can only be used inside async functions.
 
-So in the main coroutine, await the fetch call and get its result then print it.
+So in the main coroutine, await the fetch call and get its result, then print it.
 
 ```
 
 import asyncio
 async def fetch():
-   asyncio.sleep(2) # 2 seconds delay, simulates I/O operation.
+   await asyncio.sleep(2) # 2 seconds delay, simulates I/O operation.
    return 200
 
 async def main():
@@ -162,23 +162,81 @@ The main coroutine prints first, the program pauses for 2 seconds, and then the 
 
 Let's now try to call the fetch coroutine three times in main, retrieve the result of each call, and then print them all.
 
+
+
 ```
 
 import asyncio
+import time
+
 async def fetch():
-   asyncio.sleep(2)
-   return "Fetch: Nested coroutine"
+   await asyncio.sleep(2)
+   return 200
 
 
 async def main():
+ 
+  start_time = time.perf_counter()
   
   print("Start of main coroutine")
+
+  start_time = time.perf_counter()
   result1 = await fetch()
   result2 = await fetch()
   result3 = await fetch()
-  print("results: {[result1,result2,result3]})
+  end_time = time.perf_counter()
+  duration = end_time - start_time
+  print(f"The time took {duration} to execute")
+
+  print(f"results: {[result1,result2,result3]}")
   
 asyncio.run(main())
+
+
+```
+
+Output:
+
+```
+Start of main coroutine
+The time took 6.003185832989402 to execute
+results: [200,200,200]
+```
+
+There is no performance gain here yet. The fetches are executing one after another. We are essentially waiting for each I/O task to finish before starting the next one, which defeats the purpose of being asynchronous.
+
+In other words, we are not taking advantage of our event loop here.
+
+## Introducing Tasks
+
+By default, asyncio doesn't schedule coroutines in the event loop; we need to wrap each coroutine object in a task. 
+
+Once you wrap a coroutine object with a task, the event loop will start managing its execution in the event loop immediately.
+
+Let's wrap all the fetch calls in the previous example with a task. 
+
+```
+async def main():
+ 
+  start_time = time.perf_counter()
+  
+  print("Start of main coroutine")
+
+  start_time = time.perf_counter()
+  task1 = asyncio.create_task(fetch())
+  task2 = asyncio.create_task(fetch())
+  task3 = asyncio.create_task(fetch())
+  result1 = await task1
+  result2 = await task2
+  result3 = await task3
+  end_time = time.perf_counter()
+  duration = end_time - start_time
+  print(f"The time took {duration} to execute")
+
+  print(f"results: {[result1,result2,result3]}")
+  
+asyncio.run(main())
+
 
 ```
 
@@ -201,6 +259,8 @@ You can think of the event loop as the orchestrator that tracks all the async co
 1. **Execution Start**: When you call "**asyncio.run(main()),"** the event loop starts and maintains a list of all the tasks that need to be executed. At any given moment, the loop is running exactly one task.
 2. **The Yield Point:** The loop executes a task until it hits an **"await,"** which is a signal that means that the coroutine/task is waiting for an external I/O operation. 
 3. **The Switch & Resume:** Instead of waiting, the loop immediately switches to another ready task. It keeps track of the "waiting" tasks in the background and resumes them exactly where they left off the moment their I/O operation is finished.
+
+
 
 
 
