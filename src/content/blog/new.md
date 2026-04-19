@@ -73,7 +73,9 @@ In software engineering, there is no silver bullet that works for everything and
 - Subprocesses cost more memory as each one has its own memory and instance of the Python interpreter.
 - But isolation pays for that cost; a crash in one subprocess won't affect the others
 
-## Your First Async Code
+## Your First Async Code 
+
+### Getting Started
 
 Now that we understand the importance of asynchronous operations, let's write our first async code:
 
@@ -124,6 +126,28 @@ asyncio.run(main())
 ```
 
 We usually only use the run method at the top level of our code because it does two things: start the async event loop and await the passed coroutine "main." 
+
+### What is the event loop?
+
+Asynchronous execution of our program allows us to leverage the wasted waiting time of I/O-bound operations by switching from one blocked task to another until all tasks are executed. But how is that achieved in practice by asyncio? 
+
+That's where the Event Loop comes in.
+
+The `asyncio.run` method creates what's called an event loop. 
+
+```python
+
+asyncio.run(main())
+
+```
+
+You can think of the event loop as the orchestrator that tracks all the async coroutines. Here's how it works in practice.
+
+1. **Execution Start**: When you call "**asyncio.run(main()),"** the event loop starts and maintains a list of all the tasks that need to be executed. At any given moment, the loop is running exactly one task.
+2. **The Yield Point:** The loop executes a task until it hits an **"await,"** which is a signal that means that the coroutine/task is waiting for an external I/O operation. 
+3. **The Switch & Resume:** Instead of waiting, the loop immediately switches to another ready task. It keeps track of the "waiting" tasks in the background and resumes them exactly where they left off the moment their I/O operation is finished.
+
+### Concurrent IO with tasks
 
 Let's declare another coroutine called "fetch," which simulates an I/O-bound task by stopping its execution for 2 seconds, using the asyncio.sleep method and a 200 success code.
 
@@ -209,11 +233,9 @@ In other words, we are not taking advantage of our event loop here.
 
 ## Introducing Tasks
 
-By default, asyncio doesn't schedule coroutines in the event loop; we need to wrap each coroutine object in a task. 
+By default, asyncio does not schedule coroutines in the event loop; we need to wrap each coroutine object in a **Task**. Once wrapped, the event loop manages its execution immediately, allowing the program to switch between tasks while waiting for I/O operations.
 
-Once you wrap a coroutine object with a task, the event loop will start managing its execution in the event loop immediately.
-
-Let's wrap all the fetch calls in the previous example with a task. 
+Let’s wrap the `fetch` calls from the previous example into tasks and execute the code:
 
 ```
 async def main():
@@ -236,29 +258,21 @@ async def main():
   print(f"results: {[result1,result2,result3]}")
   
 asyncio.run(main())
-
-
 ```
 
-## What is the event loop?
-
-Asynchronous execution of our program allows us to leverage the wasted waiting time of I/O-bound operations by switching from one blocked task to another until all tasks are executed. But how is that achieved in practice by asyncio? 
-
-That's where the Event Loop comes in.
-
-The `asyncio.run` method creates what's called an event loop. 
-
-```python
-
-asyncio.run(main())
+Output:
 
 ```
+Start of main coroutine
+The time took 2.001712833996862 to execute
+results: [200, 200, 200]
+```
 
-You can think of the event loop as the orchestrator that tracks all the async coroutines. Here's how it works in practice.
+This time, the total execution is only 2 seconds, which matches the duration of the longest-running I/O task.
 
-1. **Execution Start**: When you call "**asyncio.run(main()),"** the event loop starts and maintains a list of all the tasks that need to be executed. At any given moment, the loop is running exactly one task.
-2. **The Yield Point:** The loop executes a task until it hits an **"await,"** which is a signal that means that the coroutine/task is waiting for an external I/O operation. 
-3. **The Switch & Resume:** Instead of waiting, the loop immediately switches to another ready task. It keeps track of the "waiting" tasks in the background and resumes them exactly where they left off the moment their I/O operation is finished.
+Since all three tasks are waiting for a sleep I/O operation to complete, the event loop starts with the first one. Once it encounters the **await** sleep call, it context switches to the second task. It continues this pattern, pausing each task at its respective **await** point. These I/O operations then progress concurrently in the background, completing the entire batch in just 2 seconds.
+
+
 
 
 
