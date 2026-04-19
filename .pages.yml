@@ -1,0 +1,359 @@
+media:
+  input: public
+  output: /
+
+content:
+  # ─── Blog Posts ────────────────────────────────────────────────────────────
+  - name: blog
+    label: Blog Posts
+    type: collection
+    path: src/content/blog
+    filename: "{fields.title|slugify}.md"
+    view:
+      fields: [title, pubDate, tags, published]
+      primary: title
+      sort: pubDate
+      default:
+        sort: pubDate
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+
+      - name: description
+        label: Description
+        type: text
+        required: true
+
+      - name: pubDate
+        label: Publication Date
+        type: date
+        required: true
+        options:
+          format: "yyyy-MM-dd"
+
+      - name: updatedDate
+        label: Updated Date
+        type: date
+        required: false
+        options:
+          format: "yyyy-MM-dd"
+
+      - name: heroImage
+        label: Hero Image
+        type: image
+        required: false
+        options:
+          input: public
+          output: /
+
+      - name: tags
+        label: Tags
+        type: select
+        required: true
+        list: true
+        options:
+          multiple: true
+          min: 1
+          max: 3
+          values:
+            - ai
+            - webdev
+            - programming
+            - productivity
+            - javascript
+            - tutorial
+            - beginners
+            - python
+            - devops
+            - opensource
+            - security
+            - blockchain
+            - career
+            - machinelearning
+            - react
+            - automation
+            - web3
+            - architecture
+            - api
+            - discuss
+            - typescript
+            - aws
+            - showdev
+            - startup
+            - node
+            - database
+            - java
+            - cybersecurity
+            - cloud
+            - news
+            - rust
+            - learning
+            - php
+            - performance
+            - testing
+            - agents
+            - llm
+            - nextjs
+            - kubernetes
+            - linux
+            - datascience
+            - marketing
+            - saas
+            - github
+            - android
+            - css
+            - go
+            - docker
+            - development
+            - mobile
+            - frontend
+            - backend
+            - computerscience
+            - softwaredevelopment
+            - softwareengineering
+            - dotnet
+            - tooling
+            - mcp
+            - wordpress
+            - devchallenge
+            - coding
+            - design
+            - claude
+            - flutter
+            - gamedev
+            - data
+            - software
+            - postgres
+            - sql
+            - deeplearning
+            - azure
+            - algorithms
+            - cli
+            - cryptocurrency
+            - html
+            - laravel
+            - codepen
+            - csharp
+            - git
+            - bitcoin
+            - privacy
+            - web
+            - networking
+            - chatgpt
+            - systemdesign
+            - codenewbie
+            - ios
+            - angular
+            - terraform
+            - vscode
+            - buildinpublic
+            - monitoring
+            - community
+            - resources
+            - developer
+            - ux
+            - watercooler
+            - django
+            - iot
+            - analytics
+
+      - name: youtubeUrl
+        label: YouTube URL
+        type: string
+        required: false
+        options:
+          pattern: "https?://.+"
+
+      - name: series
+        label: Series Slug
+        type: string
+        required: false
+
+      - name: seriesOrder
+        label: Series Order
+        type: number
+        required: false
+        options:
+          min: 1
+
+      - name: published
+        label: Published
+        type: boolean
+        required: false
+        default: true
+
+      - name: body
+        label: Content
+        type: rich-text
+
+  # ─── Work Experience ────────────────────────────────────────────────────────
+  - name: experience
+    label: Experience
+    type: collection
+    path: src/content/experience
+    view:
+      fields: [role, company, startDate, endDate, order]
+      primary: role
+      sort: order
+      default:
+        order: asc
+    fields:
+      - name: role
+        label: Role
+        type: string
+        required: true
+
+      - name: company
+        label: Company
+        type: string
+        required: true
+
+      - name: location
+        label: Location
+        type: string
+        required: true
+
+      - name: startDate
+        label: Start Date
+        type: date
+        required: true
+        options:
+          format: "yyyy-MM-dd"
+
+      - name: endDate
+        label: End Date
+        type: date
+        required: false
+        options:
+          format: "yyyy-MM-dd"
+
+      - name: stack
+        label: Tech Stack
+        type: string
+        list: true
+        required: true
+
+      - name: order
+        label: Display Order
+        type: number
+        required: true
+        options:
+          min: 1
+
+      - name: body
+        label: Responsibilities & Achievements
+        type: rich-text
+
+  # ─── Education ──────────────────────────────────────────────────────────────
+  - name: education
+    label: Education
+    type: collection
+    path: src/content/education
+    view:
+      fields: [degree, institution, startDate, endDate, order]
+      primary: degree
+      sort: order
+      default:
+        order: asc
+    fields:
+      - name: degree
+        label: Degree
+        type: string
+        required: true
+
+      - name: institution
+        label: Institution
+        type: string
+        required: true
+
+      - name: location
+        label: Location
+        type: string
+        required: true
+
+      - name: startDate
+        label: Start Date
+        type: date
+        required: true
+        options:
+          format: "yyyy-MM-dd"
+
+      - name: endDate
+        label: End Date
+        type: date
+        required: false
+        options:
+          format: "yyyy-MM-dd"
+
+      - name: order
+        label: Display Order
+        type: number
+        required: true
+        options:
+          min: 1
+
+      - name: body
+        label: Details & Highlights
+        type: rich-text
+
+  # ─── Projects ───────────────────────────────────────────────────────────────
+  - name: projects
+    label: Projects
+    type: collection
+    path: src/content/projects
+    view:
+      fields: [title, featured, order]
+      primary: title
+      sort: order
+      default:
+        order: asc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+
+      - name: description
+        label: Description
+        type: text
+        required: true
+
+      - name: github
+        label: GitHub URL
+        type: string
+        required: false
+        options:
+          pattern: "https?://.+"
+
+      - name: liveUrl
+        label: Live URL
+        type: string
+        required: false
+        options:
+          pattern: "https?://.+"
+
+      - name: stack
+        label: Tech Stack
+        type: string
+        list: true
+        required: true
+
+      - name: featured
+        label: Featured
+        type: boolean
+        required: false
+        default: false
+
+      - name: order
+        label: Display Order
+        type: number
+        required: true
+        options:
+          min: 1
+
+      - name: body
+        label: Project Description
+        type: rich-text
