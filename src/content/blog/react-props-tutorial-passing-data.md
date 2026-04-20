@@ -18,7 +18,7 @@ As you may know, in `React` we represent the user interface as components that a
 
 Each **component** is responsible for its own `Markup` and logic.
 
-`React` follows a `unidirectional data flow model`, meaning that information can only be passed from **parent components** to **child components**. In other words, the data only flows in one direction—starting from the top of the tree to the bottom.
+`React` follows a `unidirectional data flow model`, meaning that information can only be passed from **parent components** to **child components**. In other words, the data only flows in one direction, starting from the top of the tree to the bottom.
 
 ## Passing Props Between Components
 
@@ -40,7 +40,7 @@ Props are the medium that allow us to send data from a parent component to a chi
 
 Passing props from one component to another is straightforward. And here's how it's done:
 
-1.  Pass the data as attributes, similar to how you would pass `normal attributes` to an `HTML` tag element. -- Here we are passing a `content` attribute with a value of `test.`
+1.  Pass the data as attributes, similar to how you would pass `normal attributes` to an `HTML` tag element. Here we are passing a `content` attribute with a value of `test.`
     
 2.  Now, let's add a `props` parameter to the child component so that it can access the `content` attribute that we've passed before.
     

@@ -1,13 +1,13 @@
 ---
 title: "Master Python Asyncio: A Comprehensive Guide "
 description: Description
-pubDate: 2026-04-19
+pubDate: 2026-04-20
 updatedDate: 2026-04-19
 tags:
-  - - python
+  - python
 series: python-asyncio
 seriesOrder: 1
-published: false
+published: true
 ---
 ## Introduction
 
@@ -73,7 +73,7 @@ Asyncio, threads and multiprocessing three common ways to speed up a program. He
 
 Now that we understand the importance of asynchronous operations, let's write our first async code:
 
-```
+```python
 async def main():
     print("Start of main coroutine")
 
@@ -93,7 +93,7 @@ You can notice as well that the main function's code never executes as well. Not
 
 Hmm, interesting. Let's try to print what's returned by the async main function
 
-```
+```python
 
 async def main():
     print("Start of main coroutine")
@@ -108,9 +108,9 @@ But wait, what's a coroutine object? And how can we **"await for it"** to avoid 
 
 A coroutine object is one of the three awaitable objects in Python: coroutines, tasks, and futures. To await it, we need to import asyncio and wrap the main coroutine call with its `run` method.
 
-> "asyncio" is a built-in python libraray so there is no need to install anything."
+> "asyncio" is a built-in Python library, so there is no need to install anything.
 
-```
+```python
 import asyncio
 async def main():
   print("Start of main coroutine")
@@ -131,7 +131,7 @@ As we can't call the fetch coroutine without awaiting it, we need to use the awa
 
 So in the main coroutine, await the fetch call and get its result, then print it.
 
-```
+```python
 
 import asyncio
 async def fetch():
@@ -164,7 +164,7 @@ Let's now try to call the fetch coroutine three times in main, retrieve the resu
 
 
 
-```
+```python
 
 import asyncio
 import time
@@ -237,7 +237,7 @@ By default, asyncio does not schedule coroutines in the event loop; we need to w
 
 Let’s wrap the `fetch` calls from the previous example into tasks and execute the code:
 
-```
+```python
 async def main():
  
   start_time = time.perf_counter()
@@ -315,7 +315,7 @@ By default, `asyncio.gather` does not stop other tasks if one fails. Even if an 
 
 To handle these errors gracefully without crashing, you can set `return_exceptions=True` to treat exceptions as returned values instead of raised errors. You can then iterate through the results and handle both the exceptions and the successfully returned results as needed.
 
-```
+```python
 import asyncio
 
 async def fetch_success():
@@ -447,7 +447,7 @@ A Future is often used to bridge the gap between **low-level, callback-based cod
 
 
 
-```
+```python
 
 import asyncio
 import time
@@ -482,10 +482,10 @@ asyncio.run(main())
 
 In the above example, we are doing the following:
 
-1. retreing the current running event loop, create a new future object that belong to it.
+1. Retrieving the current running event loop and creating a new future object that belongs to it.
 2. We pass the future object along with a value to a provide data coroutine, and then we wrap it inside a task to schedule it in the event loop.
 3. We won't await the task itself, but just the future object that we created.
-4. Inside the data_provider coroutine we pause the executioon for 2 seconds using the sleep asyncio method, we set the future result and then we pause the execution agaian for 5 seconds.
+4. Inside the data_provider coroutine we pause the execution for 2 seconds using the sleep asyncio method, we set the future result and then we pause the execution again for 5 seconds.
 
 Output:
 
@@ -500,7 +500,7 @@ You can notice that the program took only 2 seconds to execute, it didn't pause 
 
 ## Conclusion
 
-So that's basically all you need to get started with asynchrounous programming in Python. We covered coroutines, tasks, future, how the event loop is leveraged to mnage and orchestrate concurrent running async jobs with all the necessary neaty gready details that you need to get you started.
+So that's basically all you need to get started with asynchronous programming in Python. We covered coroutines, tasks, future, how the event loop is leveraged to manage and orchestrate concurrent running async jobs with all the necessary nitty-gritty details that you need to get you started.
 
 Despite covering all of that, there is an important thing that we didn't mention yet.
 

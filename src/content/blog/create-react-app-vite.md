@@ -24,9 +24,9 @@ But we will employ something called Vite, which means blazingly fast in French.
 
 ## Prerequisites
 
-So What's the only thing that stands between you and your first `React` app? You need a runtime that lets you run `Javascript` outside the browser -- `Node.js`.
+So what's the only thing that stands between you and your first `React` app? You need a runtime that lets you run `Javascript` outside the browser -- `Node.js`.
 
-Start by heading to the official Node.js website, hit the `Get Node.js` button, and pick your operating system–either copy and paste the shown commands to your terminal or just download the corresponding binary.
+Start by heading to the official Node.js website, hit the `Get Node.js` button, and pick your operating system, then either copy and paste the shown commands to your terminal or download the corresponding binary.
 
 After running the command or downloading the binary, let's confirm that it's indeed installed by opening our terminal, and typing
 
@@ -34,7 +34,7 @@ After running the command or downloading the binary, let's confirm that it's ind
 node --version
 ```
 
-If a message that looks like this appears after running the command, then congratulations—Node.js is successfully installed.
+If a message that looks like this appears after running the command, then congratulations, Node.js is successfully installed.
 
 ![Confirm Node.js Installation](/assets/courses/confirm-node-js-installation.png)
 

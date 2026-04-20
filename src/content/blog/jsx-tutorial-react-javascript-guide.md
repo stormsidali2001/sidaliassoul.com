@@ -1,5 +1,5 @@
 ---
-title: Master JSX in 8 Minutes (Before You Write Your Next React Component) --
+title: Master JSX in 8 Minutes (Before You Write Your Next React Component) -
   React Tutorial
 description: Master JSX, the syntax extension for JavaScript that makes writing
   React components more intuitive and efficient.
@@ -16,7 +16,7 @@ youtubeUrl: "https://youtu.be/BnnaFuTl7XA?si=M7e1FoihQC2wYtV3"
 
 So what the heck is JSX? And what does it have to do with HTML?
 
-`JSX` is a syntax extension for `JavaScript`. Yes, you heard it right—it's an extension of `JavaScript` not `HTML`, despite what many people think. This means that `JSX` is eventually converted into valid `JavaScript` code 😮.
+`JSX` is a syntax extension for `JavaScript`. Yes, you heard it right: it's an extension of `JavaScript` not `HTML`, despite what many people think. This means that `JSX` is eventually converted into valid `JavaScript` code 😮.
 
 Under the hood, the conversion is handled by compilers like `Babel` or `SWC`. Consequently, the entire component tree representing our `App` is transformed into `JavaScript`. These objects are understood by the browser and used by the `React` runtime to render the final `HTML` code.
 
@@ -65,7 +65,7 @@ In this article, we will walk through everything you need to know about `JSX` in
 
 At first glance, `JSX` looks like `HTML`. In reality, its strictness may easily break your code if you're not careful.
 
-So the first rule, is simple—just be strict with your tags and you'll be fine
+So the first rule is simple: just be strict with your tags and you'll be fine
 
 The rule consists of always closing tags, including self-closing ones like `<img/>` or wrapping tags like `<div>`s.
 
@@ -82,7 +82,7 @@ function App(){
 }
 ```
 
-In addition to being strict with the tags themselves, `JSX` also has some special rules regarding their attributes-- Instead of kabab-case in `HTML`, you must use camel case when defining attributes.
+In addition to being strict with the tags themselves, `JSX` also has some special rules regarding their attributes. Instead of kabab-case in `HTML`, you must use camel case when defining attributes.
 
 ```tsx
 <button tab-index={0}> </button>  // Kabab case ❌
@@ -91,14 +91,14 @@ In addition to being strict with the tags themselves, `JSX` also has some specia
 
 Note that `JavaScript`'s reserved keywords are not allowed as attribute names. As an example of that, the `class` keyword that is used to define classes is not allowed. That's why you need to use `className` instead.
 
-As bonus information, there is one exception to the above rule, which is attributes that start with either `data-*` or `area-*`.
+As bonus information, there is one exception to the above rule, which is attributes that start with either `data-*` or `aria-*`.
 
 ```tsx
 <div class="..."> </div>  // ❌
 <div className="..."> </div> // ✅
 ```
 
-Moreover, when declaring a component we also do it in camel case, while making sure that the first character is in uppercase. -- Bonus: That's actually called Pascal case!
+Moreover, when declaring a component we also do it in camel case, while making sure that the first character is in uppercase. Bonus: That's actually called Pascal case!
 
 ```tsx
 function my_component() {
@@ -109,7 +109,7 @@ function MyComponent() {
 } // Camel case ✅
 ```
 
-Now, let me ask you a question, can a `JavaScript` function return multiples objects without wrapping them in an array or a parent object?-- No that's a syntax error right?
+Now, let me ask you a question, can a `JavaScript` function return multiple objects without wrapping them in an array or a parent object?-- No that's a syntax error right?
 
 ```typescript
 function invalidFunction() {
@@ -264,7 +264,7 @@ In standard `HTML` we set the `style` attribute as a string that looks like this
 
 But things are a bit different, in the `JSX` realm.
 
-We need to pass an object, that includes your `CSS` properties and values as key-value pairs. Such as the keys are written in camel case instead kabab case.
+We need to pass an object, that includes your `CSS` properties and values as key-value pairs. Such as the keys are written in camel case instead of kabab-case.
 
 ```css
 /* CSS kebab-case */

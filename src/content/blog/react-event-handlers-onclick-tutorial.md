@@ -12,7 +12,7 @@ seriesOrder: 9
 ---
 ## Introduction
 
-A **button** is meant to be **clicked**, and when it's clicked, we **intrinsically** expect something to happen. right?
+A **button** is meant to be **clicked**, and when it's clicked, we **intrinsically** expect something to happen, right?
 
 Well, the thing that will happen is **defined by you, the developer,** as a **JavaScript** function doing something; let's say displaying an alert message as an example.
 
@@ -27,7 +27,7 @@ In this article, **we will dive deeper into event handlers** while **exploring i
 *   And finally, how to stop event propagation and other browser default behaviors when needed.
     
 
-So if that sounds interesting let's dive in.
+So if that sounds interesting, let's dive in.
 
 ## Event Handlers Basics
 

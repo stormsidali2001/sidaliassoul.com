@@ -66,7 +66,7 @@ function App(){
 
 Okay, now what? We've got an array of JSX elements. But how can we render that?
 
-`React` can only render **two things**: `JSX` code or an `array` oa code.e can safely render the content of the new array directly in the JSX through the curly bracket syntax.
+`React` can only render **two things**: `JSX` code or an `array` of code. We can safely render the content of the new array directly in the JSX through the curly bracket syntax.
 
 The result will look like this.
 
@@ -184,7 +184,7 @@ const todosJSX =  todos.map(todo=>(<TodoItem {...todo}/>))
 }
 ```
 
-> As you can see bellow spreading the todo object makes the component more readable and maintainable.
+> As you can see below spreading the todo object makes the component more readable and maintainable.
 
 ```tsx
 const todosJSX =  todos.map(todo=>(<TodoItem title={todo.title} description={todo.description} completed={todo.completed} />)) 

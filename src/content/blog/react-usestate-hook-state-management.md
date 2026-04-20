@@ -177,7 +177,7 @@ Even though the code inside the component re-runs entirely when re-rendering, th
 
 In **React**, any function starting with **"use"** is called a **hook**.
 
-TTherefore,**useState** is one of **React**'s built-in **hooks**.
+Therefore, **useState** is one of **React**'s built-in **hooks**.
 
 > In addition to the default **hooks** that get shipped with react you're free to create your own but that's another topic for another article.
 

@@ -14,7 +14,7 @@ seriesOrder: 4
 ---
 ## Introduction
 
-Before creating your first component, you need a project, right?. And honestly, what's better than a single command to do so, thanks to Vite CLI?
+Before creating your first component, you need a project, right? And honestly, what's better than a single command to do so, thanks to Vite CLI?
 
 ```bash
 pnpm create vite@latest
@@ -214,7 +214,7 @@ As the name implies, a file can only have a single default export.
 
 Before moving on, there is one common mistake that can silently kill your app's performance: **never declare a component inside another component.**
 
-Doing this forces **React** to treat the inner component as "brand new" on every single update. This destroys any chance of caching or optimization, leading to potentiel performance issues.
+Doing this forces **React** to treat the inner component as "brand new" on every single update. This destroys any chance of caching or optimization, leading to potential performance issues.
 
 ```tsx
 export function App(){
@@ -228,7 +228,7 @@ export function App(){
 }
 ```
 
-`Html` Files can get really big, and just making sure that tags are closing properly is honestly a big drag.
+`HTML` Files can get really big, and just making sure that tags are closing properly is honestly a big drag.
 
 `React` takes a modular approach by dividing the problem of building complex **interactive web pages** into smaller **sub-problems** or **building blocks** known as `components`.
 

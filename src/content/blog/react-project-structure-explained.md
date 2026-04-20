@@ -1,5 +1,5 @@
 ---
-title: Just Created Your React Project? Don't PANIC—here's every file explained
+title: Just Created Your React Project? Don't PANIC, here's every file explained
 description: Understand the structure of a React project, how components
   interact, and the flow of data through a React application.
 pubDate: 2025-01-29
@@ -70,7 +70,7 @@ dist-ssr
 
 So what about the `package.json` file?
 
-Picture it this way: it's like a library's index—it lists all the top-level dependencies of the project.
+Picture it this way: it's like a library's index: it lists all the top-level dependencies of the project.
 
 As any package that you install may also have its own dependencies, which are known as `peer` or `transitive` dependencies
 
@@ -127,7 +127,7 @@ It's also known as the black hole folder in Javascript's memes literature becaus
 
 ![Node.js as a black hole](/assets/courses/node-js-black-hole.png)
 
-So always double-check that it's present in your `.gitignore` file—you definitely don't want to push that to GitHub.
+So always double-check that it's present in your `.gitignore` file, because you definitely don't want to push that to GitHub.
 
 ## TypeScript Configuration
 
@@ -156,7 +156,7 @@ Each one of these files helps you to customize the TypeScript type-checking expe
 
 ### vite.config.ts
 
-We've already customized `Git`, `TypeScript`, and `npm`. But what about our engine—Vite?
+We've already customized `Git`, `TypeScript`, and `npm`. But what about our engine, Vite?
 
 That's where the `vite.config.ts` file enters the game.
 
@@ -200,7 +200,7 @@ export default defineConfig({
 
 Inside the `<head/>` tag we reference the `/vite.svg` file as a `favicon`. If you look closely, you'll see that it's located within the public folder.
 
-Any static asset-- such as an image or video--stored there is publicly served. You can reference those assets from anywhere in your code using a leading slash (`/`) followed by the path relative to the public folder.
+Any static asset (such as an image or video) stored there is publicly served. You can reference those assets from anywhere in your code using a leading slash (`/`) followed by the path relative to the public folder.
 
 ## Source Code Directory
 
@@ -226,7 +226,7 @@ createRoot(divDomNode).render(
 );
 ```
 
-So where does all the Javascript action happen? -- `main.tsx`. React literally binds itself to the `index.html` here.
+So where does all the Javascript action happen? It's `main.tsx`. React literally binds itself to the `index.html` here.
 
 Inside the `main.tsx` file, we retrieve the **DOM element** of the `div` with the `id` of `root` using the `document.getElementById('')` method.
 

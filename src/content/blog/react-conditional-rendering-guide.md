@@ -61,7 +61,7 @@ function App() {
 
 And then inside the **app** component, we can **call the component multiple times** while passing **different values** to the **"type"** prop.
 
-That's nice and all, but imagine if we needed to update the style of one **"div."** With the current setup, we will have to add the styles to every if statement branch, which is **repetitive** and **unconvenient**.
+That's nice and all, but imagine if we needed to update the style of one **"div."** With the current setup, we will have to add the styles to every if statement branch, which is **repetitive** and **inconvenient**.
 
 One solution for that is to store the emoji in a **shared local variable,** and then depending on the **type** prop value, we assign the corresponding emoji.
 
@@ -86,11 +86,11 @@ That was conditional rendering in the **JavaScript** **land**, let's now explore
 
 ## Conditional Rendering in JSX
 
-If anything that you put inside the JSX curly braces syntax should always return an expression, is it possible to embed a condition directly? within it?
+If anything that you put inside the JSX curly braces syntax should always return an expression, is it possible to embed a condition directly within it?
 
-Well, if you're thinking about an **if statement, then** the answer is wrong, because as the name implies, it's a statement. In other words, it does not return anything.
+Well, if you're thinking about an **if statement, then** the answer is no, because as the name implies, it's a statement. In other words, it does not return anything.
 
-Hopefully, JavaScript has our backs covered with what's known as a ternary operator, which is a short way of representing an if statement that always returns something—it's an expression!
+Hopefully, JavaScript has our backs covered with what's known as a ternary operator, which is a short way of representing an if statement that always returns something; it's an expression!
 
 ```typescript
 condition ? exprIfTrue : exprIfFalse;
@@ -132,7 +132,7 @@ Setting **"null"** like that sounds verbose, right? Let's make it more concise b
 
 ![Zero Hi Javascript Meme](/assets/courses/zero-hi-javascript-meme.jpg)
 
-> To fix that we can either add the negation operator `!` two times just before the `number` or convert the number into a condition by **comparing it with another** **"Number"** – For example we can compare the age variable with 18: **"age >= 18"**.
+> To fix that we can either add the negation operator `!` two times just before the `number` or convert the number into a condition by **comparing it with another** **"Number"**. For example, we can compare the age variable with 18: **"age >= 18"**.
 
 ## Conclusion
 

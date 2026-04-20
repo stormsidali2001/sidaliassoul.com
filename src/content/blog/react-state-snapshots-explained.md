@@ -36,7 +36,7 @@ You may get shocked to know that this code, **will not print 2** 😮.
 
 Despite **incrementing the counter by 1**, and then **deferring the execution of the console log by 5 seconds using the `setTimeout` browser `API`**,which means that by the time the `console.log` is executed the **state will have been already incremented by 1**.
 
-**But** reality shows nothing but that, in fact a 1 gets printed 🤯.
+**But** reality shows nothing but that, in fact, a 1 gets printed 🤯.
 
 
 In this article, we will be clarifying what's exactly happening here under the scene while explaining the concept of a **state snapshot in `React`**. So without any further ado let's get started.
@@ -71,7 +71,7 @@ Every render is allocated its own constant `state` snapshot, that never change b
 
 All the derived `JSX` code including **event listeners** is tied to that specific render.
 
-In more specific words, **renders are totaly isolated**.
+In more specific words, **renders are totally isolated**.
 
 > Render 1 can never access state snapshots in render 2.
 
@@ -89,6 +89,6 @@ setCounter(counter +1)
 // counter = ?? 
 ```
 
-Well, thats what we are going to discover in the next article, where we introduce `React State Batching`.
+Well, that's what we are going to discover in the next article, where we introduce `React State Batching`.
 
 Thank you for your attentive reading and happy coding 🧑‍💻.

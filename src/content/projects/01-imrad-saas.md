@@ -1,6 +1,6 @@
 ---
 title: IMRaD Classification SaaS
-description: Master's thesis — 7-node distributed system using Gemini Pro + BERT for rhetorical classification of scientific papers. 169k-sentence dataset, 98.21% peak F1.
+description: "Master's thesis: 7-node distributed system using Gemini Pro + BERT for rhetorical classification of scientific papers. 169k-sentence dataset, 98.21% peak F1."
 github: https://github.com/stormsidali2001/graduation_IMRAD_introduction_analysis_SaaS
 stack: [Next.js, FastAPI, BERT, Gemini Pro, TF Serving]
 featured: true
