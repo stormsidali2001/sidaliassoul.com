@@ -500,3 +500,28 @@ You can notice that the program took only 2 seconds to execute, it didn't pause 
 
 ## Conclusion
 
+So that's basically all you need to get started with asynchrounous programming in Python. We covered coroutines, tasks, future, how the event loop is leveraged to mnage and orchestrate concurrent running async jobs with all the necessary neaty gready details that you need to get you started.
+
+
+
+Despite covering all of that, there is an important thing that we didn't mention yet.
+
+As your application grows and the number of concurrent jobs increases, you may encounter race conditions because they all share the same process memory space.
+
+Race conditions occur when multiple asynchronous tasks attempt to access the same variable simultaneously. Consider a "balance" variable accessed by concurrent **debit** and **credit** functions:
+
+1. The **credit** function reads the balance as 100.
+2. The **debit** function reads the balance as 100.
+3. The **credit** function adds 10, updating the balance to 110.
+4. The **debit** function subtracts 10 from the original value it read (100), updating the balance to 90.
+
+```
+credit function -> balance: 100, newBalance: 110
+debit function  -> balance: 100, newBalance: 90 (Overwrites the credit function's modification!)
+```
+
+> As shown above, the debit function has overwritten the credit function's update. This is a classic example of a **race condition**.
+
+
+
+&nbsp;
