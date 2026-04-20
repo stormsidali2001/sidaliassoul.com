@@ -1,6 +1,7 @@
 ---
 // Import the design system and global styles here so that they are included on
 // all pages through the use of the <BaseHead /> component.
+import { Analytics } from '@vercel/analytics/astro';
 import '../styles/design-system.css';
 import '../styles/global.css';
 import '../styles/utilities.css';
@@ -85,3 +86,5 @@ const ogImageUrl = image
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={ogImageUrl} />
+
+<Analytics />
