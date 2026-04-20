@@ -56,13 +56,13 @@ In software engineering, there is no silver bullet that works for everything and
 
 Asyncio, threads and multiprocessing three common ways to speed up a program. Here's what each one mean and where it exactly shines.
 
-1. ++**Asyncio**++: As we previously stated, whenever you hear the word "async," think about I/O-bound tasks. If you think that your program will deal with a lot of external systems such as databases, file system operations, or network requests, then asyncio is your best choice.
-2. ++**Threads**++: Use them for parallel (concurrent if GIL enabled) tasks that share data with minimal CPU use.
+1. **Asyncio**: As we previously stated, whenever you hear the word "async," think about I/O-bound tasks. If you think that your program will deal with a lot of external systems such as databases, file system operations, or network requests, then asyncio is your best choice.
+2. **Threads**: Use them for parallel (concurrent if GIL enabled) tasks that share data with minimal CPU use.
 
 - Threads are not really parallel in Python because of the Global Interpreter Lock (GIL). Which is a mutex ensuring that only one thread is executing python bytecode at a time
 - In the latest version of Python, they introduced a free-threaded build, but it's not enabled by default for compatibility reasons.
 
-3. ++**Multiprocessing**++: Unlike threads, each process has its own instance of the Python interpreter. This means you can truly utilize 100% of your multi-core processor.
+3. **Multiprocessing**: Unlike threads, each process has its own instance of the Python interpreter. This means you can truly utilize 100% of your multi-core processor.
 
 - Subprocesses cost more memory as each one has its own memory and instance of the Python interpreter.
 - But speed and isolation pays for that cost here; a crash in one subprocess won't affect the others.
