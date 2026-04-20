@@ -50,7 +50,7 @@ But you aren't one. Instead of waiting for your coworker (a.k.a. the external I/
 
 The same analogy can be applied to our program. If a part of the program is waiting for a record to be written to the database or a file to be saved to the disk, it should not stay idle. Instead, it can leverage that time to switch to other asynchronous tasks, such as fetching data from external APIs.
 
-As you can see, async is not about executing tasks in parallel. It is all about avoiding doing nothing while our program stays idle waiting for an external I/O-bound operation to be completed. It’s about leveraging that waiting time to execute other operations.
+As you can see, async is not about executing tasks in parallel. It is all about avoiding doing nothing while our program stays idle waiting for an external I/O-bound operation to be completed. It’s about leveraging that wasted time to execute other operations.
 
 ## How to Choose between Asyncio, Threads and Subprocesses
 
