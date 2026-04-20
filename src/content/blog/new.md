@@ -17,11 +17,11 @@ published: false
 
 By the end of this tutorial, you'll understand:
 
-- What Does **"Asynchronous"** Even Mean? And how it's the key for handling waiting I/O tasks.
-- How to choose between asyncio, threads, and subprocesses.
-- We will write our first async code with **coroutines**, learn about the sequential async trap and how async I/O uses the event loop to run the tasks concurrently.
-- We will learn about **Tasks**, an abstraction above courouting that allows us to schedule our tasks to run concurrently.
-- Finally we will look at the third type of awaitable: the **Future**.
+- **What "asynchronous" actually means** and why it is the key to handling waiting I/O tasks.
+- **How to choose** between `asyncio`, threads, and subprocesses.
+- **The fundamentals of coroutines**, including writing your first async code, identifying the "sequential async trap," and understanding how the event loop runs tasks concurrently.
+- **How to use Tasks**, an abstraction above coroutines that allows us to schedule and manage concurrent execution.
+- **The Future**, the third type of awaitable in Python, and how it represents an eventual result.
 
 
 
