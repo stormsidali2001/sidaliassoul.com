@@ -13,15 +13,15 @@ published: false
 
 
 
+&nbsp;
+
 By the end of this tutorial, you'll understand:
 
-- What Does "Asynchronous" Even Mean? And how it's the key for handling waiting IO tasks.
-- How asyncio's event loop manages and schedules async operations.
+- What Does **"Asynchronous"** Even Mean? And how it's the key for handling waiting I/O tasks.
 - How to choose between asyncio, threads, and subprocesses.
-- How to Implement Your First Async Code.
-- Tasks
-- Types of Awaitables in python
-- Future
+- We will write our first async code with **coroutines**, learn about the sequential async trap and how async I/O uses the event loop to run the tasks concurrently.
+- We will learn about **Tasks**, an abstraction above courouting that allows us to schedule our tasks to run concurrently.
+- Finally we will look at the third type of awaitable: the **Future**.
 
 
 
@@ -315,9 +315,9 @@ Just like before, the execution only takes 2 seconds. This proves that the three
 
 
 
-By default, `asyncio.gather` does not stop other tasks if one fails. Even if an exception is raised to your code, the remaining tasks continue running in the background. 
+By default, `asyncio.gather` does not stop other tasks if one fails. Even if an exception is raised in one of the tasks, the remaining ones continue running in the background. 
 
-If you want to handle these errors gracefully without crashing, you can set `return_exceptions=True` to treat exceptions as returned values instead of raised errors.
+To handle these errors gracefully without crashing, you can set `return_exceptions=True` to treat exceptions as returned values instead of raised errors. You can then iterate through the results and handle both the exceptions and the successfully returned results as needed.
 
 ```
 import asyncio
@@ -357,15 +357,13 @@ Task failed with: 500 (Internal Server Error)
 
 When using **`gather`,** returning exceptions as values instead of raising them makes error handling much easier. As you can see from the logs, **Gather** did not stop the first task even though the second one failed.
 
-
-
 ### Task Group
 
 In Python 3.11, **TaskGroups** were introduced as a safer and more structured way to manage multiple tasks.
 
-The biggest advantage of TaskGroup is what's known as structured concurrency. In other words, if one task in the group fails, the "**TaskGroup"** automatically cancels all the other ones. 
+The biggest advantage of **TaskGroup** is what's known as structured concurrency. In other words, if one task in the group fails, the "**TaskGroup"** automatically cancels all the other ones. 
 
-This prevents uncanceled tasks, or "zombie tasks," from wasting resources when running in the background.
+This prevents uncanceled tasks, or **"zombie tasks,"** from wasting resources when running in the background.
 
 ```python
 async def main():
@@ -406,7 +404,9 @@ results: [200, 200, 200]
 
 The "**async with"** block is a Python feature known as an "**async context manager."** 
 
-It acts as a barrier. The program will not proceed to the **"results=..."** line of code until every task created within that group has finished. This replaces the boilerplate code you would otherwise have to write manually to manage task lifecycles when using `asyncio.gather`.
+It acts as a barrier. The program will not proceed to the `results = ...` line of code until every task created within that group has either finished successfully or raised an exception if one of them fails.
+
+This replaces the boilerplate code you would otherwise have to write manually to manage task lifecycles when using `asyncio.gather`.
 
 ### Bonus Information About Task Group
 
