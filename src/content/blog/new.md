@@ -11,9 +11,11 @@ published: false
 ---
 ## Introduction
 
-If you're not leveraging asynchronous programming in your program, then probably your programming is wasting most of it's time waiting rather than actually processing and handling the user needs and requirements.
+If you're not leveraging asynchronous programming in your program, then probably your program is wasting most of its time waiting for external I/O-bound operations such as network requests or db calls rather than actually processing and handling the user needs and requirements. 
 
-Asynchronous programming solves that by sw
+
+
+Asynchronous programming solves that by runn
 
 By the end of this tutorial, you'll understand:
 
