@@ -11,9 +11,9 @@ published: false
 ---
 ## Introduction
 
+If you're not leveraging asynchronous programming in your program, then probably your programming is wasting most of it's time waiting rather than actually processing and handling the user needs and requirements.
 
-
-&nbsp;
+Asynchronous programming solves that by 
 
 By the end of this tutorial, you'll understand:
 
@@ -231,8 +231,6 @@ You can think of the event loop as the orchestrator that tracks all the async co
 2. **The Yield Point:** The loop executes a task until it hits an **"await,"** which is a signal that means that the task is waiting for an external I/O operation.
 3. **The Switch & Resume:** Instead of waiting, the loop immediately switches to another ready task. It keeps track of the "waiting" tasks in the background and resumes them exactly where they left off the moment their I/O operation is finished.
 
-
-
 ## Scheduling Coroutines: An Introduction to Tasks
 
 ### Creating Tasks manually
@@ -355,7 +353,7 @@ Task succeeded with: Success!
 Task failed with: 500 (Internal Server Error)
 ```
 
-When using **`gather`,** returning exceptions as values instead of raising them makes error handling much easier. As you can see from the logs, **Gather** did not stop the first task even though the second one failed.
+When using `**gather`,** returning exceptions as values instead of raising them makes error handling much easier. As you can see from the logs, **Gather** did not stop the first task even though the second one failed.
 
 ### Task Group
 
@@ -486,8 +484,8 @@ asyncio.run(main())
 
 In the above example, we are doing the following:
 
-1.  retreing the current running event loop, create a new future object that belong to it.
-2. We pass the future object along with a value to a provide data coroutine, and then we wrap it inside a task to schedule it in the event loop. 
+1. retreing the current running event loop, create a new future object that belong to it.
+2. We pass the future object along with a value to a provide data coroutine, and then we wrap it inside a task to schedule it in the event loop.
 3. We won't await the task itself, but just the future object that we created.
 4. Inside the data_provider coroutine we pause the executioon for 2 seconds using the sleep asyncio method, we set the future result and then we pause the execution agaian for 5 seconds.
 
@@ -505,7 +503,5 @@ You can notice that the program took only 2 seconds to execute, it didn't pause 
 ## Conclusion
 
 
-
-&nbsp;
 
 &nbsp;
