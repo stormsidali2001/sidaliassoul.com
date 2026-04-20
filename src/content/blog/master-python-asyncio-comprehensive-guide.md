@@ -207,7 +207,21 @@ There is no performance gain here yet. The fetches are executing one after anoth
 
 In other words, we are not taking advantage of our event loop here.
 
+```
+Sequential (await one by one) — 6 seconds total:
 
+  fetch 1:  |████████████|
+  fetch 2:              |████████████|
+  fetch 3:                          |████████████|
+            0s           2s          4s           6s
+
+With Tasks (concurrent) — 2 seconds total:
+
+  task 1:   |████████████|
+  task 2:   |████████████|
+  task 3:   |████████████|
+            0s           2s
+```
 
 ### What is the event loop?
 
@@ -229,11 +243,38 @@ You can think of the event loop as the orchestrator that tracks all the async co
 2. **The Yield Point:** The loop executes a task until it hits an **"await,"** which is a signal that means that the task is waiting for an external I/O operation.
 3. **The Switch & Resume:** Instead of waiting, the loop immediately switches to another ready task. It keeps track of the "waiting" tasks in the background and resumes them exactly where they left off the moment their I/O operation is finished.
 
+```
+ time ─────────────────────────────────────────────►
+
+ Task 1  [runs]──► await ···················► [resume]──► done
+                     │                             ▲
+                     ▼                             │
+ Task 2           [runs]──► await ············► [resume]──► done
+                               │                    ▲
+                               ▼                    │
+ Task 3                     [runs]──► await ·····► [resume]──► done
+
+         ◄──────────────── ~2 seconds ─────────────►
+```
+
 ## Scheduling Coroutines: An Introduction to Tasks
 
 ### Creating Tasks manually
 
 By default, asyncio does not schedule coroutines in the event loop; we need to wrap each coroutine object in a **Task**. Once wrapped, the event loop manages its execution immediately, allowing the program to switch between tasks while waiting for I/O operations.
+
+```
+  fetch()                       asyncio.create_task(fetch())
+     │                                     │
+     ▼                                     ▼
+┌──────────────┐               ┌─────────────────────┐
+│  coroutine   │               │        Task         │
+│   object     │ ──wraps────►  │    (scheduled ✓)    │
+│              │               │                     │
+│  idle, not   │               │  event loop will    │
+│  running ✗   │               │  pick this up       │
+└──────────────┘               └─────────────────────┘
+```
 
 Let’s wrap the `fetch` calls from the previous example into tasks and execute the code:
 
@@ -444,6 +485,19 @@ While you rarely use these at the application level, they are essential low-leve
 
 
 A Future is often used to bridge the gap between **low-level, callback-based code** and modern `async/await` syntax. When you `await` a future, your code pauses until a value is manually pushed into it, even if the background work that pushed the value continues to run.
+
+```
+  loop.create_future()
+          │
+          ▼
+  ┌──────────────┐    future.set_result(2026)    ┌──────────────────┐
+  │   PENDING    │ ───────────────────────────►  │ RESOLVED: 2026   │
+  └──────────────┘                               └──────────────────┘
+          │                                               │
+     await future                                   await future
+    (suspends here,                              (returns 2026 instantly,
+     yields to loop)                              loop moves on)
+```
 
 
 
