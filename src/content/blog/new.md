@@ -13,7 +13,7 @@ published: false
 
 If you're not leveraging asynchronous programming in your program, then probably your programming is wasting most of it's time waiting rather than actually processing and handling the user needs and requirements.
 
-Asynchronous programming solves that by 
+Asynchronous programming solves that by sw
 
 By the end of this tutorial, you'll understand:
 
