@@ -408,19 +408,97 @@ It acts as a barrier. The program will not proceed to the **"results=..."** line
 
 ### Bonus Information About Task Group
 
-If multiple tasks fail inside a group, Python does not throw one error, but it throws an ExceptionGroup. You can handle it using the except* syntax.
+If multiple tasks fail inside a group, Python does not throw one error, but it throws an "**ExceptionGroup."** You can handle it using the except* syntax.
 
 ```python
-failed
+import asyncio
+
+async def fail_fetch():
+  asyncio.sleep(1) # simulate I/O-bound task
+  raise ValueError(500)
+
 async def main():
- try:
+  try:
     async with asyncio.TaskGroup() as tg:
-        tg.create_task(fail_task_1())
-        tg.create_task(fail_task_2())
- except* ValueError as eg:
+        tg.create_task(fail_fetch())
+        tg.create_task(fail_fetch())
+  except* ValueError as eg:
     for e in eg.exceptions:
         print(f"Caught a value error: {e}")
+
+asyncio.run(main())
+
 ```
+
+Output:
+
+```
+Caught a value error: 500
+Caught a value error: 500
+```
+
+## Future
+
+Now that we have covered coroutines and tasks, let’s look at the third type of awaitable: the **Future**.
+
+While you rarely use these at the application level, they are essential low-level objects representing a result that hasn't arrived yet. Think of a Future as a "promise" or a placeholder for a value that will be set later.
+
+
+
+A Future is often used to bridge the gap between **low-level, callback-based code** and modern `async/await` syntax. When you `await` a future, your code pauses until a value is manually pushed into it, even if the background work that pushed the value continues to run.
+
+
+
+```
+
+import asyncio
+import time
+
+async def provide_data(future, value):
+    await asyncio.sleep(2)
+    # The Future is fulfilled here
+    future.set_result(value)
+    
+    print("Future result set! Doing some background cleanup now...")
+    await asyncio.sleep(5) 
+
+async def main():
+    start_time = time.perf_counter()
+
+    loop = asyncio.get_running_loop()
+    future = loop.create_future()
+    
+    # Schedule the provider
+    asyncio.create_task(provide_data(future, 2026))
+    
+    # We wait specifically for the result, not the whole task
+    result = await future
+    print(f"Received the future's result: {result}")
+    end_time = time.perf_counter()
+    duration = end_time - start_time
+    print(f"The program is executed in {duration} seconds")
+
+asyncio.run(main())
+
+```
+
+In the above example, we are doing the following:
+
+1.  retreing the current running event loop, create a new future object that belong to it.
+2. We pass the future object along with a value to a provide data coroutine, and then we wrap it inside a task to schedule it in the event loop. 
+3. We won't await the task itself, but just the future object that we created.
+4. Inside the data_provider coroutine we pause the executioon for 2 seconds using the sleep asyncio method, we set the future result and then we pause the execution agaian for 5 seconds.
+
+Output:
+
+```
+Future result set! Doing some background cleanup now...
+Received the future's result: 2026
+The program is executed in 2.0018573330016807 seconds
+
+```
+
+You can notice that the program took only 2 seconds to execute, it didn't pause for 7 whole second waiting for the whole task to execute, as we just awaited for the future value itself not the whole task
 
 ## Conclusion
 
