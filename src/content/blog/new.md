@@ -502,8 +502,6 @@ You can notice that the program took only 2 seconds to execute, it didn't pause 
 
 So that's basically all you need to get started with asynchrounous programming in Python. We covered coroutines, tasks, future, how the event loop is leveraged to mnage and orchestrate concurrent running async jobs with all the necessary neaty gready details that you need to get you started.
 
-
-
 Despite covering all of that, there is an important thing that we didn't mention yet.
 
 As your application grows and the number of concurrent jobs increases, you may encounter race conditions because they all share the same process memory space.
@@ -520,8 +518,7 @@ credit function -> balance: 100, newBalance: 110
 debit function  -> balance: 100, newBalance: 90 (Overwrites the credit function's modification!)
 ```
 
-> As shown above, the debit function has overwritten the credit function's update. This is a classic example of a **race condition**.
+As illustrated, the debit function overwrote the credit function's update. This is a classic example of a race condition that leads to **data corruption**. However, race conditions can be even more severe; certain categories can lead to memory errors that cause the entire **process to crash**.
 
+Race conditions are typically handled using semaphores and mutexes. In the next article, we will explore **asyncio** synchronization primitives, including Locks, Semaphores, BoundedSemaphores, Events, Conditions, and Barriers.
 
-
-&nbsp;
