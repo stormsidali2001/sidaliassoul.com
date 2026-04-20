@@ -29,7 +29,7 @@ By the end of this tutorial, you'll understand:
 
 ## Mastering Asynchronous I/O: How to Handle Waiting Tasks
 
-So what does async even mean? And how exactly does it exactly help in handling I/O-bound computations?
+So what does async even mean? And how exactly does it  help in handling I/O-bound computations?
 
 Whatever the programming language, the framework, or the environment, when you hear about async, you should instantly think about I/O-bound tasks.
 
