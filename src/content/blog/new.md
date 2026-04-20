@@ -22,7 +22,6 @@ By the end of this tutorial, you'll understand:
 - Tasks
 - Types of Awaitables in python
 - Future
-- Synchronisation Primitives
 
 
 
@@ -208,6 +207,8 @@ There is no performance gain here yet. The fetches are executing one after anoth
 
 In other words, we are not taking advantage of our event loop here.
 
+
+
 ### What is the event loop?
 
 Asynchronous execution of our program allows us to leverage the wasted waiting time of I/O-bound operations by switching from one blocked task to another until all tasks are executed. But how is that achieved in practice by asyncio? 
@@ -228,7 +229,11 @@ You can think of the event loop as the orchestrator that tracks all the async co
 2. **The Yield Point:** The loop executes a task until it hits an **"await,"** which is a signal that means that the coroutine/task is waiting for an external I/O operation.
 3. **The Switch & Resume:** Instead of waiting, the loop immediately switches to another ready task. It keeps track of the "waiting" tasks in the background and resumes them exactly where they left off the moment their I/O operation is finished.
 
+
+
 ## Scheduling Coroutines: An Introduction to Tasks
+
+### Creating Tasks manually
 
 By default, asyncio does not schedule coroutines in the event loop; we need to wrap each coroutine object in a **Task**. Once wrapped, the event loop manages its execution immediately, allowing the program to switch between tasks while waiting for I/O operations.
 
@@ -271,9 +276,151 @@ Since all three tasks are waiting for a sleep I/O operation to complete, the eve
 
 
 
-&nbsp;
+### The Gather method
 
-&nbsp;
+Creating tasks manually for each coroutine can be cumbersome sometimes; that's why the **"asyncio.gather"** method exists.
+
+The **"gather"** method accepts any number of coroutine objects or **"future types"** and returns what's known as an **"asyncio.Future"** type, which is one of the three Python awaitable types in Python.
+
+> More about asyncio.Future later. 
+
+```python
+async def main():
+ 
+  start_time = time.perf_counter()
+  
+  print("Start of main coroutine")
+
+  start_time = time.perf_counter()
+  results = await asyncio.gather(fetch(),fetch(),fetch())
+  end_time = time.perf_counter()
+  duration = end_time - start_time
+  print(f"The time took {duration} to execute")
+
+  print(f"results: {results}")
+
+```
+
+Output:
+
+```
+Start of main coroutine
+The time took 2.0019387080101296 to execute
+results: [200, 200, 200]
+```
+
+Just like before, the execution only takes 2 seconds. This proves that the three "**fetch"** calls ran concurrently, rather than being blocked by sequential I/O waiting.
+
+
+
+By default, `asyncio.gather` does not stop other tasks if one fails. Even if an exception is raised to your code, the remaining tasks continue running in the background. 
+
+If you want to handle these errors gracefully without crashing, you can set `return_exceptions=True` to treat exceptions as returned values instead of raised errors.
+
+```
+import asyncio
+
+async def fetch_success():
+    await asyncio.sleep(1)
+    return 200
+
+async def fetch_fail():
+    await asyncio.sleep(1)
+    raise ValueError(500)
+
+async def main():
+    # With return_exceptions=True, the program won't crash
+    results = await asyncio.gather(
+        fetch_success(), 
+        fetch_fail(), 
+        return_exceptions=True
+    )
+    
+    for res in results:
+        if isinstance(res, Exception):
+            print(f"Task failed with: {res}")
+        else:
+            print(f"Task succeeded with: {res}")
+
+asyncio.run(main())
+
+```
+
+Output:
+
+```
+Task succeeded with: Success!
+Task failed with: 500 (Internal Server Error)
+```
+
+When using **`gather`,** returning exceptions as values instead of raising them makes error handling much easier. As you can see from the logs, **Gather** did not stop the first task even though the second one failed.
+
+
+
+### Task Group
+
+In Python 3.11, **TaskGroups** were introduced as a safer and more structured way to manage multiple tasks.
+
+The biggest advantage of TaskGroup is what's known as structured concurrency. In other words, if one task in the group fails, the "**TaskGroup"** automatically cancels all the other ones. 
+
+This prevents uncanceled tasks, or "zombie tasks," from wasting resources when running in the background.
+
+```python
+async def main():
+  tasks = set()
+ 
+  start_time = time.perf_counter()
+  
+  print("Start of main coroutine")
+
+  start_time = time.perf_counter()
+# The context manager ensures all tasks finish before exiting the block
+  async with asyncio.TaskGroup() as tg:
+      for _ in range(3):
+          task = tg.create_task(fetch())
+          tasks.add(task)
+
+  end_time = time.perf_counter()
+  duration = end_time - start_time
+  
+  # At this point, TaskGroup guarantees that all tasks have     completed successfully.
+  results = [ task.result() for task in tasks]
+
+  print(f"The time took {duration} to execute")
+
+  print(f"results: {results}")
+  
+asyncio.run(main())
+
+```
+
+```
+Start of main coroutine
+The time took 2.001078375033103 to execute
+results: [200, 200, 200]
+```
+
+> Note that we are tracking the running tasks in a `tasks` set. This is done on purpose to prevent the garbage collector from cleaning up our tasks mid-execution.
+
+The "**async with"** block is a Python feature known as an "**async context manager."** 
+
+It acts as a barrier. The program will not proceed to the **"results=..."** line of code until every task created within that group has finished. This replaces the boilerplate code you would otherwise have to write manually to manage task lifecycles when using `asyncio.gather`.
+
+### Bonus Information About Task Group
+
+If multiple tasks fail inside a group, Python does not throw one error, but it throws an ExceptionGroup. You can handle it using the except* syntax.
+
+```python
+failed
+async def main():
+ try:
+    async with asyncio.TaskGroup() as tg:
+        tg.create_task(fail_task_1())
+        tg.create_task(fail_task_2())
+ except* ValueError as eg:
+    for e in eg.exceptions:
+        print(f"Caught a value error: {e}")
+```
 
 ## Conclusion
 
