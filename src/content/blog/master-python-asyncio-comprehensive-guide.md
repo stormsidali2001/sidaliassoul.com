@@ -1,10 +1,14 @@
 ---
 title: "Master Python Asyncio: A Comprehensive Guide "
-description: "Master Python asyncio: learn coroutines, async/await, the event loop, Tasks, asyncio.gather, TaskGroups (Python 3.11+), and Futures for non-blocking I/O."
+description: "Master Python asyncio: learn coroutines, async/await, the event
+  loop, Tasks, asyncio.gather, TaskGroups (Python 3.11+), and Futures for
+  non-blocking I/O."
 pubDate: 2026-04-20
 updatedDate: 2026-04-19
 tags:
-  - python
+  - - python
+  - - tutorial
+  - - programming
 series: python-asyncio
 seriesOrder: 1
 published: true
