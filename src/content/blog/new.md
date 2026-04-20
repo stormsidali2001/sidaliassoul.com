@@ -56,16 +56,18 @@ As you can see, async is not about executing tasks in parallel. It is all about 
 
 In software engineering, there is no silver bullet that works for everything and in all cases. That's why we need to make sure that we are employing the right solution for the right use case. 
 
-1. Asyncio: As we previously stated, whenever you hear the word "async," think about I/O-bound tasks. If you think that your program will deal with a lot of external systems such as databases, file system operations, or network requests, then asyncio is your best choice.
-2. Threads: Use them for parallel (concurrent if GIL enabled) tasks that share data with minimal CPU use.
+Asyncio, threads and multiprocessing three common ways to speed up a program. Here's what each one mean and where it exactly shines.
+
+1. ++**Asyncio**++: As we previously stated, whenever you hear the word "async," think about I/O-bound tasks. If you think that your program will deal with a lot of external systems such as databases, file system operations, or network requests, then asyncio is your best choice.
+2. ++**Threads**++: Use them for parallel (concurrent if GIL enabled) tasks that share data with minimal CPU use.
 
 - Threads are not really parallel in Python because of the Global Interpreter Lock (GIL). Which is a mutex ensuring that only one thread is executing python bytecode at a time
 - In the latest version of Python, they introduced a free-threaded build, but it's not enabled by default for compatibility reasons.
 
-3. Multiprocessing: Unlike threads, each process has its own instance of the Python interpreter. This means you can truly utilize 100% of your multi-core processor.
+3. ++**Multiprocessing**++: Unlike threads, each process has its own instance of the Python interpreter. This means you can truly utilize 100% of your multi-core processor.
 
 - Subprocesses cost more memory as each one has its own memory and instance of the Python interpreter.
-- But isolation pays for that cost; a crash in one subprocess won't affect the others
+- But speed and isolation pays for that cost here; a crash in one subprocess won't affect the others.
 
 ## Your First Async Code
 
@@ -102,9 +104,9 @@ print(main()) # --> <coroutine object main at 0x10711bf40>
 
 ```
 
-We can extrapolate from this that when a function is wrapped with the async keyword, it returns what's known as the coroutine object!
+We can observe that the async function `main` returned a **coroutine object**. From this, we can conclude that when a function is defined with the `async` keyword, calling it does not execute the code immediately; instead, it returns a **coroutine object**.
 
-But wait, what's a coroutine object? And how can we "await for it" to avoid the previous warning?
+But wait, what's a coroutine object? And how can we **"await for it"** to avoid the previous warning?
 
 A coroutine object is one of the three awaitable objects in Python: coroutines, tasks, and futures. To await it, we need to import asyncio and wrap the main coroutine call with its `run` method.
 
@@ -125,7 +127,7 @@ We usually only use the run method at the top level of our code because it does 
 
 ### Awaiting Sequentially: When Async Acts Like Sync
 
-Let's declare another coroutine called "fetch," which simulates an I/O-bound task by stopping its execution for 2 seconds, using the asyncio.sleep method and a 200 success code.
+Let's declare another coroutine called `fetch`, which simulates an I/O-bound task. It stops execution for 2 seconds using the `asyncio.sleep` method and returns a **200** success code.
 
 As we can't call the fetch coroutine without awaiting it, we need to use the await built-in keyword, which can only be used inside async functions.
 
@@ -223,10 +225,10 @@ asyncio.run(main())
 
 ```
 
-You can think of the event loop as the orchestrator that tracks all the async coroutines. Here's how it works in practice.
+You can think of the event loop as the orchestrator that tracks all the async coroutines. And Here's how it works in practice:
 
 1. **Execution Start**: When you call "**asyncio.run(main()),"** the event loop starts and maintains a list of all the tasks that need to be executed. At any given moment, the loop is running exactly one task.
-2. **The Yield Point:** The loop executes a task until it hits an **"await,"** which is a signal that means that the coroutine/task is waiting for an external I/O operation.
+2. **The Yield Point:** The loop executes a task until it hits an **"await,"** which is a signal that means that the task is waiting for an external I/O operation.
 3. **The Switch & Resume:** Instead of waiting, the loop immediately switches to another ready task. It keeps track of the "waiting" tasks in the background and resumes them exactly where they left off the moment their I/O operation is finished.
 
 
@@ -280,9 +282,9 @@ Since all three tasks are waiting for a sleep I/O operation to complete, the eve
 
 Creating tasks manually for each coroutine can be cumbersome sometimes; that's why the **"asyncio.gather"** method exists.
 
-The **"gather"** method accepts any number of coroutine objects or **"future types"** and returns what's known as an **"asyncio.Future"** type, which is one of the three Python awaitable types in Python.
+The **"gather"** method accepts any number of coroutine objects or **"future types"** and returns what's known as an **"asyncio.Future"** type, which is one of the three awaitable types in Python.
 
-> More about asyncio.Future later. 
+> More about asyncio.Future later.  
 
 ```python
 async def main():
