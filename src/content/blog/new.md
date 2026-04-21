@@ -182,10 +182,10 @@ credit wrote: 1
 debit read: 1
 debit wrote: 0
 The final balance is: 0
-The program took 2.0022490409901366 seconds to execute
+The program took 2.0022490409901366 seconds to execute.
 ```
 
-> As you can see when using the lock, the read and write operations are treated as a single protected operation, even though the execution of the 
+As you can see, when using a lock, the read and write operations are treated as a single protected operation. Even though the event loop **indeed transfers** execution to the `debit` function immediately after the `credit` coroutine hits an `await` line, the lock guards the state and pauses the `debit` coroutine.
 
 ```
 
@@ -194,7 +194,7 @@ debit read: 0
 credit wrote: 1
 debit wrote: -1
 The final balance is: -1
-The program took 1.001487125060521 seconds to execute
+The program took 1.001487125060521 seconds to execute.
 ```
 
 
