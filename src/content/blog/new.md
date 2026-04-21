@@ -1,12 +1,12 @@
 ---
-title: "new"
-description: "new"
+title: new
+description: new
 pubDate: 2026-04-21
 updatedDate: 2026-04-21
 tags:
-  -  python
-  -  tutorial
-  -  programming
+  - - python
+  - - tutorial
+  - - programming
 series: python-asyncio
 seriesOrder: 1
 published: false
@@ -52,7 +52,7 @@ def credit():
 
 1. First we instantiate an asyncio Lock object.
 2. Right inside the coroutine code, we acquire the lock, safely mutate the balance shared variable, "**await"** some I/O-bound task, and then release the lock.
-3. When acquiring the lock and then suspending execution, the event loop can execute another coroutine. 
+3. When acquiring the lock and then suspending execution, the event loop can execute another coroutine.
 
 While the code above is valid, it's easy to forget to release the lock, which can lead to many subtle bugs.
 
@@ -76,23 +76,65 @@ Under the hood, the `Lock` class implements the **asynchronous context manager**
 
 
 
+Let's create another debit coroutine that does exactly the same thing, but instead of incrementing the balance by 1, it decrements it.
+
+Subsequently, let's run the credit and debit coroutines concurrently using asyncio.gather, which takes any number of coroutines, tasks or futures and then schedule them to run on the event loop.
+
+asyncio.gather returns a future object, aggregating the results of all the returned values of the coroutines that are passed to it. To pause the execution and wait for all the sub routines we need to await it.
+
 ```python
+import asyncio
+
+lock = asyncio.Lock()
+balance = 0 # shared resource
+
+async def perform_io_bound_update():
+    await asyncio.sleep(1) # Simulate an I/O Operation
+
+
+async def debit():
+    global balance
+    async with lock:
+        # Access shared state here.
+        balance -= 1
+        # No other coroutine using this lock can enter this section.
+        await perform_io_bound_update()
+
+async def credit():
+    global balance
+    async with lock:
+        # Access shared state here.
+        balance += 1
+        # No other coroutine using this lock can enter this section.
+        await perform_io_bound_update()
+
+async def main():
+    await asyncio.gather(credit(),debit())
+    print(f"The final balance is: {balance}")
+
+
+asyncio.run(main())
 
 ```
 
+What do you expect as an output in these cases:
 
+1. When we remove the lock.
+2. When we keep the lock.
 
-  
-  
-## Semaphore  
-  
-## Event  
-  
-## Condition  
-  
-## Bounded Semaphore  
-  
-## Barrier  
+```
+The final balance is: 0
+```
 
+If you expect
 
+## Semaphore
+
+## Event
+
+## Condition
+
+## Bounded Semaphore
+
+## Barrier
 
