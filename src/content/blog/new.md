@@ -13,7 +13,13 @@ published: false
 ---
 ## Introduction
 
+```
+
+```
+
 By the end of this tutorial, you'll learn six synchronization primitives that you can use in different scenarios to protect your program from race conditions:
+
+
 
 1. Lock:
 2. Semaphore
@@ -21,6 +27,8 @@ By the end of this tutorial, you'll learn six synchronization primitives that yo
 4. Condition
 5. Bounded Semaphore
 6. Barrier
+
+
 
 ## Lock
 
@@ -37,20 +45,20 @@ lock = asyncio.Lock()
 balance = 0 # shared resource
 
 # inside a coroutine
-def credit():
+async def credit():
     global balance
-    await lock.aquire()
+    await lock.aquire() 
     try:
-     # Access shared state here.
-     balance += 1
+     current_balance = balance # Read balance
      # No other coroutine using this lock can enter this section.
      await perform_io_bound_update()
+     balance += current_balance + 1 # Write balance
     finally:
       lock.release()
     
 ```
 
-1. First we instantiate an asyncio Lock object.
+1. First, we instantiate an asyncio Lock object.
 2. Right inside the coroutine code, we acquire the lock, safely mutate the balance shared variable, "**await"** some I/O-bound task, and then release the lock.
 3. When acquiring the lock and then suspending execution, the event loop can execute another coroutine.
 
@@ -94,19 +102,26 @@ async def perform_io_bound_update():
 
 async def debit():
     global balance
-    async with lock:
-        # Access shared state here.
-        balance -= 1
-        # No other coroutine using this lock can enter this section.
-        await perform_io_bound_update()
+    # 1. Read the current value
+    current_balance = balance 
+    print(f"debit read: {current_balance}")
+    
+    # 2. Yield control (The event loop switches to credit() here!)
+    await perform_io_bound_update() 
+    
+    # 3. Write back based on the OLD value
+    balance = current_balance - 1
+    print(f"debit wrote: {balance}")
 
 async def credit():
     global balance
-    async with lock:
-        # Access shared state here.
-        balance += 1
-        # No other coroutine using this lock can enter this section.
-        await perform_io_bound_update()
+    current_balance = balance
+    print(f"credit read: {current_balance}")
+    
+    await perform_io_bound_update() 
+    
+    balance = current_balance + 1
+    print(f"credit wrote: {balance}")
 
 async def main():
     await asyncio.gather(credit(),debit())
@@ -114,6 +129,7 @@ async def main():
 
 
 asyncio.run(main())
+
 
 ```
 
