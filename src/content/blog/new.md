@@ -84,14 +84,14 @@ async def credit():
       global balance
       # 1. Read the current value
       current_balance = balance 
-      print(f"debit read: {current_balance}")
+      print(f"credit read: {current_balance}")
     
       # 2. Yield control (The event loop switches to another   coroutine here)
       await perform_io_bound_update() 
     
       # 3. Write back based on the OLD value
       balance = current_balance + 1 
-      print(f"debit wrote: {balance}")
+      print(f"credit wrote: {balance}")
 
  
 ```
@@ -168,11 +168,27 @@ What do you expect as an output in these cases:
 1. When we remove async with lock.
 2. When we keep async with lock
 
+Output with synchronization (with async lock):
+
 ```
-The final balance is: 0 
+debit read: 0
+debit wrote: 1
+debit read: 1
+debit wrote: 0
+The final balance is: 0
 ```
 
-If you expect
+  
+Output without synchronization:
+
+```
+
+debit read: 0
+debit read: 0
+debit wrote: 1
+debit wrote: -1
+The final balance is: -1
+```
 
 ## Semaphore
 
