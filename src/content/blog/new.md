@@ -46,7 +46,7 @@ balance = 0 # shared resource
 
 async def credit():
     try:
-
+      lock.aquire()
       global balance
       # 1. Read the current value
       current_balance = balance 
@@ -74,36 +74,66 @@ While the code above is valid, it's easy to forget to release the lock, which ca
 That's why it's recommended to use the `async with lock` syntax. The previous code is equivalent to:
 
 ```python
+
 lock = asyncio.Lock()
 balance = 0 # shared resource
 
 
 async def credit():
-    global balance
-    # 1. Read the current value
-    current_balance = balance 
-    print(f"debit read: {current_balance}")
+   async with lock:
+      global balance
+      # 1. Read the current value
+      current_balance = balance 
+      print(f"debit read: {current_balance}")
     
-    # 2. Yield control (The event loop switches to credit() here!)
-    await perform_io_bound_update() 
+      # 2. Yield control (The event loop switches to another   coroutine here)
+      await perform_io_bound_update() 
     
-    # 3. Write back based on the OLD value
-    balance = current_balance + 1 
-    print(f"debit wrote: {balance}")
+      # 3. Write back based on the OLD value
+      balance = current_balance + 1 
+      print(f"debit wrote: {balance}")
 
+ 
 ```
 
 Under the hood, the `Lock` class implements the **asynchronous context manager** protocol, which automatically acquires the lock when entering the block and releases it upon exiting.
 
 
 
-Let's create another debit coroutine that does exactly the same thing, but instead of incrementing the balance by 1, it decrements it.
+Let's create another **debit coroutine** that performs the same logic but **decrements** the balance by 1 instead of incrementing it. Subsequently, we will run the credit and debit coroutines concurrently using **asyncio.gather**.
 
-Subsequently, let's run the credit and debit coroutines concurrently using asyncio.gather, which takes any number of coroutines, tasks, or futures, and then schedule them to run on the event loop.
+```
+```python
+async def debit():
+   async with lock:
+      global balance
+      # 1. Read the current value
+      current_balance = balance 
+      print(f"debit read: {current_balance}")
+    
+      # 2. Yield control (The event loop switches to another   coroutine here)
+      await perform_io_bound_update() 
+    
+      # 3. Write back based on the OLD value
+      balance = current_balance - 1 
+      print(f"debit wrote: {balance}")
+```
+```
 
-asyncio.gather returns a future object, aggregating the results of all the returned values of the coroutines that are passed to it. To pause the execution and wait for all the coroutines, we need to await them.
+Since **asyncio.gather** accepts any number of coroutines, tasks, or futures, we can use it to schedule them on the event loop. It returns a **Future object** that aggregates the results of all passed coroutines. 
+
+To pause execution and wait for these tasks to complete, we must **await** the gather call, therefore the returned **future** object.
+
+```
+
+async def main():
+    await asyncio.gather(credit(),debit())
+    print(f"The final balance is: {balance}")
 
 
+asyncio.run(main())
+
+```
 
 ```python
 import asyncio
@@ -116,31 +146,11 @@ async def perform_io_bound_update():
 
 
 async def debit():
-    global balance
-    # 1. Read the current value
-    current_balance = balance 
-    print(f"debit read: {current_balance}")
-    
-    # 2. Yield control (The event loop switches to credit() here!)
-    await perform_io_bound_update() 
-    
-    # 3. Write back based on the OLD value
-    balance = current_balance - 1
-    print(f"debit wrote: {balance}")
+  # ... previous code
 
 
 async def credit():
-    global balance
-    # 1. Read the current value
-    current_balance = balance 
-    print(f"debit read: {current_balance}")
-    
-    # 2. Yield control (The event loop switches to credit() here!)
-    await perform_io_bound_update() 
-    
-    # 3. Write back based on the OLD value
-    balance = current_balance + 1 
-    print(f"debit wrote: {balance}")
+  # ... previous code
 
 
 async def main():
@@ -155,11 +165,11 @@ asyncio.run(main())
 
 What do you expect as an output in these cases:
 
-1. When we remove the lock.
-2. When we keep the lock.
+1. When we remove async with lock.
+2. When we keep async with lock
 
 ```
-The final balance is: 0
+The final balance is: 0 
 ```
 
 If you expect
