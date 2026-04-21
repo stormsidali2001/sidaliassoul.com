@@ -70,13 +70,19 @@ That's why it's recommended to use the `async with lock` syntax. The previous co
 lock = asyncio.Lock()
 balance = 0 # shared resource
 
-# inside a coroutine
+
 async def credit():
     global balance
-    async with lock:
-        # Access shared state here.
-        balance += 1
-        await perform_io_bound_update()
+    # 1. Read the current value
+    current_balance = balance 
+    print(f"debit read: {current_balance}")
+    
+    # 2. Yield control (The event loop switches to credit() here!)
+    await perform_io_bound_update() 
+    
+    # 3. Write back based on the OLD value
+    balance = current_balance + 1 
+    print(f"debit wrote: {balance}")
 
 ```
 
@@ -86,9 +92,11 @@ Under the hood, the `Lock` class implements the **asynchronous context manager**
 
 Let's create another debit coroutine that does exactly the same thing, but instead of incrementing the balance by 1, it decrements it.
 
-Subsequently, let's run the credit and debit coroutines concurrently using asyncio.gather, which takes any number of coroutines, tasks or futures and then schedule them to run on the event loop.
+Subsequently, let's run the credit and debit coroutines concurrently using asyncio.gather, which takes any number of coroutines, tasks, or futures, and then schedule them to run on the event loop.
 
-asyncio.gather returns a future object, aggregating the results of all the returned values of the coroutines that are passed to it. To pause the execution and wait for all the sub routines we need to await it.
+asyncio.gather returns a future object, aggregating the results of all the returned values of the coroutines that are passed to it. To pause the execution and wait for all the coroutines, we need to await them.
+
+
 
 ```python
 import asyncio
@@ -113,15 +121,20 @@ async def debit():
     balance = current_balance - 1
     print(f"debit wrote: {balance}")
 
+
 async def credit():
     global balance
-    current_balance = balance
-    print(f"credit read: {current_balance}")
+    # 1. Read the current value
+    current_balance = balance 
+    print(f"debit read: {current_balance}")
     
+    # 2. Yield control (The event loop switches to credit() here!)
     await perform_io_bound_update() 
     
-    balance = current_balance + 1
-    print(f"credit wrote: {balance}")
+    # 3. Write back based on the OLD value
+    balance = current_balance + 1 
+    print(f"debit wrote: {balance}")
+
 
 async def main():
     await asyncio.gather(credit(),debit())
