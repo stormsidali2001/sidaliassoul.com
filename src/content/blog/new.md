@@ -41,25 +41,29 @@ In **asyncio**, this is implemented via the `asyncio.Lock` class. The Lock objec
 Here's an example of how you would create a mutex lock in asyncio:
 
 ```python
+
 lock = asyncio.Lock()
 balance = 0 # shared resource
 
-# inside a coroutine
+
 async def credit():
     global balance
-    await lock.aquire() 
-    try:
-     current_balance = balance # Read balance
-     # No other coroutine using this lock can enter this section.
-     await perform_io_bound_update()
-     balance += current_balance + 1 # Write balance
-    finally:
-      lock.release()
+    # 1. Read the current value
+    current_balance = balance 
+    print(f"debit read: {current_balance}")
+    
+    # 2. Yield control (The event loop switches to credit() here!)
+    await perform_io_bound_update() 
+    
+    # 3. Write back based on the OLD value
+    balance = current_balance + 1 
+    print(f"debit wrote: {balance}")
+
     
 ```
 
 1. First, we instantiate an asyncio Lock object.
-2. Right inside the coroutine code, we acquire the lock, safely mutate the balance shared variable, "**await"** some I/O-bound task, and then release the lock.
+2. Right inside the coroutine code, we acquire the lock, safely read the balance shared variable, "**await"** some I/O-bound task, and then increment the previously read balance value by one.
 3. When acquiring the lock and then suspending execution, the event loop can execute another coroutine.
 
 While the code above is valid, it's easy to forget to release the lock, which can lead to many subtle bugs.
