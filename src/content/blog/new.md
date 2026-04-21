@@ -188,7 +188,12 @@ The program took 1.001487125060521 seconds to execute.
 
 ```
 
-Without the lock, both coroutines enter their "critical section" simultaneously. Since **credit** pauses at the **await** line, the event loop jumps to **debit**. **Debit** then reads the balance while it's still **"0,"**, then the event loop jumps back to credit at the **await line** of debit, debit decrement to 
+Without a lock, the two functions **overlap** and trip over each other:
+
+1. **Credit** reads the balance as 0 and **pauses** at the `await` line.
+2. **Debit** steps in and reads the same balance ($0$) because Credit hasn't finished yet.
+3. **Credit** wakes up and saves **1** (0 + 1).
+4. **Debit** wakes up and saves **-1** (0 - 1), **overwriting Credit's** work.
 
 Output with synchronization (with async lock):
 
@@ -202,8 +207,6 @@ The program took 2.0022490409901366 seconds to execute.
 ```
 
 As you can see, when using a lock, the read and write operations are treated as a single protected operation. Even though the event loop **indeed transfers** execution to the `debit` function immediately after the `credit` coroutine hits the **await** line, the lock guards the state and pauses the `debit` coroutine.
-
-
 
 ## Semaphore
 
