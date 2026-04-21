@@ -174,6 +174,22 @@ What do you expect as an output in these cases:
 1. When we remove async with lock.
 2. When we keep async with lock
 
+
+
+Output without synchronization:
+
+```
+credit read: 0
+debit read: 0   <--- debit reads balance as 0 here
+credit wrote: 1
+debit wrote: -1
+The final balance is: -1  <----- debit uses the balance before the credit update
+The program took 1.001487125060521 seconds to execute.
+
+```
+
+Without the lock, both coroutines enter their "critical section" simultaneously. Since **credit** pauses at the **await** line, the event loop jumps to **debit**. **Debit** then reads the balance while it's still **"0,"**, then the event loop jumps back to credit at the **await line** of debit, debit decrement to 
+
 Output with synchronization (with async lock):
 
 ```
@@ -186,16 +202,6 @@ The program took 2.0022490409901366 seconds to execute.
 ```
 
 As you can see, when using a lock, the read and write operations are treated as a single protected operation. Even though the event loop **indeed transfers** execution to the `debit` function immediately after the `credit` coroutine hits the **await** line, the lock guards the state and pauses the `debit` coroutine.
-
-```
-
-credit read: 0
-debit read: 0
-credit wrote: 1
-debit wrote: -1
-The final balance is: -1
-The program took 1.001487125060521 seconds to execute.
-```
 
 
 
