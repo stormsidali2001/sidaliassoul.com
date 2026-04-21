@@ -171,8 +171,8 @@ What do you expect as an output in these cases:
 Output with synchronization (with async lock):
 
 ```
-debit read: 0
-debit wrote: 1
+credit read: 0
+credit wrote: 1
 debit read: 1
 debit wrote: 0
 The final balance is: 0
@@ -183,9 +183,9 @@ Output without synchronization:
 
 ```
 
+credit read: 0
 debit read: 0
-debit read: 0
-debit wrote: 1
+credit wrote: 1
 debit wrote: -1
 The final balance is: -1
 ```
