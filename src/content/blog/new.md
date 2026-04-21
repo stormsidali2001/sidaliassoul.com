@@ -185,7 +185,7 @@ The final balance is: 0
 The program took 2.0022490409901366 seconds to execute.
 ```
 
-As you can see, when using a lock, the read and write operations are treated as a single protected operation. Even though the event loop **indeed transfers** execution to the `debit` function immediately after the `credit` coroutine hits an `await` line, the lock guards the state and pauses the `debit` coroutine.
+As you can see, when using a lock, the read and write operations are treated as a single protected operation. Even though the event loop **indeed transfers** execution to the `debit` function immediately after the `credit` coroutine hits the **await** line, the lock guards the state and pauses the `debit` coroutine.
 
 ```
 
