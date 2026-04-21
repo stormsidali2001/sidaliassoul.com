@@ -32,7 +32,7 @@ In **asyncio**, this is implemented via the `asyncio.Lock` class. The Lock objec
 
 Here's an example of how you would create a mutex lock in asyncio:
 
-```
+```python
 lock = asyncio.Lock()
 balance = 0 # shared resource
 
@@ -58,8 +58,7 @@ While the code above is valid, it's easy to forget to release the lock, which ca
 
 That's why it's recommended to use the `async with lock` syntax. The previous code is equivalent to:
 
-```
-```
+```python
 lock = asyncio.Lock()
 balance = 0 # shared resource
 
@@ -72,15 +71,16 @@ async def credit():
         await perform_io_bound_update()
 
 ```
-```
 
 Under the hood, the `Lock` class implements the **asynchronous context manager** protocol, which automatically acquires the lock when entering the block and releases it upon exiting.
 
 
 
-# running 5 concurrent instances of the coroutine
+```python
 
-   await asyncio.gather(*(modify_shared_resource() for _ in range(5)))
+```
+
+
 
   
   
