@@ -47,24 +47,29 @@ balance = 0 # shared resource
 
 
 async def credit():
-    global balance
-    # 1. Read the current value
-    current_balance = balance 
-    print(f"debit read: {current_balance}")
+    try:
+
+      global balance
+      # 1. Read the current value
+      current_balance = balance 
+      print(f"debit read: {current_balance}")
     
-    # 2. Yield control (The event loop switches to credit() here!)
-    await perform_io_bound_update() 
+      # 2. Yield control (The event loop switches to another   coroutine here)
+      await perform_io_bound_update() 
     
-    # 3. Write back based on the OLD value
-    balance = current_balance + 1 
-    print(f"debit wrote: {balance}")
+      # 3. Write back based on the OLD value
+      balance = current_balance + 1 
+      print(f"debit wrote: {balance}")
+
+    finally:
+         lock.release()
 
     
 ```
 
 1. First, we instantiate an asyncio Lock object.
-2. Right inside the coroutine code, we acquire the lock, safely read the balance shared variable, "**await"** some I/O-bound task, and then increment the previously read balance value by one.
-3. When acquiring the lock and then suspending execution, the event loop can execute another coroutine.
+2. Right inside the coroutine code, we acquire the lock, safely read the balance shared variable, "**await"** some I/O-bound task, and then increment the previously read balance value (current_balance) by one.
+3. The lock ensures that both the read and the write are done atomically; the lock guards the whole code block and pauses any other concurrent coroutine that tries to run the code block.
 
 While the code above is valid, it's easy to forget to release the lock, which can lead to many subtle bugs.
 
