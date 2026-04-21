@@ -28,8 +28,6 @@ By the end of this tutorial, you'll learn six synchronization primitives that yo
 5. Bounded Semaphore
 6. Barrier
 
-
-
 ## Lock
 
 The most common way to handle **race conditions** in systems programming is through **mutexes**. A mutex ensures **mutually exclusive** access to a resource, meaning only one coroutine can access it at any given time.
@@ -67,9 +65,9 @@ async def credit():
     
 ```
 
-1. First, we instantiate an asyncio Lock object.
-2. Right inside the coroutine code, we acquire the lock, safely read the balance shared variable, "**await"** some I/O-bound task, and then increment the previously read balance value (current_balance) by one.
-3. The lock ensures that both the read and the write are done atomically; the lock guards the whole code block and pauses any other concurrent coroutine that tries to run the code block.
+1. First, we instantiate an `asyncio.Lock` object.
+2. Inside the coroutine, we **acquire** the lock. This allows us to safely read the `balance` variable, **await** an I/O-bound task, and then increment the balance.
+3. The lock ensures that the sequence of reading and writing is treated as a protected operation; it guards the code block and pauses any other concurrent coroutine that attempts to enter the same block while the lock is held.
 
 While the code above is valid, it's easy to forget to release the lock, which can lead to many subtle bugs.
 
