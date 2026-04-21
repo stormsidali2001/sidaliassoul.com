@@ -6,9 +6,9 @@ description: "Master Python asyncio: learn coroutines, async/await, the event
 pubDate: 2026-04-20
 updatedDate: 2026-04-19
 tags:
-  - - python
-  - - tutorial
-  - - programming
+  -  python
+  -  tutorial
+  -  programming
 series: python-asyncio
 seriesOrder: 1
 published: true
