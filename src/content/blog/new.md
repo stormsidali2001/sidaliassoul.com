@@ -154,8 +154,14 @@ async def credit():
 
 
 async def main():
+    start_time = time.perf_counter()
+
     await asyncio.gather(credit(),debit())
     print(f"The final balance is: {balance}")
+
+    end_time = time.perf_counter()
+    duration = end_time - start_time
+    print(f"The program took {duration} seconds to execute")
 
 
 asyncio.run(main())
@@ -176,10 +182,10 @@ credit wrote: 1
 debit read: 1
 debit wrote: 0
 The final balance is: 0
+The program took 2.0022490409901366 seconds to execute
 ```
 
-  
-Output without synchronization:
+> As you can see when using the lock, the read and write operations are treated as a single protected operation, even though the execution of the 
 
 ```
 
@@ -188,7 +194,10 @@ debit read: 0
 credit wrote: 1
 debit wrote: -1
 The final balance is: -1
+The program took 1.001487125060521 seconds to execute
 ```
+
+
 
 ## Semaphore
 
