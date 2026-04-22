@@ -410,7 +410,7 @@ Program executed in 2.001378541928716 seconds
 1. First, each **waiter** executes the code above the "**await event.wait()"** statement until the event loop pauses its execution. 
 2. After two seconds, the **setter** sets the internal flag to **True**, triggering the suspended coroutines to resume. 
 
-The program takes approximately two seconds to finish, which matches the duration of the I/O-bound task that was pausing the setter.
+The program takes approximately two seconds to finish, matching the duration of the I/O-bound task that the **setter** was awaiting.
 
 ## Condition
 
