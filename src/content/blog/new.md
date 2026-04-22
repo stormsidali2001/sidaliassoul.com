@@ -40,13 +40,13 @@ Here's an example of how you would create a mutex lock in asyncio:
 
 ```python
 
-lock = asyncio.Lock()
+lock = asyncio.Lock() # <----------- lock object or mutex
 balance = 0 # shared resource
 
 
 async def credit():
     try:
-      lock.aquire()
+      lock.aquire() # <------- aquire, code guarded!
       global balance
       # 1. Read the current value
       current_balance = balance 
@@ -60,7 +60,7 @@ async def credit():
       print(f"debit wrote: {balance}")
 
     finally:
-         lock.release()
+         lock.release() #<------- release, access permited!
 
     
 ```
@@ -132,8 +132,9 @@ async def main():
 
 
 asyncio.run(main())
-
 ```
+
+Let's combine everything into a single file and run it.
 
 ```python
 import asyncio
@@ -146,21 +147,22 @@ async def perform_io_bound_update():
 
 
 async def debit():
-  # ... previous code
+  # ... previous debit code
 
 
 async def credit():
-  # ... previous code
+  # ... previous credit code
 
 
 async def main():
-    start_time = time.perf_counter()
+    start_time = time.perf_counter() # <--- start time
 
-    await asyncio.gather(credit(),debit())
+    await asyncio.gather(credit(),debit()) 
+
     print(f"The final balance is: {balance}")
 
-    end_time = time.perf_counter()
-    duration = end_time - start_time
+    end_time = time.perf_counter() # <--- end time
+    duration = end_time - start_time # <-- execution time
     print(f"The program took {duration} seconds to execute")
 
 
@@ -169,14 +171,14 @@ asyncio.run(main())
 
 ```
 
-What do you expect as an output in these cases:
+Let's compare the output for these two cases:
 
-1. When we remove async with lock.
-2. When we keep async with lock
+1. **Unsynchronized:** The lock is removed.
+2. **Synchronized:** The lock is included.
 
 
 
-Output without synchronization:
+Output **without synchronization**:
 
 ```
 credit read: 0
@@ -188,14 +190,17 @@ The program took 1.001487125060521 seconds to execute.
 
 ```
 
-Without a lock, the two functions **overlap** and trip over each other:
+Without a lock, the two functions run concurrently:
 
-1. **Credit** reads the balance as 0 and **pauses** at the `await` line.
-2. **Debit** steps in and reads the same balance ($0$) because Credit hasn't finished yet.
-3. **Credit** wakes up and saves **1** (0 + 1).
-4. **Debit** wakes up and saves **-1** (0 - 1), **overwriting Credit's** work.
+1. **Credit's first block (before the "await"):** It reads the balance as 0 and pauses at the `await` line.
+2. **Debit's first block (before the "await"):** The event loop delegates the execution to **Debit**, which steps in and reads the same balance, "0," because Credit hasn't finished yet.
 
-Output with synchronization (with async lock):
+1. **Credit's second block (after the "await"):** wakes up and saves **1** (0 + 1).
+2. **Debit's second block (after the "await")** wakes up and saves **-1** (0 - 1), **overwriting credit's** work.
+
+> Props: coroutines 
+
+Output **with synchronization** (with async lock):
 
 ```
 credit read: 0
