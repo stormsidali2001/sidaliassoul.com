@@ -323,11 +323,9 @@ event = asyncio.Event()
 ```
 ```
 
-Let's instantiate our event object using the "asyncio.Event" class. 
+Let's instantiate our event object using the `asyncio.Event` class. 
 
-
-
-Subsequently, let's declare the **"one"** side of the **one-to-many communication** that we mentioned before, the **"setter"** coroutine.
+Subsequently, we will declare the **"one"** side of the **one-to-many communication** mentioned earlier: the **"setter"** coroutine.
 
 ```
 
@@ -338,13 +336,15 @@ async def setter():
 
 ```
 
-The setter simply just waits for the I/O-bound task and then sets the event. You can think of it as somebody screaming and dispatching the alert event "Hey, the event is set, and enemies are coming!"
+The setter simply waits for an I/O-bound task to finish and then sets the event. 
 
-Under the hood, this sets a boolean flag that indicates that the event has occurred and all the tasks should awaken immediately. This flag is by default set to False.
+You can think of it as someone shouting an alert: "The event is set, and enemies are coming!" 
+
+Under the hood, this sets an internal boolean flag to **True**, signaling that the event has occurred and that all waiting tasks should awaken immediately. By default, this flag is set to **False**.
 
 
 
-Then, let's declare our waiter coroutine, which simply calls the "event.wait" method, which pauses the execution of the coroutine until the flag gets set to True by the setter coroutine.
+Next, let's declare our **waiter** coroutine. It simply calls the `event.wait()` method, which pauses the coroutine's execution until the internal flag is set to **True** by the **setter** coroutine.
 
 ```
 async def waiter(id):
@@ -356,12 +356,14 @@ async def waiter(id):
 
 
 
-Now, let's call the 2 waiters and one setter into the getter function to run everything concurrently.
+Next, let's call two **waiters** and one **setter** inside the `main()` function to run them all concurrently:
 
 ```
 def main():
  await asyncio.gather(waiter(1),waiter(2),setter())
 ```
+
+> **Note:** The order in which parameters are passed to `gather()` does not matter.
 
 Finally, let's combine everything together, then run the code:
 
@@ -404,6 +406,11 @@ waiter 2: even has been set, continuing execution
 Program executed in 2.001378541928716 seconds
 
 ```
+
+1. First, each **waiter** executes the code above the "**await event.wait()"** statement until the event loop pauses its execution. 
+2. After two seconds, the **setter** sets the internal flag to **True**, triggering the suspended coroutines to resume. 
+
+The program takes approximately two seconds to finish, which matches the duration of the I/O-bound task that was pausing the setter.
 
 ## Condition
 
