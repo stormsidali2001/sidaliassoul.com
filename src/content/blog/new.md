@@ -228,6 +228,8 @@ Use them sparingly. Only wrap sections where an **await** might trigger an event
 
 ## Semaphore
 
+### Introduction
+
 A **semaphore** works similarly to a **lock**, but it allows multiple coroutines to have access to the same resource at the same time.
 
 
@@ -235,6 +237,10 @@ A **semaphore** works similarly to a **lock**, but it allows multiple coroutines
 A semaphore manages an internal counter, which is **decremented** every time you call `acquire()` and **incremented** by each `release()` call. 
 
 When the counter reaches zero, any **subsequent** coroutine that calls **acquire()** will be suspended. These tasks are queued and will only resume execution one by one as the counter becomes greater than zero through **release()** calls.
+
+While locks totally prevent access to resources, semaphores are shine when you want to throttle requests or when a given resource **requires limited concurrent access**.
+
+### Practical Example
 
 When instantiating a semaphore object, we should specify a number that indicates the maximum number of coroutines that can run concurrently until they get blocked.
 
@@ -289,7 +295,7 @@ Rleasing resource 4
 ```
 ```
 
-As you can see from the output code above, only a maximum of 2 coroutines  get access to the resource at any given time.
+As you can see from the output code above, only a maximum of 2 coroutines get access to the resource at any given time.
 
 1. **Coroutines 0 and 1** acquire the semaphore first, decrementing the counter from 2 to 0. All other coroutines are suspended.
 2. While the first two tasks are "sleeping," the event loop tries to run the others, but they remain blocked in a queue because the counter is **0**.
