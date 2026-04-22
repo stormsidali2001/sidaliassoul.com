@@ -234,9 +234,9 @@ A **semaphore** works similarly to a **lock**, but it allows multiple coroutines
 
 A semaphore manages an internal counter, which is **decremented** every time you call `acquire()` and **incremented** by each `release()` call. 
 
-When the counter reaches zero, any **subsequent** coroutine that calls `acquire()` will be suspended. These tasks are queued and will only resume execution one by one as the counter becomes greater than zero through `release()` calls.
+When the counter reaches zero, any **subsequent** coroutine that calls **acquire()** will be suspended. These tasks are queued and will only resume execution one by one as the counter becomes greater than zero through **release()** calls.
 
-When instantiating a semaphore object, we should specify a number which indicates the maximum number of coroutines that can run concurrently until they get blocked.
+When instantiating a semaphore object, we should specify a number that indicates the maximum number of coroutines that can run concurrently until they get blocked.
 
 ```
 ```
@@ -244,30 +244,32 @@ semaphore = asyncio.Semaphore(2)
 ```
 ```
 
+We will declare a simple coroutine that uses the **async with semaphore** syntax to guard a block of code accessing a shared resource. This block will include an **await** call for a simulated I/O-bound task using **asyncio.sleep**.
+
 ```
-
-
-```python
-import asyncio
-
-semaphore = asyncio.Semaphore(2)
-
-async def access_resource(semaphore,resource_id):
+```
+async def access_resource(resource_id):
+    global semaphore
     async with semaphore:
         print(f"Accessing resource {resource_id}")
         await asyncio.sleep(1)
         print(f"Rleasing resource {resource_id}")
+```
+```
 
+Next, we will call the **access_resource** coroutine function five times to create five coroutine objects. These will be stored in a list and then executed concurrently using **asyncio.gather**.
 
+```
 
 async def main():
-    coroutines = [access_resource(semaphore,i) for i in range(5)]
+    coroutines = [access_resource(i) for i in range(5)]
     await asyncio.gather(*coroutines)
 
 asyncio.run(main())
 
 ```
-```
+
+Let's combine all the previous code into a single file and run it.
 
 ```
 ```
@@ -283,6 +285,8 @@ Accessing resource 4
 Rleasing resource 4
 ```
 ```
+
+
 
 ## Event
 
