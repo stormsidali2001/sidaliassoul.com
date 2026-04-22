@@ -228,20 +228,44 @@ Use them sparingly. Only wrap sections where an **await** might trigger an event
 
 ## Semaphore
 
+A **semaphore** works similarly to a **lock**, but it allows multiple coroutines to have access to the same resource at the same time.
+
+
+
+A semaphore manages an internal counter, which is **decremented** every time you call `acquire()` and **incremented** by each `release()` call. 
+
+When the counter reaches zero, any **subsequent** coroutine that calls `acquire()` will be suspended. These tasks are queued and will only resume execution one by one as the counter becomes greater than zero through `release()` calls.
+
+When instantiating a semaphore object, we should specify a number which indicates the maximum number of coroutines that can run concurrently until they get blocked.
+
 ```
+```
+semaphore = asyncio.Semaphore(2)
+```
+```
+
+```
+
+
 ```python
 import asyncio
+
+semaphore = asyncio.Semaphore(2)
 
 async def access_resource(semaphore,resource_id):
     async with semaphore:
         print(f"Accessing resource {resource_id}")
         await asyncio.sleep(1)
         print(f"Rleasing resource {resource_id}")
+
+
+
 async def main():
-    semaphore = asyncio.Semaphore(2) # allow 2 concurrent acesses
-    await asyncio.gather(*(access_resource(semaphore,i) for i in range(5)))
+    coroutines = [access_resource(semaphore,i) for i in range(5)]
+    await asyncio.gather(*coroutines)
 
 asyncio.run(main())
+
 ```
 ```
 
