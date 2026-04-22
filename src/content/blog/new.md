@@ -226,13 +226,126 @@ As the table shows, **there is no silver bullet**. While a **mutex** ensures dat
 
 Use them sparingly. Only wrap sections where an **await** might trigger an event loop switch that leads to a race condition.
 
-
-
 ## Semaphore
+
+```
+```python
+import asyncio
+
+async def access_resource(semaphore,resource_id):
+    async with semaphore:
+        print(f"Accessing resource {resource_id}")
+        await asyncio.sleep(1)
+        print(f"Rleasing resource {resource_id}")
+async def main():
+    semaphore = asyncio.Semaphore(2) # allow 2 concurrent acesses
+    await asyncio.gather(*(access_resource(semaphore,i) for i in range(5)))
+
+asyncio.run(main())
+```
+```
+
+```
+```
+Accessing resource 0
+Accessing resource 1
+Rleasing resource 0
+Rleasing resource 1
+Accessing resource 2
+Accessing resource 3
+Rleasing resource 2
+Rleasing resource 3
+Accessing resource 4
+Rleasing resource 4
+```
+```
 
 ## Event
 
+An Event is a synchronization primitive used to notify multiple tasks that a specific state has been reached or an action has occurred. It manages an internal boolean flag that tasks can wait on.
+
+```
+```python
+import asyncio
+
+async def waiter(event):
+    print("waiter: waiting for the event to be set")
+    await event.wait()
+    print("waiter: even has been set, continuing execution")
+async def setter(event):
+    await asyncio.sleep(2) # simulate some IO
+    event.set()
+    print("setter: event has been set!")
+
+async def main():
+    event = asyncio.Event()
+    await asyncio.gather(waiter(event),setter(event))
+
+asyncio.run(main())
+```
+```
+
+```
+
+waiter: waiting for the event to be set
+setter: event has been set!
+waiter: even has been set, continuing execution
+
+```
+
 ## Condition
+
+```
+```python
+import asyncio
+
+shared_resource = 0
+cond = asyncio.Condition()
+
+async def waiter(name):
+    global shared_resource
+    # ACQUIRE: Task enters and grabs the underlying Lock
+    async with cond:
+        print(f"Task {name} is waiting for resource to reach 3...")
+        
+        # 1. ATOMIC RELEASE: wait_for releases the lock so incrementer can work.
+        # 2. SLEEP: Task name pauses here.
+        # 3. RE-ACQUIRE: When notified, it waits to grab the lock again before continuing.
+        await cond.wait_for(lambda: shared_resource == 3)
+        
+        # LOCK HELD: Task now holds the lock again.
+        print(f"Task {name} sees resource is {shared_resource}. Starting work!")
+        await asyncio.sleep(1)
+        
+    # RELEASE: Lock is released automatically at the end of the 'async with' block.
+
+async def incrementer():
+    global shared_resource
+    for i in range(5):
+        await asyncio.sleep(0.5)
+        
+        # ACQUIRE: Incrementer grabs the lock.
+        async with cond:
+            shared_resource += 1
+            print(f"Incrementer: shared_resource is now {shared_resource}")
+            
+            # SIGNAL: This doesn't release the lock; it just wakes up the waiters
+            # so they are READY to grab the lock as soon as this block ends.
+            cond.notify_all()
+            
+        # RELEASE: Lock is released here. 
+        # Now, one of the waiters (or the incrementer in its next loop) can grab it.
+
+async def main():
+    await asyncio.gather(
+        waiter("A"),
+        waiter("B"),
+        incrementer()
+    )
+
+asyncio.run(main())
+```
+```
 
 ## Bounded Semaphore
 
