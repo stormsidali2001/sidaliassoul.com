@@ -315,7 +315,19 @@ Events shine in **one-to-many communication**, where a single "setter" task need
 
 ### Practical Example
 
-Let's declare the **"one"** side of the **one-to-many communication** that we mentioned before, the **"setter"** coroutine.
+```
+```
+import asyncio
+
+event = asyncio.Event()
+```
+```
+
+Let's instantiate our event object using the "asyncio.Event" class. 
+
+
+
+Subsequently, let's declare the **"one"** side of the **one-to-many communication** that we mentioned before, the **"setter"** coroutine.
 
 ```
 
@@ -323,51 +335,72 @@ async def setter():
     await asyncio.sleep(2) # simulate some IO
     event.set()
     print("setter: event has been set!")
+
 ```
 
 The setter simply just waits for the I/O-bound task and then sets the event. You can think of it as somebody screaming and dispatching the alert event "Hey, the event is set, and enemies are coming!"
 
+Under the hood, this sets a boolean flag that indicates that the event has occurred and all the tasks should awaken immediately. This flag is by default set to False.
 
 
+
+Then, let's declare our waiter coroutine, which simply calls the "event.wait" method, which pauses the execution of the coroutine until the flag gets set to True by the setter coroutine.
+
 ```
-```
-async def waiter(event):
-    print("waiter: waiting for the event to be set")
+async def waiter(id):
+    print(f"waiter {id}: waiting for the event to be set")
     await event.wait()
-    print("waiter: even has been set, continuing execution")
-```
+    print(f"waiter {id}: even has been set, continuing execution")
+
 ```
 
 
 
+Now, let's call the 2 waiters and one setter into the getter function to run everything concurrently.
+
 ```
-```python
+def main():
+ await asyncio.gather(waiter(1),waiter(2),setter())
+
+```
+
+```
+```
 import asyncio
+import time 
 
-event = asyncio.Event()
+event = asyncioo.Event()
 
-async def waiter(event):
-    print("waiter: waiting for the event to be set")
-    await event.wait()
-    print("waiter: even has been set, continuing execution")
-async def setter(event):
-    await asyncio.sleep(2) # simulate some IO
-    event.set()
-    print("setter: event has been set!")
+# setter coroutine function code
+# waiter coroutine function code...
 
 async def main():
-   
-    await asyncio.gather(waiter(event),setter(event))
+    start_time = time.perf_counter()
+
+    await asyncio.gather(waiter(1),waiter(2),setter())
+
+    end_time = time.perf_counter()
+    duration = end_time - start_time
+    print(f"Program executed in {duration} seconds")
 
 asyncio.run(main())
+
 ```
 ```
 
+
+
 ```
 
-waiter: waiting for the event to be set
+waiter 1: waiting for the event to be set
+waiter 2: waiting for the event to be set
+
 setter: event has been set!
-waiter: even has been set, continuing execution
+
+waiter 1: even has been set, continuing execution
+waiter 2: even has been set, continuing execution
+
+Program executed in 2.001378541928716 seconds
 
 ```
 
