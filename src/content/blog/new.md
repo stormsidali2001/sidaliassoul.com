@@ -332,9 +332,11 @@ Output:
 
 ```
 # same logs as before
-Safety Triggered
+Safety Triggered: BoundedSemaphore released too many times
 
 ```
+
+
 
 ## Event
 
