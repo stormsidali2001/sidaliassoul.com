@@ -336,7 +336,7 @@ Safety Triggered: BoundedSemaphore released too many times
 
 ```
 
-
+As you can see, an extra `release()` call results in a `ValueError` with the message: "BoundedSemaphore released too many times.
 
 ## Event
 
