@@ -4,9 +4,9 @@ description: new
 pubDate: 2026-04-21
 updatedDate: 2026-04-21
 tags:
-  -  python
-  -  tutorial
-  -  programming
+  - - python
+    - tutorial
+    - programming
 series: python-asyncio
 seriesOrder: 1
 published: false
@@ -174,8 +174,6 @@ Let's compare the output for these two cases:
 1. **Unsynchronized:** The lock is removed.
 2. **Synchronized:** The lock is included.
 
-
-
 Output **without synchronization**:
 
 ```
@@ -230,7 +228,6 @@ Use them sparingly. Only wrap sections where an **await** might trigger an event
 
 A **semaphore** works similarly to a **lock**, but it allows multiple coroutines to have access to the same resource at the same time.
 
-
 A semaphore manages an internal counter, which is **decremented** every time you call `acquire()` and **incremented** by each `release()` call. 
 
 When the counter reaches zero, any **subsequent** coroutine that calls **acquire()** will be suspended. These tasks are queued and will only resume execution one by one as the counter becomes greater than zero through **release()** calls.
@@ -244,6 +241,7 @@ When instantiating a semaphore object, we should specify a number that indicates
 ```python
 semaphore = asyncio.Semaphore(2)
 ```
+
 `
 
 We will declare a simple coroutine that uses the **async with semaphore** syntax to guard a block of code accessing a shared resource. This block will include an **await** call for a simulated I/O-bound task using **asyncio.sleep**.
@@ -296,9 +294,11 @@ As you can see from the output code above, only a maximum of 2 coroutines get ac
 4. After another second, Coroutines 2 and 3 release the semaphore, finally permitting **Coroutine 4** to acquire it and finish.
 5. The program concludes in approximately **3 seconds**, processing the five tasks in waves of two.
 
+## Bounded Semaphore
 
+Bounded semaphores are a safer alternative to standard semaphores. 
 
-##  Bounded Semaphore
+While a normal semaphore allows its **internal counter** to increase  beyond its initial value, a bounded semaphore prevents this by raising a **ValueError** during the `release()` call if the counter exceeds that initial limit.
 
 ## Event
 
@@ -385,7 +385,6 @@ asyncio.run(main())
 
 ```
 
-
 Output:
 
 ```
@@ -402,8 +401,8 @@ Program executed in 2.001378541928716 seconds
 
 ```
 
-1. First, each **waiter** executes the code above the "**await event.wait()"** statement until the event loop pauses its execution. 
-2. After two seconds, the **setter** sets the internal flag to **True**, triggering the suspended coroutines to resume. 
+1. First, each **waiter** executes the code above the "**await event.wait()"** statement until the event loop pauses its execution.
+2. After two seconds, the **setter** sets the internal flag to **True**, triggering the suspended coroutines to resume.
 
 The program takes approximately two seconds to finish, matching the duration of the I/O-bound task that the **setter** was awaiting.
 
