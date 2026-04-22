@@ -4,9 +4,9 @@ description: new
 pubDate: 2026-04-21
 updatedDate: 2026-04-21
 tags:
-  - - python
-  - - tutorial
-  - - programming
+  -  python
+  -  tutorial
+  -  programming
 series: python-asyncio
 seriesOrder: 1
 published: false
@@ -102,7 +102,6 @@ Under the hood, the `Lock` class implements the **asynchronous context manager**
 
 Let's create another **debit coroutine** that performs the same logic but **decrements** the balance by 1 instead of incrementing it. Subsequently, we will run the credit and debit coroutines concurrently using **asyncio.gather**.
 
-```
 ```python
 async def debit():
    async with lock:
@@ -118,13 +117,12 @@ async def debit():
       balance = current_balance - 1 
       print(f"debit wrote: {balance}")
 ```
-```
 
 Since **asyncio.gather** accepts any number of coroutines, tasks, or futures, we can use it to schedule them on the event loop. It returns a **Future object** that aggregates the results of all passed coroutines. 
 
 To pause execution and wait for these tasks to complete, we must **await** the gather call, therefore the returned **future** object.
 
-```
+```python
 
 async def main():
     await asyncio.gather(credit(),debit())
@@ -233,7 +231,6 @@ Use them sparingly. Only wrap sections where an **await** might trigger an event
 A **semaphore** works similarly to a **lock**, but it allows multiple coroutines to have access to the same resource at the same time.
 
 
-
 A semaphore manages an internal counter, which is **decremented** every time you call `acquire()` and **incremented** by each `release()` call. 
 
 When the counter reaches zero, any **subsequent** coroutine that calls **acquire()** will be suspended. These tasks are queued and will only resume execution one by one as the counter becomes greater than zero through **release()** calls.
@@ -244,16 +241,14 @@ While locks totally prevent access to resources, semaphores are shine when you w
 
 When instantiating a semaphore object, we should specify a number that indicates the maximum number of coroutines that can run concurrently until they get blocked.
 
-```
-```
+```python
 semaphore = asyncio.Semaphore(2)
 ```
-```
+`
 
 We will declare a simple coroutine that uses the **async with semaphore** syntax to guard a block of code accessing a shared resource. This block will include an **await** call for a simulated I/O-bound task using **asyncio.sleep**.
 
-```
-```
+```python
 async def access_resource(resource_id):
     global semaphore
     async with semaphore:
@@ -261,11 +256,10 @@ async def access_resource(resource_id):
         await asyncio.sleep(1)
         print(f"Rleasing resource {resource_id}")
 ```
-```
 
 Next, we will call the **access_resource** coroutine function five times to create five coroutine objects. These will be stored in a list and then executed concurrently using **asyncio.gather**.
 
-```
+```python
 
 async def main():
     coroutines = [access_resource(i) for i in range(5)]
@@ -278,7 +272,7 @@ asyncio.run(main())
 Let's combine all the previous code into a single file and run it.
 
 ```
-```
+
 Accessing resource 0
 Accessing resource 1
 Rleasing resource 0
@@ -292,7 +286,6 @@ Rleasing resource 3
 Accessing resource 4
 Rleasing resource 4
 -------------> After three seconds
-```
 ```
 
 As you can see from the output code above, only a maximum of 2 coroutines get access to the resource at any given time.
@@ -319,19 +312,17 @@ Events shine in **one-to-many communication**, where a single "setter" task need
 
 ### Practical Example
 
-```
-```
+```python
 import asyncio
 
 event = asyncio.Event()
-```
 ```
 
 Let's instantiate our event object using the `asyncio.Event` class. 
 
 Subsequently, we will declare the **"one"** side of the **one-to-many communication** mentioned earlier: the **"setter"** coroutine.
 
-```
+```python
 
 async def setter():
     await asyncio.sleep(2) # simulate some IO
@@ -350,7 +341,7 @@ Under the hood, this sets an internal boolean flag to **True**, signaling that t
 
 Next, let's declare our **waiter** coroutine. It simply calls the `event.wait()` method, which pauses the coroutine's execution until the internal flag is set to **True** by the **setter** coroutine.
 
-```
+```python
 async def waiter(id):
     print(f"waiter {id}: waiting for the event to be set")
     await event.wait()
@@ -362,7 +353,7 @@ async def waiter(id):
 
 Next, let's call two **waiters** and one **setter** inside the `main()` function to run them all concurrently:
 
-```
+```python
 def main():
  await asyncio.gather(waiter(1),waiter(2),setter())
 ```
@@ -371,12 +362,12 @@ def main():
 
 Finally, let's combine everything together, then run the code:
 
-```
-```
+```python
+`
 import asyncio
 import time 
 
-event = asyncioo.Event()
+event = asyncio.Event()
 
 # setter coroutine function code
 # waiter coroutine function code...
@@ -393,7 +384,7 @@ async def main():
 asyncio.run(main())
 
 ```
-```
+
 
 Output:
 
@@ -418,7 +409,6 @@ The program takes approximately two seconds to finish, matching the duration of 
 
 ## Condition
 
-```
 ```python
 import asyncio
 
@@ -467,7 +457,6 @@ async def main():
     )
 
 asyncio.run(main())
-```
 ```
 
 ## Barrier
