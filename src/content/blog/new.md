@@ -305,11 +305,46 @@ As you can see from the output code above, only a maximum of 2 coroutines get ac
 
 ## Event
 
-An Event is a synchronization primitive used to notify multiple tasks that a specific state has been reached or an action has occurred. It manages an internal boolean flag that tasks can wait on.
+### Introduction
+
+An event is a synchronization primitive that is used to notify multiple tasks that a specific state has been reached or an action has occurred. 
+
+Under the hood, it manages an internal boolean flag that tasks can wait on.
+
+Events shine in **one-to-many communication**, where a single "setter" task needs to trigger the simultaneous resume of multiple "waiter" tasks.
+
+### Practical Example
+
+Let's declare the **"one"** side of the **one-to-many communication** that we mentioned before, the **"setter"** coroutine.
+
+```
+
+async def setter():
+    await asyncio.sleep(2) # simulate some IO
+    event.set()
+    print("setter: event has been set!")
+```
+
+The setter simply just waits for the I/O-bound task and then sets the event. You can think of it as somebody screaming and dispatching the alert event "Hey, the event is set, and enemies are coming!"
+
+
+
+```
+```
+async def waiter(event):
+    print("waiter: waiting for the event to be set")
+    await event.wait()
+    print("waiter: even has been set, continuing execution")
+```
+```
+
+
 
 ```
 ```python
 import asyncio
+
+event = asyncio.Event()
 
 async def waiter(event):
     print("waiter: waiting for the event to be set")
@@ -321,7 +356,7 @@ async def setter(event):
     print("setter: event has been set!")
 
 async def main():
-    event = asyncio.Event()
+   
     await asyncio.gather(waiter(event),setter(event))
 
 asyncio.run(main())
