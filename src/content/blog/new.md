@@ -303,6 +303,10 @@ As you can see from the output code above, only a maximum of 2 coroutines get ac
 4. After another second, Coroutines 2 and 3 release the semaphore, finally permitting **Coroutine 4** to acquire it and finish.
 5. The program concludes in approximately **3 seconds**, processing the five tasks in waves of two.
 
+
+
+##  Bounded Semaphore
+
 ## Event
 
 ### Introduction
@@ -465,8 +469,6 @@ async def main():
 asyncio.run(main())
 ```
 ```
-
-## Bounded Semaphore
 
 ## Barrier
 
