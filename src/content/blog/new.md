@@ -300,13 +300,19 @@ Bounded semaphores are a safer alternative to standard semaphores.
 
 While a normal semaphore allows its **internal counter** to increase beyond its initial value, a bounded semaphore prevents this by raising a **ValueError** during the `release()` call if the counter exceeds that initial limit.
 
+
+
+To demonstrate this, let's modify our previous code. 
+
+First, we will update the instantiation line to use a `BoundedSemaphore` instead of a standard one:
+
 ```
 ```python
 semaphore = asyncio.BoundedSemaphore(2)
 ```
 ```
 
-
+Next, we will add an extra `release()` call at the end of our `main` function. By wrapping it in a `try...except` block, we can see exactly how the bounded semaphore handles a counter that exceeds its initial limit:
 
 ```
 ```python
@@ -314,15 +320,21 @@ async def main():
     coroutines = [access_resource(i) for i in range(5)]
     await asyncio.gather(*coroutines)
     try:
-      semaphore.release()
-    except: ValueError as e:
+      semaphore.release() <--- extra release, throws an error when using a bounded semaphore.
+    except ValueError as e:
       print(f"Safety Triggered: {e}")
 
 asyncio.run(main())
 ```
 ```
 
+Output:
 
+```
+# same logs as before
+Safety Triggered
+
+```
 
 ## Event
 
