@@ -298,7 +298,31 @@ As you can see from the output code above, only a maximum of 2 coroutines get ac
 
 Bounded semaphores are a safer alternative to standard semaphores. 
 
-While a normal semaphore allows its **internal counter** to increase  beyond its initial value, a bounded semaphore prevents this by raising a **ValueError** during the `release()` call if the counter exceeds that initial limit.
+While a normal semaphore allows its **internal counter** to increase beyond its initial value, a bounded semaphore prevents this by raising a **ValueError** during the `release()` call if the counter exceeds that initial limit.
+
+```
+```python
+semaphore = asyncio.BoundedSemaphore(2)
+```
+```
+
+
+
+```
+```python
+async def main():
+    coroutines = [access_resource(i) for i in range(5)]
+    await asyncio.gather(*coroutines)
+    try:
+      semaphore.release()
+    except: ValueError as e:
+      print(f"Safety Triggered: {e}")
+
+asyncio.run(main())
+```
+```
+
+
 
 ## Event
 
