@@ -190,15 +190,12 @@ The program took 1.001487125060521 seconds to execute.
 
 ```
 
-Without a lock, the two functions run concurrently:
+Without a lock, the two functions run concurrently, leading to a race condition:
 
-1. **Credit's first block (before the "await"):** It reads the balance as 0 and pauses at the `await` line.
-2. **Debit's first block (before the "await"):** The event loop delegates the execution to **Debit**, which steps in and reads the same balance, "0," because Credit hasn't finished yet.
-
-1. **Credit's second block (after the "await"):** wakes up and saves **1** (0 + 1).
-2. **Debit's second block (after the "await")** wakes up and saves **-1** (0 - 1), **overwriting credit's** work.
-
-> Props: coroutines 
+1. **Credit’s first block (before the await):** It reads the balance as 0 and pauses at the **await** line.
+2. **Debit’s first block (before the await):** The event loop switches execution to **Debit**, which reads the same balance (0) because **Credit** hasn't updated it yet.
+3. **Credit’s second block (after the await):** It resumes and saves the new balance as **1** (0 + 1).
+4. **Debit’s second block (after the await):** It resumes and saves its result as **-1** (0 - 1), **overwriting** Credit’s update.
 
 Output **with synchronization** (with async lock):
 
@@ -212,6 +209,24 @@ The program took 2.0022490409901366 seconds to execute.
 ```
 
 As you can see, when using a lock, the read and write operations are treated as a single protected operation. Even though the event loop **indeed transfers** execution to the `debit` function immediately after the `credit` coroutine hits the **await** line, the lock guards the state and pauses the `debit` coroutine.
+
+
+
+**Here is how the two approaches compare:**
+
+
+|  |  |  |
+| ------------------ | ------------------------ | --------------------- |
+| **Feature** | **Without Lock** | **With Lock** |
+| **Execution Time** | 1 Second | 2 Seconds |
+| **Reliability** | **Cons:** Race Condition | **Pros:** Data Safety |
+
+
+As the table shows, **there is no silver bullet**. While a **mutex** ensures data integrity, it forces the protected code to run sequentially and increases the total runtime. 
+
+Use them sparingly. Only wrap sections where an **await** might trigger an event loop switch that leads to a race condition.
+
+
 
 ## Semaphore
 
