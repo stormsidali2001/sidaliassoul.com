@@ -446,45 +446,57 @@ The program takes approximately two seconds to finish, matching the duration of 
 
 ## Condition
 
+```
 ```python
 import asyncio
 
 shared_resource = 0
 cond = asyncio.Condition()
+```
+```
 
+
+
+```
+```python
 async def waiter(name):
     global shared_resource
-    # ACQUIRE: Task enters and grabs the underlying Lock
-    async with cond:
-        print(f"Task {name} is waiting for resource to reach 3...")
-        
-        # 1. ATOMIC RELEASE: wait_for releases the lock so incrementer can work.
-        # 2. SLEEP: Task name pauses here.
-        # 3. RE-ACQUIRE: When notified, it waits to grab the lock again before continuing.
-        await cond.wait_for(lambda: shared_resource == 3)
-        
-        # LOCK HELD: Task now holds the lock again.
-        print(f"Task {name} sees resource is {shared_resource}. Starting work!")
-        await asyncio.sleep(1)
-        
-    # RELEASE: Lock is released automatically at the end of the 'async with' block.
 
+    print(f"Task {name} is waiting for resource to reach 3...")
+       
+    await cond.wait_for(lambda: shared_resource == 3)
+ 
+
+    print(f"Task {name} sees resource is {shared_resource}. Starting work!")
+
+    await asyncio.sleep(1) # Simulate an I/O-bound task.`
+        
+ 
+```
+```
+
+
+
+```
+```python
 async def incrementer():
     global shared_resource
     for i in range(5):
         await asyncio.sleep(0.5)
         
-        # ACQUIRE: Incrementer grabs the lock.
         async with cond:
             shared_resource += 1
             print(f"Incrementer: shared_resource is now {shared_resource}")
-            
-            # SIGNAL: This doesn't release the lock; it just wakes up the waiters
-            # so they are READY to grab the lock as soon as this block ends.
+
             cond.notify_all()
             
-        # RELEASE: Lock is released here. 
-        # Now, one of the waiters (or the incrementer in its next loop) can grab it.
+        
+```
+```
+
+
+
+```python
 
 async def main():
     await asyncio.gather(
@@ -496,5 +508,78 @@ async def main():
 asyncio.run(main())
 ```
 
+Output:
+
+```
+
+Task A is waiting for resource to reach 3...
+Task B is waiting for resource to reach 3...
+Incrementer: shared_resource is now 1
+Incrementer: shared_resource is now 2
+Incrementer: shared_resource is now 3
+Task A sees resource is 3. Starting work!
+Task B sees resource is 3. Starting work!
+Incrementer: shared_resource is now 4
+Incrementer: shared_resource is now 5
+
+```
+
 ## Barrier
 
+```
+```
+import asyncio
+
+async def worker(barrier, name):
+    print(f"Worker {name} is preparing...")
+    await asyncio.sleep(1)
+    
+    print(f"Worker {name} is waiting at the barrier.")
+    try:
+        # Execution pauses here until the 'parties' count is met
+        await barrier.wait()
+    except asyncio.BrokenBarrierError:
+        print(f"Worker {name}: The barrier was reset or broken.")
+        return
+
+    print(f"Worker {name} passed the barrier! Starting work...")
+
+async def main():
+    # Define a barrier for 3 tasks
+    barrier = asyncio.Barrier(3)
+
+    await asyncio.gather(
+        worker(barrier, "A"),
+        worker(barrier, "B"),
+        worker(barrier, "C")
+    )
+
+asyncio.run(main())
+```
+```
+
+Output:
+
+```
+```
+Worker A is preparing...
+Worker B is preparing...
+Worker C is preparing...
+Worker A is waiting at the barrier.
+Worker B is waiting at the barrier.
+Worker C is waiting at the barrier.
+Worker C passed the barrier! Starting work...
+Worker A passed the barrier! Starting work...
+Worker B passed the barrier! Starting work...
+```
+```
+
+
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
