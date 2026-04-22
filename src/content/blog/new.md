@@ -277,16 +277,25 @@ Accessing resource 0
 Accessing resource 1
 Rleasing resource 0
 Rleasing resource 1
+-------------> After one second
 Accessing resource 2
 Accessing resource 3
 Rleasing resource 2
 Rleasing resource 3
+-------------> After two seconds
 Accessing resource 4
 Rleasing resource 4
+-------------> After three seconds
 ```
 ```
 
+As you can see from the output code above, only a maximum of 2 coroutines  get access to the resource at any given time.
 
+1. **Coroutines 0 and 1** acquire the semaphore first, decrementing the counter from 2 to 0. All other coroutines are suspended.
+2. While the first two tasks are "sleeping," the event loop tries to run the others, but they remain blocked in a queue because the counter is **0**.
+3. Once Coroutines 0 and 1 call `release()`, the counter returns to **2**, allowing **Coroutines 2 and 3** to exit the queue and begin their work.
+4. After another second, Coroutines 2 and 3 release the semaphore, finally permitting **Coroutine 4** to acquire it and finish.
+5. The program concludes in approximately **3 seconds**, processing the five tasks in waves of two.
 
 ## Event
 
