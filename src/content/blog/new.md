@@ -361,8 +361,9 @@ Now, let's call the 2 waiters and one setter into the getter function to run eve
 ```
 def main():
  await asyncio.gather(waiter(1),waiter(2),setter())
-
 ```
+
+Finally, let's combine everything together, then run the code:
 
 ```
 ```
@@ -388,7 +389,7 @@ asyncio.run(main())
 ```
 ```
 
-
+Output:
 
 ```
 
