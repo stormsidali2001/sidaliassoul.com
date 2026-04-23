@@ -56,7 +56,7 @@ If you run these concurrently, you risk a race condition. Because the read and w
 
 In this tutorial, I took a deep dive into **asyncio** synchronization primitives. These are essential tools for building flexible programs that are resilient to race conditions like the one we just saw:
 
-1. Lock:
+1. Lock.
 2. Semaphore
 3. Bounded Semaphore
 4. Event
