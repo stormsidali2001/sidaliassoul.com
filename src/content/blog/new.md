@@ -471,6 +471,7 @@ condition = asyncio.Condition()
 shared_resource = 0 
 # inside a coroutine
 async waiter():
+ global condition
  async with condition:
    await cond.wait()
    # or with a condition
@@ -481,14 +482,24 @@ The async with syntax is equivalent to the following:
 
 ```
 async waiter():
+ global condition
  await condition.aquire()
  try:
    await condition.wait()
-   # or with a condition
-   await conditionl.wait_for(shared_resource > 3)
+   # or with a predicate
+   await conditionl.wait_for(lambda: shared_resource == 3)
   finally:
    condition.release()
 ```
+
+Whether you're using wait or await for a RuntimeError will be raised if you haven't acquired the lock yet, either manually or implicitly via the previously discussed async with syntax.
+
+
+
+The await "condition.wait()" line works in 2 phases.
+
+- Releases the lock and then blocks or pauses until it's awakened by a "condition.notify()" or "condition.notify_all()" call.
+- Once awakened, the condition reacquires its lock. 
 
 ### Practical Example
 
