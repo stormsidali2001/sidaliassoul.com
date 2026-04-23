@@ -13,13 +13,9 @@ published: false
 ---
 ## Introduction
 
-```
 
-```
 
 By the end of this tutorial, you'll learn six synchronization primitives that you can use in different scenarios to protect your program from race conditions:
-
-
 
 1. Lock:
 2. Semaphore
@@ -688,8 +684,8 @@ As you can see from the output, workers **A**, **B**, and **C** don't start thei
 
 
 
-&nbsp;
+## Conclusion
 
-&nbsp;
+
 
 &nbsp;
