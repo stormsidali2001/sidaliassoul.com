@@ -23,14 +23,14 @@ Despite running in a single thread, async code runs concurrently. This means tha
 
 The reason is simple: as soon as an `await` line is executed, the decision of whether to proceed or switch to another coroutine is left entirely to the event loop.
 
-Picture this, a credit, reading a shared balance state, awaits an I/O-bound task for a second, and then increment the previouosly read balance by 1.
+Picture this: a credit coroutine reads a shared balance, awaits an I/O-bound task for a second, and then increments the previously read balance by 1.
 
 ```
-async credit():
+async def credit():
   global balance
   # read balance
   current_balance = balance # read current balance
-  await asyncio.sleep(1) # Simute an IO-bound task.
+  await asyncio.sleep(1) # Simulate an I/O-bound task.
   # write new balance balance
   balance = current_balance + 1
   
@@ -49,7 +49,7 @@ In this tutorial, I took a deep dive into **asyncio** synchronization primitives
 
 
 
-Without any further ado, let's dive straight to the one of the most classic 
+Without any further ado, let's dive straight into one of the most classic synchronization primitives.
 
 ## Lock
 
@@ -69,7 +69,7 @@ balance = 0 # shared resource
 
 async def credit():
     try:
-      lock.aquire() # <------- aquire, code guarded!
+      await lock.acquire() # <------- acquire, code guarded!
       global balance
       # 1. Read the current value
       current_balance = balance 
@@ -255,7 +255,7 @@ A semaphore manages an internal counter, which is **decremented** every time you
 
 When the counter reaches zero, any **subsequent** coroutine that calls **acquire()** will be suspended. These tasks are queued and will only resume execution one by one as the counter becomes greater than zero through **release()** calls.
 
-While locks totally prevent access to resources, semaphores are shine when you want to throttle requests or when a given resource **requires limited concurrent access**.
+While locks totally prevent access to resources, semaphores shine when you want to throttle requests or when a given resource **requires limited concurrent access**.
 
 ### Practical Example
 
@@ -265,8 +265,6 @@ When instantiating a semaphore object, we should specify a number that indicates
 semaphore = asyncio.Semaphore(2)
 ```
 
-`
-
 We will declare a simple coroutine that uses the **async with semaphore** syntax to guard a block of code accessing a shared resource. This block will include an **await** call for a simulated I/O-bound task using **asyncio.sleep**.
 
 ```python
@@ -275,7 +273,7 @@ async def access_resource(resource_id):
     async with semaphore:
         print(f"Accessing resource {resource_id}")
         await asyncio.sleep(1)
-        print(f"Rleasing resource {resource_id}")
+        print(f"Releasing resource {resource_id}")
 ```
 
 Next, we will call the **access_resource** coroutine function five times to create five coroutine objects. These will be stored in a list and then executed concurrently using **asyncio.gather**.
@@ -296,16 +294,16 @@ Let's combine all the previous code into a single file and run it.
 
 Accessing resource 0
 Accessing resource 1
-Rleasing resource 0
-Rleasing resource 1
+Releasing resource 0
+Releasing resource 1
 -------------> After one second
 Accessing resource 2
 Accessing resource 3
-Rleasing resource 2
-Rleasing resource 3
+Releasing resource 2
+Releasing resource 3
 -------------> After two seconds
 Accessing resource 4
-Rleasing resource 4
+Releasing resource 4
 -------------> After three seconds
 ```
 
@@ -329,26 +327,22 @@ To demonstrate this, let's modify our previous code.
 
 First, we will update the instantiation line to use a `BoundedSemaphore` instead of a standard one:
 
-```
 ```python
 semaphore = asyncio.BoundedSemaphore(2)
-```
 ```
 
 Next, we will add an extra `release()` call at the end of our `main` function. By wrapping it in a `try...except` block, we can see exactly how the bounded semaphore handles a counter that exceeds its initial limit:
 
-```
 ```python
 async def main():
     coroutines = [access_resource(i) for i in range(5)]
     await asyncio.gather(*coroutines)
     try:
-      semaphore.release() <--- extra release, throws an error when using a bounded semaphore.
+      semaphore.release() # <--- extra release, throws an error when using a bounded semaphore.
     except ValueError as e:
       print(f"Safety Triggered: {e}")
 
 asyncio.run(main())
-```
 ```
 
 Output:
@@ -406,7 +400,7 @@ Next, let's declare our **waiter** coroutine. It simply calls the `event.wait()`
 async def waiter(id):
     print(f"waiter {id}: waiting for the event to be set")
     await event.wait()
-    print(f"waiter {id}: even has been set, continuing execution")
+    print(f"waiter {id}: event has been set, continuing execution")
 
 ```
 
@@ -415,8 +409,8 @@ async def waiter(id):
 Next, let's call two **waiters** and one **setter** inside the `main()` function to run them all concurrently:
 
 ```python
-def main():
- await asyncio.gather(waiter(1),waiter(2),setter())
+async def main():
+    await asyncio.gather(waiter(1), waiter(2), setter())
 ```
 
 > **Note:** The order in which parameters are passed to `gather()` does not matter.
@@ -424,9 +418,8 @@ def main():
 Finally, let's combine everything together, then run the code:
 
 ```python
-`
 import asyncio
-import time 
+import time
 
 event = asyncio.Event()
 
@@ -436,14 +429,13 @@ event = asyncio.Event()
 async def main():
     start_time = time.perf_counter()
 
-    await asyncio.gather(waiter(1),waiter(2),setter())
+    await asyncio.gather(waiter(1), waiter(2), setter())
 
     end_time = time.perf_counter()
     duration = end_time - start_time
     print(f"Program executed in {duration} seconds")
 
 asyncio.run(main())
-
 ```
 
 Output:
@@ -455,8 +447,8 @@ waiter 2: waiting for the event to be set
 
 setter: event has been set!
 
-waiter 1: even has been set, continuing execution
-waiter 2: even has been set, continuing execution
+waiter 1: event has been set, continuing execution
+waiter 2: event has been set, continuing execution
 
 Program executed in 2.001378541928716 seconds
 
@@ -474,7 +466,7 @@ The program takes approximately two seconds to finish, matching the duration of 
 You can think of a condition as a combination of a **lock** and an **event**.
 
 1. The Lock Side: It ensures mutual exclusion. You cannot **check the condition** or **modify the shared state** without holding the lock.
-2. The Event Side: It allows a task to pause and wait for a specific signal (notify() or notifiy_all()).
+2. The Event Side: It allows a task to pause and wait for a specific signal (notify() or notify_all()).
 
 In fact, it's possible to have multiple condition objects sharing the same lock; you can just pass the lock as a parameter to the condition object when instantiating it.
 
@@ -487,35 +479,35 @@ conditionN = asyncio.Condition(lock)
 
 
 
-The recommended way for using a condition is inside an async with statement.
+The recommended way to use a condition is inside an `async with` statement.
 
-```
+```python
 condition = asyncio.Condition()
-shared_resource = 0 
+shared_resource = 0
 # inside a coroutine
-async waiter():
- global condition
- async with condition:
-   await cond.wait()
-   # or with a condition
-   await cond.wait_for(shared_resource > 3)
+async def waiter():
+    global condition
+    async with condition:
+        await cond.wait()
+        # or with a predicate
+        await cond.wait_for(lambda: shared_resource > 3)
 ```
 
-The async with syntax is equivalent to the following:
+The `async with` syntax is equivalent to the following:
 
-```
-async waiter():
- global condition
- await condition.aquire()
- try:
-   await condition.wait()
-   # or with a predicate
-   await conditionl.wait_for(lambda: shared_resource == 3)
-  finally:
-   condition.release()
+```python
+async def waiter():
+    global condition
+    await condition.acquire()
+    try:
+        await condition.wait()
+        # or with a predicate
+        await condition.wait_for(lambda: shared_resource == 3)
+    finally:
+        condition.release()
 ```
 
-Whether you're using wait or await for a RuntimeError will be raised if you haven't acquired the lock yet, either manually or implicitly via the previously discussed async with syntax.
+Whether you're using `wait` or `wait_for`, a `RuntimeError` will be raised if you haven't acquired the lock yet, either manually or implicitly via the previously discussed `async with` syntax.
 
 
 
@@ -524,7 +516,7 @@ The "**await condition.wait()"** statement operates in two distinct phases:
 - **Release and Suspend:** The coroutine atomically releases the lock and yields control back to the event loop, remaining suspended until it is resumed by "**condition.notify"** or "**condition.notify_all."**
 - **Reacquisition:** Once notified, the condition requires its lock.
 
-> Once the lock is re-aquired the await condition.wait call returns True. 
+> Once the lock is re-acquired, the `await condition.wait()` call returns `True`.
 
 The "**await condition.wait_for(predicate)"** method functions similarly, but it accepts a callable that returns a boolean value. It effectively wraps **wait()** in a loop, repeatedly calling it until the predicate evaluates to **True**.
 
@@ -536,13 +528,11 @@ Let's understand how conditions work in practice through a simpler waiters incre
 
 Let's start by declaring a variable representing a shared resource and then instantiate a condition object using "asyncio.Condition" class.
 
-```
 ```python
 import asyncio
 
 shared_resource = 0
 cond = asyncio.Condition()
-```
 ```
 
 
@@ -553,43 +543,34 @@ Once these conditions are satisfied, the coroutine reacquires the lock, sleeps f
 
 
 
-```
 ```python
 async def waiter(name):
     global shared_resource
-    async with condition: 
-      print(f"Task {name} is waiting for resource to reach 3...")
-       
-      await cond.wait_for(lambda: shared_resource == 3)
- 
+    async with condition:
+        print(f"Task {name} is waiting for resource to reach 3...")
 
-      print(f"Task {name} sees resource is {shared_resource}. Starting work!")
+        await cond.wait_for(lambda: shared_resource == 3)
 
-      await asyncio.sleep(1) # Simulate an I/O-bound task.`
-        
- 
-```
+        print(f"Task {name} sees resource is {shared_resource}. Starting work!")
+
+        await asyncio.sleep(1) # Simulate an I/O-bound task.
 ```
 
 Now, let's create our **incrementer** coroutine. The **incrementer's** job, as the name implies, is to modify the shared resource by incrementing it five times every **0.5** seconds. For each iteration, it sleeps, increments the shared resource by **1**, and notifies all the waiters.
 
 Note that we had to wrap the resource mutation and notification code within an **async with condition** block because the **Condition** mechanism requires it. If you call it without a lock, a **RuntimeError** will be raised.
 
-```
 ```python
 async def incrementer():
     global shared_resource
     for i in range(5):
         await asyncio.sleep(0.5)
-        
+
         async with condition:
             shared_resource += 1
             print(f"Incrementer: shared_resource is now {shared_resource}")
 
             condition.notify_all()
-            
-        
-```
 ```
 
 Finally, let's create two waiters, **A** and **B**, and run them concurrently with the incrementer using the **asyncio.gather** method.
@@ -625,7 +606,7 @@ Incrementer: shared_resource is now 5
 I think that the output should be self explanatory.
 
 1. First, the waiters acquire the lock, release it, and pause just after the **wait_for** line. They remain suspended until the **incrementer** calls **notify** and the predicate condition is satisfied.
-2. As you can see from the output, Waiters **A** and **B** only start their work once the **shared_resource** value reaches.
+2. As you can see from the output, Waiters **A** and **B** only start their work once the **shared_resource** value reaches **3**.
 
 
 
@@ -643,21 +624,18 @@ No task is allowed to pass the gate until the required number of participants ha
 
 Let's start by instantiating a **Barrier** object, which is a gate that only opens when three participants or coroutines arrive.
 
-```
-
+```python
 barrier = asyncio.Barrier(3)
 ```
 
 Then, let's create a **worker** coroutine which does the following: it sleeps for one second to simulate an I/O-bound task and then awaits the **barrier**, which pauses the worker until the number of suspended workers at that line reaches three.
 
-```
-```
-
+```python
 async def worker(name):
     global barrier
     print(f"Worker {name} is preparing...")
     await asyncio.sleep(1) # simulate an I/O-bound task
-    
+
     print(f"Worker {name} is waiting at the barrier.")
     try:
         # Execution pauses here until the 'parties' count is met
@@ -668,19 +646,15 @@ async def worker(name):
 
     print(f"Worker {name} passed the barrier! Starting work...")
 ```
-```
 
 
 
 Finally, let's run three workers concurrently using the **asyncio.gather** method.
 
-```
-```
+```python
 import asyncio
 
 async def main():
-
-
     await asyncio.gather(
         worker("A"),
         worker("B"),
@@ -689,11 +663,9 @@ async def main():
 
 asyncio.run(main())
 ```
-```
 
 Output:
 
-```
 ```
 Worker A is preparing...
 Worker B is preparing...
@@ -704,7 +676,6 @@ Worker C is waiting at the barrier.
 Worker C passed the barrier! Starting work...
 Worker A passed the barrier! Starting work...
 Worker B passed the barrier! Starting work...
-```
 ```
 
 As you can see from the output, workers **A**, **B**, and **C** don't start their work until all of them reach the barrier line of code. The barrier ensures that the workers meet at a single synchronization point, **"the gate"**, and then start running together concurrently.
