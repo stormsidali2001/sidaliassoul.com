@@ -446,6 +446,24 @@ The program takes approximately two seconds to finish, matching the duration of 
 
 ## Condition
 
+You can think of a condition as a combination of a **lock** and an **event**.
+
+1. The Lock Side: It ensures mutual exclusion. You cannot **check the condition** or **modify the shared state** without holding the lock.
+2. The Event Side: It allows a task to pause and wait for a specific signal (notify() or notifiy_all()).
+
+In fact, it's possible to have multiple condition objects sharing the same lock; you can just pass the lock as a parameter to the condition object when instantiating it.
+
+```
+lock = asyncio.Lock()
+condition1 = asyncio.Condition(lock)
+#... 1-N relationship between lock and condition
+conditionN = asyncio.Condition(lock)
+```
+
+
+
+Let's start by declaring a variable representing a shared resource and then instantiate a condition object using asyncio. Condition class.
+
 ```
 ```python
 import asyncio
