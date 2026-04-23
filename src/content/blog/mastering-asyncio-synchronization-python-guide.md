@@ -23,7 +23,7 @@ Despite running in a single thread, async code runs concurrently. This means tha
 
 The reason is simple: as soon as an `await` line is executed, the decision of whether to proceed or switch to another coroutine is left entirely to the event loop.
 
-Picture this: a credit coroutine reads a shared balance, awaits an I/O-bound task for a second, and then increments the previously read balance by 1.
+Picture this: a credit coroutine reads a shared balance variable, awaits an I/O-bound task for a second, and then increments the previously read balance by 1.
 
 ```
 async def credit():
