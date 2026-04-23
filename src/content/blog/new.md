@@ -684,9 +684,9 @@ Worker B passed the barrier! Starting work...
 ```
 ```
 
+As you can see from the output, workers **A**, **B**, and **C** don't start their work until all of them reach the barrier line of code. The barrier ensures that the workers meet at a single synchronization point, **"the gate"**, and then start running together concurrently.
 
 
-&nbsp;
 
 &nbsp;
 
