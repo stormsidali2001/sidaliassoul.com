@@ -25,7 +25,7 @@ The reason is simple: as soon as an `await` line is executed, the decision of wh
 
 Picture this: a credit coroutine reads a shared balance variable, awaits an I/O-bound task for a second, and then increments the previously read balance by 1.
 
-```
+```python
 async def credit():
   global balance
   # read balance
