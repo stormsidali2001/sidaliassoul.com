@@ -499,9 +499,17 @@ Whether you're using wait or await for a RuntimeError will be raised if you have
 The "**await condition.wait()"** statement operates in two distinct phases:
 
 - **Release and Suspend:** The coroutine atomically releases the lock and yields control back to the event loop, remaining suspended until it is resumed by "**condition.notify"** or "**condition.notify_all."**
-- **Reacquisition:** Once notified, the coroutine is scheduled to run again; however, it must reacquire the lock before the **wait()** call finishes and the next line of code executes.
+- **Reacquisition:** Once notified, the condition requires its lock.
+
+> Once the lock is re-aquired the await condition.wait call returns True. 
+
+The "**await condition.wait_for(predicate)"** method functions similarly, but it accepts a callable that returns a boolean value. It effectively wraps **wait()** in a loop, repeatedly calling it until the predicate evaluates to **True**.
 
 ### Practical Example
+
+Let's understand how conditions work in practice through a simpler waiters incrementer example.
+
+
 
 Let's start by declaring a variable representing a shared resource and then instantiate a condition object using "asyncio.Condition" class.
 
@@ -516,27 +524,33 @@ cond = asyncio.Condition()
 
 
 
-&nbsp;
+Next, we define the **waiter** coroutine. It uses the **wait_for** method to ensure the coroutine remains suspended until two requirements are met: it must be notified via **notify()** or **notify_all()**, and the predicate condition on the shared resource must evaluate to **True**. 
+
+Once these conditions are satisfied, the coroutine reacquires the lock, sleeps for one second, and then releases the lock as the **async with condition** block exits.
+
+
 
 ```
 ```python
 async def waiter(name):
     global shared_resource
-
-    print(f"Task {name} is waiting for resource to reach 3...")
+    async with condition: 
+      print(f"Task {name} is waiting for resource to reach 3...")
        
-    await cond.wait_for(lambda: shared_resource == 3)
+      await cond.wait_for(lambda: shared_resource == 3)
  
 
-    print(f"Task {name} sees resource is {shared_resource}. Starting work!")
+      print(f"Task {name} sees resource is {shared_resource}. Starting work!")
 
-    await asyncio.sleep(1) # Simulate an I/O-bound task.`
+      await asyncio.sleep(1) # Simulate an I/O-bound task.`
         
  
 ```
 ```
 
+Now, let's create our **incrementer** coroutine. The **incrementer's** job, as the name implies, is to modify the shared resource by incrementing it five times every **0.5** seconds. For each iteration, it sleeps, increments the shared resource by **1**, and notifies all the waiters.
 
+Note that we had to wrap the resource mutation and notification code within an **async with condition** block because the **Condition** mechanism requires it. If you call it without a lock, a **RuntimeError** will be raised.
 
 ```
 ```python
@@ -545,17 +559,17 @@ async def incrementer():
     for i in range(5):
         await asyncio.sleep(0.5)
         
-        async with cond:
+        async with condition:
             shared_resource += 1
             print(f"Incrementer: shared_resource is now {shared_resource}")
 
-            cond.notify_all()
+            condition.notify_all()
             
         
 ```
 ```
 
-
+Finally, let's create two waiters, **A** and **B**, and run them concurrently with the incrementer using the **asyncio.gather** method.
 
 ```python
 
@@ -584,6 +598,13 @@ Incrementer: shared_resource is now 4
 Incrementer: shared_resource is now 5
 
 ```
+
+I think that the output should be self explanatory.
+
+1. First, the waiters acquire the lock, release it, and pause just after the **wait_for** line. They remain suspended until the **incrementer** calls **notify** and the predicate condition is satisfied.
+2. As you can see from the output, Waiters **A** and **B** only start their work once the **shared_resource** value reaches.
+
+
 
 ## Barrier
 
