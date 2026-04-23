@@ -446,6 +446,8 @@ The program takes approximately two seconds to finish, matching the duration of 
 
 ## Condition
 
+### Introduction
+
 You can think of a condition as a combination of a **lock** and an **event**.
 
 1. The Lock Side: It ensures mutual exclusion. You cannot **check the condition** or **modify the shared state** without holding the lock.
@@ -462,6 +464,8 @@ conditionN = asyncio.Condition(lock)
 
 
 
+### Practical Example
+
 Let's start by declaring a variable representing a shared resource and then instantiate a condition object using asyncio. Condition class.
 
 ```
@@ -474,6 +478,8 @@ cond = asyncio.Condition()
 ```
 
 
+
+&nbsp;
 
 ```
 ```python
