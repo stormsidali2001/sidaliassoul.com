@@ -6,9 +6,9 @@ description: Stop race conditions in Python! Master asyncio synchronization
 pubDate: 2026-04-21
 updatedDate: 2026-04-21
 tags:
-  - - python
-    - tutorial
-    - programming
+  - python
+  - programming
+  - tutorial
 series: python-asyncio
 seriesOrder: 1
 published: false
