@@ -464,6 +464,32 @@ conditionN = asyncio.Condition(lock)
 
 
 
+The recommended way for using a condition is inside an async with statement.
+
+```
+condition = asyncio.Condition()
+shared_resource = 0 
+# inside a coroutine
+async waiter():
+ async with condition:
+   await cond.wait()
+   # or with a condition
+   await cond.wait_for(shared_resource > 3)
+```
+
+The async with syntax is equivalent to the following:
+
+```
+async waiter():
+ await condition.aquire()
+ try:
+   await condition.wait()
+   # or with a condition
+   await conditionl.wait_for(shared_resource > 3)
+  finally:
+   condition.release()
+```
+
 ### Practical Example
 
 Let's start by declaring a variable representing a shared resource and then instantiate a condition object using asyncio. Condition class.
