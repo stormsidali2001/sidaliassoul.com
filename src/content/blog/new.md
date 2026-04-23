@@ -36,7 +36,23 @@ async def credit():
   
 ```
 
-If you run these concurrently, you risk a race condition. Because the read and write operations are separated by an **await**, each coroutine can be paused at that point. While the first coroutine is suspended, another runs and updates the balance; when the first coroutine resumes, it overwrites the second one's work. This is known as a **lost update race condition**! 
+If you run these concurrently, you risk a race condition. Because the read and write operations are separated by an **await**, each coroutine can be paused at that point. While the first coroutine is suspended, another runs and updates the balance; when the first coroutine resumes, it overwrites the second one's work. This is known as a **lost update race condition**!
+
+```text
+  CREDIT        DEBIT
+    │              │
+  read(0)          │
+    │              │
+  await ───────►   │
+    │           read(0)
+    │              │
+    │           await
+    │              │
+  write(1)      write(-1)
+    │              │
+    │         ─overwrites!─
+              balance = -1  ✗
+```
 
 In this tutorial, I took a deep dive into **asyncio** synchronization primitives. These are essential tools for building flexible programs that are resilient to race conditions like the one we just saw:
 
@@ -55,7 +71,25 @@ Without any further ado, let's dive straight into one of the most classic synchr
 
 The most common way to handle **race conditions** in systems programming is through **mutexes**. A mutex ensures **mutually exclusive** access to a resource, meaning only one coroutine can access it at any given time.
 
-In **asyncio**, this is implemented via the `asyncio.Lock` class. The Lock object acts as a guard; when a coroutine holds the lock, any other coroutine attempting to acquire it will be suspended until the lock is released. 
+In **asyncio**, this is implemented via the `asyncio.Lock` class. The Lock object acts as a guard; when a coroutine holds the lock, any other coroutine attempting to acquire it will be suspended until the lock is released.
+
+```text
+  CREDIT          DEBIT
+    │                │
+  acquire            │
+  ╔══════════╗     blocked
+  ║   read   ║       ⟳
+  ║   await  ║       ⟳
+  ║   write  ║       ⟳
+  ╚══════════╝       │
+  release        acquire
+    │            ╔══════════╗
+    │            ║   read   ║
+    │            ║   await  ║
+    │            ║   write  ║
+    │            ╚══════════╝
+    │              release
+```
 
 
 
@@ -251,9 +285,31 @@ Use them sparingly. Only wrap sections where an **await** might trigger an event
 
 A **semaphore** works similarly to a **lock**, but it allows multiple coroutines to have access to the same resource at the same time.
 
-A semaphore manages an internal counter, which is **decremented** every time you call `acquire()` and **incremented** by each `release()` call. 
+A semaphore manages an internal counter, which is **decremented** every time you call `acquire()` and **incremented** by each `release()` call.
 
 When the counter reaches zero, any **subsequent** coroutine that calls **acquire()** will be suspended. These tasks are queued and will only resume execution one by one as the counter becomes greater than zero through **release()** calls.
+
+```text
+ Semaphore(2)  counter=2
+
+ [0] acquire  counter 2→1  ████
+ [1] acquire  counter 1→0  ████
+ [2]          counter = 0  ░░░░ ┐
+ [3]          counter = 0  ░░░░ │ queue
+ [4]          counter = 0  ░░░░ ┘
+
+  ↑ [0],[1] release
+    counter 0→2
+
+ [2] acquire  counter 2→1  ████
+ [3] acquire  counter 1→0  ████
+ [4]          counter = 0  ░░░░
+
+  ↑ [2],[3] release
+    counter 0→2
+
+ [4] acquire  counter 2→1  ████
+```
 
 While locks totally prevent access to resources, semaphores shine when you want to throttle requests or when a given resource **requires limited concurrent access**.
 
@@ -512,6 +568,22 @@ Whether you're using `wait` or `wait_for`, a `RuntimeError` will be raised if yo
 
 
 The "**await condition.wait()"** statement operates in two distinct phases:
+
+```text
+  WAITER         NOTIFIER
+    │                │
+  acquire             │
+    │                │
+  wait() ──────────► │
+  release          acquire
+  SUSPENDED ⟳     mutate
+            ⟳     notify()
+            ⟳     release
+  re-acquire ◄────────┘
+  returns True
+    │
+  continue
+```
 
 - **Release and Suspend:** The coroutine atomically releases the lock and yields control back to the event loop, remaining suspended until it is resumed by "**condition.notify"** or "**condition.notify_all."**
 - **Reacquisition:** Once notified, the condition requires its lock.
