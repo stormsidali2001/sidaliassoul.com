@@ -608,11 +608,30 @@ I think that the output should be self explanatory.
 
 ## Barrier
 
-```
-```
-import asyncio
+### Introduction
 
-async def worker(barrier, name):
+As the name implies, a **Barrier** can be thought of as an imaginary gate that stops tasks from progressing so they can wait for each other and meet at a single synchronization point. 
+
+No task is allowed to pass the gate until the required number of participants has arrived. 
+
+
+
+### Code Example
+
+Let's start by instantiating a **Barrier** object, which is a gate that only opens when three participants or coroutines arrive.
+
+```
+
+barrier = asyncio.Barrier(3)
+```
+
+Then 
+
+```
+```
+
+async def worker(name):
+    global barrier
     print(f"Worker {name} is preparing...")
     await asyncio.sleep(1)
     
@@ -625,15 +644,24 @@ async def worker(barrier, name):
         return
 
     print(f"Worker {name} passed the barrier! Starting work...")
+```
+```
+
+
+
+&nbsp;
+
+```
+```
+import asyncio
 
 async def main():
-    # Define a barrier for 3 tasks
-    barrier = asyncio.Barrier(3)
+
 
     await asyncio.gather(
-        worker(barrier, "A"),
-        worker(barrier, "B"),
-        worker(barrier, "C")
+        worker("A"),
+        worker("B"),
+        worker("C")
     )
 
 asyncio.run(main())
