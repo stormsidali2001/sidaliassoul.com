@@ -492,7 +492,7 @@ async waiter():
 
 ### Practical Example
 
-Let's start by declaring a variable representing a shared resource and then instantiate a condition object using asyncio. Condition class.
+Let's start by declaring a variable representing a shared resource and then instantiate a condition object using "asyncio.Condition" class.
 
 ```
 ```python
