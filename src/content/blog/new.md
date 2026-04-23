@@ -496,10 +496,10 @@ Whether you're using wait or await for a RuntimeError will be raised if you have
 
 
 
-The await "condition.wait()" line works in 2 phases.
+The "**await condition.wait()"** statement operates in two distinct phases:
 
-- Releases the lock and then blocks or pauses until it's awakened by a "condition.notify()" or "condition.notify_all()" call.
-- Once awakened, the condition reacquires its lock. 
+- **Release and Suspend:** The coroutine atomically releases the lock and yields control back to the event loop, remaining suspended until it is resumed by "**condition.notify"** or "**condition.notify_all."**
+- **Reacquisition:** Once notified, the coroutine is scheduled to run again; however, it must reacquire the lock before the **wait()** call finishes and the next line of code executes.
 
 ### Practical Example
 
