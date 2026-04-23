@@ -1,6 +1,8 @@
 ---
-title: new
-description: new
+title: "Mastering Asyncio Synchronization: A Python Guide"
+description: Stop race conditions in Python! Master asyncio synchronization
+  using Lock, Semaphore, Bounded Semaphore, Event, Condition, and Barrier in
+  this expert guide.
 pubDate: 2026-04-21
 updatedDate: 2026-04-21
 tags:
@@ -19,9 +21,9 @@ By the end of this tutorial, you'll learn six synchronization primitives that yo
 
 1. Lock:
 2. Semaphore
-3. Event
-4. Condition
-5. Bounded Semaphore
+3. 1. Bounded Semaphore
+4. Event
+5. Condition
 6. Barrier
 
 ## Lock
