@@ -625,7 +625,7 @@ Let's start by instantiating a **Barrier** object, which is a gate that only ope
 barrier = asyncio.Barrier(3)
 ```
 
-Then 
+Then, let's create a **worker** coroutine which does the following: it sleeps for one second to simulate an I/O-bound task and then awaits the **barrier**, which pauses the worker until the number of suspended workers at that line reaches three.
 
 ```
 ```
@@ -633,7 +633,7 @@ Then
 async def worker(name):
     global barrier
     print(f"Worker {name} is preparing...")
-    await asyncio.sleep(1)
+    await asyncio.sleep(1) # simulate an I/O-bound task
     
     print(f"Worker {name} is waiting at the barrier.")
     try:
@@ -649,7 +649,7 @@ async def worker(name):
 
 
 
-&nbsp;
+Finally, let's run three workers concurrently using the **asyncio.gather** method.
 
 ```
 ```
