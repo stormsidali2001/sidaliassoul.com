@@ -751,7 +751,7 @@ As you can see from the output, workers **A**, **B**, and **C** don't start thei
 
 If you’ve made it this far, I’d like to thank you for taking the time to read. I wrote this article for my past self, who struggled to understand these concepts.
 
-I hope you found this piece helpful and informative. If you have any questions or suggestions, feel free to reach out. You'll find all my social media links on the [Contact Page](/contact).
+I hope you found this helpful and informative. If you have any questions or suggestions, feel free to reach out. You'll find all my social media links on the [Contact Page](/contact).
 
 
 &nbsp;
