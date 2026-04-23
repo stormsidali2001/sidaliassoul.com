@@ -15,16 +15,41 @@ published: false
 ---
 ## Introduction
 
+A common beginner mistake when starting out with asynchronous programming is thinking that your code is safe from race conditions just because it runs in a single thread. 
 
+**That’s totally wrong!** 
 
-By the end of this tutorial, you'll learn six synchronization primitives that you can use in different scenarios to protect your program from race conditions:
+Despite running in a single thread, async code runs concurrently. This means that as long as there is an `await` keyword inside your async function, your program is prone to race conditions. 
+
+The reason is simple: as soon as an `await` line is executed, the decision of whether to proceed or switch to another coroutine is left entirely to the event loop.
+
+Picture this, a credit, reading a shared balance state, awaits an I/O-bound task for a second, and then increment the previouosly read balance by 1.
+
+```
+async credit():
+  global balance
+  # read balance
+  current_balance = balance # read current balance
+  await asyncio.sleep(1) # Simute an IO-bound task.
+  # write new balance balance
+  balance = current_balance + 1
+  
+```
+
+If you run these concurrently, you risk a race condition. Because the read and write operations are separated by an **await**, each coroutine can be paused at that point. While the first coroutine is suspended, another runs and updates the balance; when the first coroutine resumes, it overwrites the second one's work. This is known as a **lost update race condition**! 
+
+In this tutorial, I took a deep dive into **asyncio** synchronization primitives. These are essential tools for building flexible programs that are resilient to race conditions like the one we just saw:
 
 1. Lock:
 2. Semaphore
-3. 1. Bounded Semaphore
+3. Bounded Semaphore
 4. Event
 5. Condition
 6. Barrier
+
+
+
+Without any further ado, let's dive straight to the one of the most classic 
 
 ## Lock
 
