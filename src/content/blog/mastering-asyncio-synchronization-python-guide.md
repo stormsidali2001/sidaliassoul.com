@@ -10,7 +10,7 @@ tags:
   - programming
   - tutorial
 series: python-asyncio
-seriesOrder: 1
+seriesOrder: 2
 published: true
 ---
 ## Introduction
