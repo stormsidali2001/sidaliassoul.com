@@ -29,7 +29,7 @@ The project was at a laboratory in the university where I've been studying, ESI-
 
 I looked up his teaching schedule and found out he was teaching the 4th-year students at 9:00 AM, so I asked a friend to let him know I was genuinely interested in the theme he suggested and that I wanted to meet him to discuss my application for the project.
 
-As soon as he got out of the class, I thanked my friend, then approached him in order to discuss the details.
+As soon as he got out of the class, I thanked my friend, then approached the supervisor in order to discuss the details. So my request was faced with a warm approval; he explained the problem briefly and sent me some PDFs for a deeper dive on it.
 
 
 
