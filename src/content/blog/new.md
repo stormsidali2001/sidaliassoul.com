@@ -62,6 +62,14 @@ Each section serves a different goal:
 
 In my masters thesis entitled **"**Leveraging BERT and Data Augmentation for Robust Classification of IMRAD Sections in Research Papers**"**  
 
+The thesis provides a robust IMRAD classification framework using transfer learning, data augmentation and advanced preprocessing: 
+
+
+
+### Experimentation
+
+
+
 ## Research Part:
 
 ### Dataset Preparation
