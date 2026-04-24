@@ -60,7 +60,7 @@ Each section serves a different goal:
 
 ## Masters Thesis: 
 
-In my masters thesis entitled **"**Leveraging BERT and Data Augmentation for Robust Classification of IMRAD Sections in Research Papers**"** 
+In my masters thesis entitled **"**Leveraging BERT and Data Augmentation for Robust Classification of IMRAD Sections in Research Papers**"**  
 
 ## Research Part:
 
