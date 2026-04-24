@@ -37,7 +37,7 @@ I immediately went to the university reading room and started skimming through t
 
 The initial project requirements were about analysing IMRD introductions, and extracting a bunch of sementic contexes known as  
 
-
+### ...............
 
 
 
@@ -46,6 +46,10 @@ The initial project requirements were about analysing IMRD introductions, and ex
 ## Research Part:
 
 ### Dataset Preparation
+
+Before jumping straight to research and building our models, I've been sitting in perplexity and doubt after discovering that there is no research paper and/or publicly labeled dataset for IMRD introduction's moves and sub-moves at the sentence level or granularity.
+
+It's 
 
 ### Phase 1: Baseline Model (V1)
 
