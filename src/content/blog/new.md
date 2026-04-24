@@ -41,7 +41,7 @@ In Algeria, we don't just pick one; we’re required to complete both a master's
 
 Both my master's and engineering theses are about IMRAD classification, but each one focuses on a different angle of it. 
 
-But what does IMRAD even mean?
+## But what does IMRAD even mean?
 
 Before moving forward you need to understand something about research papers.
 
@@ -58,7 +58,9 @@ Each section serves a different goal:
 
 
 
-&nbsp;
+## Masters Thesis: 
+
+In my masters thesis entitled **"**Leveraging BERT and Data Augmentation for Robust Classification of IMRAD Sections in Research Papers**"** 
 
 ## Research Part:
 
