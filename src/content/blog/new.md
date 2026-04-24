@@ -31,6 +31,12 @@ I looked up his teaching schedule and found out he was teaching the 4th-year stu
 
 As soon as he got out of class, I thanked my friend and approached the supervisor to discuss the details. My request was met with a warm approval; he explained the problem briefly and sent me some PDFs to dive deeper into it.
 
+
+
+## Project Overview
+
+## Research Part:
+
 ### Dataset Preparation
 
 ### Phase 1: Baseline Model (V1)
