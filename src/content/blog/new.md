@@ -80,6 +80,8 @@ I also studied a wide range of relevant topics, including classic NLP techniques
 
 ### Experimentation Pipeline
 
+Although the experimentation section is typically optional in a master's thesis, I decided to include it anyway. Here is a clear summary of the end-to-end experimental pipeline I built:
+
 - Data collection from Hugging Face (~530k rows, enriched with my new “Related Work” label), followed by exploration, cleaning (removal of non-natural language elements), and balancing down to ~25k rows
 
 - Traditional baseline (Logistic Regression + TF-IDF) hitting 63.78% accuracy
