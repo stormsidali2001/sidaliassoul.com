@@ -58,11 +58,11 @@ Each section serves a different goal:
 
 
 
-## Masters Thesis: 
-
-In my masters thesis entitled **"**Leveraging BERT and Data Augmentation for Robust Classification of IMRAD Sections in Research Papers**"**  
+## Master's Thesis:
 
 Given the vast number of scientific papers published daily, there is a growing need for classifiers that enable researchers and students to filter, search, and query literature based on specific IMRaD sections (Introduction, Methods, Results, Discussion, and an extra Related Work label).
+
+That's where my master's thesis entitled **"Leveraging BERT and Data Augmentation for Robust Classification of IMRAD Sections in Research Papers,"** comes in!
 
 
 
@@ -70,18 +70,29 @@ The research question that I sought to answer with this thesis is the following:
 
 Can a BERT model, enhanced through data augmentation and robust preprocessing techniques (including outlier detection and data cleaning), achieve highly accurate and generalizable classification of IMRAD sections in scientific papers, outperforming traditional machine learning approaches?
 
+### State of Art
 
+In a master's thesis, before diving into your own approach, you have to survey the current research and see what the state of the art looks like. 
 
-In a master thesis, before trying your own approach  you'll have to read, study and compare a bunch of scientic papers.
+So I spent a significant amount of time searching for relevant papers, reading, filtering, and carefully selecting four pivotal studies that I reviewed and compared in terms of data size, annotation method, models used, and accuracy. 
 
-- **State of the Art**: I studied and compared multiple scientific papers covering the IMRAD format (its history, structure, and benefits), classic NLP techniques, traditional classifiers (Logistic Regression with TF-IDF, BoW, Word2Vec, Naïve Bayes, SVM), modern deep learning advances (pre-trained models like BERT and GPT, LLMs, prompt engineering), key prior works including the massive unarXive 2022 dataset (1.9 million arXiv papers with automatic section labels), and the main literature gaps around limited deep-learning adoption and weak contextual understanding.
-- **Experimental Pipeline**:
-  - Data collection from Hugging Face (~530k rows, enriched with my new “Related Work” label), followed by exploration, cleaning (removal of non-natural language elements), and balancing down to ~25k rows
-  - Traditional baseline (Logistic Regression + TF-IDF) hitting 63.78% accuracy
-  - Initial BERT fine-tuning reaching F1-score 0.7309
-  - LLM-based outlier detection/cleaning + data augmentation (generating synthetic paragraphs to expand to ~100k rows)
-  - Final fine-tuned BERT model achieving F1-score 0.9172, showing massive progressive gains over the baseline
-- **Contributions**: A robust, transferable IMRAD classification framework combining transfer learning, advanced preprocessing, and data augmentation; a valuable new annotated dataset; clear proof that it beats traditional methods; and practical insights that push automated scientific text processing forward.
+I also studied a wide range of relevant topics, including classic NLP techniques, traditional machine learning classifiers (TF-IDF, BoW, Word2Vec, Naïve Bayes, and SVM), and modern deep learning advances (pre-trained models like BERT and GPT, LLMs, and prompt engineering).
+
+### Experimentation Pipeline
+
+- Data collection from Hugging Face (~530k rows, enriched with my new “Related Work” label), followed by exploration, cleaning (removal of non-natural language elements), and balancing down to ~25k rows
+
+- Traditional baseline (Logistic Regression + TF-IDF) hitting 63.78% accuracy
+
+- Initial BERT fine-tuning reaching F1-score 0.7309
+
+- LLM-based outlier detection/cleaning + data augmentation (generating synthetic paragraphs to expand to ~100k rows)
+
+- Final fine-tuned BERT model achieving F1-score 0.9172, showing massive progressive gains over the baseline
+
+### Contributions
+
+A robust, transferable IMRAD classification framework combining transfer learning, advanced preprocessing, and data augmentation; a valuable new annotated dataset; clear proof that it beats traditional methods; and practical insights that push automated scientific text processing forward.
 
 
 
