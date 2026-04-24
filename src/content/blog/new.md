@@ -13,7 +13,7 @@ published: false
 
 ## Project Overview
 
-It's March 2024, and I've totally lost track of time as I've been fully indulged in a long-term freelancing mission with an interesting Upwork client. 
+It's March 2024, and I've totally lost track of time, as I've been fully indulged in a long-term freelancing mission with an interesting Upwork client. 
 
 Then, I was soon to find out that I was running out of time! I needed to start working on my graduation project.
 
@@ -28,6 +28,8 @@ I thought to myself, "A 'writing support system' implies that the project might 
 The project was at a laboratory in the university where I've been studying, ESI-SBA, known as the "Higher School of Computer Science Sidi Bel Abbès." I have a lot of nice memories about the supervisor as well, as he taught me two modules in the past: File Systems and Data Structures in my second year and Data Analysis in my fourth year. So, going with that supervisor was just a no-brainer for me.
 
 I looked up his teaching schedule and found out he was teaching the 4th-year students at 9:00 AM, so I asked a friend to let him know I was genuinely interested in the theme he suggested and that I wanted to meet him to discuss my application for the project.
+
+As soon as he got out of the class, I thanked my friend, then approached him in order to discuss the details.
 
 
 
