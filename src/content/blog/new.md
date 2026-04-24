@@ -11,7 +11,7 @@ published: false
 ---
 ## Introduction
 
-## How Everything Started?
+## How did everything start?
 
 It's March 2024, and I've totally lost track of time, as I've been fully indulged in a long-term freelancing mission with an interesting Upwork client. 
 
@@ -31,9 +31,15 @@ I looked up his teaching schedule and found out he was teaching the 4th-year stu
 
 As soon as he got out of class, I thanked my friend and approached the supervisor to discuss the details. My request was met with a warm approval; he explained the problem briefly and sent me some PDFs to dive deeper into it.
 
+I immediately went to the university reading room and started skimming through the documents the supervisor sent, full of eagerness and joy, completely losing myself in a flow state. Finally, "I'm going to work on a serious NLP research project!"
 
 
-## Project Overview
+
+
+
+
+
+&nbsp;
 
 ## Research Part:
 
