@@ -62,11 +62,17 @@ Each section serves a different goal:
 
 In my masters thesis entitled **"**Leveraging BERT and Data Augmentation for Robust Classification of IMRAD Sections in Research Papers**"**  
 
-The thesis provides a robust IMRAD classification framework using transfer learning, data augmentation and advanced preprocessing: 
 
 
-
-### Experimentation
+- **Introduction**: With scientific papers exploding in number, the goal was to build a tool that automatically classifies paragraphs into IMRAD sections (Introduction, Methods, Results, Discussion) plus a new “Related Work” label I added. The central research question was whether a BERT model boosted with data augmentation and solid preprocessing (including outlier detection) could beat traditional machine learning approaches.
+- **State of the Art**: I studied and compared multiple scientific papers covering the IMRAD format (its history, structure, and benefits), classic NLP techniques, traditional classifiers (Logistic Regression with TF-IDF, BoW, Word2Vec, Naïve Bayes, SVM), modern deep learning advances (pre-trained models like BERT and GPT, LLMs, prompt engineering), key prior works including the massive unarXive 2022 dataset (1.9 million arXiv papers with automatic section labels), and the main literature gaps around limited deep-learning adoption and weak contextual understanding.
+- **Experimental Pipeline**:
+  - Data collection from Hugging Face (~530k rows, enriched with my new “Related Work” label), followed by exploration, cleaning (removal of non-natural language elements), and balancing down to ~25k rows
+  - Traditional baseline (Logistic Regression + TF-IDF) hitting 63.78% accuracy
+  - Initial BERT fine-tuning reaching F1-score 0.7309
+  - LLM-based outlier detection/cleaning + data augmentation (generating synthetic paragraphs to expand to ~100k rows)
+  - Final fine-tuned BERT model achieving F1-score 0.9172, showing massive progressive gains over the baseline
+- **Contributions**: A robust, transferable IMRAD classification framework combining transfer learning, advanced preprocessing, and data augmentation; a valuable new annotated dataset; clear proof that it beats traditional methods; and practical insights that push automated scientific text processing forward.
 
 
 
