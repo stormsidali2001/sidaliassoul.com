@@ -94,9 +94,9 @@ Although the experimentation section is typically optional in a master's thesis,
 
 ### Contributions
 
-A robust, transferable IMRAD classification framework combining transfer learning, advanced preprocessing, and data augmentation; a valuable new annotated dataset; clear proof that it beats traditional methods; and practical insights that push automated scientific text processing forward.
 
 
+&nbsp;
 
 ## Research Part:
 
