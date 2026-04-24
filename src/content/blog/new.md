@@ -62,6 +62,8 @@ Each section serves a different goal:
 
 In my masters thesis entitled **"**Leveraging BERT and Data Augmentation for Robust Classification of IMRAD Sections in Research Papers**"**  
 
+Given the vast number of scientific papers published daily, there is a growing need for classifiers that enable researchers and students to filter, search, and query literature based on specific IMRaD sections.
+
 
 
 - **Introduction**: With scientific papers exploding in number, the goal was to build a tool that automatically classifies paragraphs into IMRAD sections (Introduction, Methods, Results, Discussion) plus a new “Related Work” label I added. The central research question was whether a BERT model boosted with data augmentation and solid preprocessing (including outlier detection) could beat traditional machine learning approaches.
