@@ -33,9 +33,28 @@ As soon as he got out of class, I thanked my friend and approached the superviso
 
 I immediately went to the university reading room and started skimming through the documents the supervisor sent, full of eagerness and joy, completely losing myself in a flow state. Finally, "I'm going to work on a serious NLP research project!"
 
+## Not one graduation project, but actually two!
+
+In Algeria, we don't just pick one; we’re required to complete both a master's thesis and an engineering project at the same time.
 
 
-The initial project requirements were about analysing IMRD introductions, and extracting a bunch of sementic contexes known as  
+
+Both my master's and engineering theses are about IMRAD classification, but each one focuses on a different angle of it. 
+
+But what does IMRAD even mean?
+
+Before moving forward you need to understand something about research papers.
+
+Research papers are about presenting scientific findings, which can't be mixed with other kinds of human literature. That's why IMRAD comes in.
+
+IMRaD stands for Introduction, Methods, Results, and Discussion. It provides a formal and well-defined logical framework for presenting research findings.
+
+Each section serves a different goal:
+
+- **Introduction:** Sets the stage by identifying a research gap and stating the study's specific goals.
+- **Methods:** Details the exact steps and materials used so the experiment can be reproduced by others.
+- **Results:** Reports the raw data and findings objectively through text, tables, and figures.
+- **Discussion:** Explains what the findings actually mean and how they fit into the bigger picture of the field.
 
 ### ...............
 
