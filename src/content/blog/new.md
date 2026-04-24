@@ -62,7 +62,7 @@ Each section serves a different goal:
 
 Given the vast number of scientific papers published daily, there is a growing need for classifiers that enable researchers and students to filter, search, and query literature based on specific IMRaD sections (Introduction, Methods, Results, Discussion, and an extra Related Work label).
 
-That's where my master's thesis entitled **"Leveraging BERT and Data Augmentation for Robust Classification of IMRAD Sections in Research Papers,"** comes in!
+That's where my master's thesis entitled **"Leveraging BERT and Data Augmentation for Robust Classification of IMRAD Sections in Research Papers"** comes in!
 
 
 
