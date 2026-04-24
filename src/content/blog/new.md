@@ -29,7 +29,7 @@ The project was at a laboratory in the university where I've been studying, ESI-
 
 I looked up his teaching schedule and found out he was teaching the 4th-year students at 9:00 AM, so I asked a friend to let him know I was genuinely interested in the theme he suggested and that I wanted to meet him to discuss my application for the project.
 
-As soon as he got out of the class, I thanked my friend, then approached the supervisor in order to discuss the details. So my request was faced with a warm approval; he explained the problem briefly and sent me some PDFs for a deeper dive on it.
+As soon as he got out of class, I thanked my friend and approached the supervisor to discuss the details. My request was met with a warm approval; he explained the problem briefly and sent me some PDFs to dive deeper into it.
 
 
 
@@ -37,7 +37,7 @@ As soon as he got out of the class, I thanked my friend, then approached the sup
 
 ### Phase 1: Baseline Model (V1)
 
-- **Data Generation:** Due to the absence of a suitable dataset, i utilized Gemini Pro LLM to generate annotated data. I start by filtering the unarxive dataset by introductions, and extracting a small subset of it. Afterwards, we split the introdoctions into  
+- **Data Generation:** Due to the absence of a suitable dataset, I utilized Gemini Pro LLM to generate annotated data. I start by filtering the unarxive dataset by introductions, and extracting a small subset of it. Afterwards, we split the introdoctions into  
 - 
 
 ### Phase 2: Model Refinement (V2)
