@@ -94,10 +94,11 @@ Although the experimentation section is typically optional in a master's thesis,
 
 ### Contributions
 
-The key findings of the thesis are the following:
+The key findings of the thesis are as follows:
 
-- A robust and transferable IMRAD classification framework that combines transfer learning, advanced preprocessing, and data augmentation.
-- The final BERT model, trained on the augmented data, achieved a remarkable F1 score of 0.9172, demonstrating the significant improvements gained from my data pipeline and the power of data augmentation.
+- Establishment of a robust and transferable IMRAD classification framework that combines transfer learning, advanced preprocessing, and data augmentation.
+- Creation of a new annotated dataset (approximately 100k rows) published on Hugging Face.
+- Training of a high-accuracy fine-tuned BERT classifier.
 
 
 
