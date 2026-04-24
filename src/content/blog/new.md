@@ -56,8 +56,6 @@ Each section serves a different goal:
 - **Results:** Reports the raw data and findings objectively through text, tables, and figures.
 - **Discussion:** Explains what the findings actually mean and how they fit into the bigger picture of the field.
 
-### ...............
-
 
 
 &nbsp;
