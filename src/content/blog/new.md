@@ -49,7 +49,9 @@ The initial project requirements were about analysing IMRD introductions, and ex
 
 Before jumping straight to research and building our models, I've been sitting in perplexity and doubt after discovering that there is no research paper and/or publicly labeled dataset for IMRD introduction's moves and sub-moves at the sentence level or granularity.
 
-It's 
+Things went a bit smoother for my master's thesis because I found a lot of research papers and publicly annotated datasets that provide "I," "I","M","R" and "D" labels for paragraphs extracted from various papers. One of these is the "**unarXive"** dataset.
+
+However, because the research for my engineering thesis focused specifically on IMRD introductions, I wasn't able to find a suitable, ready-made dataset that provides sentence-level annotations capturing the rhetorical moves and sub-moves within an introduction.
 
 ### Phase 1: Baseline Model (V1)
 
