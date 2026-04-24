@@ -35,6 +35,8 @@ I immediately went to the university reading room and started skimming through t
 
 
 
+The initial project requirements were about analysing IMRD introductions, and extracting a bunch of sementic contexes known as  
+
 
 
 
