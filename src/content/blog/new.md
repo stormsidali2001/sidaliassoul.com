@@ -1,6 +1,6 @@
 ---
-title: "new"
-description: "new"
+title: new
+description: new
 pubDate: 2026-04-23
 updatedDate: 2026-04-23
 tags:
@@ -10,8 +10,6 @@ tags:
 published: false
 ---
 ## Introduction
-
-                        
 
 ## Project Overview
 
@@ -27,17 +25,18 @@ After a few hours of research and contemplation, I stumbled upon an interesting 
 
 I thought to myself, "A 'writing support system' implies that the project might involve some software design, which is something I've always loved, and 'text analysis' means finally having a chance to fulfill my craving for NLP with a project that actually looks interesting."
 
-The project was at a laboratory in the university where I've been studying, ESI-SBA, known as the "Higher School of Computer Science Sidi Bel Abbès." I had a lot of nice memories about the supervisor as well, as he taught me two modules in the past: File Systems and Data Structures in my second year and Data Analysis in my fourth year. So, going with that supervisor was just a no-brainer for me.
+The project was at a laboratory in the university where I've been studying, ESI-SBA, known as the "Higher School of Computer Science Sidi Bel Abbès." I have a lot of nice memories about the supervisor as well, as he taught me two modules in the past: File Systems and Data Structures in my second year and Data Analysis in my fourth year. So, going with that supervisor was just a no-brainer for me.
 
-&nbsp;
+I looked up his teaching schedule and found out he was teaching the 4th-year students at 9:00 AM, so I asked a friend to let him know I was genuinely interested in the theme he suggested and that I wanted to meet him to discuss my application for the project.
+
+
 
 ### Dataset Preparation
 
 ### Phase 1: Baseline Model (V1)
 
 - **Data Generation:** Due to the absence of a suitable dataset, i utilized Gemini Pro LLM to generate annotated data. I start by filtering the unarxive dataset by introductions, and extracting a small subset of it. Afterwards, we split the introdoctions into  
-
--   
+- 
 
 ### Phase 2: Model Refinement (V2)
 
@@ -45,4 +44,3 @@ The project was at a laboratory in the university where I've been studying, ESI-
 
 ## Conclusion
 
-&nbsp;
