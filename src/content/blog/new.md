@@ -68,9 +68,12 @@ Given the vast number of scientific papers published daily, there is a growing n
 
 The research question that I sought to answer with this thesis is the following:
 
+Can a BERT model, enhanced through data augmentation and robust preprocessing techniques (including outlier detection and data cleaning), achieve highly accurate and generalizable classification of IMRAD sections in scientific papers, outperforming traditional machine learning approaches?
 
 
-- **Introduction**: With scientific papers exploding in number, the goal was to build a tool that automatically classifies paragraphs into IMRAD sections (Introduction, Methods, Results, Discussion) plus a new “Related Work” label I added. The central research question was whether a BERT model boosted with data augmentation and solid preprocessing (including outlier detection) could beat traditional machine learning approaches.
+
+In a master thesis, before trying your own approach  you'll have to read, study and compare a bunch of scientic papers.
+
 - **State of the Art**: I studied and compared multiple scientific papers covering the IMRAD format (its history, structure, and benefits), classic NLP techniques, traditional classifiers (Logistic Regression with TF-IDF, BoW, Word2Vec, Naïve Bayes, SVM), modern deep learning advances (pre-trained models like BERT and GPT, LLMs, prompt engineering), key prior works including the massive unarXive 2022 dataset (1.9 million arXiv papers with automatic section labels), and the main literature gaps around limited deep-learning adoption and weak contextual understanding.
 - **Experimental Pipeline**:
   - Data collection from Hugging Face (~530k rows, enriched with my new “Related Work” label), followed by exploration, cleaning (removal of non-natural language elements), and balancing down to ~25k rows
