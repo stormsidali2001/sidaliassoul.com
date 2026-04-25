@@ -386,5 +386,19 @@ The **User Data microservice** is responsible for storing user predictions and m
 
 Finally, **Redis** serves as both an in-memory database and a message broker, enabling asynchronous communication between the different microservices.
 
+## Data Models
+
+Here's a quick look at the data model of our platform.
+
+### Next.js Microservice:
+
+
+
+The User Data microservice is responsible for three entities: **Introduction**, **Sentence**, and **Feedback**.
+
+Even though the **User** and **Introduction** entities are located in different microservices and use totally different databases, they are linked via a one-to-many relationship (a user can have many introductions).
+
+
+
 ## Conclusion
 
