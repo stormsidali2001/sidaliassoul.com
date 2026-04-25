@@ -163,10 +163,19 @@ However, because the research part of my engineering thesis focused specifically
 
 
 
-As I couldn't find public data or afford a human annotator, I designed a three-phase approach (V1->V2->V3) to **overcome** the lack of a sentence-level granular dataset and to create a custom one tailored to our specific needs.
+As I couldn't find public data or afford a human annotator, I designed a three-phase approach (V1->V2->V3) to **overcome** the lack of a sentence-level granular dataset and to create a custom one tailored to our specific needs.    
+
+
+
+### Phase 1: Baseline Model (V1)
+
+### Phase 2: Model Refinement (V2)
+
+### Phase 3: Model Enhancement and Dataset Augmentation (V3)
 
 ```
-       [ START ]
+```
+   [ START ]
            |
            v
 +-----------------------+
@@ -218,14 +227,7 @@ As I couldn't find public data or afford a human annotator, I designed a three-p
            v
         [ END ]
 ```
-
-
-
-### Phase 1: Baseline Model (V1)
-
-### Phase 2: Model Refinement (V2)
-
-### Phase 3: Model Enhancement and Dataset Augmentation (V3)
+```
 
 ```
 
