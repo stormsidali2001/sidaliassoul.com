@@ -252,15 +252,11 @@ For my final model, i generated a custom dataset of 169k sentences by creating a
 
 
 
-The final generated data was used to fine-tune multiple specialised BERT models. 
+The final generated data was used to fine-tune four hierarchical, specialized BERT models.
 
-Believe me when i tell you that i was 
+Believe me when I tell you that I was bursting with joy when I saw the validation and training accuracy graphs increasing in parallel. 
 
-  
-
-
-- This data was used to fine-tune multiple specialised BERT models.
-- Achieving impressive F1 scores exceeding 0.89 for sub-move classification and 0.98 for overall move classification."  
+When the F1 score hit 0.98 for overall move classification and exceeded 0.89 for submove classification, I was literally screaming, "Yes, yes! It's not overfitting, and the F1 score is above 98%!"  
 
 
 ```
