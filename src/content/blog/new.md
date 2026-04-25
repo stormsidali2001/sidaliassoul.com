@@ -215,7 +215,7 @@ However, because the research part of my engineering thesis focused specifically
         [ END ]
 ```
 
-As I couldn't find public data or afford a human annotator, I created a Gemini Pro based data pipeline including baseline generation, prompt refinement, outlier detection, and data augmentation, validating outputs with Random Forest, Logistic Regression, SVM, KNN, and Naive Bayes classifiers.
+As I couldn't find public data or afford a human annotator, I created a Gemini Pro-based data pipeline, including baseline generation, prompt refinement, outlier detection, and data augmentation, validating outputs with Random Forest, Logistic Regression, SVM, KNN, and Naive Bayes classifiers.
 
 ### Phase 1: Baseline Model (V1)
 
