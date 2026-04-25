@@ -392,8 +392,6 @@ Here's a quick look at the data model of our platform.
 
 ### Next.js Microservice:
 
-
-
 The User Data microservice is responsible for three entities: **Introduction**, **Sentence**, and **Feedback**.
 
 Even though the **User** and **Introduction** entities are located in different microservices and use totally different databases, they are linked via a one-to-many relationship (a user can have many introductions).
