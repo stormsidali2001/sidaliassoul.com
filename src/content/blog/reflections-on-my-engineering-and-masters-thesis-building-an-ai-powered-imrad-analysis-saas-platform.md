@@ -1,7 +1,7 @@
 ---
-title: "Reflections on My Engineering and Masters Thesis: Building an AI Powered
+title: "Reflections on My Engineering and Master's Thesis: Building an AI-Powered
   IMRaD Analysis SaaS Platform"
-description: In this reflection I share how I completed both my master's thesis
+description: In this reflection, I share how I completed both my master's thesis
   and engineering project on IMRAD classification. From building a 169k-sentence
   dataset and fine-tuning BERT models to a 98.21 percent F1 score, to launching
   a full microservices SaaS platform. This post details the complete technical
@@ -16,7 +16,7 @@ published: true
 ---
 ## How did everything start?
 
-It's March 2024, and I've totally lost track of time, as I've been fully indulged in a long-term freelancing mission with an interesting Upwork client. 
+It's March 2024, and I've totally lost track of time, as I've been fully engrossed in a long-term freelancing mission with an interesting Upwork client. 
 
 Then, I was soon to find out that I was running out of time! I needed to start working on my graduation project.
 
@@ -46,9 +46,9 @@ Both my master's and engineering theses are about IMRAD classification, but each
 
 ## But what does IMRAD even mean?
 
-Before moving forward you need to understand something about research papers.
+Before moving forward, you need to understand something about research papers.
 
-Research papers are about presenting scientific findings, which can't be mixed with other kinds of human literature. That's why IMRAD comes in.
+Research papers are about presenting scientific findings, which can't be mixed with other kinds of human literature. That's where IMRAD comes in.
 
 IMRaD stands for Introduction, Methods, Results, and Discussion. It provides a formal and well-defined logical framework for presenting research findings:
 
@@ -71,7 +71,7 @@ The research question that I sought to answer with this thesis is the following:
 
 Can a BERT model, enhanced through data augmentation and robust preprocessing techniques (including outlier detection and data cleaning), achieve highly accurate and generalizable classification of IMRAD sections in scientific papers, outperforming traditional machine learning approaches?
 
-### State of Art
+### State of the Art
 
 In a master's thesis, before diving into your own approach, you have to survey the current research and see what the state of the art looks like. 
 
@@ -114,7 +114,7 @@ Before I dive into the granular details of the research and development phases l
 ### Research Contributions:
 
 - Established a Gemini Pro data pipeline including baseline generation, prompt refinement, outlier detection, and data augmentation, validating outputs with Random Forest, Logistic Regression, SVM, KNN, and Naive Bayes classifiers.
-- Synthesized a custom 169,000 sentence dataset and fine-tuned four hierarchical BERT models, driving accuracy from a 44.61% baseline to a surprising 98.21% peak F1 score.
+- Synthesized a custom 169,000-sentence dataset and fine-tuned four hierarchical BERT models, driving accuracy from a 44.61% baseline to a surprising 98.21% peak F1 score.
 
 
 
@@ -164,13 +164,13 @@ However, because the research part of my engineering thesis focused specifically
 
 
 
-As I couldn't find public data or afford a human annotator, I designed a three-phase approach (V1->V2->V3) to **overcome** the lack of a sentence-level granular dataset and to create a custom one tailored to our specific needs.    
+As I couldn't find public data or afford a human annotator, I designed a three-phase approach (V1->V2->V3) to **overcome** the lack of a sentence-level granular dataset and to create a custom one tailored to my specific needs.    
 
 
 
 ## Phase 1: Baseline Model (V1)
 
-The way I approached this problem is incremental. I started with a baseline model involving the following workflow:
+The way I approached this problem was incremental. I started with a baseline model involving the following workflow:
 
 - I selected random introductions from the cleaned and filtered unarXive dataset.
 - I split the introductions into their individual sentences.
@@ -203,11 +203,11 @@ The way I approached this problem is incremental. I started with a baseline mode
 
 
 
-LLMs are generalists by design; they are meant to deal with any kind of situation. So, how can we leverage them on specific tasks like classification? That's where prompt engineering comes in. 
+LLMs are generalists by design; they are meant to deal with any kind of situation. So, how can we leverage them for specific tasks like classification? That's where prompt engineering comes in. 
 
 A prompt is basically a set of instructions written in raw natural text. It allows us to restrict how the LLM acts, or specialize it for a specific task like classification, summarization, etc.
 
-In this version, i used a fairly simple prompt to instruct each Gemini Pro instance to classify a given sentence into its corresponding IMRAD move.
+In this version, I used a fairly simple prompt to instruct each Gemini Pro instance to classify a given sentence into its corresponding IMRAD move.
 
 ## Phase 2: Model Refinement (V2)
 
@@ -215,7 +215,7 @@ In the second version of the pipeline, I decided to focus on enhancing the promp
 
 I thought to myself, 'What if the reason behind that low accuracy is that Gemini Pro **didn't have enough context about the introduction**? Maybe I should **embed the whole introduction in the prompt**.' 
 
-In addition to that, instead of classifying only the moves, the enhanced prompt will allow Gemini to **classify both moves and submoves in one go**. 
+In addition to that, instead of classifying only the moves, the enhanced prompt would allow Gemini to **classify both moves and submoves in one go**. 
 
 The comparative table below explains the steps that were taken.
 
@@ -249,7 +249,7 @@ Every single one of them managed to outperform the previous BERT model. That was
 
 ## Phase 3: Model Enhancement and Dataset Augmentation (V3)
 
-For my final model, i generated a custom dataset of 169k sentences by creating a custoom pipeline that was built on top of the V2 generated data and including: Gemini based outlier detection, Gemini data augmentation then fine tuning 4 customo bert models.
+For my final model, I generated a custom dataset of 169k sentences by creating a custom pipeline that was built on top of the V2 generated data and including: Gemini-based outlier detection, Gemini data augmentation, then fine-tuning 4 custom BERT models.
 
 
 
@@ -291,7 +291,7 @@ Essentially, the outlier detection prompt instructs Gemini to audit previous pre
 
 The data augmentation prompt then handles the heavy lifting, instructing Gemini to generate more sentences for each move while strictly respecting the rules I defined.
 
-## A Microservices Based Such platform:
+## A Microservices-Based SaaS Platform
 
 After publishing the final four **hierarchical classification BERT models**, I decided to create a SaaS platform that makes full use of these models and helps researchers and students easily analyze the rhetorical structure of scientific paper introductions.
 
@@ -341,7 +341,7 @@ Here's a quick look at the data model of our platform.
 
 ### Next.js Microservice
 
-**Next.js Microservice:** The Next.js api microservices takes responsability on two entities: **User** and **subscription**.
+**Next.js Microservice:** The Next.js API microservice takes responsibility for two entities: **User** and **Subscription**.
 
 ![class_diagram.png](/class_diagram.png)
 
