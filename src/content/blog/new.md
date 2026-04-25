@@ -161,18 +161,6 @@ Things went a bit smoother for my master's thesis because I found a lot of resea
 
 However, because the research part of my engineering thesis focused specifically on IMRaD introductions, I wasn't able to find a suitable, ready-made dataset that provides sentence-level annotations capturing the rhetorical moves and sub-moves within an introduction.
 
-
-
-As i couldn't find public data or afford a human annotators, I decided to make use of the state of Pre-trained models that are known
-
-### Phase 1: Baseline Model (V1)
-
-
-
-### Phase 2: Model Refinement (V2)
-
-### Phase 3: Model Enhancement and Dataset Augmentation (V3)
-
 ```
        [ START ]
            |
@@ -225,6 +213,20 @@ As i couldn't find public data or afford a human annotators, I decided to make u
            |
            v
         [ END ]
+```
+
+As I couldn't find public data or afford a human annotator, I created a Gemini Pro based data pipeline including baseline generation, prompt refinement, outlier detection, and data augmentation, validating outputs with Random Forest, Logistic Regression, SVM, KNN, and Naive Bayes classifiers.
+
+### Phase 1: Baseline Model (V1)
+
+
+
+### Phase 2: Model Refinement (V2)
+
+### Phase 3: Model Enhancement and Dataset Augmentation (V3)
+
+```
+
 ```
 
 ## Conclusion
