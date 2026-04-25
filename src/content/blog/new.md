@@ -105,14 +105,16 @@ In my graduation thesis, 'Leveraging Gemini Pro and BERT for Automated IMRaD Cla
 
 
 ### Research Part:
-In a three-phased Gemini Pro pipeline(V1->V2->V3) including baseline generation, prompt refinment, outlier detection, and data augmentation, 
+- Established a Gemini Pro data pipeline including baseline generation, prompt refinement, outlier detection, and data augmentation, validating outputs with Random Forest, Logistic Regression, SVM, KNN, and Naive Bayes classifiers.
+
+- Synthesized a custom 169,000 sentence dataset and fine-tuned four hierarchical BERT models, driving accuracy from a 44.61% baseline to a surprising 98.21% peak F1 score.
+
+
+
 
 ### Engineering Part:
-
-In the 
-
-- • Master’s Thesis: ‘Leveraging Gemini Pro and BERT for Automated IMRaD Classification: A Novel Dataset and SaaS Platform’. (Notebooks). Architected a scalable 7-node distributed system (Next.js, FastAPI, TF Serving, Express.js, Eureka) to automate the rhetorical classification of semantic moves and sub-moves within the introduction sections of scientific papers. • Key Contributions & Pipeline: Addressed the lack of sentence-level IMRaD datasets by engineering a 3-phase Gemini Pro pipeline (baseline generation, prompt refinement, and outlier detection/augmentation). Synthesized and validated a custom 169k-sentence dataset,
-
+- Architected a scalable 8-node microservices ecosystem comprising Nginx (Gateway), Spring Cloud Eureka (Discovery), Next.js (Frontend and API), a FastAPI PDF Extractor, TensorFlow Serving, FastAPI with LangChain (AI Analysis), and Express.js with MongoDB (User Data) decoupled by a Redis message broker.
+- 
 
 
 &nbsp;
