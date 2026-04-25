@@ -36,6 +36,27 @@ As soon as he got out of class, I thanked my friend and approached the superviso
 
 I immediately went to the university reading room and started skimming through the documents the supervisor sent, full of eagerness and joy, completely losing myself in a flow state. Finally, "I'm going to work on a serious NLP research project!"
 
+## Table of Contents
+
+- [Not one graduation project, but actually two!](#not-one-graduation-project-but-actually-two)
+- [But what does IMRAD even mean?](#but-what-does-imrad-even-mean)
+- [Master's Thesis](#masters-thesis)
+  - [State of the Art](#state-of-the-art)
+  - [Experimentation Pipeline](#experimentation-pipeline)
+  - [Contributions](#contributions)
+- [Engineering Thesis](#engineering-thesis)
+  - [Research Contributions](#research-contributions)
+  - [Engineering Contribution](#engineering-contribution)
+- [Dataset Preparation](#dataset-preparation)
+- [Phase 1: Baseline Model (V1)](#phase-1-baseline-model-v1)
+- [Phase 2: Model Refinement (V2)](#phase-2-model-refinement-v2)
+- [Phase 3: Model Enhancement and Dataset Augmentation (V3)](#phase-3-model-enhancement-and-dataset-augmentation-v3)
+- [A Microservices-Based SaaS Platform](#a-microservices-based-saas-platform)
+  - [Microservices Breakdown](#microservices-breakdown)
+- [Data Models](#data-models)
+  - [Next.js Microservice](#nextjs-microservice)
+- [Conclusion](#conclusion)
+
 ## Not one graduation project, but actually two!
 
 In Algeria, we don't just pick one; we’re required to complete both a master's thesis and an engineering project at the same time.
