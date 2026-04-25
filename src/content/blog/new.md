@@ -100,9 +100,26 @@ The key findings of the thesis are as follows:
 
 ## Engineering Thesis
 
-I named my graduation thesis "Leveraging Gemini Pro and BERT for Automated IMRaD Classification: A Novel Dataset and SaaS Platform."
+In my graduation thesis, **"Leveraging Gemini Pro and BERT for Automated IMRaD Classification: A Novel Dataset and SaaS Platform,"** I designed and shipped a scalable, 7-node distributed microservices system. This architecture consists of a Next.js frontend and aggregation API, a FastAPI microservice for PDF extraction, a microservice for AI moves and submoves analysis, TensorFlow Serving, an Express/MongoDB microservice for user data, and Spring Cloud Eureka for service discovery.
 
 
+
+
+
+TensorFlow Serving is an optimized docker image based microservice, which is designed for production grade 
+
+• Master’s Thesis: ‘Leveraging Gemini Pro and BERT for Automated IMRaD Classification: A Novel Dataset and SaaS
+
+Platform’. (Notebooks). Architected a scalable 7-node distributed system (Next.js, FastAPI, TF Serving, Express.js,
+
+Eureka) to automate the rhetorical classification of semantic moves and sub-moves within the introduction sections
+
+
+
+### Contributions
+
+- Addressed the lack of sentence-level IMRaD datasets by engineering a 3-phase Gemini Pro pipeline (baseline generation, prompt refinement, and outlier detection/augmentation). 
+- Synthesized and validated a custom 169k-sentence dataset, boosting baseline accuracy from 44.61% to >94% (Peak F1: 98.21%) by fine-tuning 4 hierarchical BERT models
 
 ## Research Part:
 
