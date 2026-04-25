@@ -357,7 +357,6 @@ Finally, **Redis** serves as both an in-memory database and a message broker, en
 
 Here's a quick look at the data model of our platform.
 
-### Next.js Microservice
 
 **Next.js Microservice:** The Next.js API microservice takes responsibility for two entities: **User** and **Subscription**.
 
