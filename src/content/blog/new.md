@@ -359,3 +359,17 @@ Even though the **User** and **Introduction** entities are located in different 
 
 ## Conclusion
 
+Thank you so much for taking the time to read my entire story — I really appreciate it.
+
+**Hook**  
+Who would have thought a last-minute panic in March 2024 would turn into two full theses and a live AI SaaS platform?
+
+**Curiosity**  
+I went from having no dataset to creating a 169k-sentence annotated dataset, fine-tuning four hierarchical BERT models to 98.21% F1-score, and building a complete microservices platform.
+
+**Action**  
+Try the **IMRaD Analysis Platform** now — upload a paper or paste an introduction and see the AI analyze it in real time. I’d love to hear your feedback!
+
+This was truly a learning journey that was worth every single challenge.  
+This is just the beginning.
+
