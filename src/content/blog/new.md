@@ -360,6 +360,8 @@ The **IMRaD Analysis Platform** offers the following key features:
 
 ### Microservices Breakdown
 
+![component_diagram (1).png](</component_diagram (1).png>)
+
 Let’s break down the key microservices in our platform.
 
 The entry point of the entire system is the **API Gateway**. It is responsible for forwarding and load-balancing user requests to the active instances of our internal microservices.
