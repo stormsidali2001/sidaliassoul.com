@@ -12,7 +12,7 @@ tags:
   - ai
   - programming
   - tutorial
-published: false
+published: true
 ---
 ## How did everything start?
 
