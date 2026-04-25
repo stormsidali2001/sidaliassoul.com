@@ -336,13 +336,21 @@ Finally, **Redis** serves as both an in-memory database and a message broker, en
 
 Here's a quick look at the data model of our platform.
 
-### Next.js Microservice:
+### Next.js Microservice
 
-The User Data microservice is responsible for three entities: **Introduction**, **Sentence**, and **Feedback**.
+**Next.js Microservice:** The Next.js api microservices takes responsability on two entities: **User** and **subscription**.
 
-Even though the **User** and **Introduction** entities are located in different microservices and use totally different databases, they are linked via a one-to-many relationship (a user can have many introductions).
+![class_diagram.png](/class_diagram.png)
+
+**User Data Microservice:** The User Data microservice is responsible for three entities: **Introduction**, **Sentence**, and **Feedback**.
 
 ![VL9FQ_f04BtdKonUVuXw-n52i5OAGdlAjPT9TenBihCoEv5AwNTlObnYKicUPj-RURpvi_K2B8sj8ryPEWE3LRKXbEiPbMCvkGUYgC7xlO6o_UmDOo76aM9JdkGXYvn6ZsUrMQyVK0QgElJ_EefkEkf0mautlSXtfDhtpvyWLfcmeR876ezyq6EiO0H1_IAnshV1lH99a0hqiNetNfBi_azx6Yx8K6BMv1_kWg-EZaPtTApU.png](/VL9FQ_f04BtdKonUVuXw-n52i5OAGdlAjPT9TenBihCoEv5AwNTlObnYKicUPj-RURpvi_K2B8sj8ryPEWE3LRKXbEiPbMCvkGUYgC7xlO6o_UmDOo76aM9JdkGXYvn6ZsUrMQyVK0QgElJ_EefkEkf0mautlSXtfDhtpvyWLfcmeR876ezyq6EiO0H1_IAnshV1lH99a0hqiNetNfBi_azx6Yx8K6BMv1_kWg-EZaPtTApU.png)
+
+
+
+Even though the **User** and **Introduction** entities are located in different microservices and use totally different databases, they are related in a one-to-many relationship (a user can have many introductions) and linked via a foreign key "introductionId" within the introduction document.
+
+
 
 ## Conclusion
 
