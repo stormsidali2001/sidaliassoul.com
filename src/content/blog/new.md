@@ -359,17 +359,11 @@ Even though the **User** and **Introduction** entities are located in different 
 
 ## Conclusion
 
-Thank you so much for taking the time to read my entire story — I really appreciate it.
 
-**Hook**  
-Who would have thought a last-minute panic in March 2024 would turn into two full theses and a live AI SaaS platform?
 
-**Curiosity**  
-I went from having no dataset to creating a 169k-sentence annotated dataset, fine-tuning four hierarchical BERT models to 98.21% F1-score, and building a complete microservices platform.
+If you’ve reached this far, I’d like to thank you for your time and patience in reading about these memories from almost two years ago.
 
-**Action**  
-Try the **IMRaD Analysis Platform** now — upload a paper or paste an introduction and see the AI analyze it in real time. I’d love to hear your feedback!
+After months of studying NLP, leafing through research papers, and listening to podcasts about it during my walks, I went from having no dataset to creating a 169k-sentence annotated dataset, fine-tuning four hierarchical BERT models to a 98.21% F1-score, and building a complete microservices platform.
 
-This was truly a learning journey that was worth every single challenge.  
-This is just the beginning.
+I hope you found this helpful and informative. If you have any questions or suggestions, feel free to reach out. You'll find all my social media links on the [Contact Page](/contact).
 
