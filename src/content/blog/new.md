@@ -151,12 +151,66 @@ However, because the research part of my engineering thesis focused specifically
 
 ### Phase 1: Baseline Model (V1)
 
-- **Data Generation:** Due to the absence of a suitable dataset, I utilized Gemini Pro LLM to generate annotated data. I start by filtering the unarxive dataset by introductions, and extracting a small subset of it. Afterwards, we split the introdoctions into  
+- **Data Generation:** Due to the absence of a suitable dataset, I utilized Gemini Pro LLM to generate annotated data. I start by filtering the unarxive dataset by introductions and extracting a small subset of it. Afterwards, we split the introdoctions into  
 - 
 
 ### Phase 2: Model Refinement (V2)
 
 ### Phase 3: Model Enhancement and Dataset Augmentation (V3)
+
+```
+       [ START ]
+           |
+           v
++-----------------------+
+| DATA REFINEMENT |
+|-----------------------|
+| - V2 Data (IMRaD) |
+| - Outlier Detection |
++-----------------------+
+           |
+           v
++-----------------------+
+| DATA AUGMENTATION |
+|-----------------------|
+| - Generate Sentences |
+| - Tailored Prompts |
++-----------------------+
+           |
+           v
++-----------------------+
+| COMBINE & ANNOTATE |
+| (169k Sentences) |
++-----------------------+
+           |
+           v
++-----------------------+
+| MODEL TRAINING |
+|-----------------------|
+| 1. BERT 1: |
+| Overall Move |
+| Classifier |
+|  |
+| 2. Sub-move Training: |
+| - Filter Move 0 |
+| -> BERT 2 |
+| - Filter Move 1 |
+| -> BERT 3 |
+| - Filter Move 2 |
+| -> BERT 4 |
++-----------------------+
+           |
+           v
++-----------------------+
+| EVALUATION |
+|-----------------------|
+| - Overall: F1 > 0.98 |
+| - Sub-move: F1 > 0.89 |
++-----------------------+
+           |
+           v
+        [ END ]
+```
 
 ## Conclusion
 
