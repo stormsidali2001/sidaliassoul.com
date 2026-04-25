@@ -174,6 +174,29 @@ As I couldn't find public data or afford a human annotator, I designed a three-p
 - I split the introductions into their individual sentences.
 
 - I fed every individual sentence into a Gemini LLM instance while guiding it with a well-crafted classification prompt.
+
+```
+[ unarxive dataset ]
+  ↳ Cleaned & filtered
+          |
+          v
+  [ Introductions ]
+          |
+       (split)
+          v
+    [ Sentences ]
+          |
+          v
+   [ Gemini LLMs ] <--- [ Classification Prompt ]
+          |
+      (outputs)
+          v
+   [ Predictions ]
+    ↳ Sentence -> Move 3
+    ↳ Sentence -> Move 1
+    ↳ Sentence -> Move 2
+```
+
 - The prompt that I've used is the following: …
 - Then I used the generated data to fine-tune a BERT model for classification. 
 - This model achieved an accuracy of 44.61%, demonstrating potential (because the accuracy is slightly higher than a random guess for three classes) but highlighting the need for improvement.
