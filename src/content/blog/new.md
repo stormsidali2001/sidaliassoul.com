@@ -81,13 +81,9 @@ I also studied a wide range of relevant topics, including classic NLP techniques
 Although the experimentation section is typically optional in a master's thesis, I decided to include it anyway. Here is a clear summary of the end-to-end experimental pipeline I built:
 
 - Data collection from Hugging Face (~530k rows, enriched with my new “Related Work” label), followed by exploration, cleaning (removal of non-natural language elements), and balancing down to ~25k rows
-
 - Traditional baseline (Logistic Regression + TF-IDF) hitting 63.78% accuracy
-
 - Initial BERT fine-tuning reaching F1-score 0.7309
-
 - LLM-based outlier detection/cleaning + data augmentation (generating synthetic paragraphs to expand to ~100k rows)
-
 - Final fine-tuned BERT model achieving F1-score 0.9172, showing massive progressive gains over the baseline
 
 ### Contributions
@@ -104,28 +100,27 @@ In my graduation thesis, 'Leveraging Gemini Pro and BERT for Automated IMRaD Cla
 
 
 
+Yes, I know. It would have been much easier for me to just carry on with the same theme as my master's thesis and do a single research and engineering study. 
+
+**However**,**** I'm not the kind of person who gives up**** on something easily. My supervisor challenged me with the analysis of introductions, and despite all the hurdles I faced due to the lack of a suitable dataset, I wasn't going to drop the theme that easily.
+
+Before I dive into the granular details of the research and development phases later in this post, here is a brief summary of my key contributions to both the research and engineering parts of the project: 
+
+
+
 ### Research Part:
+
 - Established a Gemini Pro data pipeline including baseline generation, prompt refinement, outlier detection, and data augmentation, validating outputs with Random Forest, Logistic Regression, SVM, KNN, and Naive Bayes classifiers.
-
 - Synthesized a custom 169,000 sentence dataset and fine-tuned four hierarchical BERT models, driving accuracy from a 44.61% baseline to a surprising 98.21% peak F1 score.
-
 
 
 
 ### Engineering Part:
 
-- Architected a scalable 8-node microservices ecosystem comprising Nginx (Gateway), Spring Cloud Eureka (Discovery), Next.js (Frontend and API), a FastAPI PDF Extractor, TensorFlow Serving, FastAPI with LangChain (AI Analysis), and Express.js with MongoDB (User Data) decoupled by a Redis message broker.
-- Directed the complete software development life cycle, authoring comprehensive technical documentation across Requirements Analysis and Specification, System Design, and Implementation to ship a scalable, production-ready platform.
+- Architected a scalable 8-node microservices ecosystem comprising Nginx (gateway), Spring Cloud Eureka (discovery), Next.js (frontend and API), a FastAPI PDF extractor, TensorFlow Serving, FastAPI with LangChain (AI analysis), and Express.js with MongoDB (user data) decoupled by a Redis message broker.
+- Directed the complete software development life cycle, authoring comprehensive technical documentation across requirements analysis and specification, system design, and implementation to ship a scalable, production-ready platform.
 
 
-&nbsp;
-
-&nbsp;
-
-### Contributions
-
-- Addressed the lack of sentence-level IMRaD datasets by engineering a 3-phase Gemini Pro pipeline (baseline generation, prompt refinement, and outlier detection/augmentation). 
-- Synthesized and validated a custom 169k-sentence dataset, boosting baseline accuracy from 44.61% to >94% (Peak F1: 98.21%) by fine-tuning 4 hierarchical BERT models
 
 ## Research Part:
 
