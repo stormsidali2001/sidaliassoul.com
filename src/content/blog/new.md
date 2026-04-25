@@ -169,11 +169,14 @@ As I couldn't find public data or afford a human annotator, I designed a three-p
 
 ### Phase 1: Baseline Model (V1)
 
-- I started with a baseline model.
-- I selected random introductions from the cleaned and filtered unarxive dataset.
-- I split the introductions into their individual sentences.
+The way I approached this problem is incremental. I started with a baseline model involving the following workflow:
 
+- I selected random introductions from the cleaned and filtered unarXive dataset.
+- I split the introductions into their individual sentences.
 - I fed every individual sentence into a Gemini LLM instance while guiding it with a well-crafted classification prompt.
+- Then I used the generated data to fine-tune a BERT model for classification. 
+
+- This model achieved an accuracy of 44.61%, demonstrating potential (because the accuracy is slightly higher than a random guess for three classes) but highlighting the need for improvement.
 
 ```
 [ unarxive dataset ]
@@ -197,9 +200,11 @@ As I couldn't find public data or afford a human annotator, I designed a three-p
     ↳ Sentence -> Move 2
 ```
 
-- The prompt that I've used is the following: …
-- Then I used the generated data to fine-tune a BERT model for classification. 
-- This model achieved an accuracy of 44.61%, demonstrating potential (because the accuracy is slightly higher than a random guess for three classes) but highlighting the need for improvement.
+
+
+LLMs are generalists by design; they are meant to deal with any kind of situation. So, how can we leverage them on specific tasks like classification? That's where prompt engineering comes in. 
+
+A prompt is basically a set of instructions written in raw natural text. It allows us to restrict how the LLM acts, or specialize it for a specific task like classification, summarization, etc.
 
 ### Phase 2: Model Refinement (V2)
 
