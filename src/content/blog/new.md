@@ -47,9 +47,7 @@ Before moving forward you need to understand something about research papers.
 
 Research papers are about presenting scientific findings, which can't be mixed with other kinds of human literature. That's why IMRAD comes in.
 
-IMRaD stands for Introduction, Methods, Results, and Discussion. It provides a formal and well-defined logical framework for presenting research findings.
-
-Each section serves a different goal:
+IMRaD stands for Introduction, Methods, Results, and Discussion. It provides a formal and well-defined logical framework for presenting research findings:
 
 - **Introduction:** Sets the stage by identifying a research gap and stating the study's specific goals.
 - **Methods:** Details the exact steps and materials used so the experiment can be reproduced by others.
@@ -101,6 +99,8 @@ The key findings of the thesis are as follows:
 - Training of a high-accuracy fine-tuned BERT classifier.
 
 ## Engineering Thesis
+
+I named my graduation thesis "Leveraging Gemini Pro and BERT for Automated IMRaD Classification: A Novel Dataset and SaaS Platform."
 
 
 
