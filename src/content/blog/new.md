@@ -228,21 +228,14 @@ The comparative table bellow explains the steps that were taken for
 
 
   
-
-
-- Instead of classifying only the moves.The enhanced prompt allow gemini to classify both moves and the sub moves  in one go.
-- The output Is also changed from ( read what's on the slides)
-
   
   
-
-
-- The reason behind these two last changes is to increase the overall annotation speed and give gemini pro more understanding of every move by knowing the corresponding sub moves.
+The reason behind these two last changes is to increase the overall annotation speed and give gemini pro more understanding of every move by knowing the corresponding sub moves.
 
   
 
 
-- This resulted in a significant improvement, achieving an accuracy of 60% using a Logistic Regression classifier."
+This resulted in a significant improvement, achieving an accuracy of 60% using a Logistic Regression classifier."
 
 ### Phase 3: Model Enhancement and Dataset Augmentation (V3)
 
