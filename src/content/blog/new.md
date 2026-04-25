@@ -210,15 +210,22 @@ In this version, i used a fairly simple prompt to instruct each Gemini Pro insta
 
 ### Phase 2: Model Refinement (V2)
 
-In the second version of the pipline i decided 
+In the second version of the pipline i decided i decided to focus on inhancing the prompt.
 
-- To enhance accuracy, I decided to change the previous Gemini pro prompt .
+I thought in my head "What if the reason behind that low accuracy is that Gemini Pro didn't have enough context about the introduction, maybe embedding the whole introduction in the prompt."
 
-  
-  
+In addition to that, Instead of classifying only the moves.The enhanced prompt will allow gemini to classify both moves and the sub moves  in one go. 
+
+The comparative table bellow explains the steps that were taken for 
 
 
-- So Instead of giving gemini pro a single sentence as an input we are now giving it the whole introduction. Which may help in understanding the  whole context of the introduction.
+|  |  |  |
+| ------------------------ | ----------------------------- | -------------------------------------------------------------- |
+| **Feature** | **Initial Prompts** | **Enhanced Prompts** |
+| **Input** | A single sentence. | A single introduction. |
+| **Classification Scope** | Classifies only moves. | Classifies both moves and submoves in one go. |
+| **Output** | A single sentence prediction. | A list of sentence predictions (with move and submove labels). |
+
 
   
 
