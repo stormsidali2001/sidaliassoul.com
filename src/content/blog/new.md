@@ -210,13 +210,13 @@ In this version, i used a fairly simple prompt to instruct each Gemini Pro insta
 
 ### Phase 2: Model Refinement (V2)
 
-In the second version of the pipline i decided i decided to focus on inhancing the prompt.
+In the second version of the pipeline, I decided to focus on enhancing the prompt. 
 
-I thought in my head "What if the reason behind that low accuracy is that Gemini Pro didn't have enough context about the introduction, maybe embedding the whole introduction in the prompt."
+I thought to myself, 'What if the reason behind that low accuracy is that Gemini Pro **didn't have enough context about the introduction**? Maybe I should **embed the whole introduction in the prompt**.' 
 
-In addition to that, Instead of classifying only the moves.The enhanced prompt will allow gemini to classify both moves and the sub moves  in one go. 
+In addition to that, instead of classifying only the moves, the enhanced prompt will allow Gemini to **classify both moves and submoves in one go**. 
 
-The comparative table bellow explains the steps that were taken for 
+The comparative table below explains the steps that were taken.
 
 
 |  |  |  |
@@ -228,49 +228,39 @@ The comparative table bellow explains the steps that were taken for
 
 
   
-  
-  
-The reason behind these two last changes is to increase the overall annotation speed and give gemini pro more understanding of every move by knowing the corresponding sub moves.
+The reason behind these last two changes was to increase the overall annotation speed and give Gemini Pro a better understanding of every move by knowing the corresponding submoves. 
 
-  
+Since using a heavy model like BERT for simple benchmarking is both time-consuming and resource-intensive, I opted for basic ML classifiers paired with TF-IDF vectorization to check the quality of the new dataset. The results were surprising!
 
 
-This resulted in a significant improvement, achieving an accuracy of 60% using a Logistic Regression classifier."
+|  |  |
+| ---------------------- | ------------ |
+| **Classifier** | **Accuracy** |
+| Random Forest | **60.7 %** |
+| Logistic Regression | 60.0 % |
+| Neural Network (Keras) | 57.5 % |
+| Naive Bayes | 55.6 % |
+| K-Nearest Neighbors | 54.0 % |
+| Decision Tree | 51.6 % |
+
+
+Every single one of them managed to outperform the previous BERT model. That was a clear sign that I was making progress; the prompt enhancement was fruitful.
 
 ### Phase 3: Model Enhancement and Dataset Augmentation (V3)
 
-- For my final model, I generated a custom dataset of 169,000 sentences. By creating a custom pipeline built on top of the v2 generated data and Including: Gemini outlier detection, Gemini data augmentation then fine-tuning 4 custom bert models.
+For my final model, i generated a custom dataset of 169k sentences by creating a custoom pipeline that was built on top of the V2 generated data and including: Gemini based outlier detection, Gemini data augmentation then fine tuning 4 customo bert models.
+
+
+
+The final generated data was used to fine-tune multiple specialised BERT models. 
+
+Believe me when i tell you that i was 
 
   
 
 
 - This data was used to fine-tune multiple specialised BERT models.
-- Achieving impressive F1 scores exceeding 0.89 for sub-move classification and 0.98 for overall move classification."
-
-  
-  
-
-
-–next slide__________
-
-- This  previous pipeline is powered by a series of carefully designed prompts for Gemini Pro. 
-- 
-
-  
-
-
-- The base prompt is the same prompt used in v2 but with an extra ingredient
-  - In addition To listing all the moves and the sub moves in the prompt I also provided many examples for every sub move.
-
-  
-
-
-- Both the outlier detection and the data augmentation prompts extend from the base prompt while adding additional adjustments.
-- Basicly the outlier detection prompt instructs gemini to flag previous predictions as outliers or correct them if they are wrong.
-- And the data augmentation prompt instructs gemini to generate more sentences for each move while respecting the defined rules.
-
-  
-  
+- Achieving impressive F1 scores exceeding 0.89 for sub-move classification and 0.98 for overall move classification."  
 
 
 ```
@@ -329,7 +319,27 @@ This resulted in a significant improvement, achieving an accuracy of 60% using a
 ```
 ```
 
+–next slide__________
 
+- This  previous pipeline is powered by a series of carefully designed prompts for Gemini Pro. 
+- 
+
+  
+
+
+- The base prompt is the same prompt used in v2 but with an extra ingredient
+  - In addition To listing all the moves and the sub moves in the prompt I also provided many examples for every sub move.
+
+  
+
+
+- Both the outlier detection and the data augmentation prompts extend from the base prompt while adding additional adjustments.
+- Basicly the outlier detection prompt instructs gemini to flag previous predictions as outliers or correct them if they are wrong.
+- And the data augmentation prompt instructs gemini to generate more sentences for each move while respecting the defined rules.
+
+
+
+&nbsp;
 
 ## Conclusion
 
