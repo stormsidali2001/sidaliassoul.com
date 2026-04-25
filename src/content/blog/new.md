@@ -14,8 +14,6 @@ tags:
   - tutorial
 published: false
 ---
-## Introduction
-
 ## How did everything start?
 
 It's March 2024, and I've totally lost track of time, as I've been fully indulged in a long-term freelancing mission with an interesting Upwork client. 
