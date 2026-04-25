@@ -122,9 +122,7 @@ Before I dive into the granular details of the research and development phases l
 
 
 
-## Research Part:
-
-### Dataset Preparation
+## Dataset Preparation
 
 Before jumping into the research and development of my engineering project, I faced a hurdle that almost made me give up on the theme. 
 
@@ -167,7 +165,7 @@ As I couldn't find public data or afford a human annotator, I designed a three-p
 
 
 
-### Phase 1: Baseline Model (V1)
+## Phase 1: Baseline Model (V1)
 
 The way I approached this problem is incremental. I started with a baseline model involving the following workflow:
 
@@ -208,7 +206,7 @@ A prompt is basically a set of instructions written in raw natural text. It allo
 
 In this version, i used a fairly simple prompt to instruct each Gemini Pro instance to classify a given sentence into its corresponding IMRAD move.
 
-### Phase 2: Model Refinement (V2)
+## Phase 2: Model Refinement (V2)
 
 In the second version of the pipeline, I decided to focus on enhancing the prompt. 
 
@@ -246,7 +244,7 @@ Since using a heavy model like BERT for simple benchmarking is both time-consumi
 
 Every single one of them managed to outperform the previous BERT model. That was a clear sign that I was making progress; the prompt enhancement was fruitful.
 
-### Phase 3: Model Enhancement and Dataset Augmentation (V3)
+## Phase 3: Model Enhancement and Dataset Augmentation (V3)
 
 For my final model, i generated a custom dataset of 169k sentences by creating a custoom pipeline that was built on top of the V2 generated data and including: Gemini based outlier detection, Gemini data augmentation then fine tuning 4 customo bert models.
 
@@ -343,6 +341,48 @@ Both the **outlier detection** and **data augmentation** prompts **extend** from
 Essentially, the outlier detection prompt instructs Gemini to audit previous predictions, flagging them as outliers or correcting them if they're wrong. 
 
 The data augmentation prompt then handles the heavy lifting, instructing Gemini to generate more sentences for each move while strictly respecting the rules I defined.
+
+## A Microservices Based Such platform:
+
+After publishing the final four **hierarchical classification BERT models**, I decided to create a SaaS platform that makes full use of these models and helps researchers and students easily analyze the rhetorical structure of scientific paper introductions.
+
+
+
+The **IMRaD Analysis Platform** offers the following key features:
+
+- Upload a research paper (PDF) or manually paste introduction text
+- Automatic sentence segmentation and classification of IMRaD moves and sub-moves with confidence scores
+- Clean and intuitive visual interface for viewing analysis results
+- User feedback system allowing corrections to predictions to help improve the model
+- Premium features including detailed summaries and AI-generated author thought process
+- Full user account management with Stripe subscription handling
+- Comprehensive administrator tools for managing users, reviewing feedback, and monitoring platform statistics
+
+### Microservices Breakdown
+
+Let’s break down the key microservices in our platform.
+
+The entry point of the entire system is the **API Gateway**. It is responsible for forwarding and load-balancing user requests to the active instances of our internal microservices.
+
+All microservices automatically self-register into the **Eureka Discovery Server**, which acts like a dynamic index that keeps track of all running instances of each service.
+
+Next, we have the **Next.js microservice**, which actually consists of two parts:
+
+- A frontend responsible for rendering all the individual pages
+- A backend that handles:
+  - Authentication and authorization
+  - Subscription management using the Stripe third-party service
+  - Acting as a composition service that calls and aggregates results from multiple internal microservices
+  - Sending transactional emails via the Resend third-party API
+  - Persisting data using a PostgreSQL database
+
+Then we have the **TensorFlow Serving microservice**, which provides optimized, production-grade access to our fine-tuned BERT models.
+
+The **AI Moves and Sub-moves microservice** handles batch predictions for moves and sub-moves by delegating requests to TensorFlow Serving. It also communicates with the Gemini API to generate the introduction summary and the author’s hypothetical thought process behind switching between the different moves and sub-moves while writing the introduction.
+
+The **User Data microservice** is responsible for storing user predictions and managing feedback. It uses MongoDB as its database.
+
+Finally, **Redis** serves as both an in-memory database and a message broker, enabling asynchronous communication between the different microservices.
 
 ## Conclusion
 
