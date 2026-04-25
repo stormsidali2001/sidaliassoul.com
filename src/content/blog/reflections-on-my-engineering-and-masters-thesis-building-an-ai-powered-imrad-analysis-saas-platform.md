@@ -6,12 +6,12 @@ description: In this reflection, I share how I completed both my master's thesis
   dataset and fine-tuning BERT models to a 98.21 percent F1 score, to launching
   a full microservices SaaS platform. This post details the complete technical
   journey.
-pubDate: 2026-04-23
-updatedDate: 2026-04-23
+pubDate: 2026-04-25
+updatedDate: 2026-04-25
 tags:
   - ai
   - programming
-  - tutorial
+  - career
 published: true
 ---
 ## How did everything start?
