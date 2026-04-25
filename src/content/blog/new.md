@@ -257,61 +257,7 @@ Believe me when I tell you that I was bursting with joy when I saw the validatio
 When the F1 score hit 0.98 for overall move classification and exceeded 0.89 for submove classification, I was literally screaming, "Yes, yes! It's not overfitting, and the F1 score is above 98%!"  
 
 
-```
-```
-   [ START ]
-           |
-           v
-+-----------------------+
-| DATA REFINEMENT |
-|-----------------------|
-| - V2 Data (IMRaD) |
-| - Outlier Detection |
-+-----------------------+
-           |
-           v
-+-----------------------+
-| DATA AUGMENTATION |
-|-----------------------|
-| - Generate Sentences |
-| - Tailored Prompts |
-+-----------------------+
-           |
-           v
-+-----------------------+
-| COMBINE & ANNOTATE |
-| (169k Sentences) |
-+-----------------------+
-           |
-           v
-+-----------------------+
-| MODEL TRAINING |
-|-----------------------|
-| 1. BERT 1: |
-| Overall Move |
-| Classifier |
-|  |
-| 2. Sub-move Training: |
-| - Filter Move 0 |
-| -> BERT 2 |
-| - Filter Move 1 |
-| -> BERT 3 |
-| - Filter Move 2 |
-| -> BERT 4 |
-+-----------------------+
-           |
-           v
-+-----------------------+
-| EVALUATION |
-|-----------------------|
-| - Overall: F1 > 0.98 |
-| - Sub-move: F1 > 0.89 |
-+-----------------------+
-           |
-           v
-        [ END ]
-```
-```
+![ZPFFJXin48VlVeeflO3KLfkqGX2aYZ-GYWCW9RIdN2QxasI4rux6iujerNUlxLYA8fhIvBJZMN_V_Bm-3ugYNMlDErrHIz3pND2fCU69tHe5My1QkMTzWLy6u1BhfwNupZLNtdg1z-DX-gSLBmr9gHxdNwoElTDxR0akXD6MmfH_4WmgyzkOp3ScafILlOE3QrI42ItOHH-d1n4x-Z64L3uppYk1y7Ab8vZ6LN8r1R0u9qiD.png](/ZPFFJXin48VlVeeflO3KLfkqGX2aYZ-GYWCW9RIdN2QxasI4rux6iujerNUlxLYA8fhIvBJZMN_V_Bm-3ugYNMlDErrHIz3pND2fCU69tHe5My1QkMTzWLy6u1BhfwNupZLNtdg1z-DX-gSLBmr9gHxdNwoElTDxR0akXD6MmfH_4WmgyzkOp3ScafILlOE3QrI42ItOHH-d1n4x-Z64L3uppYk1y7Ab8vZ6LN8r1R0u9qiD.png)
 
 
 
