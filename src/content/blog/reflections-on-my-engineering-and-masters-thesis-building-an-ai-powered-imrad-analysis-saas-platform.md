@@ -185,11 +185,11 @@ However, because the research part of my engineering thesis focused specifically
 
 
 
-As I couldn't find public data or afford a human annotator, I designed a three-phase approach (V1->V2->V3) to **overcome** the lack of a sentence-level granular dataset and to create a custom one tailored to my specific needs.
+As I couldn't find public data or afford a human annotator, I designed a [three-phase approach](https://github.com/stormsidali2001/graduation_IMRAD_introduction_analysis_SaaS/tree/main/notebooks) (V1→V2→V3) to **overcome** the lack of a sentence-level granular dataset and to create a custom one tailored to my specific needs.
 
 
 
-## Phase 1: Baseline Model (V1)
+## Phase 1: Baseline Model ([V1](https://github.com/stormsidali2001/graduation_IMRAD_introduction_analysis_SaaS/tree/main/notebooks/v1))
 
 The way I approached this problem was incremental. I started with a baseline model involving the following workflow:
 
@@ -229,7 +229,7 @@ A prompt is basically a set of instructions written in raw natural text. It allo
 
 In this version, I used a fairly simple prompt to instruct each Gemini Pro instance to classify a given sentence into its corresponding IMRAD move.
 
-## Phase 2: Model Refinement (V2)
+## Phase 2: Model Refinement ([V2](https://github.com/stormsidali2001/graduation_IMRAD_introduction_analysis_SaaS/tree/main/notebooks/v2))
 
 In the second version of the pipeline, I decided to focus on enhancing the prompt.
 
@@ -266,7 +266,7 @@ Since using a heavy model like BERT for simple benchmarking is both time-consumi
 
 Every single one of them managed to outperform the previous BERT model. That was a clear sign that I was making progress; the prompt enhancement was fruitful.
 
-## Phase 3: Model Enhancement and Dataset Augmentation (V3)
+## Phase 3: Model Enhancement and Dataset Augmentation ([V3](https://github.com/stormsidali2001/graduation_IMRAD_introduction_analysis_SaaS/tree/main/notebooks/v3))
 
 For my final model, I generated a custom dataset of 169k sentences by creating a custom pipeline that was built on top of the V2 generated data and including: Gemini-based outlier detection, Gemini data augmentation, then fine-tuning 4 custom BERT models.
 
