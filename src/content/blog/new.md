@@ -108,14 +108,14 @@ Before I dive into the granular details of the research and development phases l
 
 
 
-### Research Part:
+### Research Contributions:
 
 - Established a Gemini Pro data pipeline including baseline generation, prompt refinement, outlier detection, and data augmentation, validating outputs with Random Forest, Logistic Regression, SVM, KNN, and Naive Bayes classifiers.
 - Synthesized a custom 169,000 sentence dataset and fine-tuned four hierarchical BERT models, driving accuracy from a 44.61% baseline to a surprising 98.21% peak F1 score.
 
 
 
-### Engineering Part:
+### Engineering Contribution:
 
 - Architected a scalable 8-node microservices ecosystem comprising Nginx (gateway), Spring Cloud Eureka (discovery), Next.js (frontend and API), a FastAPI PDF extractor, TensorFlow Serving, FastAPI with LangChain (AI analysis), and Express.js with MongoDB (user data) decoupled by a Redis message broker.
 - Directed the complete software development life cycle, authoring comprehensive technical documentation across requirements analysis and specification, system design, and implementation to ship a scalable, production-ready platform.
