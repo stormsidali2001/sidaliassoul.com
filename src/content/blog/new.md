@@ -315,27 +315,34 @@ When the F1 score hit 0.98 for overall move classification and exceeded 0.89 for
 ```
 ```
 
-–next slide__________
-
-- This  previous pipeline is powered by a series of carefully designed prompts for Gemini Pro. 
-- 
-
-  
 
 
-- The base prompt is the same prompt used in v2 but with an extra ingredient
-  - In addition To listing all the moves and the sub moves in the prompt I also provided many examples for every sub move.
+This previous pipeline was powered by a series of carefully designed prompts for Gemini Pro.
 
-  
+```
+[ V2 Prompt ]
+        +
+ [ Moves & Sub-moves ]
+     examples
+        |
+        v
+    (extends)
+        |
+        +--> [ AI Outlier Detection ]
+        |
+        +--> [ AI Data Augmentation ]
 
+```
 
-- Both the outlier detection and the data augmentation prompts extend from the base prompt while adding additional adjustments.
-- Basicly the outlier detection prompt instructs gemini to flag previous predictions as outliers or correct them if they are wrong.
-- And the data augmentation prompt instructs gemini to generate more sentences for each move while respecting the defined rules.
+The **base prompt** is the same one I used in V2, but with an extra ingredient. 
 
+In addition to listing all the moves and submoves, I also provided multiple examples for every single submove to better guide the model.
 
+Both the **outlier detection** and **data augmentation** prompts **extend** from this **base prompt**, just with some extra adjustments added on top.
 
-&nbsp;
+Essentially, the outlier detection prompt instructs Gemini to audit previous predictions, flagging them as outliers or correcting them if they're wrong. 
+
+The data augmentation prompt then handles the heavy lifting, instructing Gemini to generate more sentences for each move while strictly respecting the rules I defined.
 
 ## Conclusion
 
