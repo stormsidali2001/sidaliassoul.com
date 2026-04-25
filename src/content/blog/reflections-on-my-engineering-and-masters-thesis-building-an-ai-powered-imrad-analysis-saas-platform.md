@@ -152,7 +152,7 @@ Before jumping into the research and development of my engineering project, I fa
 
 I sat in doubt and perplexity after discovering that there are no research papers or public datasets providing sentence-level labels for IMRD introduction moves and sub-moves.
 
-Things went a bit smoother for my master's thesis because I found a lot of research papers and publicly annotated datasets that provide "I," "M," "R," and "D" labels for paragraphs extracted from various papers. One of these is the "**unarXive"** dataset.
+Things went a bit smoother for my master's thesis because I found a lot of research papers and publicly annotated datasets that provide "I," "M," "R," and "D" labels for paragraphs extracted from various papers. One of these is the [**unarXive**](https://huggingface.co/datasets/saier/unarXive_imrad_clf) dataset.
 
 ```
 [ Unarxive Dataset ]
@@ -272,7 +272,7 @@ For my final model, I generated a custom dataset of 169k sentences by creating a
 
 
 
-The final generated data was used to fine-tune four hierarchical, specialized BERT models.
+The final generated data was used to fine-tune four hierarchical, specialized BERT models, all published on Hugging Face: [Move Classifier](https://huggingface.co/stormsidali2001/IMRAD_introduction_moves_classifier), [Move 0 Sub-move Classifier](https://huggingface.co/stormsidali2001/IMRAD-introduction-move-zero-sub-moves-classifier), [Move 1 Sub-move Classifier](https://huggingface.co/stormsidali2001/IMRAD-introduction-move-one-sub-moves-classifier), and [Move 2 Sub-move Classifier](https://huggingface.co/stormsidali2001/IMRAD-introduction-move-two-sub-moves-classifier).
 
 Believe me when I tell you that I was bursting with joy when I saw the validation and training accuracy graphs increasing in parallel.
 
@@ -311,7 +311,7 @@ The data augmentation prompt then handles the heavy lifting, instructing Gemini 
 
 ## A Microservices-Based SaaS Platform
 
-After publishing the final four **hierarchical classification BERT models**, I decided to create a SaaS platform that makes full use of these models and helps researchers and students easily analyze the rhetorical structure of scientific paper introductions.
+After publishing the final four **hierarchical classification BERT models**, I decided to create a [SaaS platform](https://github.com/stormsidali2001/graduation_IMRAD_introduction_analysis_SaaS/tree/main) that makes full use of these models and helps researchers and students easily analyze the rhetorical structure of scientific paper introductions.
 
 
 
@@ -335,7 +335,7 @@ The entry point of the entire system is the **API Gateway**. It is responsible f
 
 All microservices automatically self-register into the **Eureka Discovery Server**, which acts like a dynamic index that keeps track of all running instances of each service.
 
-Next, we have the **Next.js microservice**, which actually consists of two parts:
+Next, we have the [**Next.js microservice**](https://github.com/stormsidali2001/graduation_IMRAD_introduction_analysis_SaaS/tree/main), which actually consists of two parts:
 
 - A frontend responsible for rendering all the individual pages
 - A backend that handles:
@@ -347,9 +347,9 @@ Next, we have the **Next.js microservice**, which actually consists of two parts
 
 Then we have the **TensorFlow Serving microservice**, which provides optimized, production-grade access to our fine-tuned BERT models.
 
-The **AI Moves and Sub-moves microservice** handles batch predictions for moves and sub-moves by delegating requests to TensorFlow Serving. It also communicates with the Gemini API to generate the introduction summary and the author’s hypothetical thought process behind switching between the different moves and sub-moves while writing the introduction.
+The [**AI Moves and Sub-moves microservice**](https://github.com/stormsidali2001/imrad_intros_moves_submoves_python_microservices) handles batch predictions for moves and sub-moves by delegating requests to TensorFlow Serving. It also communicates with the Gemini API to generate the introduction summary and the author's hypothetical thought process behind switching between the different moves and sub-moves while writing the introduction. This same repository also contains the **PDF Extractor microservice**, built with FastAPI, which extracts introductions from uploaded research papers.
 
-The **User Data microservice** is responsible for storing user predictions and managing feedback. It uses MongoDB as its database.
+The [**User Data microservice**](https://github.com/stormsidali2001/imrad_introduction_moves_sub_moves_express_user_data) is responsible for storing user predictions and managing feedback. It uses MongoDB as its database.
 
 Finally, **Redis** serves as both an in-memory database and a message broker, enabling asynchronous communication between the different microservices.
 
@@ -369,6 +369,8 @@ Here's a quick look at the data model of our platform.
 
 
 Even though the **User** and **Introduction** entities are located in different microservices and use totally different databases, they are related in a one-to-many relationship (a user can have many introductions) and linked via a foreign key "introductionId" within the introduction document.
+
+
 
 
 
