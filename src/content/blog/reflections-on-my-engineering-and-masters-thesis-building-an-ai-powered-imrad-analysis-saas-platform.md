@@ -1,6 +1,6 @@
 ---
-title: "Reflections on My Engineering and Master's Thesis: Building an AI-Powered
-  IMRaD Analysis SaaS Platform"
+title: "Reflections on My Engineering and Master's Thesis: Building an
+  AI-Powered IMRaD Analysis SaaS Platform"
 description: In this reflection, I share how I completed both my master's thesis
   and engineering project on IMRAD classification. From building a 169k-sentence
   dataset and fine-tuning BERT models to a 98.21 percent F1 score, to launching
@@ -16,7 +16,7 @@ published: true
 ---
 ## How did everything start?
 
-It's March 2024, and I've totally lost track of time, as I've been fully engrossed in a long-term freelancing mission with an interesting Upwork client. 
+It's March 2024, and I've totally lost track of time, as I've been fully immersed in a long-term freelancing mission with an interesting Upwork client. 
 
 Then, I was soon to find out that I was running out of time! I needed to start working on my graduation project.
 
@@ -176,7 +176,6 @@ The way I approached this problem was incremental. I started with a baseline mod
 - I split the introductions into their individual sentences.
 - I fed every individual sentence into a Gemini LLM instance while guiding it with a well-crafted classification prompt.
 - Then I used the generated data to fine-tune a BERT model for classification. 
-
 - This model achieved an accuracy of 44.61%, demonstrating potential (because the accuracy is slightly higher than a random guess for three classes) but highlighting the need for improvement.
 
 ```
@@ -228,7 +227,6 @@ The comparative table below explains the steps that were taken.
 | **Output** | A single sentence prediction. | A list of sentence predictions (with move and submove labels). |
 
 
-  
 The reason behind these last two changes was to increase the overall annotation speed and give Gemini Pro a better understanding of every move by knowing the corresponding submoves. 
 
 Since using a heavy model like BERT for simple benchmarking is both time-consuming and resource-intensive, I opted for basic ML classifiers paired with TF-IDF vectorization to check the quality of the new dataset. The results were surprising!
@@ -258,7 +256,6 @@ The final generated data was used to fine-tune four hierarchical, specialized BE
 Believe me when I tell you that I was bursting with joy when I saw the validation and training accuracy graphs increasing in parallel. 
 
 When the F1 score hit 0.98 for overall move classification and exceeded 0.89 for submove classification, I was literally screaming, "Yes, yes! It's not overfitting, and the F1 score is above 98%!"  
-
 
 ![ZPFFJXin48VlVeeflO3KLfkqGX2aYZ-GYWCW9RIdN2QxasI4rux6iujerNUlxLYA8fhIvBJZMN_V_Bm-3ugYNMlDErrHIz3pND2fCU69tHe5My1QkMTzWLy6u1BhfwNupZLNtdg1z-DX-gSLBmr9gHxdNwoElTDxR0akXD6MmfH_4WmgyzkOp3ScafILlOE3QrI42ItOHH-d1n4x-Z64L3uppYk1y7Ab8vZ6LN8r1R0u9qiD.png](/ZPFFJXin48VlVeeflO3KLfkqGX2aYZ-GYWCW9RIdN2QxasI4rux6iujerNUlxLYA8fhIvBJZMN_V_Bm-3ugYNMlDErrHIz3pND2fCU69tHe5My1QkMTzWLy6u1BhfwNupZLNtdg1z-DX-gSLBmr9gHxdNwoElTDxR0akXD6MmfH_4WmgyzkOp3ScafILlOE3QrI42ItOHH-d1n4x-Z64L3uppYk1y7Ab8vZ6LN8r1R0u9qiD.png)
 
@@ -356,8 +353,6 @@ Even though the **User** and **Introduction** entities are located in different 
 
 
 ## Conclusion
-
-
 
 If you’ve reached this far, I’d like to thank you for your time and patience in reading about these memories from almost two years ago.
 
