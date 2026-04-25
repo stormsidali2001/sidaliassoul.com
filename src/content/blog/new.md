@@ -206,19 +206,7 @@ LLMs are generalists by design; they are meant to deal with any kind of situatio
 
 A prompt is basically a set of instructions written in raw natural text. It allows us to restrict how the LLM acts, or specialize it for a specific task like classification, summarization, etc.
 
-In this version, we used a fairly simple prompt to instruct each Gemini Pro instance to classify a given sentence into its corresponding IMRAD move.
-
-```
-analyze the provided text {sentence}, which represents a sentence of an introduction of an IMRaD formatted scientific paper. 
-
-classify the sentence into an imrad introduction move, knowing that the imrad moves are:
-
-      1. establishing a research territory.
-      2. establishing a niche, 
-      3. occupying the niche.
-
-the output should be the corresponding imrad move without anything extra
-```
+In this version, i used a fairly simple prompt to instruct each Gemini Pro instance to classify a given sentence into its corresponding IMRAD move.
 
 ### Phase 2: Model Refinement (V2)
 
