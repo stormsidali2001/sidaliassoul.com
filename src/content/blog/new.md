@@ -100,6 +100,8 @@ The key findings of the thesis are as follows:
 - Creation of a new annotated dataset (approximately 100k rows) published on Hugging Face.
 - Training of a high-accuracy fine-tuned BERT classifier.
 
+## Engineering Thesis
+
 
 
 ## Research Part:
@@ -110,9 +112,36 @@ Before jumping into the research and development of my engineering project, I fa
 
 I sat in doubt and perplexity after discovering that there are no research papers or public datasets providing sentence-level labels for IMRD introduction moves and sub-moves.
 
-Things went a bit smoother for my master's thesis because I found a lot of research papers and publicly annotated datasets that provide "I," "I","M","R" and "D" labels for paragraphs extracted from various papers. One of these is the "**unarXive"** dataset.
+Things went a bit smoother for my master's thesis because I found a lot of research papers and publicly annotated datasets that provide "I," "M," "R," and "D" labels for paragraphs extracted from various papers. One of these is the "**unarXive"** dataset.
 
-However, because the research part of my engineering thesis focused specifically on IMRD introductions, I wasn't able to find a suitable, ready-made dataset that provides sentence-level annotations capturing the rhetorical moves and sub-moves within an introduction.
+```
+[ Unarxive Dataset ]
+      (Labels: I,M,R,D,W)
+               |
+               | Filter &
+               | Cleaning
+               v
+       [ Filtered Results ]
+
+-------------------------------
+| Text (Excerpt) | Label |
+|-------------------|---------|
+| "Food recom..." | I |
+| "Previous stu..." | R |
+| "As discussed..." | D |
+| "Initially..." | I |
+| "The method..." | M |
+| "Furthermore..." | R |
+| "Results show..." | D |
+-------------------------------
+
+         CHALLENGES:
+* Section-level annotations only.
+* Lack of sentence-level
+  granularity.
+```
+
+However, because the research part of my engineering thesis focused specifically on IMRaD introductions, I wasn't able to find a suitable, ready-made dataset that provides sentence-level annotations capturing the rhetorical moves and sub-moves within an introduction.
 
 ### Phase 1: Baseline Model (V1)
 
