@@ -46,7 +46,7 @@ I immediately went to the university reading room and started skimming through t
   - [Contributions](#contributions)
 - [Engineering Thesis](#engineering-thesis)
   - [Research Contributions](#research-contributions)
-  - [Engineering Contribution](#engineering-contribution)
+  - [Engineering Contributions](#engineering-contributions)
 - [Dataset Preparation](#dataset-preparation)
 - [Phase 1: Baseline Model (V1)](#phase-1-baseline-model-v1)
 - [Phase 2: Model Refinement (V2)](#phase-2-model-refinement-v2)
@@ -80,7 +80,7 @@ IMRaD stands for Introduction, Methods, Results, and Discussion. It provides a f
 
 
 
-## Master's Thesis:
+## Master's Thesis
 
 Given the vast number of scientific papers published daily, there is a growing need for classifiers that enable researchers and students to filter, search, and query literature based on specific IMRaD sections (Introduction, Methods, Results, Discussion, and an extra Related Work label).
 
@@ -132,14 +132,14 @@ Before I dive into the granular details of the research and development phases l
 
 
 
-### Research Contributions:
+### Research Contributions
 
 - Established a Gemini Pro data pipeline including baseline generation, prompt refinement, outlier detection, and data augmentation, validating outputs with Random Forest, Logistic Regression, SVM, KNN, and Naive Bayes classifiers.
 - Synthesized a custom 169,000-sentence dataset and fine-tuned four hierarchical BERT models, driving accuracy from a 44.61% baseline to a surprising 98.21% peak F1 score.
 
 
 
-### Engineering Contribution:
+### Engineering Contributions
 
 - Architected a scalable 8-node microservices ecosystem comprising Nginx (gateway), Spring Cloud Eureka (discovery), Next.js (frontend and API), a FastAPI PDF extractor, TensorFlow Serving, FastAPI with LangChain (AI analysis), and Express.js with MongoDB (user data) decoupled by a Redis message broker.
 - Directed the complete software development life cycle, authoring comprehensive technical documentation across requirements analysis and specification, system design, and implementation to ship a scalable, production-ready platform.
