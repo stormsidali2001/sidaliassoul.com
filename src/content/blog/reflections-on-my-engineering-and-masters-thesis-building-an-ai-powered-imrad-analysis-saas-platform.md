@@ -24,7 +24,7 @@ But wait, I haven't even chosen a theme. No, but worse, I haven't even chosen a 
 
 So just after finishing my part-time freelancing hours, I started leafing through the themes list, looking for an interesting one that could capture my curiosity and satisfy my knowledge hunger (I was craving NLP, btw).
 
-After a few hours of research and contemplation, I stumbled upon an interesting article entitled "**Writing support system: IMRD text analysis**." 
+After a few hours of research and contemplation, I stumbled upon an interesting project theme entitled "**Writing support system: IMRD text analysis**." 
 
 I thought to myself, "A 'writing support system' implies that the project might involve some software design, which is something I've always loved, and 'text analysis' means finally having a chance to fulfill my craving for NLP with a project that actually looks interesting."
 
