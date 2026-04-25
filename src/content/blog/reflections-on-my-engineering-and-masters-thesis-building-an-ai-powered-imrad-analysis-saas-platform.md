@@ -42,7 +42,7 @@ In Algeria, we don't just pick one; we’re required to complete both a master's
 
 
 
-Both my master's and engineering theses are about IMRAD classification, but each one focuses on a different angle of it. 
+Both my master's and engineering theses are about IMRAD classification, but each one focuses on a different angle of it.
 
 ## But what does IMRAD even mean?
 
@@ -73,9 +73,9 @@ Can a BERT model, enhanced through data augmentation and robust preprocessing te
 
 ### State of the Art
 
-In a master's thesis, before diving into your own approach, you have to survey the current research and see what the state of the art looks like. 
+In a master's thesis, before diving into your own approach, you have to survey the current research and see what the state of the art looks like.
 
-So I spent a significant amount of time searching for relevant papers, reading, filtering, and carefully selecting four pivotal studies that I reviewed and compared in terms of data size, annotation method, models used, and accuracy. 
+So I spent a significant amount of time searching for relevant papers, reading, filtering, and carefully selecting four pivotal studies that I reviewed and compared in terms of data size, annotation method, models used, and accuracy.
 
 I also studied a wide range of relevant topics, including classic NLP techniques, traditional machine learning classifiers (TF-IDF, BoW, Word2Vec, Naïve Bayes, and SVM), and modern deep learning advances (pre-trained models like BERT and GPT, LLMs, and prompt engineering).
 
@@ -103,11 +103,11 @@ In my graduation thesis, 'Leveraging Gemini Pro and BERT for Automated IMRaD Cla
 
 
 
-Yes, I know. It would have been much easier for me to just carry on with the same theme as my master's thesis and do a single research and engineering study. 
+Yes, I know. It would have been much easier for me to just carry on with the same theme as my master's thesis and do a single research and engineering study.
 
 **However**, I'm not the kind of person who gives up on something easily. My supervisor challenged me with the analysis of introductions, and despite all the hurdles I faced due to the lack of a suitable dataset, I wasn't going to drop the theme that easily.
 
-Before I dive into the granular details of the research and development phases later in this post, here is a brief summary of my key contributions to both the research and engineering parts of the project: 
+Before I dive into the granular details of the research and development phases later in this post, here is a brief summary of my key contributions to both the research and engineering parts of the project:
 
 
 
@@ -127,7 +127,7 @@ Before I dive into the granular details of the research and development phases l
 
 ## Dataset Preparation
 
-Before jumping into the research and development of my engineering project, I faced a hurdle that almost made me give up on the theme. 
+Before jumping into the research and development of my engineering project, I faced a hurdle that almost made me give up on the theme.
 
 I sat in doubt and perplexity after discovering that there are no research papers or public datasets providing sentence-level labels for IMRD introduction moves and sub-moves.
 
@@ -142,17 +142,17 @@ Things went a bit smoother for my master's thesis because I found a lot of resea
                v
        [ Filtered Results ]
 
--------------------------------
-| Text (Excerpt) | Label |
-|-------------------|---------|
-| "Food recom..." | I |
-| "Previous stu..." | R |
-| "As discussed..." | D |
-| "Initially..." | I |
-| "The method..." | M |
-| "Furthermore..." | R |
-| "Results show..." | D |
--------------------------------
++-----------------------+---------+
+| Text (Excerpt)        | Label   |
++-----------------------+---------+
+| "Food recom..."       | I       |
+| "Previous stu..."     | R       |
+| "As discussed..."     | D       |
+| "Initially..."        | I       |
+| "The method..."       | M       |
+| "Furthermore..."      | R       |
+| "Results show..."     | D       |
++-----------------------+---------+
 
          CHALLENGES:
 * Section-level annotations only.
@@ -164,7 +164,7 @@ However, because the research part of my engineering thesis focused specifically
 
 
 
-As I couldn't find public data or afford a human annotator, I designed a three-phase approach (V1->V2->V3) to **overcome** the lack of a sentence-level granular dataset and to create a custom one tailored to my specific needs.    
+As I couldn't find public data or afford a human annotator, I designed a three-phase approach (V1->V2->V3) to **overcome** the lack of a sentence-level granular dataset and to create a custom one tailored to my specific needs.
 
 
 
@@ -202,7 +202,7 @@ The way I approached this problem was incremental. I started with a baseline mod
 
 
 
-LLMs are generalists by design; they are meant to deal with any kind of situation. So, how can we leverage them for specific tasks like classification? That's where prompt engineering comes in. 
+LLMs are generalists by design; they are meant to deal with any kind of situation. So, how can we leverage them for specific tasks like classification? That's where prompt engineering comes in.
 
 A prompt is basically a set of instructions written in raw natural text. It allows us to restrict how the LLM acts, or specialize it for a specific task like classification, summarization, etc.
 
@@ -210,11 +210,11 @@ In this version, I used a fairly simple prompt to instruct each Gemini Pro insta
 
 ## Phase 2: Model Refinement (V2)
 
-In the second version of the pipeline, I decided to focus on enhancing the prompt. 
+In the second version of the pipeline, I decided to focus on enhancing the prompt.
 
-I thought to myself, 'What if the reason behind that low accuracy is that Gemini Pro **didn't have enough context about the introduction**? Maybe I should **embed the whole introduction in the prompt**.' 
+I thought to myself, 'What if the reason behind that low accuracy is that Gemini Pro **didn't have enough context about the introduction**? Maybe I should **embed the whole introduction in the prompt**.'
 
-In addition to that, instead of classifying only the moves, the enhanced prompt would allow Gemini to **classify both moves and submoves in one go**. 
+In addition to that, instead of classifying only the moves, the enhanced prompt would allow Gemini to **classify both moves and submoves in one go**.
 
 The comparative table below explains the steps that were taken.
 
@@ -253,7 +253,7 @@ For my final model, I generated a custom dataset of 169k sentences by creating a
 
 The final generated data was used to fine-tune four hierarchical, specialized BERT models.
 
-Believe me when I tell you that I was bursting with joy when I saw the validation and training accuracy graphs increasing in parallel. 
+Believe me when I tell you that I was bursting with joy when I saw the validation and training accuracy graphs increasing in parallel.
 
 When the F1 score hit 0.98 for overall move classification and exceeded 0.89 for submove classification, I was literally screaming, "Yes, yes! It's not overfitting, and the F1 score is above 98%!"  
 
@@ -278,13 +278,13 @@ This previous pipeline was powered by a series of carefully designed prompts for
 
 ```
 
-The **base prompt** is the same one I used in V2, but with an extra ingredient. 
+The **base prompt** is the same one I used in V2, but with an extra ingredient.
 
 In addition to listing all the moves and submoves, I also provided multiple examples for every single submove to better guide the model.
 
 Both the **outlier detection** and **data augmentation** prompts **extend** from this **base prompt**, just with some extra adjustments added on top.
 
-Essentially, the outlier detection prompt instructs Gemini to audit previous predictions, flagging them as outliers or correcting them if they're wrong. 
+Essentially, the outlier detection prompt instructs Gemini to audit previous predictions, flagging them as outliers or correcting them if they're wrong.
 
 The data augmentation prompt then handles the heavy lifting, instructing Gemini to generate more sentences for each move while strictly respecting the rules I defined.
 
