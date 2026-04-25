@@ -102,7 +102,7 @@ In my graduation thesis, 'Leveraging Gemini Pro and BERT for Automated IMRaD Cla
 
 Yes, I know. It would have been much easier for me to just carry on with the same theme as my master's thesis and do a single research and engineering study. 
 
-**However**,**** I'm not the kind of person who gives up**** on something easily. My supervisor challenged me with the analysis of introductions, and despite all the hurdles I faced due to the lack of a suitable dataset, I wasn't going to drop the theme that easily.
+**However**, I'm not the kind of person who gives up on something easily. My supervisor challenged me with the analysis of introductions, and despite all the hurdles I faced due to the lack of a suitable dataset, I wasn't going to drop the theme that easily.
 
 Before I dive into the granular details of the research and development phases later in this post, here is a brief summary of my key contributions to both the research and engineering parts of the project: 
 
@@ -221,6 +221,8 @@ the output should be the corresponding imrad move without anything extra
 ```
 
 ### Phase 2: Model Refinement (V2)
+
+In the second version of the pipline i decided 
 
 - To enhance accuracy, I decided to change the previous Gemini pro prompt .
 
