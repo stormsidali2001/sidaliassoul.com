@@ -113,8 +113,9 @@ In my graduation thesis, 'Leveraging Gemini Pro and BERT for Automated IMRaD Cla
 
 
 ### Engineering Part:
+
 - Architected a scalable 8-node microservices ecosystem comprising Nginx (Gateway), Spring Cloud Eureka (Discovery), Next.js (Frontend and API), a FastAPI PDF Extractor, TensorFlow Serving, FastAPI with LangChain (AI Analysis), and Express.js with MongoDB (User Data) decoupled by a Redis message broker.
-- 
+- Directed the complete software development life cycle, authoring comprehensive technical documentation across Requirements Analysis and Specification, System Design, and Implementation to ship a scalable, production-ready platform.
 
 
 &nbsp;
