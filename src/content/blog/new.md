@@ -215,11 +215,9 @@ However, because the research part of my engineering thesis focused specifically
         [ END ]
 ```
 
-As I couldn't find public data or afford a human annotator, I created a Gemini Pro-based data pipeline, including baseline generation, prompt refinement, outlier detection, and data augmentation, validating outputs with Random Forest, Logistic Regression, SVM, KNN, and Naive Bayes classifiers.
+As I couldn't find public data or afford a human annotator, I designed a three-phase approach (V1->V2->V3) to **overcome** the lack of a sentence-level granular dataset and to create a custom one tailored to our specific needs.
 
 ### Phase 1: Baseline Model (V1)
-
-
 
 ### Phase 2: Model Refinement (V2)
 
