@@ -329,9 +329,7 @@ In the second version of the pipline i decided
 ```
 ```
 
-```
 
-```
 
 ## Conclusion
 
