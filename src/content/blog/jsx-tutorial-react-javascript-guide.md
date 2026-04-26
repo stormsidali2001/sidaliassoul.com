@@ -16,7 +16,7 @@ youtubeUrl: "https://youtu.be/BnnaFuTl7XA?si=M7e1FoihQC2wYtV3"
 
 So what the heck is JSX? And what does it have to do with HTML?
 
-`JSX` is a syntax extension for `JavaScript`. Yes, you heard it right: it's an extension of `JavaScript` not `HTML`, despite what many people think. This means that `JSX` is eventually converted into valid `JavaScript` code 😮.
+`JSX` is a syntax extension for `JavaScript`. Yes, you heard it right: it's an extension of `JavaScript` not `HTML`, despite what many people think. This means that `JSX` is eventually converted into valid `JavaScript` code.
 
 Under the hood, the conversion is handled by compilers like `Babel` or `SWC`. Consequently, the entire component tree representing our `App` is transformed into `JavaScript`. These objects are understood by the browser and used by the `React` runtime to render the final `HTML` code.
 
@@ -152,7 +152,7 @@ Sure we can perform any kind of `JavaScript` logic in the function's body before
 
 But is there a built-in way to use `JavaScript` or reference a `JavaScript` value or object from within the `JSX` code itself?
 
-Yes, and it's pretty simple; just use the curly bracket syntax `{}` and then reference any variable, value, function call, or any expression from the `JavaScript world 🌎`.
+Yes, and it's pretty simple; just use the curly bracket syntax `{}` and then reference any variable, value, function call, or any expression from the `JavaScript world`.
 
 Rather than hardcoding the title value in the `Markup` here, we can store the `h1` tag's inner content in a `JavaScript` variable as a string.
 

@@ -240,4 +240,4 @@ Can you guess? -- Yes, that's right; we kept saying "HTML-like code." But we nev
 
 Well, because that's not HTML code; it's actually a syntax extension of JavaScript, and it's called JSX!
 
-In the next article of the series, we will reveal **more secrets** 🤫 about this mystery. Until then, happy coding.
+In the next article of the series, we will reveal **more secrets** about this mystery. Until then, happy coding.

@@ -15,7 +15,7 @@ seriesOrder: 11
 
 Did you know that a **React** component can re-render while the corresponding displayed **UI** segment has not been changed?
 
-I know **when we say rendering, we instinctively think that something has to be printed on the screen**. But that's not necessarily the case for **React** 🤯.
+I know **when we say rendering, we instinctively think that something has to be printed on the screen**. But that's not necessarily the case for **React**.
 
 ## Why DOM Updates Are Expensive
 

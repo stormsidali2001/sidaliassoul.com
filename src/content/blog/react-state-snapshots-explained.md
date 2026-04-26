@@ -32,11 +32,11 @@ return (
 }
 ```
 
-You may get shocked to know that this code, **will not print 2** 😮.
+You may get shocked to know that this code, **will not print 2**.
 
 Despite **incrementing the counter by 1**, and then **deferring the execution of the console log by 5 seconds using the `setTimeout` browser `API`**,which means that by the time the `console.log` is executed the **state will have been already incremented by 1**.
 
-**But** reality shows nothing but that, in fact, a 1 gets printed 🤯.
+**But** reality shows nothing but that, in fact, a 1 gets printed.
 
 
 In this article, we will be clarifying what's exactly happening here under the scene while explaining the concept of a **state snapshot in `React`**. So without any further ado let's get started.
@@ -46,7 +46,7 @@ As you might know, `State` doesn't live inside the function component but it's s
 
 And **provided as a snapshot** or in other terms, as **a copy of the original state** via the `useState` hook.
 
-In fact, `useState` is named a hook because \*\*it's hooking into the external state stored in `React` itself 🤯! \*\*
+In fact, `useState` is named a hook because \*\*it's hooking into the external state stored in `React` itself! \*\*
 
 Components re-renders can be triggered via a state updates. Therefore when a given component re-renders or `gets called by React` a new snapshot mirroring the latest updated state value is given to it, and then based on that value the whole `JSX` including the **attached event handlers** gets re-created again.
 
@@ -91,4 +91,4 @@ setCounter(counter +1)
 
 Well, that's what we are going to discover in the next article, where we introduce `React State Batching`.
 
-Thank you for your attentive reading and happy coding 🧑‍💻.
+Thank you for your attentive reading and happy coding.

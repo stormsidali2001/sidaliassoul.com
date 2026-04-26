@@ -150,7 +150,7 @@ const todosJSX =  todos.map(item=>(
 }
 ```
 
-That's how easy it is to render an array of objects. It's that simple; just map it to **JSX** elements, and you're good to go 😄.
+That's how easy it is to render an array of objects. It's that simple; just map it to **JSX** elements, and you're good to go.
 
 Now as the JSX returned by the **map's callback function** is getting quite long and messy, let's substitute it or move it into its own react component
 
@@ -203,7 +203,7 @@ When calling the same component twice or rendering an array of components, it's 
 
 In fact, if you try to render a list of items without passing the **key** prop into each one. The following warning gets displayed in your browser console.
 
-> ⚠️ **React Warning:** Each child in a list should have a unique "key" prop.
+> **React Warning:** Each child in a list should have a unique "key" prop.
 
 When using the `map` method to render an `array` of items, we should always pass a `string` or a `number` `key` prop that **uniquely identifies each item among other items in the array**.
 
@@ -277,4 +277,4 @@ The user can now see its todos, but what if he wanted to complete a todo? He nee
 
 In the next article we're going to **unveil how we can seamlessly respond to those events**.
 
-Thank you for your attentive reading, and happy coding 🧑‍💻.
+Thank you for your attentive reading, and happy coding.

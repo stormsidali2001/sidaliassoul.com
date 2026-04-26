@@ -184,4 +184,4 @@ That's where conditional rendering comes in!
 
 In the next article, we will learn how to **display different elements** depending on specific **conditions**, using either `if` statements within the `JavaScript logic` of the component or a `ternary operator` inside the `Markup` itself.
 
-Until then, happy coding 🧑‍💻.
+Until then, happy coding.
