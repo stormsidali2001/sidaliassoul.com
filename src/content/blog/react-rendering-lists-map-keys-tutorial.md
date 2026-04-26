@@ -18,7 +18,7 @@ Even though the data might come from **various sources,** it always ends up in a
 
 So in this article we will learn **how to render a list of components** or just raw **JSX** codes given an **array of data**.
 
-And then we will understand how **React** can track those **rendered components** via something called **keys**. So without any further ado, let's dive in.
+And then we will understand how **React** can track those **rendered components** via something called **keys**.
 
 
 Take a look at this code.

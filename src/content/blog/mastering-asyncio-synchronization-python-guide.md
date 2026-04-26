@@ -150,7 +150,7 @@ Under the hood, the `Lock` class implements the **asynchronous context manager**
 
 
 
-Let's create another **debit coroutine** that performs the same logic but **decrements** the balance by 1 instead of incrementing it. Subsequently, we will run the credit and debit coroutines concurrently using **asyncio.gather**.
+Let's create another **debit coroutine** that performs the same logic but **decrements** the balance by 1 instead of incrementing it. Next, we will run the credit and debit coroutines concurrently using **asyncio.gather**.
 
 ```python
 async def debit():
@@ -424,7 +424,7 @@ event = asyncio.Event()
 
 Let's instantiate our event object using the `asyncio.Event` class. 
 
-Subsequently, we will declare the **"one"** side of the **one-to-many communication** mentioned earlier: the **"setter"** coroutine.
+Then, we will declare the **"one"** side of the **one-to-many communication** mentioned earlier: the **"setter"** coroutine.
 
 ```python
 

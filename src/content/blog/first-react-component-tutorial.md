@@ -150,7 +150,7 @@ pnpm run dev
 npm run dev
 ```
 
-Subsequently, we need to head into `http://localhost:5173` and inspect the page.
+Next, we need to head into `http://localhost:5173` and inspect the page.
 
 ![First component preview](/assets/courses/inspect-content-vite-first-component.png)
 

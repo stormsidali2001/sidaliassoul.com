@@ -96,7 +96,7 @@ Can a BERT model, enhanced through data augmentation and robust preprocessing te
 
 In a master's thesis, before diving into your own approach, you have to survey the current research and see what the state of the art looks like.
 
-So I spent a significant amount of time searching for relevant papers, reading, filtering, and carefully selecting four pivotal studies that I reviewed and compared in terms of data size, annotation method, models used, and accuracy.
+So I spent a significant amount of time searching for relevant papers, reading, filtering, and carefully selecting four key studies that I reviewed and compared in terms of data size, annotation method, models used, and accuracy.
 
 I also studied a wide range of relevant topics, including classic NLP techniques, traditional machine learning classifiers (TF-IDF, BoW, Word2Vec, Naïve Bayes, and SVM), and modern deep learning advances (pre-trained models like BERT and GPT, LLMs, and prompt engineering).
 
@@ -114,7 +114,7 @@ Although the experimentation section is typically optional in a master's thesis,
 
 The key findings of the thesis are as follows:
 
-- Establishment of a robust and transferable IMRAD classification framework that combines transfer learning, advanced preprocessing, and data augmentation.
+- Establishment of a solid and transferable IMRAD classification framework that combines transfer learning, advanced preprocessing, and data augmentation.
 - Creation of a new annotated dataset (approximately 100k rows) published on Hugging Face.
 - Training of a high-accuracy fine-tuned BERT classifier.
 
@@ -141,8 +141,8 @@ Before I dive into the granular details of the research and development phases l
 
 ### Engineering Contributions
 
-- Architected a scalable 8-node microservices ecosystem comprising Nginx (gateway), Spring Cloud Eureka (discovery), Next.js (frontend and API), a FastAPI PDF extractor, TensorFlow Serving, FastAPI with LangChain (AI analysis), and Express.js with MongoDB (user data) decoupled by a Redis message broker.
-- Directed the complete software development life cycle, authoring comprehensive technical documentation across requirements analysis and specification, system design, and implementation to ship a scalable, production-ready platform.
+- Architected a scalable 8-node microservices architecture comprising Nginx (gateway), Spring Cloud Eureka (discovery), Next.js (frontend and API), a FastAPI PDF extractor, TensorFlow Serving, FastAPI with LangChain (AI analysis), and Express.js with MongoDB (user data) decoupled by a Redis message broker.
+- Directed the complete software development life cycle, authoring full technical documentation across requirements analysis and specification, system design, and implementation to ship a scalable, production-ready platform.
 
 
 
@@ -223,7 +223,7 @@ The way I approached this problem was incremental. I started with a baseline mod
 
 
 
-LLMs are generalists by design; they are meant to deal with any kind of situation. So, how can we leverage them for specific tasks like classification? That's where prompt engineering comes in.
+LLMs are generalists by design; they are meant to deal with any kind of situation. So, how can we use them for specific tasks like classification? That's where prompt engineering comes in.
 
 A prompt is basically a set of instructions written in raw natural text. It allows us to restrict how the LLM acts, or specialize it for a specific task like classification, summarization, etc.
 
@@ -323,7 +323,7 @@ The **IMRaD Analysis Platform** offers the following key features:
 - User feedback system allowing corrections to predictions to help improve the model
 - Premium features including detailed summaries and AI-generated author thought process
 - Full user account management with Stripe subscription handling
-- Comprehensive administrator tools for managing users, reviewing feedback, and monitoring platform statistics
+- Administrator tools for managing users, reviewing feedback, and monitoring platform statistics
 
 ### Microservices Breakdown
 

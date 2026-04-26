@@ -57,7 +57,7 @@ return (
 
 Doing so will just **make the function run at every single render or component update,** which is obviously not our goal here.
 
-The function that is attached to the **onClick** prop is going to get called. Consequently, the alert message will pop up only when the **button** gets clicked by the user.
+The function that is attached to the **onClick** prop is going to get called. So, the alert message will pop up only when the **button** gets clicked by the user.
 
 What if our component receives a **username** prop? Can we access it in the **event handler**?
 
@@ -84,7 +84,7 @@ Declaring "**handleClick**" inside it makes it impossible to change the **button
 
 So can we solve this with props? In addition to that, is it even possible to pass functions as props?
 
-Functions are first-class citizens in **JavaScript**. Consequently, they can be passed to other functions, therefore, **React** components. So it's obviously possible to do that.
+Functions are first-class citizens in **JavaScript**. That means they can be passed to other functions, therefore, **React** components. So it's obviously possible to do that.
 
 Now let's make our Button component accept a new prop called **"onClick,"** assign it to the button's "**onClick"** prop, and then declare a **handleClick** event handler inside the parent component itself. And then pass it to the **Button** child component.
 

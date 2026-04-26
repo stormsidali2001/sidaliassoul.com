@@ -18,7 +18,7 @@ So what the heck is JSX? And what does it have to do with HTML?
 
 `JSX` is a syntax extension for `JavaScript`. Yes, you heard it right: it's an extension of `JavaScript` not `HTML`, despite what many people think. This means that `JSX` is eventually converted into valid `JavaScript` code.
 
-Under the hood, the conversion is handled by compilers like `Babel` or `SWC`. Consequently, the entire component tree representing our `App` is transformed into `JavaScript`. These objects are understood by the browser and used by the `React` runtime to render the final `HTML` code.
+Under the hood, the conversion is handled by compilers like `Babel` or `SWC`. So, the entire component tree representing our `App` is transformed into `JavaScript`. These objects are understood by the browser and used by the `React` runtime to render the final `HTML` code.
 
 For example, the code below.
 
@@ -98,7 +98,7 @@ As bonus information, there is one exception to the above rule, which is attribu
 <div className="..."> </div> // ✅
 ```
 
-Moreover, when declaring a component we also do it in camel case, while making sure that the first character is in uppercase. Bonus: That's actually called Pascal case!
+Also, when declaring a component we also do it in camel case, while making sure that the first character is in uppercase. Bonus: That's actually called Pascal case!
 
 ```tsx
 function my_component() {

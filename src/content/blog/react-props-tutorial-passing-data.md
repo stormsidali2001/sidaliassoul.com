@@ -93,7 +93,7 @@ Okay, now let's say that we have 3 levels of nesting:
 App -{title,img,description}--> ChildComponent1 --{description,image}-> ChildComponent2 
 ```
 
-This can quickly get cumbersome as the number of forwarded `props` increases. Moreover, the components become less resistant to changes when we want to forward more props.
+This can quickly get cumbersome as the number of forwarded `props` increases. On top of that, the components become less resistant to changes when we want to forward more props.
 
 So instead of forwarding the `props` manually like that
 

@@ -23,7 +23,7 @@ Updating your application's **UI**, which is displayed on your browser screen, i
 
 If **React** were updating the **DOM** **every time a component had re-rendered**, **the number of DOM operations performed could become huge**. Therefore, your application's performance would be negatively affected.
 
-Moreover, we shall say that **updating the DOM is considered a costly operation in general**. Especially **if performed too often** because of the following reasons:
+On top of that, we shall say that **updating the DOM is considered a costly operation in general**. Especially **if performed too often** because of the following reasons:
 
 ### Browser Reflows
 
@@ -84,7 +84,7 @@ Secondly, once **your component tree has been initially rendered, you can trigge
 
 Put differently, using the **setter function** means just asking **React** for a future render while mentioning the state changes.
 
-**React** will take that into consideration and schedule the next render with the **new state value**. **Consequently, it will update the parts of the JSX code that are derived from the new state** during the next render.
+**React** will take that into consideration and schedule the next render with the **new state value**. **So, it will update the parts of the JSX code that are derived from the new state** during the next render.
 
 ### 2\. Render Phase
 

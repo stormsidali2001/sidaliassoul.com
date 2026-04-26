@@ -1,5 +1,5 @@
 ---
-title: "Master Python Asyncio: A Comprehensive Guide "
+title: "Master Python Asyncio: A Full Guide "
 description: "Master Python asyncio: learn coroutines, async/await, the event
   loop, Tasks, asyncio.gather, TaskGroups (Python 3.11+), and Futures for
   non-blocking I/O."
@@ -27,7 +27,7 @@ In this guide, we will break down how to implement this effectively in your Pyth
 - **How to use Tasks**, an abstraction above coroutines that allows us to schedule and manage concurrent execution.
 - **The Future**, the third type of awaitable in Python, and how it represents an eventual result.
 
-So without any further ado let's dive in.
+Let's get into it.
 
 ## Mastering Asynchronous I/O: How to Handle Waiting Tasks
 
@@ -50,7 +50,7 @@ You soon find out, however, that your task has a dependency on a teammate. In ot
 
 But you aren't one. Instead of waiting for your coworker (a.k.a. the external I/O-bound task) to finish their work, you can just proceed asynchronously by switching to another task until they are done.
 
-The same analogy can be applied to our program. If a part of the program is waiting for a record to be written to the database or a file to be saved to the disk, it should not stay idle. Instead, it can leverage that time to switch to other asynchronous tasks, such as fetching data from external APIs.
+The same analogy can be applied to our program. If a part of the program is waiting for a record to be written to the database or a file to be saved to the disk, it should not stay idle. Instead, it can use that time to switch to other asynchronous tasks, such as fetching data from external APIs.
 
 As you can see, async is not about executing tasks in parallel. It is all about avoiding doing nothing while our program stays idle waiting for an external I/O-bound operation to be completed. It’s about leveraging that wasted time to execute other operations.
 
@@ -66,7 +66,7 @@ Asyncio, threads and multiprocessing three common ways to speed up a program. He
 - Threads are not really parallel in Python because of the Global Interpreter Lock (GIL). Which is a mutex ensuring that only one thread is executing python bytecode at a time
 - In the latest version of Python, they introduced a free-threaded build, but it's not enabled by default for compatibility reasons.
 
-3. **Multiprocessing**: Unlike threads, each process has its own instance of the Python interpreter. This means you can truly utilize 100% of your multi-core processor.
+3. **Multiprocessing**: Unlike threads, each process has its own instance of the Python interpreter. This means you can truly use 100% of your multi-core processor.
 
 - Subprocesses cost more memory as each one has its own memory and instance of the Python interpreter.
 - But speed and isolation pays for that cost here; a crash in one subprocess won't affect the others.
@@ -229,7 +229,7 @@ With Tasks (concurrent) — 2 seconds total:
 
 ### What is the event loop?
 
-Asynchronous execution of our program allows us to leverage the wasted waiting time of I/O-bound operations by switching from one blocked task to another until all tasks are executed. But how is that achieved in practice by asyncio? 
+Asynchronous execution of our program allows us to use the wasted waiting time of I/O-bound operations by switching from one blocked task to another until all tasks are executed. But how is that achieved in practice by asyncio? 
 
 That's where the Event Loop comes in.
 
@@ -558,7 +558,7 @@ You can notice that the program took only 2 seconds to execute, it didn't pause 
 
 ## Conclusion
 
-So that's basically all you need to get started with asynchronous programming in Python. We covered coroutines, tasks, future, how the event loop is leveraged to manage and orchestrate concurrent running async jobs with all the necessary nitty-gritty details that you need to get you started.
+So that's basically all you need to get started with asynchronous programming in Python. We covered coroutines, tasks, future, how the event loop is used to manage and orchestrate concurrent running async jobs with all the necessary nitty-gritty details that you need to get you started.
 
 Despite covering all of that, there is an important thing that we didn't mention yet.
 

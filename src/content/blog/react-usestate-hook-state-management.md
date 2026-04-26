@@ -24,7 +24,7 @@ In other words, sometimes a **React** component needs some kind of **local and p
 
 ## Understanding Component State
 
-This specific type of memory is called a **component's local state**, and it's today's article topic. So without any further ado, let's get started.
+This specific type of memory is called a **component's local state**, and it's today's article topic.
 
 ## Building a Counter Component
 

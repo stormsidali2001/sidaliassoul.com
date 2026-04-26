@@ -39,7 +39,7 @@ Despite **incrementing the counter by 1**, and then **deferring the execution of
 **But** reality shows nothing but that, in fact, a 1 gets printed.
 
 
-In this article, we will be clarifying what's exactly happening here under the scene while explaining the concept of a **state snapshot in `React`**. So without any further ado let's get started.
+Here we'll clarify what's exactly happening under the scene while explaining the concept of a **state snapshot in `React`**.
 
 
 As you might know, `State` doesn't live inside the function component but it's stored within the `React` package itself!.
