@@ -7,4 +7,5 @@ featured: true
 order: 4
 ---
 
-A scalable TypeScript chess engine (DDD + Hexagonal Architecture) featuring a Polymorphic Move Strategy and deep-cloning Rules Engine to handle complex state transitions and edge cases within a Turborepo monorepo.
+- Architected a scalable TypeScript chess engine using Domain-Driven Design and Hexagonal Architecture within a Turborepo monorepo
+- Designed a Polymorphic Move Strategy and deep-cloning Rules Engine to manage complex state transitions and edge cases

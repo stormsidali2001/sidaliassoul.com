@@ -1,5 +1,5 @@
 ---
-role: Full Stack Engineer
+role: Full Stack Engineer Intern
 company: Data Intuition
 location: Algiers, Algeria
 startDate: 2022-05-01
@@ -8,5 +8,5 @@ stack: [Express.js, EJS, JavaScript]
 order: 4
 ---
 
-- Maintained and modernized three legacy production platforms built with Express.js and EJS, ensuring 99.9% uptime during transitions
+- Maintained and modernized 3 legacy production platforms built with Express.js and EJS, achieving 99.9% uptime during transitions
 - Implemented critical feature updates and resolved security vulnerabilities in high-traffic administrative portals

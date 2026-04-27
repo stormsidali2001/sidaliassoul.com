@@ -7,4 +7,7 @@ featured: true
 order: 3
 ---
 
-Designed during an internship at Béjaïa's harbor company (BMT), this real-time contracts and organizational management dashboard empowers juridicals, admins, and employees. Built with Clean Architecture, Domain-Driven Design (DDD), and Event-Driven Design, the platform features a Feature-Sliced Next.js frontend and a NestJS backend leveraging Redis Pub/Sub to horizontally scale WebSockets, fully validated by comprehensive unit and integration tests.
+- Designed a real-time contracts and organizational management dashboard for juridicals and admins at BMT
+- Architected the backend with NestJS using Clean Architecture and Domain-Driven Design (DDD)
+- Implemented Redis Pub/Sub to horizontally scale WebSockets for real-time state synchronization
+- Built a Feature-Sliced Next.js frontend validated by unit and integration tests
