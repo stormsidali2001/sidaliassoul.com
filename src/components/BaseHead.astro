@@ -22,7 +22,9 @@ interface Props {
 	author?: string;
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const rawPathname = Astro.url.pathname;
+const canonicalPathname = rawPathname.endsWith('/') ? rawPathname : `${rawPathname}/`;
+const canonicalURL = new URL(canonicalPathname, Astro.site);
 
 const { title, description, image, type = 'website', pubDate, author } = Astro.props;
 

@@ -49,7 +49,7 @@ const hasHiddenAfter = windowEnd < seriesPosts.length - 1;
 							<span class="series-item__badge" aria-label="You are here">You are here</span>
 						</span>
 					) : (
-						<a href={`/blog/${post.id}`} class="series-item__link">
+						<a href={`/blog/${post.id}/`} class="series-item__link">
 							<span class="series-item__number" aria-hidden="true">{displayNumber}.</span>
 							<span class="series-item__title">{post.data.title}</span>
 						</a>

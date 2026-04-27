@@ -38,11 +38,11 @@ if (related.length < 3) {
 	<section class="related-articles">
 		<div class="related-header">
 			<h2 class="related-title">Continue Reading</h2>
-			<a href="/blog" class="related-all-link">All articles →</a>
+			<a href="/blog/" class="related-all-link">All articles →</a>
 		</div>
 		<div class="related-grid">
 			{related.map(post => (
-				<a href={`/blog/${post.id}`} class="related-card">
+				<a href={`/blog/${post.id}/`} class="related-card">
 					<div class="related-card__top">
 						{post.data.tags?.[0] && (
 							<span class="related-card__tag">{post.data.tags[0]}</span>

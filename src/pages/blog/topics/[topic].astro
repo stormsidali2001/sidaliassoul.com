@@ -81,7 +81,7 @@ function readingTime(body: string): string {
 						{post.data.tags.length > 0 && (
 							<div class="blog-post-topics">
 								{post.data.tags.map(t => (
-									<a href={`/blog/topics/${t}`} class={`blog-topic${t === tag ? ' blog-topic--active' : ''}`}>{t}</a>
+									<a href={`/blog/topics/${t}/`} class={`blog-topic${t === tag ? ' blog-topic--active' : ''}`}>{t}</a>
 								))}
 							</div>
 						)}

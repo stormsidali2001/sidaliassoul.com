@@ -82,7 +82,7 @@ const years = [...postsByYear.keys()].sort((a, b) => b - a);
 									{(post.data.tags ?? []).length > 0 && (
 										<div class="blog-post-topics">
 											{post.data.tags!.map(topic => (
-												<a href={`/blog/topics/${topic}`} class="blog-topic">{topic}</a>
+												<a href={`/blog/topics/${topic}/`} class="blog-topic">{topic}</a>
 											))}
 										</div>
 									)}

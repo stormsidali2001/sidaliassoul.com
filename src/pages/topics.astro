@@ -46,7 +46,7 @@ const topics = [...topicMap.entries()]
 
 			<div class="topics-grid">
 				{topics.map(({ name, count }) => (
-					<a href={`/blog/topics/${name}`} class="topic-card">
+					<a href={`/blog/topics/${name}/`} class="topic-card">
 						<div class="topic-card__header">
 							<span class="topic-card__hash">#</span>
 							<span class="topic-card__count">{count} article{count !== 1 ? 's' : ''}</span>

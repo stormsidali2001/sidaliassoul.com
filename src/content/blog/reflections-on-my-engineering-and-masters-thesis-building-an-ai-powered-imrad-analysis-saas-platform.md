@@ -278,7 +278,7 @@ Believe me when I tell you that I was bursting with joy when I saw the validatio
 
 When the F1 score hit 0.98 for overall move classification and exceeded 0.89 for submove classification, I was literally screaming, "Yes, yes! It's not overfitting, and the F1 score is above 98%!"  
 
-![ZPFFJXin48VlVeeflO3KLfkqGX2aYZ-GYWCW9RIdN2QxasI4rux6iujerNUlxLYA8fhIvBJZMN_V_Bm-3ugYNMlDErrHIz3pND2fCU69tHe5My1QkMTzWLy6u1BhfwNupZLNtdg1z-DX-gSLBmr9gHxdNwoElTDxR0akXD6MmfH_4WmgyzkOp3ScafILlOE3QrI42ItOHH-d1n4x-Z64L3uppYk1y7Ab8vZ6LN8r1R0u9qiD.png](/ZPFFJXin48VlVeeflO3KLfkqGX2aYZ-GYWCW9RIdN2QxasI4rux6iujerNUlxLYA8fhIvBJZMN_V_Bm-3ugYNMlDErrHIz3pND2fCU69tHe5My1QkMTzWLy6u1BhfwNupZLNtdg1z-DX-gSLBmr9gHxdNwoElTDxR0akXD6MmfH_4WmgyzkOp3ScafILlOE3QrI42ItOHH-d1n4x-Z64L3uppYk1y7Ab8vZ6LN8r1R0u9qiD.png)
+<img src="/bert-move-classifier-training-accuracy.png" alt="Training and validation accuracy curves for the fine-tuned BERT move classifier, showing the F1 score progressively reaching 98.21%" width="903" height="673" loading="lazy" />
 
 
 
@@ -327,7 +327,7 @@ The **IMRaD Analysis Platform** offers the following key features:
 
 ### Microservices Breakdown
 
-![component_diagram (1).png](</component_diagram (1).png>)
+<img src="/microservices-architecture-diagram.png" alt="Microservices architecture component diagram showing all 8 nodes: Nginx API gateway, Eureka discovery server, Next.js frontend and API, FastAPI PDF extractor, TensorFlow Serving, FastAPI LangChain AI analysis service, Express.js user data microservice, and Redis message broker" width="1485" height="836" loading="lazy" />
 
 Let’s break down the key microservices in our platform.
 
@@ -361,11 +361,11 @@ Here's a quick look at the data model of our platform.
 
 **Next.js Microservice:** The Next.js API microservice takes responsibility for two entities: **User** and **Subscription**.
 
-![class_diagram.png](/class_diagram.png)
+<img src="/class_diagram.png" alt="Class diagram of the Next.js microservice showing the User and Subscription entities and their relationship" width="693" height="1056" loading="lazy" />
 
 **User Data Microservice:** The User Data microservice is responsible for three entities: **Introduction**, **Sentence**, and **Feedback**.
 
-![VL9FQ_f04BtdKonUVuXw-n52i5OAGdlAjPT9TenBihCoEv5AwNTlObnYKicUPj-RURpvi_K2B8sj8ryPEWE3LRKXbEiPbMCvkGUYgC7xlO6o_UmDOo76aM9JdkGXYvn6ZsUrMQyVK0QgElJ_EefkEkf0mautlSXtfDhtpvyWLfcmeR876ezyq6EiO0H1_IAnshV1lH99a0hqiNetNfBi_azx6Yx8K6BMv1_kWg-EZaPtTApU.png](/VL9FQ_f04BtdKonUVuXw-n52i5OAGdlAjPT9TenBihCoEv5AwNTlObnYKicUPj-RURpvi_K2B8sj8ryPEWE3LRKXbEiPbMCvkGUYgC7xlO6o_UmDOo76aM9JdkGXYvn6ZsUrMQyVK0QgElJ_EefkEkf0mautlSXtfDhtpvyWLfcmeR876ezyq6EiO0H1_IAnshV1lH99a0hqiNetNfBi_azx6Yx8K6BMv1_kWg-EZaPtTApU.png)
+<img src="/user-data-microservice-class-diagram.png" alt="Class diagram of the User Data microservice showing Introduction, Sentence, and Feedback entities and their one-to-many relationships" width="885" height="191" loading="lazy" />
 
 
 
@@ -381,5 +381,5 @@ If you’ve reached this far, I’d like to thank you for your time and patience
 
 After months of studying NLP, leafing through research papers, and listening to podcasts about it during my walks, I went from having no dataset to creating a 169k-sentence annotated dataset, fine-tuning four hierarchical BERT models to a 98.21% F1-score, and building a complete microservices platform.
 
-I hope you found this helpful and informative. If you have any questions or suggestions, feel free to reach out. You'll find all my social media links on the [Contact Page](/contact).
+I hope you found this helpful and informative. If you have any questions or suggestions, feel free to reach out. You'll find all my social media links on the [Contact Page](/contact/).
 

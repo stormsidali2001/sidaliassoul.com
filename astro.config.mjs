@@ -30,6 +30,7 @@ for (const file of fs.readdirSync(blogDir)) {
 // https://astro.build/config
 export default defineConfig({
   site: siteBase,
+  trailingSlash: 'always',
   vite: {
     ssr: {
       external: ['@resvg/resvg-js'],
