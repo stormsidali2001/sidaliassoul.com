@@ -73,7 +73,7 @@ Research papers are the medium that is used to communicate scientific findings b
 
 Subjectivity has no place in science, so we can't mix scientific findings with other kinds of literature. And that's where IMRad is useful.
 
-IMRad stands for introduction, results, and discussion. It's a logical and objective framework for writing scientific papers.
+IMRad stands for introduction, methods, results, and discussion. It's a logical and objective framework for writing scientific papers.
 
 In the Introduction section the author should present what's known about the research area and all the existing work that's done about it, show the motivation behind it's own study and then conclude by showing how his research brings a unique perspective to the field. 
 
