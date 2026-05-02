@@ -243,7 +243,7 @@ As I could neither obtain public data nor afford a human annotator, I designed a
 
 The way I approached this problem was incremental. I started with a baseline model involving the following workflow:
 
-- I selected random introductions from the cleaned and filtered unarXive dataset.
+- I selected random introductions from the cleaned and filtered "unarXive" dataset.
 - I split the introductions into their individual sentences.
 - I fed every individual sentence into a Gemini LLM instance while guiding it with a well-crafted classification prompt.
 - Then I used the generated data to fine-tune a BERT model for classification. 
