@@ -241,13 +241,17 @@ As I could neither obtain public data nor afford a human annotator, I designed a
 
 ## Phase 1: Baseline Model ([V1](https://github.com/stormsidali2001/graduation_IMRAD_introduction_analysis_SaaS/tree/main/notebooks/v1))
 
-The way I approached this problem was incremental. I started with a baseline model involving the following workflow:
+My solution to this problem was incremental.
 
-- I selected random introductions from the cleaned and filtered "unarXive" dataset.
-- I split the introductions into their individual sentences.
-- I fed every individual sentence into a Gemini LLM instance while guiding it with a well-crafted classification prompt.
-- Then I used the generated data to fine-tune a BERT model for classification. 
-- This model achieved an accuracy of 44.61%, demonstrating potential (because the accuracy is slightly higher than a random guess for three classes) but highlighting the need for improvement.
+I started with a baseline model using the following workflow:
+
+1. I've chosen random introductions from the cleaned and filtered “unarXive” dataset.
+2. I broke the introductions into sentences.
+3. I fed every individual sentence into a Gemini LLM instance while guiding it with a well-crafted classification prompt.
+4. I then used the generated data to finetune a BERT model for classification. 
+5. This model achieved an accuracy of 44.61%, which has, in my opinion, shown potential (because the accuracy was a little higher than a random guess for three classes). 
+
+
 
 ```
 [ unarxive dataset ]
