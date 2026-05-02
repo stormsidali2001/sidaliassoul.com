@@ -39,7 +39,7 @@ I immediately went to the university reading room and started skimming through t
 ## Table of Contents
 
 - [Not one graduation project, but actually two!](#not-one-graduation-project-but-actually-two)
-- [But what does IMRAD actually mean?](#but-what-does-imrad-even-mean)
+- [But what does IMRAD actually mean?](#but-what-does-imrad-actually-mean)
 - [Master's Thesis](#masters-thesis)
   - [State of the Art](#state-of-the-art)
   - [Experimentation Pipeline](#experimentation-pipeline)
