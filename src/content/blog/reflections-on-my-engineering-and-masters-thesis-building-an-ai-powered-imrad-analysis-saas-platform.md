@@ -171,28 +171,30 @@ Before I get into the nitty gritty of the research and development phases later 
 
 
 
-### Engineering 
+### Engineering Contributions
 
 Basically, in the engineering part, I took the outputs of the research part, which are the four hierarchical BERT classifiers, and then built a whole microservices-based SaaS platform on top of them. 
 
-Here's a full summary of what's been built:
-
-- Developed a scalable microservices architecture consisting of 8 nodes, which includes the following:
 
 
-| Microservice | Technologies |
-| ----------------- | ------------------------------ |
+The SaaS platform is broken down over the network into 8 nodes:
+
+
+| Nodes | Technologies |
+| -------------------- | ------------------------------ |
 | Gateway | Nginx |
 | Service Discovery | Spring Cloud Eureka |
-| Frontend + API | Next.js |
+| Frontend + API | Next.js, Postgres, Stripe API |
 | PDF Extraction | FastAPI |
-| ML Inference | TensorFlow Serving |
-| AI Analysis | FastAPI, LangChain, Gemini Pro |
+| BERT Models | TensorFlow Serving Container |
+| AI Moves & Sub Moves | FastAPI, LangChain, Gemini Pro |
 | User Data Service | Express.js, MongoDB |
 | Message Broker | Redis |
 
 
-- Managed the complete software development life cycle and wrote comprehensive technical documentation during the requirements analysis, specification, system design, and implementation phases to deliver a scalable, production-ready platform.
+
+
+I'd also like to add that I've followed the SDLC, or software development life cycle, and written comprehensive documentation, starting from requirements analysis and specification to system design, implementation & testing to the delivery of the platform.
 
 
 
