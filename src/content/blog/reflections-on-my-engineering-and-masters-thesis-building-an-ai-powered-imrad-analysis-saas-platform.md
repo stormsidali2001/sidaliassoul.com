@@ -89,22 +89,15 @@ Naturally when talking about something, we tend to both describe it and explain 
 
 > I guess that all developers were victim of this at some stage of  their carriers, we like explaining the technical details of our project before even finishing describing the business side of it.
 
-Mixing the two together gives the listener, or the paper audience, a hard time when trying to both understand the results and your own interpretation. 
+Well, mixing the two together makes it difficult for the listener or the paper audience to understand both the results and your interpretation. 
+
+A separation of concern is needed between the two!
+
+In the IMRaD methodology, the author is required to first describe the **results** and data in an objective way with normal text, tables, figures, equations, code, and so on. And then and only then does it interpret and explain the results in the **discussion** section.
 
 
 
-- **Results**: The data and results are described in an objective way, using text, tables and figures.
-
-- **Discussion**: What do the results mean and how do they fit into the larger context of the field?
-
-
-
-- **Introduction:** Rationalizing the need for this research and presenting the particular objectives of this study.
-- **Methods:** Describes the exact procedures and materials used so that the experiment can be repeated.
-- **Results**: Describes the data and findings in an objective manner by means of text, tables, and figures.
-- **Discussion**: What do the results mean, and how do they fit into the bigger picture of the field?
-
-
+&nbsp;
 
 ## Master's Thesis
 
