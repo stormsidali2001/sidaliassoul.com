@@ -104,7 +104,7 @@ And then and only then does it interpret and explain the results in the **discus
 ## Master's Thesis
 
 Think about this: there are millions of researchers around the world, which means that scientific papers are published daily at crazy rates.  
-  
+
 Ok, now imagine that you're a researcher sifting through all that vast sea of knowledge; it won't be an effortless task, right? 
 
 To solve this problem, we need something that tells us which section of the text is a discussion and which one is a result.
@@ -112,7 +112,7 @@ To solve this problem, we need something that tells us which section of the text
 We need a classifier that is trained on text data that is annotated with the four types of IMRaD sections.
 
 This latter can be used internally by search engines to index the papers and provide features such as searching, filtering, and querying literature based on a specific IMRaD section.  
-  
+
 Well, that's what I studied and even implemented in my master's thesis entitled **"Leveraging BERT and Data Augmentation for Robust Classification of IMRAD Sections in Research Papers."**
 
 
@@ -125,8 +125,6 @@ So I got the following hypothesis or research question:
 
 Can a BERT model, enhanced with a custom pipeline of data processing, LLM-based outlier detection, and data augmentation, achieve a high accuracy in the classification of IMRaD sections of scientific papers and outperform traditional machine learning approaches?
 
-  
-  
 
 
 ### State of the Art
@@ -143,8 +141,8 @@ The experimentation section is normally optional in a master's thesis, but I dec
 
 Here’s a clear summary of the end-to-end experimental pipeline I built: 
 
--  Data collection from Hugging Face (~530k rows), then exploration, cleaning (removing non-natural language elements), and balancing to ~25k rows
--  Traditional baseline (Logistic Regression + TF-IDF) accuracy: 63.78%
+- Data collection from Hugging Face (~530k rows), then exploration, cleaning (removing non-natural language elements), and balancing to ~25k rows
+- Traditional baseline (Logistic Regression + TF-IDF) accuracy: 63.78%
 - Initial BERT fine-tuning at F1-score 0.7309
 - LLM-based outlier detection/cleaning + data augmentation (generating synthetic paragraphs based on similarity with the existing ones to reach ~100k rows)
 - Final fine-tuned BERT model with an F1-score of 0.9172 showing massive progressive gains over baseline
@@ -167,15 +165,34 @@ Before I get into the nitty gritty of the research and development phases later 
 
 ### Research Contributions
 
-- Established a Gemini Pro data pipeline including baseline generation, prompt refinement, outlier detection, and data augmentation, validating outputs with Random Forest, Logistic Regression, SVM, KNN, and Naive Bayes classifiers.
-- Synthesized a custom 169,000-sentence dataset and fine-tuned four hierarchical BERT models, driving accuracy from a 44.61% baseline to a surprising 98.21% peak F1 score.
+- Created a Gemini Pro data pipeline that included baseline generation, prompt refinement, outlier detection, and data augmentation. 
+- Used Random Forest, Logistic Regression, SVM, KNN, and Naive Bayes classifiers to validate the outputs incrementally.
+- Created a custom 169,000 sentence dataset and fine-tuned four hierarchical BERT models to boost accuracy from a baseline of 44.61% to a surprisingly high peak F1 score of 98.21%.
 
 
 
-### Engineering Contributions
+### Engineering 
 
-- Architected a scalable 8-node microservices architecture comprising Nginx (gateway), Spring Cloud Eureka (discovery), Next.js (frontend and API), a FastAPI PDF extractor, TensorFlow Serving, FastAPI with LangChain (AI analysis), and Express.js with MongoDB (user data) decoupled by a Redis message broker.
-- Directed the complete software development life cycle, authoring full technical documentation across requirements analysis and specification, system design, and implementation to ship a scalable, production-ready platform.
+Basically, in the engineering part, I took the outputs of the research part, which are the four hierarchical BERT classifiers, and then built a whole microservices-based SaaS platform on top of them. 
+
+Here's a full summary of what's been built:
+
+- Developed a scalable microservices architecture consisting of 8 nodes, which includes the following:
+
+
+| Microservice | Technologies |
+| ----------------- | ------------------------------ |
+| Gateway | Nginx |
+| Service Discovery | Spring Cloud Eureka |
+| Frontend + API | Next.js |
+| PDF Extraction | FastAPI |
+| ML Inference | TensorFlow Serving |
+| AI Analysis | FastAPI, LangChain, Gemini Pro |
+| User Data Service | Express.js, MongoDB |
+| Message Broker | Redis |
+
+
+- Managed the complete software development life cycle and wrote comprehensive technical documentation during the requirements analysis, specification, system design, and implementation phases to deliver a scalable, production-ready platform.
 
 
 
