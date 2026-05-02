@@ -77,7 +77,7 @@ IMRad stands for introduction, methods, results, and discussion. It's a logical 
 
 In the Introduction section the author should present what's known about the research area and all the existing work that's done about it, show the motivation behind it's own study and then conclude by showing how his research brings a unique perspective to the field. 
 
- 
+
 
 In the methods section, the researcher simply tries to make his research reproducible by describing the exact steps and materials he used to create his experiment.
 
@@ -103,15 +103,31 @@ And then and only then does it interpret and explain the results in the **discus
 
 ## Master's Thesis
 
-Given the vast number of scientific papers published daily, there is a growing need for classifiers that enable researchers and students to filter, search, and query literature based on specific IMRaD sections (Introduction, Methods, Results, Discussion, and an extra Related Work label).
+Think about this: there are millions of researchers around the world, which means that scientific papers are published daily at crazy rates.  
+  
+Ok, now imagine that you're a researcher sifting through all that vast sea of knowledge; it won't be an effortless task, right? 
 
-That's where my master's thesis entitled **"Leveraging BERT and Data Augmentation for Robust Classification of IMRAD Sections in Research Papers"** comes in!
+To solve this problem, we need something that tells us which section of the text is a discussion and which one is a result.
+
+We need a classifier that is trained on text data that is annotated with the four types of IMRaD sections.
+
+This latter can be used internally by search engines to index the papers and provide features such as searching, filtering, and querying literature based on a specific IMRaD section.  
+  
+Well, that's what I studied and even implemented in my master's thesis entitled **"Leveraging BERT and Data Augmentation for Robust Classification of IMRAD Sections in Research Papers."**
 
 
 
-The research question that I sought to answer with this thesis is the following:
+After sifting through that vast sea of knowledge myself, reading a ton of research papers, I stumbled upon an interesting one that included a link to a publicly available dataset.
 
-Can a BERT model, enhanced through data augmentation and robust preprocessing techniques (including outlier detection and data cleaning), achieve highly accurate and generalizable classification of IMRAD sections in scientific papers, outperforming traditional machine learning approaches?
+And to my surprise, it included a bunch of paragraphs extracted from various research papers with their corresponding IMRaD annotation and an extra Related Work label.
+
+So I got the following hypothesis or research question:
+
+Can a BERT model, enhanced with a custom pipeline of data processing, LLM-based outlier detection, and data augmentation, achieve a high accuracy in the classification of IMRaD sections of scientific papers and outperform traditional machine learning approaches?
+
+  
+  
+
 
 ### State of the Art
 
