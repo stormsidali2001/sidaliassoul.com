@@ -194,7 +194,7 @@ The SaaS platform is broken down over the network into 8 nodes:
 
 
 
-I'd also like to add that I've followed the SDLC, or software development life cycle, and written comprehensive documentation, starting from requirements analysis and specification to system design, implementation & testing to the delivery of the platform.
+I'd also like to add that I've followed the **SDLC**, or software development life cycle, and written comprehensive documentation, starting from requirements analysis and specification to system design, implementation, and testing, to the delivery of the platform.
 
 
 
