@@ -39,7 +39,7 @@ I immediately went to the university reading room and started skimming through t
 ## Table of Contents
 
 - [Not one graduation project, but actually two!](#not-one-graduation-project-but-actually-two)
-- [But what does IMRAD even mean?](#but-what-does-imrad-even-mean)
+- [But what does IMRAD actually mean?](#but-what-does-imrad-even-mean)
 - [Master's Thesis](#masters-thesis)
   - [State of the Art](#state-of-the-art)
   - [Experimentation Pipeline](#experimentation-pipeline)
@@ -137,35 +137,31 @@ Therefore, I spent a lot of time looking for relevant papers, reading, filtering
 
 I also studied a variety of relevant topics, including classic NLP techniques; traditional machine learning classifiers such as TF-IDF, BoW, Word2Vec, Naive Bayes, and SVM; and modern deep learning advancements such as pre-trained models (BERT and GPT), LLMs, and prompt engineering.
 
-### Experimentation Pipeline
+### Experimentation Pipeline And Contributions
 
-Although the experimentation section is typically optional in a master's thesis, I decided to include it anyway. Here is a clear summary of the end-to-end experimental pipeline I built:
+The experimentation section is normally optional in a master's thesis, but I decided to add it anyway. 
 
-- Data collection from Hugging Face (~530k rows, enriched with my new “Related Work” label), followed by exploration, cleaning (removal of non-natural language elements), and balancing down to ~25k rows
-- Traditional baseline (Logistic Regression + TF-IDF) hitting 63.78% accuracy
-- Initial BERT fine-tuning reaching an F1-score of 0.7309
-- LLM-based outlier detection/cleaning + data augmentation (generating synthetic paragraphs to expand to ~100k rows)
-- Final fine-tuned BERT model achieving F1-score 0.9172, showing massive progressive gains over the baseline
+Here’s a clear summary of the end-to-end experimental pipeline I built: 
 
-### Contributions
+-  Data collection from Hugging Face (~530k rows), then exploration, cleaning (removing non-natural language elements), and balancing to ~25k rows
+-  Traditional baseline (Logistic Regression + TF-IDF) accuracy: 63.78%
+- Initial BERT fine-tuning at F1-score 0.7309
+- LLM-based outlier detection/cleaning + data augmentation (generating synthetic paragraphs based on similarity with the existing ones to reach ~100k rows)
+- Final fine-tuned BERT model with an F1-score of 0.9172 showing massive progressive gains over baseline
 
-The key findings of the thesis are as follows:
-
-- Establishment of a solid and transferable IMRAD classification framework that combines transfer learning, advanced preprocessing, and data augmentation.
-- Creation of a new annotated dataset (approximately 100k rows) published on Hugging Face.
-- Training of a high-accuracy fine-tuned BERT classifier.
+The execution of the pipeline resulted in the creation of a newly annotated dataset (approx. 100k rows) and the training of a highly accurate (99.2% F1 scores) fine-tuned BERT classifier, both published on Hugging Face.
 
 ## Engineering Thesis
 
-In my graduation thesis, 'Leveraging Gemini Pro and BERT for Automated IMRaD Classification: A Novel Dataset and SaaS Platform,' I worked on a project spanning two core areas: **NLP deep learning research** and **systems engineering**.
+For my graduation thesis, “Leveraging Gemini Pro and BERT for Automated IMRaD Classification: A Novel Dataset and SaaS Platform," I developed a project that covers two main domains: **NLP deep learning research** and **systems engineering**.
 
+I know. Yeah. It would have been much easier to just keep on with the same topic as my master's thesis and do one study, research, and engineering study. 
 
+But I’m not the kind to give up on something. 
 
-Yes, I know. It would have been much easier for me to just carry on with the same theme as my master's thesis and do a single research and engineering study.
+My supervisor gave me the task of analyzing introductions, and no matter the difficulties I had due to the absence of a proper dataset, I wasn't going to let the topic slide just like that. 
 
-**However**, I'm not the kind of person who gives up on something easily. My supervisor challenged me with the analysis of introductions, and despite all the hurdles I faced due to the lack of a suitable dataset, I wasn't going to drop the theme that easily.
-
-Before I dive into the granular details of the research and development phases later in this post, here is a brief summary of my key contributions to both the research and engineering parts of the project:
+Before I get into the nitty gritty of the research and development phases later in this post, here is a quick summary of my main contributions to the research and engineering parts of the project:
 
 
 
