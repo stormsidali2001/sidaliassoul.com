@@ -91,9 +91,11 @@ Naturally when talking about something, we tend to both describe it and explain 
 
 Well, mixing the two together makes it difficult for the listener or the paper audience to understand both the results and your interpretation. 
 
-A separation of concern is needed between the two!
+We definitely need to pause a little bit between the two sections and separate the two concerns, "describing" and "explaining," to give the audience enough time to process and comprehend everything incrementally. 
 
-In the IMRaD methodology, the author is required to first describe the **results** and data in an objective way with normal text, tables, figures, equations, code, and so on. And then and only then does it interpret and explain the results in the **discussion** section.
+In the IMRaD framework, the author is required to first describe the **results** and data in an objective way with normal text, tables, figures, equations, code, and so on. 
+
+And then and only then does it interpret and explain the results in the **discussion** section.
 
 
 
