@@ -65,7 +65,7 @@ In Algeria, we don't just pick one; we’re required to complete both a master's
 
 Both my master's and engineering theses are about IMRAD classification, but each one focuses on a different angle of it.
 
-## But what does IMRAD even mean?
+## But what does IMRAD actually mean?
 
 Before we dive any further, there's something important that you need to be aware of.
 
