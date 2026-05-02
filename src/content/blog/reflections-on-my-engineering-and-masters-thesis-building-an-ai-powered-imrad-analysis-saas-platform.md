@@ -281,7 +281,7 @@ LLMs by design are generalists. They are intended to handle any sort of situatio
 
 That’s where prompt engineering comes in. A prompt is essentially a set of instructions written in raw natural text. 
 
-This allows us to limit the LLM's behavior, or specialize it for a given task, like classification, summarization, [etc.](http://etc.In)
+This allows us to limit the LLM's behavior, or specialize it for a given task, like classification, summarization, etc.
 
 In this version, I used a relatively simple prompt to tell each Gemini Pro instance to classify a given sentence into its corresponding IMRaD move.
 
@@ -304,7 +304,7 @@ The comparative table below explains the steps that were taken.
 | **Output** | A single-sentence prediction. | A list of sentence predictions (with move and submove labels). |
 
 
-The reason behind these last two changes was to increase the overall annotation speed and give Gemini Pro a better understanding of every move by knowing the corresponding submoves. 
+The reason behind these last changes was to increase the overall annotation speed and give Gemini Pro a better understanding of every move by knowing the corresponding submoves. 
 
 Since using a heavy model like BERT for simple benchmarking is both time-consuming and resource-intensive, I opted for basic ML classifiers paired with TF-IDF vectorization to check the quality of the new dataset. The results were surprising!
 
