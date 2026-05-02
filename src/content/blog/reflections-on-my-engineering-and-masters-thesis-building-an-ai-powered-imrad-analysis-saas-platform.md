@@ -32,7 +32,7 @@ The project was at a laboratory in the university where I've been studying, ESI-
 
 I looked up his teaching schedule and found out he was teaching the 4th-year students at 9:00 AM, so I asked a friend to let him know I was genuinely interested in the theme he suggested and that I wanted to meet him to discuss my application for the project.
 
-As soon as he got out of class, I thanked my friend and approached the supervisor to discuss the details. My request was met with a warm approval; he explained the problem briefly and sent me some PDFs to dive deeper into it.
+As soon as he got out of class, I thanked my friend and approached the supervisor to discuss the details. My request was met with warm approval; he explained the problem briefly and sent me some PDFs to dive deeper into it.
 
 I immediately went to the university reading room and started skimming through the documents the supervisor sent, full of eagerness and joy, completely losing myself in a flow state. Finally, "I'm going to work on a serious NLP research project!"
 
@@ -106,7 +106,7 @@ Although the experimentation section is typically optional in a master's thesis,
 
 - Data collection from Hugging Face (~530k rows, enriched with my new “Related Work” label), followed by exploration, cleaning (removal of non-natural language elements), and balancing down to ~25k rows
 - Traditional baseline (Logistic Regression + TF-IDF) hitting 63.78% accuracy
-- Initial BERT fine-tuning reaching F1-score 0.7309
+- Initial BERT fine-tuning reaching an F1-score of 0.7309
 - LLM-based outlier detection/cleaning + data augmentation (generating synthetic paragraphs to expand to ~100k rows)
 - Final fine-tuned BERT model achieving F1-score 0.9172, showing massive progressive gains over the baseline
 
@@ -245,7 +245,7 @@ The comparative table below explains the steps that were taken.
 | **Feature** | **Initial Prompts** | **Enhanced Prompts** |
 | **Input** | A single sentence. | A single introduction. |
 | **Classification Scope** | Classifies only moves. | Classifies both moves and submoves in one go. |
-| **Output** | A single sentence prediction. | A list of sentence predictions (with move and submove labels). |
+| **Output** | A single-sentence prediction. | A list of sentence predictions (with move and submove labels). |
 
 
 The reason behind these last two changes was to increase the overall annotation speed and give Gemini Pro a better understanding of every move by knowing the corresponding submoves. 
@@ -268,7 +268,7 @@ Every single one of them managed to outperform the previous BERT model. That was
 
 ## Phase 3: Model Enhancement and Dataset Augmentation ([V3](https://github.com/stormsidali2001/graduation_IMRAD_introduction_analysis_SaaS/tree/main/notebooks/v3))
 
-For my final model, I generated a custom dataset of 169k sentences by creating a custom pipeline that was built on top of the V2 generated data and including: Gemini-based outlier detection, Gemini data augmentation, then fine-tuning 4 custom BERT models.
+For my final model, I generated a custom dataset of 169k sentences by creating a custom pipeline that was built on top of the V2 generated data and including Gemini-based outlier detection, Gemini data augmentation, and then fine-tuning 4 custom BERT models.
 
 
 
@@ -278,9 +278,7 @@ Believe me when I tell you that I was bursting with joy when I saw the validatio
 
 When the F1 score hit 0.98 for overall move classification and exceeded 0.89 for submove classification, I was literally screaming, "Yes, yes! It's not overfitting, and the F1 score is above 98%!"  
 
-<img src="/bert-move-classifier-training-accuracy.png" alt="Training and validation accuracy curves for the fine-tuned BERT move classifier, showing the F1 score progressively reaching 98.21%" width="903" height="673" loading="lazy" />
-
-
+![Training and validation accuracy curves for the fine-tuned BERT move classifier, showing the F1 score progressively reaching 98.21%](/bert-move-classifier-training-accuracy.png)
 
 This previous pipeline was powered by a series of carefully designed prompts for Gemini Pro.
 
@@ -327,7 +325,7 @@ The **IMRaD Analysis Platform** offers the following key features:
 
 ### Microservices Breakdown
 
-<img src="/microservices-architecture-diagram.png" alt="Microservices architecture component diagram showing all 8 nodes: Nginx API gateway, Eureka discovery server, Next.js frontend and API, FastAPI PDF extractor, TensorFlow Serving, FastAPI LangChain AI analysis service, Express.js user data microservice, and Redis message broker" width="1485" height="836" loading="lazy" />
+![Microservices architecture component diagram showing all 8 nodes: Nginx API gateway, Eureka discovery server, Next.js frontend and API, FastAPI PDF extractor, TensorFlow Serving, FastAPI LangChain AI analysis service, Express.js user data microservice, and Redis message broker](/microservices-architecture-diagram.png)
 
 Let’s break down the key microservices in our platform.
 
@@ -361,13 +359,11 @@ Here's a quick look at the data model of our platform.
 
 **Next.js Microservice:** The Next.js API microservice takes responsibility for two entities: **User** and **Subscription**.
 
-<img src="/class_diagram.png" alt="Class diagram of the Next.js microservice showing the User and Subscription entities and their relationship" width="693" height="1056" loading="lazy" />
+![Class diagram of the Next.js microservice showing the User and Subscription entities and their relationship](/class_diagram.png)
 
-**User Data Microservice:** The User Data microservice is responsible for three entities: **Introduction**, **Sentence**, and **Feedback**.
+**User Data Microservice:** The User Data microservice is responsible for three entities: **introduction,** **sentence,** and **feedback.**
 
-<img src="/user-data-microservice-class-diagram.png" alt="Class diagram of the User Data microservice showing Introduction, Sentence, and Feedback entities and their one-to-many relationships" width="885" height="191" loading="lazy" />
-
-
+![Class diagram of the User Data microservice showing Introduction, Sentence, and Feedback entities and their one-to-many relationships](/user-data-microservice-class-diagram.png)
 
 Even though the **User** and **Introduction** entities are located in different microservices and use totally different databases, they are related in a one-to-many relationship (a user can have many introductions) and linked via a foreign key "introductionId" within the introduction document.
 
@@ -379,7 +375,7 @@ Even though the **User** and **Introduction** entities are located in different 
 
 If you’ve reached this far, I’d like to thank you for your time and patience in reading about these memories from almost two years ago.
 
-After months of studying NLP, leafing through research papers, and listening to podcasts about it during my walks, I went from having no dataset to creating a 169k-sentence annotated dataset, fine-tuning four hierarchical BERT models to a 98.21% F1-score, and building a complete microservices platform.
+After months of studying NLP, leafing through research papers, and listening to podcasts about it during my walks, I went from having no dataset to creating a 169k-sentence annotated dataset, fine-tuning four hierarchical BERT models to a 98.21% F1 score, and building a complete microservices platform.
 
-I hope you found this helpful and informative. If you have any questions or suggestions, feel free to reach out. You'll find all my social media links on the [Contact Page](/contact/).
+I hope you found this helpful and informative. If you have any questions or suggestions, feel free to reach out. You'll find all my social media links on the [contact page](/contact/).
 
