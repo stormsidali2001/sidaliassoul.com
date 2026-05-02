@@ -377,9 +377,11 @@ The **IMRaD Analysis Platform** offers the following key features:
 
 Let's review the key microservices in our platform. 
 
-The whole system is accessed via the **API Gateway**. This component takes care of forwarding and load balancing user requests to our active internal microservice instances. 
+The whole system is accessed via the **API Gateway**. 
 
-All the microservices self-register automatically into the **Eureka Discovery Server**, which is a dynamic index of all live instances of each service. 
+This component takes care of forwarding and load balancing user requests to our active internal microservice instances. 
+
+All the microservices self-register automatically with the **Eureka Discovery Server**, which is a dynamic index of all live instances of each service. 
 
 Then we have the [Next.js microservice,](https://github.com/stormsidali2001/graduation_IMRAD_introduction_analysis_SaaS/tree/main) which is actually composed of two parts: 
 
@@ -389,7 +391,8 @@ And a backend that does the following:
 
 - Authentication and authorisation
 - Managing subscriptions via the third-party service Stripe
-- serving as a composition service that calls and aggregates results from multiple internal microservices
+- It serves as a composition service that calls and aggregates results from multiple internal microservices.
+- It doesn't **hardcode the IP and port** of each microservice, but registers with the **discovery server,** gets all the active instances of a given microservice, and then does **client-side load balancing** between the active instances of each called microservice. 
 - Send transactional emails with the Resend third-party API
 - Use of PostgreSQL database for persistent data
 
