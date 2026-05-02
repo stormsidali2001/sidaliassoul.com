@@ -75,9 +75,7 @@ Subjectivity has no place in science, so we can't mix scientific findings with o
 
 IMRad stands for introduction, methods, results, and discussion. It's a logical and objective framework for writing scientific papers.
 
-In the Introduction section the author should present what's known about the research area and all the existing work that's done about it, show the motivation behind it's own study and then conclude by showing how his research brings a unique perspective to the field. 
-
-
+In the Introduction section, the author should present what's known about the research area and all the existing work that's been done on it, show the motivation behind his own study, and then conclude by showing how his research brings a unique perspective to the field. 
 
 In the methods section, the researcher simply tries to make his research reproducible by describing the exact steps and materials he used to create his experiment.
 
@@ -233,9 +231,9 @@ My master's thesis went a bit smoother because I found a lot of research papers 
   granularity.
 ```
 
-However, because the research part of my engineering thesis focused specifically on IMRaD introductions, I wasn't able to find a suitable, ready-made dataset that provides sentence-level annotations capturing the rhetorical moves and sub-moves within an introduction.
+Since I can't make use of the "Unarxive" dataset directly, the only solution for my problem was either paying for human annotators or using the closest form of intelligence that science could achieve, "LLMs," or large language models. 
 
-
+Fortunately, that option was cheap at the time because the free tier for Gemini Pro was so generous, and I also used all the $150 free credit on my Google Cloud account.
 
 As I couldn't find public data or afford a human annotator, I designed a [three-phase approach](https://github.com/stormsidali2001/graduation_IMRAD_introduction_analysis_SaaS/tree/main/notebooks) (V1→V2→V3) to **overcome** the lack of a sentence-level granular dataset and to create a custom one tailored to my specific needs.
 
