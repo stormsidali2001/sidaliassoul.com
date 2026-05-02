@@ -409,29 +409,35 @@ Finally, **Redis** is used as an in-memory database and message broker to enable
 
 ## Data Models
 
-Here's a quick look at the data model of our platform.
+Here’s a quick look at the data model of our platform. 
 
-**Next.js Microservice:** The Next.js API microservice takes responsibility for two entities: **User** and **Subscription**.
+**The Next.js microservice** is responsible for two entities: **User** and **Subscription.** It uses a SQL database (PostgreSQL).
+
+The **User Data Microservice** is responsible for managing three entities: **introduction**, **sentence,** and **feedback.** 
+
+As everything usually gets queried together, I decided to store everything as a MongoDB document.
+
+Since an introduction can have many sentences, and we usually query them with introductions, we embedded them in a subarray within the introduction document.
+
+The **feedback,** in its turn, also got embedded within the sentence and, therefore, by transitivity, within the introduction document.
+
+The **User** and **Introduction** entities are in different microservices and have completely different databases, but they are related in a one-to-many relationship (a user can have many introductions) and linked via a foreign key, "introductionId." The introduction document
 
 ![Class diagram of the Next.js microservice showing the User and Subscription entities and their relationship](/class_diagram.png)
-
-**User Data Microservice:** The User Data microservice is responsible for three entities: **introduction,** **sentence,** and **feedback.**
-
-![Class diagram of the User Data microservice showing Introduction, Sentence, and Feedback entities and their one-to-many relationships](/user-data-microservice-class-diagram.png)
-
-Even though the **User** and **Introduction** entities are located in different microservices and use totally different databases, they are related in a one-to-many relationship (a user can have many introductions) and linked via a foreign key "introductionId" within the introduction document.
 
 
 
 &nbsp;
 
+&nbsp;
+
 ## Conclusion
 
-If you have stuck with it up to this point, I thank you for your time and patience in reading about these memories of almost two years ago. If you have stuck with it this far, I thank you for your time and patience in reading about these memories of almost two years ago.
+If you've reached this point, I'd like to thank you for your attentive reading of these memories of almost two years ago.
+
+Honestly, like any other student in my university, the thoughts of missing the graduation deadline, facing judges, and presenting my work in a really short time never left my mind. It was a really rewarding journey and exceptional experience that I want to repeat again. Hopefully when I work with other interesting NLP or advanced deep learning projects.
 
 After months of studying NLP, reading research papers, and listening to podcasts about it during my walks, I went from having no dataset to building a 169k-sentence annotated dataset, fine-tuning four hierarchical BERT models to an F1 score of 98.21%, and constructing a complete microservices platform. 
 
-
-
-I hope this was helpful and informative for you. Please feel free to contact us with any questions or suggestions. Please feel free to contact us with any questions or suggestions. All of my social media links are on the contact page. All of my social media links are on the contact page.
+If you have any questions or thoughts about all of this, let me know; my DMs are always open. I list all my social links on my contact page.
 
