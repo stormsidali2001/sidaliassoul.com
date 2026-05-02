@@ -427,9 +427,11 @@ Even though the **User** and **Introduction** entities are located in different 
 
 ## Conclusion
 
-If you’ve reached this far, I’d like to thank you for your time and patience in reading about these memories from almost two years ago.
+If you have stuck with it up to this point, I thank you for your time and patience in reading about these memories of almost two years ago. If you have stuck with it this far, I thank you for your time and patience in reading about these memories of almost two years ago.
 
-After months of studying NLP, leafing through research papers, and listening to podcasts about it during my walks, I went from having no dataset to creating a 169k-sentence annotated dataset, fine-tuning four hierarchical BERT models to a 98.21% F1 score, and building a complete microservices platform.
+After months of studying NLP, reading research papers, and listening to podcasts about it during my walks, I went from having no dataset to building a 169k-sentence annotated dataset, fine-tuning four hierarchical BERT models to an F1 score of 98.21%, and constructing a complete microservices platform. 
 
-I hope you found this helpful and informative. If you have any questions or suggestions, feel free to reach out. You'll find all my social media links on the [contact page](/contact/).
+
+
+I hope this was helpful and informative for you. Please feel free to contact us with any questions or suggestions. Please feel free to contact us with any questions or suggestions. All of my social media links are on the contact page. All of my social media links are on the contact page.
 
