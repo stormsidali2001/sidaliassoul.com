@@ -304,9 +304,9 @@ The comparative table below explains the steps that were taken.
 | **Output** | A single-sentence prediction. | A list of sentence predictions (with move and submove labels). |
 
 
-The reason behind these last changes was to increase the overall annotation speed and give Gemini Pro a better understanding of every move by knowing the corresponding submoves. 
+These last changes were made to increase overall annotation speed and to give Gemini Pro a better understanding of every move by knowing the corresponding sub moves.
 
-Since using a heavy model like BERT for simple benchmarking is both time-consuming and resource-intensive, I opted for basic ML classifiers paired with TF-IDF vectorization to check the quality of the new dataset. The results were surprising!
+To test the quality of the new dataset, I used simple ML classifiers with TF-IDF vectorization to avoid time and resource consumption of using a heavy model like BERT for simple benchmarking. The results were a surprise!
 
 
 |  |  |
