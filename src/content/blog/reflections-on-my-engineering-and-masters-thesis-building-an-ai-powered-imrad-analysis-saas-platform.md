@@ -324,9 +324,7 @@ Every single one of them managed to outperform the previous BERT model. That was
 
 ## Phase 3: Model Enhancement and Dataset Augmentation ([V3](https://github.com/stormsidali2001/graduation_IMRAD_introduction_analysis_SaaS/tree/main/notebooks/v3))
 
-For my final model, I generated a custom dataset of 169k sentences by creating a custom pipeline that was built on top of the V2 generated data and including Gemini-based outlier detection, Gemini data augmentation, and then fine-tuning 4 custom BERT models.
-
-
+For my final model, I built a custom dataset of 169k sentences using a custom pipeline which sat on top of the V2 generated data, with Gemini based outlier detection, Gemini data augmentation, and fine-tuning 4 custom BERT models.
 
 The final generated data was used to fine-tune four hierarchical, specialized BERT models, all published on Hugging Face: [Move Classifier](https://huggingface.co/stormsidali2001/IMRAD_introduction_moves_classifier), [Move 0 Sub-move Classifier](https://huggingface.co/stormsidali2001/IMRAD-introduction-move-zero-sub-moves-classifier), [Move 1 Sub-move Classifier](https://huggingface.co/stormsidali2001/IMRAD-introduction-move-one-sub-moves-classifier), and [Move 2 Sub-move Classifier](https://huggingface.co/stormsidali2001/IMRAD-introduction-move-two-sub-moves-classifier).
 
