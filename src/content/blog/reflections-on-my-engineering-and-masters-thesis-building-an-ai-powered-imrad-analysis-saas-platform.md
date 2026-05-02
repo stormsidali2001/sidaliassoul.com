@@ -351,11 +351,13 @@ This previous pipeline was powered by a series of carefully designed prompts for
 
 ```
 
-The **base prompt** is the one I used in V2, but with some extra ingredients, such as enumerating all the moves and submoves and providing several examples for the model to follow for each submove. 
+The **base prompt** is the one I used in V2, with some extra ingredients, like enumerating all the moves and submoves and providing several examples for the model to follow for each submove. 
 
-The **outlier detection** and **data augmentation** prompts **build upon** this **base prompt**, with just a few additional tweaks on top. 
+The **outlier detection** and **data augmentation** prompts **are based on** this **base prompt** with a few additional modifications on top. 
 
-The outlier detection prompt effectively tells Gemini to go back and review past predictions, marking them as outliers or correcting them if they are wrong. The data augmentation prompt then does the heavy lifting and asks Gemini to generate more sentences for each move while strictly respecting the rules I defined.
+The **outlier detection** **prompt** makes Gemini Pro go back over previous predictions and mark them as outliers and filters them or corrects them if they are mistaken. 
+
+Then the **data augmentation prompt** asks Gemini to generate more sentences for each move, strictly respecting a bunch of rules.
 
 ## A Microservices-Based SaaS Platform
 
