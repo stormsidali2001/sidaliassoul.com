@@ -200,9 +200,9 @@ I'd also like to add that I've followed the **SDLC**, or software development li
 
 ## Dataset Preparation
 
-However, before I could begin the research and development of my engineering project, I encountered a hurdle that almost made me give up on the theme.
+Before I could begin the research and development of my engineering project, I encountered a hurdle that almost made me give up on the theme.
 
-I was in doubt and perplexity when I found that there are no research papers or public datasets that provide sentence-level labels for IMRD introduction moves and sub-moves[.](http://sub-moves.My) 
+I was in doubt and perplexity when I found that there are no research papers or public datasets that provide sentence-level labels for IMRaD introduction moves and sub-moves[.](http://sub-moves.My) 
 
 My master's thesis went a bit smoother because I found a lot of research papers and publicly annotated datasets that provide "I," "M," "R," and "D" labels for paragraphs extracted from different papers. One of them is the "**unarXive"** dataset.
 
