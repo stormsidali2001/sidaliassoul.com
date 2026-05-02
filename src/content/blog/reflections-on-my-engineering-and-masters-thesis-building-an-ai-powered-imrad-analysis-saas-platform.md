@@ -379,31 +379,23 @@ The **IMRaD Analysis Platform** offers the following key features:
 
 ![Microservices architecture component diagram showing all 8 nodes: Nginx API gateway, Eureka discovery server, Next.js frontend and API, FastAPI PDF extractor, TensorFlow Serving, FastAPI LangChain AI analysis service, Express.js user data microservice, and Redis message broker](/microservices-architecture-diagram.png)
 
-Let’s break down the key microservices in our platform.
+Let's review the key microservices in our platform. 
 
-The entry point of the entire system is the **API Gateway**. It is responsible for forwarding and load-balancing user requests to the active instances of our internal microservices.
+The whole system is accessed via the **API Gateway**. This component takes care of forwarding and load balancing user requests to our active internal microservice instances. All the microservices self-register automatically into the **Eureka Discovery Server**, which is a dynamic index of all live instances of each service. Then we have the [Next.js microservice ](https://github.com/stormsidali2001/graduation_IMRAD_introduction_analysis_SaaS/tree/main) which is actually composed of two parts: 
 
-All microservices automatically self-register into the **Eureka Discovery Server**, which acts like a dynamic index that keeps track of all running instances of each service.
+-A frontend which is responsible for rendering all the individual pages- A backend to manage:
+- Authentication and authorisation
+- Managing subscriptions via the third-party service Stripe
+- serving as a composition service that calls and aggregates results from multiple internal microservices
+- Send transactional emails with the Resend third-party API
+- Use of PostgreSQL database for persistent data
 
-Next, we have the **[Next.js microservice](https://github.com/stormsidali2001/graduation_IMRAD_introduction_analysis_SaaS/tree/main)**, which actually consists of two parts:
+Then we have the **TensorFlow Serving microservice** that serves our fine-tuned BERT models with optimized production-grade access.
 
-- A frontend responsible for rendering all the individual pages
-- A backend that handles:
-  - Authentication and authorization
-  - Subscription management using the Stripe third-party service
-  - Acting as a composition service that calls and aggregates results from multiple internal microservices
-  - Sending transactional emails via the Resend third-party API
-  - Persisting data using a PostgreSQL database
+The [AI Moves and Sub-moves microservice](https://github.com/stormsidali2001/imrad_intros_moves_submoves_python_microservices) does batch prediction for moves and sub-moves by forwarding the requests to TensorFlow Serving. 
+It also connects with the Gemini API to generate the intro summary as well as the hypothetical thought process of the author behind switching between the different moves and sub-moves when writing the intro.
 
-Then we have the **TensorFlow Serving microservice**, which provides optimized, production-grade access to our fine-tuned BERT models.
-
-The **[AI Moves and Sub-moves microservice](https://github.com/stormsidali2001/imrad_intros_moves_submoves_python_microservices)** handles batch predictions for moves and sub-moves by delegating requests to TensorFlow Serving. It also communicates with the Gemini API to generate the introduction summary and the author's hypothetical thought process behind switching between the different moves and sub-moves while writing the introduction. 
-
-This same repository also contains the **PDF Extractor microservice**, built with FastAPI, which extracts introductions from uploaded research papers.
-
-The **[User Data microservice](https://github.com/stormsidali2001/imrad_introduction_moves_sub_moves_express_user_data)** is responsible for storing user predictions and managing feedback. It uses MongoDB as its database.
-
-Finally, **Redis** serves as both an in-memory database and a message broker, enabling asynchronous communication between the different microservices.
+The **PDF Extractor microservice** built on FastAPI that extracts introductions for uploaded research papers is on the same repository.The **[User Data microservice](https://github.com/stormsidali2001/imrad_introduction_moves_sub_moves_express_user_data) stores user predictions and handles feedback. The database used is MongoDB.Finally, **Redis** is used as an in memory database and message broker to enable asynchronous communication between the different microservices.
 
 ## Data Models
 
