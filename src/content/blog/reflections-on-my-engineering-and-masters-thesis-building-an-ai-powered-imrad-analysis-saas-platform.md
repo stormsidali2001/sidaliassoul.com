@@ -131,11 +131,11 @@ Can a BERT model, enhanced with a custom pipeline of data processing, LLM-based 
 
 ### State of the Art
 
-In a master's thesis, before diving into your own approach, you have to survey the current research and see what the state of the art looks like.
+In a master's thesis you need to look into the current research before you can get started with your own approach and see what the state of the art is.
 
-So I spent a significant amount of time searching for relevant papers, reading, filtering, and carefully selecting four key studies that I reviewed and compared in terms of data size, annotation method, models used, and accuracy.
+Therefore, I spent a lot of time looking for relevant papers, reading, filtering, and carefully choosing four key studies that I read and compared based on data size, annotation method, models used, and accuracy. 
 
-I also studied a wide range of relevant topics, including classic NLP techniques, traditional machine learning classifiers (TF-IDF, BoW, Word2Vec, Naïve Bayes, and SVM), and modern deep learning advances (pre-trained models like BERT and GPT, LLMs, and prompt engineering).
+I also studied a variety of relevant topics, including classic NLP techniques; traditional machine learning classifiers such as TF-IDF, BoW, Word2Vec, Naive Bayes, and SVM; and modern deep learning advancements such as pre-trained models (BERT and GPT), LLMs, and prompt engineering.
 
 ### Experimentation Pipeline
 
