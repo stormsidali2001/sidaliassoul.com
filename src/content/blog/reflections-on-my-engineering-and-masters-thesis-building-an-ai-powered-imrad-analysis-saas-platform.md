@@ -67,16 +67,42 @@ Both my master's and engineering theses are about IMRAD classification, but each
 
 ## But what does IMRAD even mean?
 
-Before moving forward, you need to understand something about research papers.
+Before we dive any further, there's something important that you need to be aware of.
 
-Research papers are about presenting scientific findings, which can't be mixed with other kinds of human literature. That's where IMRAD comes in.
+Research papers are the medium that is used to communicate scientific findings between researchers. 
 
-IMRaD stands for Introduction, Methods, Results, and Discussion. It provides a formal and well-defined logical framework for presenting research findings:
+Subjectivity has no place in science, so we can't mix scientific findings with other kinds of literature. And that's where IMRad is useful.
 
-- **Introduction:** Sets the stage by identifying a research gap and stating the study's specific goals.
-- **Methods:** Details the exact steps and materials used so the experiment can be reproduced by others.
-- **Results:** Reports the raw data and findings objectively through text, tables, and figures.
-- **Discussion:** Explains what the findings actually mean and how they fit into the bigger picture of the field.
+IMRad stands for introduction, results, and discussion. It's a logical and objective framework for writing scientific papers.
+
+In the Introduction section the author should present what's known about the research area and all the existing work that's done about it, show the motivation behind it's own study and then conclude by showing how his research brings a unique perspective to the field. 
+
+ 
+
+In the methods section, the researcher simply tries to make his research reproducible by describing the exact steps and materials he used to create his experiment.
+
+You can think of it as a comprehensive guide to recreate the experiment with the same steps and in the same conditions.
+
+
+
+Naturally when talking about something, we tend to both describe it and explain it in detail, all in parallel.  
+
+> I guess that all developers were victim of this at some stage of  their carriers, we like explaining the technical details of our project before even finishing describing the business side of it.
+
+Mixing the two together gives the listener, or the paper audience, a hard time when trying to both understand the results and your own interpretation. 
+
+
+
+- **Results**: The data and results are described in an objective way, using text, tables and figures.
+
+- **Discussion**: What do the results mean and how do they fit into the larger context of the field?
+
+
+
+- **Introduction:** Rationalizing the need for this research and presenting the particular objectives of this study.
+- **Methods:** Describes the exact procedures and materials used so that the experiment can be repeated.
+- **Results**: Describes the data and findings in an objective manner by means of text, tables, and figures.
+- **Discussion**: What do the results mean, and how do they fit into the bigger picture of the field?
 
 
 
