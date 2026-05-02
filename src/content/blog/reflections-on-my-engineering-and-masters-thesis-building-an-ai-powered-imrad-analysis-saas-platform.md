@@ -277,11 +277,13 @@ I started with a baseline model using the following workflow:
 
 
 
-LLMs are generalists by design; they are meant to deal with any kind of situation. So, how can we use them for specific tasks like classification? That's where prompt engineering comes in.
+LLMs by design are generalists. They are intended to handle any sort of situation. So how do we get them to do a particular task like classification? 
 
-A prompt is basically a set of instructions written in raw natural text. It allows us to restrict how the LLM acts, or specialize it for a specific task like classification, summarization, etc.
+That’s where prompt engineering comes in. A prompt is essentially a set of instructions written in raw natural text. 
 
-In this version, I used a fairly simple prompt to instruct each Gemini Pro instance to classify a given sentence into its corresponding IMRAD move.
+This allows us to limit the LLM's behavior, or specialize it for a given task, like classification, summarization, [etc.](http://etc.In)
+
+In this version, I used a relatively simple prompt to tell each Gemini Pro instance to classify a given sentence into its corresponding IMRaD move.
 
 ## Phase 2: Model Refinement ([V2](https://github.com/stormsidali2001/graduation_IMRAD_introduction_analysis_SaaS/tree/main/notebooks/v2))
 
