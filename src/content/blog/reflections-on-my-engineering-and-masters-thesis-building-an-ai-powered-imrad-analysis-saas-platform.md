@@ -190,8 +190,6 @@ The SaaS platform is broken down over the network into 8 nodes:
 | Message Broker | Redis |
 
 
-
-
 I'd also like to add that I've followed the **SDLC**, or software development life cycle, and written comprehensive documentation, starting from requirements analysis and specification to system design, implementation, and testing, to the delivery of the platform.
 
 
@@ -248,10 +246,8 @@ I started with a baseline model using the following workflow:
 1. I've chosen random introductions from the cleaned and filtered “unarXive” dataset.
 2. I broke the introductions into sentences.
 3. I fed every individual sentence into a Gemini LLM instance while guiding it with a well-crafted classification prompt.
-4. I then used the generated data to finetune a BERT model for classification. 
-5. This model achieved an accuracy of 44.61%, which has, in my opinion, shown potential (because the accuracy was a little higher than a random guess for three classes). 
-
-
+4. I then used the generated data to finetune a BERT model for classification.
+5. This model achieved an accuracy of 44.61%, which has, in my opinion, shown potential (because the accuracy was a little higher than a random guess for three classes).
 
 ```
 [ unarxive dataset ]
@@ -381,9 +377,16 @@ The **IMRaD Analysis Platform** offers the following key features:
 
 Let's review the key microservices in our platform. 
 
-The whole system is accessed via the **API Gateway**. This component takes care of forwarding and load balancing user requests to our active internal microservice instances. All the microservices self-register automatically into the **Eureka Discovery Server**, which is a dynamic index of all live instances of each service. Then we have the [Next.js microservice ](https://github.com/stormsidali2001/graduation_IMRAD_introduction_analysis_SaaS/tree/main) which is actually composed of two parts: 
+The whole system is accessed via the **API Gateway**. This component takes care of forwarding and load balancing user requests to our active internal microservice instances. 
 
--A frontend which is responsible for rendering all the individual pages- A backend to manage:
+All the microservices self-register automatically into the **Eureka Discovery Server**, which is a dynamic index of all live instances of each service. 
+
+Then we have the [Next.js microservice,](https://github.com/stormsidali2001/graduation_IMRAD_introduction_analysis_SaaS/tree/main) which is actually composed of two parts: 
+
+First, a frontend, which is responsible for rendering all the individual pages.
+
+And a backend that does the following:
+
 - Authentication and authorisation
 - Managing subscriptions via the third-party service Stripe
 - serving as a composition service that calls and aggregates results from multiple internal microservices
@@ -395,7 +398,11 @@ Then we have the **TensorFlow Serving microservice** that serves our fine-tuned 
 The [AI Moves and Sub-moves microservice](https://github.com/stormsidali2001/imrad_intros_moves_submoves_python_microservices) does batch prediction for moves and sub-moves by forwarding the requests to TensorFlow Serving. 
 It also connects with the Gemini API to generate the intro summary as well as the hypothetical thought process of the author behind switching between the different moves and sub-moves when writing the intro.
 
-The **PDF Extractor microservice** built on FastAPI that extracts introductions for uploaded research papers is on the same repository.The **[User Data microservice](https://github.com/stormsidali2001/imrad_introduction_moves_sub_moves_express_user_data) stores user predictions and handles feedback. The database used is MongoDB.Finally, **Redis** is used as an in memory database and message broker to enable asynchronous communication between the different microservices.
+The **PDF Extractor microservice** built on FastAPI that extracts introductions for uploaded research papers is on the same repository. 
+
+The [User Data microservice](https://github.com/stormsidali2001/imrad_introduction_moves_sub_moves_express_user_data) stores user predictions and handles feedback. It uses a NoSQL MongoDB database to persist data.
+
+Finally, **Redis** is used as an in-memory database and message broker to enable asynchronous communication between the different microservices.
 
 ## Data Models
 
