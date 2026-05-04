@@ -21,7 +21,7 @@ Well, that works for simple projects, but my graduation project was literally a 
 
 I have already written a full blog article detailing everything about it [here](/blog/reflections-on-my-engineering-and-masters-thesis-building-an-ai-powered-imrad-analysis-saas-platform/)
 
-I thought in my head, "I'm not spending money or taking the risk of getting DDoS attacks from someone just for a preview project.
+I thought in my head, "I'm not spending money or taking the risk of getting DDoS attacks from someone just for a resume project.
 
 
 
