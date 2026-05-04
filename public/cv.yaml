@@ -1,0 +1,92 @@
+cv:
+  name: Sidali Assoul
+  headline: Full Stack Engineer
+  email: assoulsidali@gmail.com
+  website: https://sidaliassoul.com/
+  social_networks:
+    - network: GitHub
+      username: stormsidali2001
+  sections:
+    skills:
+      - label: Languages
+        details: Python, PHP, Java, SQL, TypeScript, JavaScript, C++
+      - label: Frameworks and Libraries
+        details: NestJS, Django, FastAPI, Laravel
+      - label: Backend and Infrastructure
+        details: AWS, GCP, Kubernetes, Docker, MySQL, PostgreSQL, GitHub Actions
+    experience:
+      - company: Upwork Client
+        position: Full Stack Engineer (Freelance)
+        location: United Arab Emirates (Remote)
+        start_date: 2024-01
+        end_date: 2026-01
+        highlights:
+          - Architected a multi-tenant logistics hub (110+ model schema) enabling merchants to synchronize orders and providing shipping companies with dedicated tools to manage fulfillment
+          - Led a developer team of 4, conducted technical interviews, and performed code reviews across 2 production codebases
+          - Built an eCommerce sync engine (Shopify, WooCommerce); applied the Strategy pattern for pluggable, non-breaking store integrations
+          - Implemented financial infrastructure using Stripe Connect for merchant and carrier wallets, on-demand withdrawals, and automated payouts
+      - company: Addinfo
+        position: Backend Engineer
+        location: Paris, France (Remote)
+        start_date: 2023-04
+        end_date: 2023-11
+        highlights:
+          - Architected a multi-tenant SaaS with a high-throughput NestJS core and multi-provider OAuth (Google, GitHub, GitLab, Azure)
+          - Designed a scan ingestion engine mapping complex JSON snapshots across 50+ relational tables with automated deduplication
+          - Built Git integrations (GitHub, GitLab, Azure) using OAuth and automated CI/CD workflow and secret injection
+          - Eliminated analytics latency from ~3s to <100ms by implementing Write-time Aggregation (Materialized View strategy) for high-volume statistics, using application-level caching and SQL query refinement
+          - Integrated a real-time memory monitoring interceptor across all production endpoints to detect heap usage spikes, and resolved identified memory leaks after receiving automated alerts
+          - Launched a standalone Certification Microservice featuring Stripe payment integration, LinkedIn OAuth, and a Puppeteer-based PDF generation engine for automated diploma issuance
+      - company: CreaTech dz
+        position: Backend Software Engineer
+        location: Algiers, Algeria
+        start_date: 2022-09
+        end_date: 2023-03
+        highlights:
+          - Architected a multi-tenant Events Marketplace (NestJS, TypeScript, TypeORM, MySQL) with Twilio SMS-OTP onboarding, RBAC guards, partner approval workflow, and geo-tagged discovery for organizers and sellers
+          - 'Built full revenue engine: Stripe webhook payments, frequency-based loyalty system, SaaS tier subscriptions, moderator permissions, and CMS (blogs and guides), plus Docker CI/CD and automated cleanup'
+          - 'Developed Ecole at Home LMS backend automating virtual-school operations (NestJS + TypeORM): tri-role identity, teacher availability mapping, and RxJS-resilient Zoom scheduler eliminating manual bookings'
+          - 'Delivered end-to-end student experience: Stripe payments, automated Zoom-to-Vimeo recording pipeline, transactional emails, and dedicated upcoming and past course portals'
+      - company: Data Intuition
+        position: Full Stack Engineer Intern
+        location: Algiers, Algeria
+        start_date: 2022-05
+        end_date: 2022-08
+        highlights:
+          - Maintained and modernized 3 legacy production platforms built with Express.js and EJS, achieving 99.9% uptime during transitions
+          - Implemented critical feature updates and resolved security vulnerabilities in high-traffic administrative portals
+    projects:
+      - name: IMRaD Classification SaaS
+        url: https://github.com/stormsidali2001/graduation_IMRAD_introduction_analysis_SaaS
+        highlights:
+          - Architected a scalable 8-node microservices architecture comprising Nginx (gateway), Spring Cloud Eureka (discovery), Next.js (frontend and API), a FastAPI PDF extractor, TensorFlow Serving, FastAPI with LangChain (AI analysis), and Express.js with MongoDB (user data) decoupled by a Redis message broker
+          - Addressed the lack of sentence-level IMRaD datasets by building a 3-phase Gemini Pro pipeline (baseline generation, prompt refinement, and outlier detection/augmentation)
+          - 'Synthesized and validated a custom 169k-sentence dataset, boosting baseline accuracy from 44.61% to >94% (Peak F1: 98.21%) by fine-tuning 4 hierarchical BERT models'
+        summary: 'Master''s thesis: 8-node microservices architecture using Gemini Pro + BERT for rhetorical classification of scientific papers. 169k-sentence dataset, 98.21% peak F1.'
+      - name: Contracts Management System
+        url: https://github.com/stormsidali2001/contracts-management
+        highlights:
+          - Designed a real-time contracts and organizational management dashboard for juridicals and admins at BMT
+          - Architected the backend with NestJS using Clean Architecture and Domain-Driven Design (DDD)
+          - Implemented Redis Pub/Sub to horizontally scale WebSockets for real-time state synchronization
+          - Built a Feature-Sliced Next.js frontend validated by unit and integration tests
+        summary: Real-time dashboard for Béjaïa's harbor company with Clean Architecture, DDD, and Redis Pub/Sub to horizontally scale WebSockets. Full unit & integration test coverage.
+      - name: Chess Game Engine
+        url: https://github.com/stormsidali2001/react-chess-game-from-scratch
+        highlights:
+          - Architected a scalable TypeScript chess engine using Domain-Driven Design and Hexagonal Architecture within a Turborepo monorepo
+          - Designed a Polymorphic Move Strategy and deep-cloning Rules Engine to manage complex state transitions and edge cases
+        summary: Scalable TypeScript chess engine using DDD + Hexagonal Architecture, featuring a Polymorphic Move Strategy and deep-cloning Rules Engine inside a Turborepo monorepo.
+      - name: vgath 8086
+        url: https://github.com/idrisT11/8086-Online-IDE
+        highlights:
+          - Built an open-source Intel 8086 emulator and assembler for the browser using Vanilla JS
+          - Implemented instruction set simulation and interactive debugging capabilities alongside a team of 6
+        summary: Open-source Intel 8086 emulator and assembler for the browser (Vanilla JS), built as a university final project in a team of 6, featuring instruction set simulation and interactive debugging.
+    education:
+      - institution: Higher National School of Computer Science (ESI SBA), Systems Engineering
+        area: Computer Science
+        degree: Master's
+        end_date: 2024-09
+design:
+  theme: engineeringresumes

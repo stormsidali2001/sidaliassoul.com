@@ -5,6 +5,11 @@ dist/
 
 # dependencies
 node_modules/
+.venv/
+
+# rendercv build artifacts
+rendercv_output/
+*_rendercv_output/
 
 # logs
 npm-debug.log*

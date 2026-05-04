@@ -1,63 +1,50 @@
-# Astro Starter Kit: Blog
+# sidaliassoul.com
 
-```sh
-pnpm create astro@latest -- --template blog
-```
+Personal website and blog built with [Astro](https://astro.build).
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-Features:
-
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and Open Graph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## Project structure
 
 ```text
-├── public/
+├── public/              Static assets served as-is (images, fonts, cv.yaml, resume.pdf)
+├── scripts/
+│   └── generate-cv.mjs  Reads content collections and writes public/cv.yaml
 ├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
+│   ├── components/
+│   ├── content/
+│   │   ├── blog/        Markdown blog posts
+│   │   ├── education/   Education entries (one .md per degree)
+│   │   ├── experience/  Work experience entries (one .md per role)
+│   │   └── projects/    Project entries (one .md per project)
+│   ├── layouts/
+│   └── pages/
 ├── astro.config.mjs
-├── README.md
 ├── package.json
 └── tsconfig.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Commands
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+| Command               | Action                                           |
+| :-------------------- | :----------------------------------------------- |
+| `pnpm install`        | Install dependencies                             |
+| `pnpm dev`            | Start local dev server at `localhost:4321`       |
+| `pnpm build`          | Build production site to `./dist/`               |
+| `pnpm preview`        | Preview the production build locally             |
+| `pnpm generate:cv`    | Regenerate `public/cv.yaml` from content collections |
+| `pnpm render:resume`  | Generate `cv.yaml` and render `public/resume.pdf`    |
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+## Generating and rendering the resume
 
-Any static assets, like images, can be placed in the `public/` directory.
+The resume PDF is generated from the content collections using [rendercv](https://github.com/rendercv/rendercv).
 
-## 🧞 Commands
+```sh
+pnpm render:resume
+```
 
-All commands are run from the root of the project, from a terminal:
+This single command:
+1. Creates a `.venv` Python virtual environment if one does not exist
+2. Installs rendercv into it (skipped on subsequent runs)
+3. Reads `src/content/experience/`, `src/content/projects/`, and `src/content/education/` and writes `public/cv.yaml`
+4. Renders the PDF and writes it directly to `public/resume.pdf`
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+> **Note:** The skills section and personal details (name, email, website, GitHub) are hardcoded in `scripts/generate-cv.mjs`. Edit that file directly to update them.

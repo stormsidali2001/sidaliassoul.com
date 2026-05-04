@@ -56,6 +56,12 @@ export const CONTACT = {
   ] as const,
 } as const;
 
+export const SKILLS = [
+  { label: 'Languages', details: 'Python, PHP, Java, SQL, TypeScript, JavaScript, C++' },
+  { label: 'Frameworks and Libraries', details: 'NestJS, Django, FastAPI, Laravel' },
+  { label: 'Backend and Infrastructure', details: 'AWS, GCP, Kubernetes, Docker, MySQL, PostgreSQL, GitHub Actions' },
+] as const;
+
 export const AUTHOR = {
   name: "Sidali Assoul",
   jobTitle: "Full Stack Engineer",
