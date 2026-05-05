@@ -38,21 +38,9 @@ async def credit():
 
 If you run these concurrently, you risk a race condition. Because the read and write operations are separated by an **await**, each coroutine can be paused at that point. While the first coroutine is suspended, another runs and updates the balance; when the first coroutine resumes, it overwrites the second one's work. This is known as a **lost update race condition**!
 
-```text
-  CREDIT        DEBIT
-    │              │
-  read(0)          │
-    │              │
-  await ───────►   │
-    │           read(0)
-    │              │
-    │           await
-    │              │
-  write(1)      write(-1)
-    │              │
-    │         ─overwrites!─
-              balance = -1  ✗
-```
+![plantuml-credit-debit-example.png](/plantuml-credit-debit-example.png)
+
+
 
 In this tutorial, I took a deep dive into **asyncio** synchronization primitives. These are essential tools for building flexible programs that are resilient to race conditions like the one we just saw. We will explore: Locks, Semaphores, Bounded Semaphores, events, Conditions And Barriers.
 
@@ -66,25 +54,11 @@ The most common way to handle **race conditions** in systems programming is thro
 
 In **asyncio**, this is implemented via the `asyncio.Lock` class. The Lock object acts as a guard; when a coroutine holds the lock, any other coroutine attempting to acquire it will be suspended until the lock is released.
 
-```text
-  CREDIT          DEBIT
-    │                │
-  acquire            │
-  ╔══════════╗     blocked
-  ║   read   ║       ⟳
-  ║   await  ║       ⟳
-  ║   write  ║       ⟳
-  ╚══════════╝       │
-  release        acquire
-    │            ╔══════════╗
-    │            ║   read   ║
-    │            ║   await  ║
-    │            ║   write  ║
-    │            ╚══════════╝
-    │              release
-```
+![plantuml-mutext-lock.png](/plantuml-mutext-lock.png)
 
 
+
+&nbsp;
 
 Here's an example of how you would create a mutex lock in asyncio:
 
@@ -282,31 +256,13 @@ A semaphore manages an internal counter, which is **decremented** every time you
 
 When the counter reaches zero, any **subsequent** coroutine that calls **acquire()** will be suspended. These tasks are queued and will only resume execution one by one as the counter becomes greater than zero through **release()** calls.
 
-```text
- Semaphore(2)  counter=2
 
- [0] acquire  counter 2→1  ████
- [1] acquire  counter 1→0  ████
- [2]          counter = 0  ░░░░ ┐
- [3]          counter = 0  ░░░░ │ queue
- [4]          counter = 0  ░░░░ ┘
-
-  ↑ [0],[1] release
-    counter 0→2
-
- [2] acquire  counter 2→1  ████
- [3] acquire  counter 1→0  ████
- [4]          counter = 0  ░░░░
-
-  ↑ [2],[3] release
-    counter 0→2
-
- [4] acquire  counter 2→1  ████
-```
 
 While locks totally prevent access to resources, semaphores shine when you want to throttle requests or when a given resource **requires limited concurrent access**.
 
 ### Practical Example
+
+![semaphore-plantuml-diagram.png](/semaphore-plantuml-diagram.png)
 
 When instantiating a semaphore object, we should specify a number that indicates the maximum number of coroutines that can run concurrently until they get blocked.
 
@@ -562,22 +518,6 @@ Whether you're using `wait` or `wait_for`, a `RuntimeError` will be raised if yo
 
 The "**await condition.wait()"** statement operates in two distinct phases:
 
-```text
-  WAITER         NOTIFIER
-    │                │
-  acquire             │
-    │                │
-  wait() ──────────► │
-  release          acquire
-  SUSPENDED ⟳     mutate
-            ⟳     notify()
-            ⟳     release
-  re-acquire ◄────────┘
-  returns True
-    │
-  continue
-```
-
 - **Release and Suspend:** The coroutine atomically releases the lock and yields control back to the event loop, remaining suspended until it is resumed by "**condition.notify"** or "**condition.notify_all."**
 - **Reacquisition:** Once notified, the condition requires its lock.
 
@@ -673,8 +613,6 @@ I think that the output should be self explanatory.
 1. First, the waiters acquire the lock, release it, and pause just after the **wait_for** line. They remain suspended until the **incrementer** calls **notify** and the predicate condition is satisfied.
 2. As you can see from the output, Waiters **A** and **B** only start their work once the **shared_resource** value reaches **3**.
 
-
-
 ## Barrier
 
 ### Introduction
@@ -753,5 +691,3 @@ If you’ve made it this far, I’d like to thank you for taking the time to rea
 
 I hope you found this helpful and informative. If you have any questions or suggestions, feel free to reach out. You'll find all my social media links on the [Contact Page](/contact).
 
-
-&nbsp;
